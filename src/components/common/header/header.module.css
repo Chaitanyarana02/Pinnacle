@@ -1,0 +1,117 @@
+.pinnaqleLogo {
+    position: relative;
+    line-height: 1.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .pinnaqleWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+  }
+  .label {
+    flex: 1;
+    position: relative;
+    line-height: 1.5rem;
+    font-weight: 600;
+  }
+  .homeOwnersBtn {
+    flex: 1;
+    border-radius: var(--br-31xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-lg) var(--padding-9xl);
+  }
+  .label1 {
+    flex: 1;
+    position: relative;
+    line-height: 1.5rem;
+    font-weight: 600;
+  }
+  .professionalsBtn {
+    flex: 1;
+    border-radius: var(--br-31xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-lg) var(--padding-9xl);
+  }
+  .label2 {
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.5rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-royalblue);
+    text-align: left;
+    display: inline-block;
+    min-width: 3.688rem;
+  }
+  .autoLayoutHorizontal,
+  .logInBtn,
+  .mainHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .logInBtn {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-lg) var(--padding-9xl);
+    background-color: var(--color-aliceblue-200);
+    border-radius: var(--br-31xl);
+    overflow: hidden;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  .homeOwnersBtn:hover,
+  .professionalsBtn:hover,
+  .logInBtn:hover {
+    background-color: var(--color-lavender);
+  }
+  .autoLayoutHorizontal,
+  .mainHeader {
+    max-width: 100%;
+  }
+  .autoLayoutHorizontal {
+    width: 30.25rem;
+    justify-content: flex-start;
+    font-size: var(--font-size-xl);
+    font-family: var(--font-alegreya-sans-sc);
+  }
+  .mainHeader {
+    align-self: stretch;
+    background-color: var(--color-gray-100);
+    border-bottom: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    overflow: hidden;
+    justify-content: space-between;
+    padding: var(--padding-xl) var(--padding-41xl) var(--padding-lg);
+    top: 0;
+    z-index: 99;
+    position: sticky;
+    gap: var(--gap-xl);
+    text-align: left;
+    font-size: var(--font-size-18xl-3);
+    color: var(--color-gray-400);
+    font-family: var(--font-mohave);
+  }
+  @media screen and (max-width: 750px) {
+    .autoLayoutHorizontal {
+      display: none;
+    }
+    .mainHeader {
+      padding-left: var(--padding-11xl);
+      padding-right: var(--padding-11xl);
+      box-sizing: border-box;
+    }
+  }
+  

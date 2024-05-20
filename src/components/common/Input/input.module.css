@@ -1,0 +1,77 @@
+.label,
+.startAdornmentIcon {
+  position: relative;
+  display: none;
+}
+.label {
+  width: 106px;
+  line-height: 20px;
+}
+.startAdornmentIcon {
+  height: 16px;
+  width: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.placeholder {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  font-size: var(--body-base-text-size);
+  background-color: transparent;
+  height: 20px;
+  flex: 1;
+  position: relative;
+  line-height: 20px;
+  color: var(--color-dimgray-100);
+  text-align: left;
+  display: inline-block;
+  min-width: 221px;
+  max-width: 100%;
+  padding: 0;
+}
+.endAdornmentIcon,
+.selectarrowIcon {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  display: none;
+}
+.selectarrowIcon {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.content {
+  align-self: stretch;
+  border-radius: var(--br-7xs);
+  background-color: var(--default-white);
+  border: 1px solid var(--color-gainsboro-200);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-lg) var(--padding-mini);
+  gap: var(--gap-5xs);
+  max-width: 100%;
+}
+.helptext {
+  width: 50px;
+  position: relative;
+  font-size: var(--font-size-xs);
+  line-height: 12px;
+  color: var(--gray-500);
+  display: none;
+}
+.input {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-7xs);
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--body-base-text-size);
+  color: var(--color-black);
+}

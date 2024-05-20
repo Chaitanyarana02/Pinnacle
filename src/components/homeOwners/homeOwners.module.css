@@ -1,0 +1,189 @@
+.homeowners {
+    align-self: stretch;
+    position: relative;
+    font-size: inherit;
+    line-height: 4.75rem;
+    font-weight: 600;
+  }
+  .autoLayoutVertical {
+    width: 58.625rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .blankLine {
+    margin: 0;
+    white-space: pre-wrap;
+  }
+  .someExamples {
+    color: var(--color-gray-400);
+  }
+  .areThereAnyOpenWindowsIn1,
+  .closeAllBlindsOnTheGround,
+  .openAllBlindsInTheHouse,
+  .setTheLightInTheLibraryT,
+  .whatIsTheTemperatureInThe {
+    white-space: pre-wrap;
+  }
+  .areThereAnyOpenWindowsIn {
+    margin: 0;
+    /* font-family: inherit; */
+    font-size: inherit;
+    padding-left: var(--padding-13xl);
+  }
+  .blankLine5,
+  .siriWillInform {
+    margin: 0;
+  }
+  .aDoorOrWindowIsLeftOpen1,
+  .aSmokeAlarmWentOff,
+  .airQualityInTheLivingRoom,
+  .thereIsALeakInTheKitchen {
+    white-space: pre-wrap;
+  }
+  .aDoorOrWindowIsLeftOpen {
+    margin: 0;
+    /* font-family: inherit; */
+    font-size: inherit;
+    padding-left: var(--padding-13xl);
+  }
+  .heySiriWhatContainer,
+  .pleaseNoteThat {
+    position: relative;
+    line-height: 2.25rem;
+    font-weight: 600;
+  }
+  .heySiriWhatContainer {
+    width: 71rem;
+    height: 58.5rem;
+    font-size: var(--font-size-5xl);
+    /* font-family: var(--font-alegreya-sans-sc); */
+    text-align: left;
+    display: inline-block;
+    max-width: 100%;
+    color: var(--color-dimgray-100);
+  }
+  .pleaseNoteThat {
+    align-self: stretch;
+  }
+  .label,
+  .pleaseNoteWrapper {
+    font-size: var(--font-size-5xl);
+    /* font-family: var(--font-alegreya-sans-sc); */
+    text-align: left;
+  }
+  .pleaseNoteWrapper {
+    width: 71rem;
+    border-radius: var(--br-11xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-29xl) var(--padding-30xl) var(--padding-39xl);
+    min-height: 13.625rem;
+    max-width: 100%;
+    color: var(--color-gray-400);
+  }
+  .label {
+    position: relative;
+    line-height: 1.5rem;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: var(--default-white);
+    display: inline-block;
+    min-width: 7.813rem;
+  }
+  .button {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-5xl) var(--padding-13xl);
+    background-color: var(--color-royalblue);
+    border-radius: var(--br-31xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  .button:hover {
+    background-color: var(--color-dodgerblue);
+  }
+  .autoLayoutVerticalParent,
+  .homeownersPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .autoLayoutVerticalParent {
+    align-self: stretch;
+    background-color: var(--color-gray-100);
+    align-items: center;
+    padding: var(--padding-101xl) var(--padding-xl);
+    box-sizing: border-box;
+    gap: var(--gap-61xl);
+    max-width: 100%;
+    text-align: center;
+    font-size: var(--font-size-45xl);
+    color: var(--color-gray-400);
+    /* font-family: var(--font-alegreya-sans-sc); */
+  }
+  .homeownersPage {
+    width: 100%;
+    position: relative;
+    background-color: var(--default-white);
+    align-items: flex-start;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+  @media screen and (max-width: 1200px) {
+    .autoLayoutVerticalParent {
+      padding-top: var(--padding-59xl);
+      padding-bottom: var(--padding-59xl);
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 1050px) {
+    .homeowners {
+      font-size: var(--font-size-32xl);
+      line-height: 3.813rem;
+    }
+    .pleaseNoteThatPinnaqleHomeWrapper {
+      padding-left: var(--padding-5xl);
+      padding-right: var(--padding-5xl);
+      box-sizing: border-box;
+    }
+    .autoLayoutVerticalParent {
+      gap: var(--gap-21xl);
+      padding-top: var(--padding-32xl);
+      padding-bottom: var(--padding-32xl);
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 750px) {
+    .autoLayoutVerticalParent {
+      gap: var(--gap-xl);
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .homeowners {
+      font-size: var(--font-size-19xl);
+      line-height: 2.875rem;
+    }
+    .heySiriWhatContainer,
+    .pleaseNoteThat {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .autoLayoutVerticalParent {
+      padding-top: var(--padding-14xl);
+      padding-bottom: var(--padding-14xl);
+      box-sizing: border-box;
+    }
+  }
+  

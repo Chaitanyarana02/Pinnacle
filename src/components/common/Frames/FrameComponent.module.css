@@ -1,0 +1,55 @@
+.pinnaqle {
+  position: relative;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.pinnaqleWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.copyright2024Pinnaqle {
+  position: relative;
+  font-size: var(--body-base-text-size);
+  line-height: 3rem;
+  font-weight: 300;
+  font-family: var(--font-sf-pro);
+  color: var(--color-gray-300);
+  display: inline-block;
+  max-width: 100%;
+}
+.content {
+  align-self: stretch;
+  background-color: var(--color-gray-400);
+  border-bottom: 1px solid var(--color-gainsboro-500);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-61xl) var(--padding-xl) var(--padding-35xl);
+  gap: var(--gap-21xl);
+  max-width: 100%;
+  z-index: 2;
+  text-align: left;
+  font-size: var(--font-size-34xl-3);
+  color: var(--default-white);
+  font-family: var(--font-mohave);
+}
+@media screen and (max-width: 800px) {
+  .pinnaqle {
+    font-size: var(--font-size-24xl);
+    line-height: 3.188rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .pinnaqle {
+    font-size: var(--font-size-13xl);
+    line-height: 2.375rem;
+  }
+  .content {
+    gap: var(--gap-xl);
+  }
+}
