@@ -9,6 +9,7 @@ import Login from './components/Login/loginComponent'
 import ProjectDashboard from './components/projects/projectDashboard.component'
 import { useState } from 'react'
 import worker from './mock/mock.api'
+import AddEditProject from './components/projects/add-edit/addProject.component'
 // import HomeOwners from './components/homeOwners/homeOwners'
 // import Hompage from './components/homePage/Hompage'
 
@@ -20,15 +21,19 @@ function App() {
       {
         render ?
           <BrowserRouter>
-            <Header></Header>
+          {window.location.pathname !== '/add' ?  <Header></Header> : null}
+           
             <Routes>
               <Route path="/" element={<Hompage />}></Route>
               <Route path="/home-owners" element={<HomeOwners />}></Route>
               <Route path="/professionals" element={<ProfessionalsPage />}></Route>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/dashboard" element={<ProjectDashboard />}></Route>
+              <Route path="/add" element={<AddEditProject />}></Route>
             </Routes>
-            <FrameComponent />
+          {window.location.pathname !== '/add' ? <FrameComponent /> : null}
+
+            
           </BrowserRouter> :
           <></>
       }
