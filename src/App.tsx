@@ -7,14 +7,14 @@ import HomeOwners from './components/homeOwners/homeOwners'
 import Hompage from './components/homePage/Hompage'
 import Login from './components/Login/loginComponent'
 import ProjectDashboard from './components/projects/projectDashboard.component'
-import { useState } from 'react'
-import worker from './mock/mock.api'
-import AddEditProject from './components/projects/add-edit/addProject.component'
+// import { useState } from 'react'
+// import worker from './mock/mock.api'
+// import AddEditProject from './components/projects/add-edit/addProject.component'
 import Payment from './components/projects/add-edit/payment.component'
-import Step1Info from './components/projects/add-edit/step1Info.component'
-import Step1 from './components/projects/add-edit/step1.component'
+// import Step1Info from './components/projects/add-edit/step1Info.component'
+// import Step1 from './components/projects/add-edit/step1.component'
 import Step2 from './components/projects/add-edit/steps/step2'
-import Step3 from './components/projects/add-edit/step3.component'
+// import Step3 from './components/projects/add-edit/step3.component'
 import InfoStep from './components/projects/add-edit/steps/infoStep'
 import Step3new from './components/projects/add-edit/steps/step3new'
 import Step4 from './components/projects/add-edit/steps/step4'
@@ -24,15 +24,13 @@ import Step1new from './components/projects/add-edit/steps/step1New'
 // import Hompage from './components/homePage/Hompage'
 
 function App() {
-  const [render, setRender] = useState(false)
-  worker.start().then(() => setRender(true));
+  // const [render, setRender] = useState(false)
+  // worker.start().then(() => setRender(true));
   const paths: string[] = ['/home-owners' ,'/professionals', '/login', '/dashboard', '/']
 
   return (
     <>
-      {
-      
-        render ?
+
           <BrowserRouter>
           {paths.includes(window.location.pathname) ?  <Header></Header> : null}
            
@@ -53,9 +51,7 @@ function App() {
           {!paths.includes(window.location.pathname) ? <FrameComponent /> : null}
 
             
-          </BrowserRouter> :
-          <></>
-      }
+          </BrowserRouter> 
 
     </>
 

@@ -12,9 +12,9 @@ const Step4 = () => {
     // Please sync "Dashboard" to the project
   }, []);
 
-  const onFrameButton2Click = useCallback(() => {
-    // Please sync "Add Details 7" to the project
-  }, []);
+  // const onFrameButton2Click = useCallback(() => {
+  //   // Please sync "Add Details 7" to the project
+  // }, []);
 
   return (
     <div className={styles.step4}>

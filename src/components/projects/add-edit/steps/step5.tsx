@@ -10,17 +10,17 @@ const Step5 = () => {
     navigate("/add-details-5");
   }, [navigate]);
 
-  const onFrameContainer1Click = useCallback(() => {
-    navigate("/add-details-6");
-  }, [navigate]);
+  // const onFrameContainer1Click = useCallback(() => {
+  //   navigate("/add-details-6");
+  // }, [navigate]);
 
   const onXIconClick = useCallback(() => {
     navigate("/dashboard");
   }, [navigate]);
 
-  const onFrameButton1Click = useCallback(() => {
-    navigate("/add-details-8");
-  }, [navigate]);
+  // const onFrameButton1Click = useCallback(() => {
+  //   navigate("/add-details-8");
+  // }, [navigate]);
 
   return (
     <div className={styles.step5}>

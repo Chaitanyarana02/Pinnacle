@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchProjectList } from "../../store/fearure/project-list.slice";
-import { useAppDispatch, useAppSelector } from "../../store/store.utils";
+import { useAppDispatch } from "../../store/store.utils";
 import { ProjectBasicDetail } from "../../interfaces/project.interface";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 const ProjectDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const productListState = useAppSelector((state) => state.projectListState);
+  // const productListState = useAppSelector((state) => state.projectListState);
   const [isCreateProjectVisible, setCreateProjectVisible] =
     useState<boolean>(false);
   const [newProjectData, setNewProjectData] = useState<ProjectBasicDetail>({

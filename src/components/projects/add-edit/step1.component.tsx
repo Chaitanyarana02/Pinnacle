@@ -1,10 +1,10 @@
-import { useState } from "react";
+// import { useState } from "react";
 import styles from "./step1.module.css";
 
 const Step1 = ({
   className = "",
 }) => {
-  const [isAddNewPopupOpen, setAddNewPopupOpen] = useState(false);
+  // const [isAddNewPopupOpen, setAddNewPopupOpen] = useState(false);
 
 
   return (

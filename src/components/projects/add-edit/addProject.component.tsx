@@ -1,7 +1,7 @@
-import Step1Info from "./step1Info.component";
+// import Step1Info from "./step1Info.component";
 import styles from "./addProject.module.css";
-import Step1 from "./step1.component";
-import Step3 from "./step3.component";
+// import Step1 from "./step1.component";
+// import Step3 from "./step3.component";
 const AddEditProject = () => {
   return (
     <>
