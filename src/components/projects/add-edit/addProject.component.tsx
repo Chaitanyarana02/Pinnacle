@@ -46,7 +46,7 @@ const AddEditProject = () => {
         <div className="flex flex-wrap justify-content-center w-full">
           <div className="flex justify-content-center">
             {/* <Step1></Step1> */}
-            <Step3></Step3>
+            {/* <Step3></Step3> */}
           </div>
         </div>
 

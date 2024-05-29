@@ -1,0 +1,3437 @@
+.testProject {
+  text-decoration: none;
+  align-self: stretch;
+  position: relative;
+  line-height: 2.75rem;
+  font-weight: 600;
+  color: inherit;
+  white-space: nowrap;
+}
+.testProjectWrapper {
+  width: 10.375rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-11xs) 0 0;
+  box-sizing: border-box;
+}
+.frameChild {
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+  min-height: 3rem;
+}
+.projectStructure {
+  text-decoration: none;
+  position: relative;
+  line-height: 2.75rem;
+  color: inherit;
+  white-space: nowrap;
+}
+.frameGroup,
+.projectStructureWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.projectStructureWrapper {
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+}
+.frameGroup {
+  flex-direction: row;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+.frameItem {
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+  min-height: 3rem;
+}
+.projectFunction {
+  text-decoration: none;
+  position: relative;
+  line-height: 2.75rem;
+  color: inherit;
+  white-space: nowrap;
+}
+.frameContainer,
+.projectFunctionWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.projectFunctionWrapper {
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+}
+.frameContainer {
+  flex-direction: row;
+  gap: var(--gap-smi);
+  cursor: pointer;
+}
+.a,
+.frameInner {
+  position: absolute;
+}
+.frameInner {
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background-color: #ebe8e8;
+  width: 100%;
+  height: 100%;
+}
+.a {
+  text-decoration: none;
+  top: 0.275rem;
+  left: 0.988rem;
+  line-height: 2.5rem;
+  font-weight: 600;
+  color: inherit;
+  display: inline-block;
+  min-width: 0.875rem;
+  white-space: nowrap;
+  z-index: 1;
+}
+.ellipseParent {
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+}
+.projectDetailing {
+  text-decoration: none;
+  align-self: stretch;
+  position: relative;
+  line-height: 2.75rem;
+  font-weight: 600;
+  color: inherit;
+  white-space: nowrap;
+}
+.frameDiv,
+.frameParent,
+.projectDetailingWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.projectDetailingWrapper {
+  flex: 1;
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
+}
+.frameDiv,
+.frameParent {
+  flex-direction: row;
+}
+.frameDiv {
+  flex: 1;
+  gap: var(--gap-smi);
+  font-size: 1.331rem;
+  color: var(--color-royalblue);
+  font-family: var(--font-alegreya-sans-sc);
+}
+.frameParent {
+  margin: 0;
+  width: 48rem;
+  gap: var(--gap-41xl);
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
+  font-family: var(--font-abeezee);
+}
+.xIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.xWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+}
+.header1,
+.header1Wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.header1 {
+  flex: 1;
+  background-color: var(--default-white);
+  border-bottom: 1px solid var(--color-gainsboro-500);
+  overflow: hidden;
+  justify-content: space-between;
+  padding: 1.75rem var(--padding-21xl) 1.625rem var(--padding-41xl);
+  top: 0;
+  z-index: 99;
+  position: sticky;
+  gap: var(--gap-xl);
+  text-align: center;
+  font-size: var(--font-size-13xl);
+  color: var(--color-gray-400);
+  font-family: var(--font-alegreya-sans-sc);
+}
+.header1Wrapper {
+  align-self: stretch;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-41xl);
+}
+.chevronRightIcon {
+  height: 1.5rem;
+  width: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  min-height: 1.5rem;
+}
+.label {
+  position: relative;
+  font-size: var(--font-size-xl);
+  line-height: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  color: var(--color-royalblue);
+  text-align: left;
+}
+.button,
+.buttonWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.button {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-lg) var(--padding-xl);
+  background-color: var(--color-whitesmoke-100);
+  border-radius: var(--br-31xl);
+  flex-direction: row;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+.button1:hover,
+.button:hover {
+  background-color: var(--color-gainsboro-400);
+}
+.buttonWrapper {
+  flex-direction: column;
+  padding: 0.562rem 1.812rem 0 0;
+}
+.defineTechDetails {
+  margin: 0;
+  flex: 1;
+  position: relative;
+  font-size: inherit;
+  line-height: 2.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  display: inline-block;
+  max-width: 100%;
+}
+.defineTechDetailsForYourSWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 4.562rem 0 var(--padding-52xl);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.startByAssigning {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: 1.75rem;
+  font-family: var(--font-abeezee);
+  color: var(--color-dimgray-100);
+}
+.frameParent2 {
+  width: 39.688rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.375rem;
+  max-width: 100%;
+}
+.printerIcon {
+  height: 1.5rem;
+  width: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  min-height: 1.5rem;
+}
+.label1 {
+  flex: 1;
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  color: var(--color-royalblue);
+  text-align: left;
+}
+.button1,
+.buttonContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.button1 {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-xs) var(--padding-xl);
+  background-color: var(--color-whitesmoke-100);
+  align-self: stretch;
+  border-radius: var(--br-31xl);
+  flex-direction: row;
+  gap: var(--gap-5xs);
+  white-space: nowrap;
+}
+.buttonContainer {
+  width: 14.813rem;
+  flex-direction: column;
+  padding: var(--padding-mini) 0 0;
+  box-sizing: border-box;
+}
+.frameParent1,
+.step5Inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.frameParent1 {
+  flex: 1;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.step5Inner {
+  align-self: stretch;
+  justify-content: flex-start;
+  padding: 0 var(--padding-41xl) var(--padding-41xl);
+  box-sizing: border-box;
+}
+.lineDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top: 1px solid var(--color-gainsboro-500);
+  box-sizing: border-box;
+  width: 90.063rem;
+  height: 0.063rem;
+}
+.house {
+  position: relative;
+  font-size: var(--font-size-xl);
+  line-height: 1.75rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  display: inline-block;
+  min-width: 3.875rem;
+}
+.rectangleDiv {
+  width: 0.063rem;
+  height: 1.25rem;
+  position: relative;
+  background-color: var(--color-dimgray-100);
+}
+.rectangleWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+}
+.house1 {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 3.063rem;
+}
+.houseWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-11xs) 0 0;
+}
+.ellipseDiv {
+  width: 0.25rem;
+  height: 0.25rem;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-dimgray-100);
+}
+.ellipseWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) 0 0;
+}
+.indoor {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 3.125rem;
+}
+.houseParent,
+.indoorWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.indoorWrapper {
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+}
+.houseParent {
+  flex-direction: row;
+  gap: var(--gap-3xs-8);
+}
+.groundFloor {
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 2.25rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  color: var(--color-gray-400);
+}
+.frameParent5 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.frameChild1 {
+  align-self: stretch;
+  width: 0.063rem;
+  position: relative;
+  background-color: var(--color-gainsboro-500);
+}
+.kitchen {
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: 1.75rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  color: var(--color-royalblue);
+  text-align: left;
+  display: inline-block;
+  min-width: 3.75rem;
+}
+.kitchenWrapper {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-3xs) var(--padding-base);
+  background-color: #e9f1fe;
+  border-radius: var(--br-3xs);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.kitchenWrapper:hover {
+  background-color: #cfd9e6;
+}
+.bathroom {
+  position: relative;
+  line-height: 1.75rem;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 4.813rem;
+}
+.bathroomWrapper {
+  border-radius: var(--br-3xs);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-3xs) var(--padding-base);
+  z-index: 1;
+}
+.entrance {
+  position: relative;
+  line-height: 1.75rem;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 4.438rem;
+}
+.entranceWrapper {
+  border-radius: var(--br-3xs);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-3xs) var(--padding-base);
+  z-index: 2;
+}
+.cinema {
+  position: relative;
+  line-height: 1.75rem;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 3.75rem;
+}
+.cinemaWrapper {
+  border-radius: var(--br-3xs);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-3xs) var(--padding-base);
+  z-index: 3;
+}
+.utility {
+  position: relative;
+  line-height: 1.75rem;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 3rem;
+}
+.utilityWrapper {
+  border-radius: var(--br-3xs);
+  flex-direction: row;
+  padding: var(--padding-3xs) var(--padding-base);
+  z-index: 4;
+}
+.frameParent4,
+.frameParent6,
+.rectangleParent,
+.utilityWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameParent6 {
+  flex-direction: column;
+}
+.frameParent4,
+.rectangleParent {
+  flex: 1;
+  gap: var(--gap-xl);
+}
+.rectangleParent {
+  flex-direction: row;
+  font-family: var(--font-alegreya-sans-sc);
+}
+.frameParent4 {
+  flex-direction: column;
+  padding: 0 var(--padding-xl) 0 0;
+}
+.frameChild2 {
+  align-self: stretch;
+  height: 0.063rem;
+  position: relative;
+  background-color: var(--color-gainsboro-600);
+}
+.house2 {
+  position: relative;
+  font-size: var(--font-size-xl);
+  line-height: 1.75rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  display: inline-block;
+  min-width: 3.875rem;
+}
+.frameChild3 {
+  width: 0.063rem;
+  height: 1.25rem;
+  position: relative;
+  background-color: var(--color-dimgray-100);
+}
+.rectangleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+}
+.house3 {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 3.063rem;
+}
+.houseContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-11xs) 0 0;
+}
+.frameChild4 {
+  width: 0.25rem;
+  height: 0.25rem;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-dimgray-100);
+}
+.ellipseContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) 0 0;
+}
+.indoor1 {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 3.125rem;
+}
+.indoorContainer {
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+}
+.houseGroup,
+.indoorContainer,
+.rectangleGroup {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.houseGroup {
+  flex-direction: row;
+  padding: 0 var(--padding-xl) 0 0;
+  gap: var(--gap-3xs-8);
+}
+.rectangleGroup {
+  align-self: stretch;
+  flex-direction: column;
+  gap: var(--gap-xl);
+}
+.firstFloor {
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 2.25rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  color: var(--color-gray-400);
+  display: inline-block;
+  min-width: 7rem;
+}
+.frameParent7 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.frameChild5 {
+  align-self: stretch;
+  height: 0.063rem;
+  position: relative;
+  background-color: var(--color-gainsboro-600);
+}
+.manCave {
+  position: relative;
+  font-size: var(--font-size-xl);
+  line-height: 1.75rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  display: inline-block;
+  min-width: 5.875rem;
+}
+.frameChild6 {
+  width: 0.063rem;
+  height: 1.25rem;
+  position: relative;
+  background-color: var(--color-dimgray-100);
+}
+.rectangleFrame {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+}
+.shed {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 2.438rem;
+}
+.shedWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-11xs) 0 0;
+}
+.frameChild7 {
+  width: 0.25rem;
+  height: 0.25rem;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-dimgray-100);
+}
+.ellipseFrame {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) 0 0;
+}
+.indoor2 {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 3.125rem;
+}
+.indoorFrame {
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+}
+.indoorFrame,
+.manCaveParent,
+.rectangleParent1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.manCaveParent {
+  flex-direction: row;
+  padding: 0 var(--padding-xl) 0 0;
+  gap: var(--gap-3xs-8);
+}
+.rectangleParent1 {
+  align-self: stretch;
+  flex-direction: column;
+  gap: var(--gap-xl);
+}
+.groundFloor1 {
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 2.25rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  color: var(--color-gray-400);
+}
+.frameParent8 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.frameChild8 {
+  align-self: stretch;
+  height: 0.063rem;
+  position: relative;
+  background-color: var(--color-gainsboro-600);
+}
+.carGarage {
+  position: relative;
+  font-size: var(--font-size-xl);
+  line-height: 1.75rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  display: inline-block;
+  min-width: 6.813rem;
+}
+.frameChild9 {
+  width: 0.063rem;
+  height: 1.25rem;
+  position: relative;
+  background-color: var(--color-dimgray-100);
+}
+.rectangleWrapper1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+}
+.garage {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 3.438rem;
+}
+.garageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-11xs) 0 0;
+}
+.frameChild10 {
+  width: 0.25rem;
+  height: 0.25rem;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-dimgray-100);
+}
+.ellipseWrapper1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) 0 0;
+}
+.indoor3 {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 3.125rem;
+}
+.carGarageParent,
+.indoorWrapper1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.indoorWrapper1 {
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+}
+.carGarageParent {
+  align-self: stretch;
+  flex-direction: row;
+  gap: var(--gap-3xs-8);
+}
+.groundFloor2 {
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 2.25rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  color: var(--color-gray-400);
+}
+.frameParent9,
+.rectangleParent2 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.rectangleParent2 {
+  gap: var(--gap-xl);
+}
+.frameChild11 {
+  align-self: stretch;
+  height: 0.063rem;
+  position: relative;
+  background-color: var(--color-gainsboro-600);
+}
+.gardenArea {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 5.938rem;
+}
+.frameChild12 {
+  width: 0.25rem;
+  height: 0.25rem;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-dimgray-100);
+}
+.ellipseWrapper2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-3xs) 0 0;
+}
+.outdoor {
+  position: relative;
+  line-height: 1.5rem;
+  display: inline-block;
+  min-width: 4rem;
+}
+.gardenAreaParent,
+.rectangleParent3 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.gardenAreaParent {
+  flex-direction: row;
+  padding: 0 var(--padding-xl) 0 0;
+  gap: 0.468rem;
+}
+.rectangleParent3 {
+  align-self: stretch;
+  flex-direction: column;
+  gap: var(--gap-xl);
+}
+.frontGarden {
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 2.25rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+  color: var(--color-gray-400);
+}
+.frameParent10 {
+  align-self: stretch;
+  gap: var(--gap-5xs);
+}
+.frameParent10,
+.frameParent3,
+.frameWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameParent3 {
+  align-self: stretch;
+  flex: 1;
+  gap: var(--gap-11xl);
+}
+.frameWrapper {
+  height: 53.75rem;
+  width: 17.313rem;
+  padding: var(--padding-21xl) 1.187rem 0 0;
+  box-sizing: border-box;
+}
+.frameChild13 {
+  height: 104.063rem;
+  width: 0.063rem;
+  position: relative;
+  background-color: var(--color-gainsboro-600);
+  z-index: 1;
+}
+.color,
+.dimmable,
+.lights,
+.wattage,
+.wiring {
+  position: relative;
+  line-height: 1.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+.lights {
+  width: 10rem;
+  flex-shrink: 0;
+}
+.color,
+.dimmable,
+.wattage,
+.wiring {
+  flex: 1;
+  min-width: 3.813rem;
+}
+.lightsParent {
+  align-self: stretch;
+  border-radius: var(--br-5xs);
+  background-color: var(--color-whitesmoke-100);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-mini) var(--padding-xl);
+  gap: var(--gap-xl);
+  color: var(--color-dimgray-100);
+}
+.spotLight {
+  width: 10rem;
+  position: relative;
+  line-height: 1.75rem;
+  font-weight: 600;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.vectorIcon {
+  height: 1.875rem;
+  width: 3rem;
+  position: relative;
+}
+.yes {
+  position: relative;
+  line-height: 1.25rem;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 1.75rem;
+}
+.vectorParent {
+  flex: 0.4929;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 5.562rem 0 0;
+  box-sizing: border-box;
+  gap: var(--gap-3xs);
+  min-width: 4.75rem;
+}
+.radio,
+.w {
+  position: relative;
+}
+.radio {
+  cursor: pointer;
+  margin: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+.w {
+  line-height: 1.25rem;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 3.625rem;
+}
+.radioParent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-53xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio1,
+  .w1 {
+    position: relative;
+  }
+  .radio1 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .w1 {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.625rem;
+  }
+  .frameParent13,
+  .radioGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-53xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent13 {
+    flex: 0.9145;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 var(--padding-mini) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+    min-width: 7.125rem;
+  }
+  .radio2 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .concealed {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 5.25rem;
+  }
+  .radioContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-42xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio3 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .directToSwitch {
+    flex: 1;
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+  }
+  .radioParent1 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 1.312rem 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio4,
+  .socket {
+    position: relative;
+  }
+  .radio4 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .socket {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.438rem;
+  }
+  .frameParent14,
+  .radioParent2 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent2 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 5.625rem 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent14 {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-xl);
+    min-width: 7.125rem;
+  }
+  .radio5,
+  .white {
+    position: relative;
+  }
+  .radio5 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .white {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-65xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .black,
+  .radio6 {
+    position: relative;
+  }
+  .radio6 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .black {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.75rem;
+  }
+  .radioParent4 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-67xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent15,
+  .spotLightParent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-xl);
+  }
+  .frameParent15 {
+    flex: 0.9145;
+    flex-direction: column;
+    padding: 0 var(--padding-mini) 0 0;
+    box-sizing: border-box;
+    min-width: 7.125rem;
+  }
+  .spotLightParent {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 var(--padding-xl);
+  }
+  .frameChild14 {
+    align-self: stretch;
+    height: 0.063rem;
+    position: relative;
+    background-color: var(--color-gainsboro-500);
+  }
+  .pendants {
+    width: 10rem;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .vectorIcon1 {
+    height: 1.875rem;
+    width: 3rem;
+    position: relative;
+    object-fit: contain;
+  }
+  .no {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 1.375rem;
+  }
+  .vectorGroup {
+    flex: 0.4587;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-76xl) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-3xs);
+    min-width: 4.375rem;
+  }
+  .radio7,
+  .w2 {
+    position: relative;
+  }
+  .radio7 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .w2 {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.625rem;
+  }
+  .radioParent5 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-53xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio8,
+  .w3 {
+    position: relative;
+  }
+  .radio8 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .w3 {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.625rem;
+  }
+  .frameParent16,
+  .radioParent6 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-53xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent16 {
+    flex: 0.9145;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 var(--padding-mini) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+    min-width: 7.125rem;
+  }
+  .radio9 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .concealed1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 5.25rem;
+  }
+  .radioParent7 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-67xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio10 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .directToSwitch1 {
+    flex: 1;
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+  }
+  .radioParent8 {
+    width: 12.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-27xl) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-3xs);
+  }
+  .radio11 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .socket1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.438rem;
+  }
+  .frameParent17,
+  .radioParent9 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent9 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-96xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent17 {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+    min-width: 7.125rem;
+  }
+  .radio12 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .white1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent10 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-65xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio13 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .black1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.75rem;
+  }
+  .radioParent11 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-67xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent18,
+  .pendantsParent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-xl);
+  }
+  .frameParent18 {
+    flex: 0.9145;
+    flex-direction: column;
+    padding: 0 var(--padding-mini) 0 0;
+    box-sizing: border-box;
+    min-width: 7.125rem;
+  }
+  .pendantsParent {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 var(--padding-xl);
+  }
+  .frameChild15 {
+    align-self: stretch;
+    height: 0.063rem;
+    position: relative;
+    background-color: var(--color-gainsboro-500);
+  }
+  .wallLights {
+    width: 10rem;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .vectorIcon2 {
+    height: 1.875rem;
+    width: 3rem;
+    position: relative;
+    object-fit: contain;
+  }
+  .no1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 1.375rem;
+  }
+  .vectorContainer {
+    flex: 0.4587;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-76xl) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-3xs);
+    min-width: 4.375rem;
+  }
+  .radio14,
+  .w4 {
+    position: relative;
+  }
+  .radio14 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .w4 {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.625rem;
+  }
+  .radioParent12 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-53xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio15,
+  .w5 {
+    position: relative;
+  }
+  .radio15 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .w5 {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.625rem;
+  }
+  .frameParent19,
+  .radioParent13 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-53xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent19 {
+    flex: 0.9145;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 var(--padding-mini) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+    min-width: 7.125rem;
+  }
+  .radio16 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .concealed2 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 5.25rem;
+  }
+  .radioParent14 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-67xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio17 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .directToSwitch2 {
+    flex: 1;
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+  }
+  .radioParent15 {
+    width: 12.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-27xl) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-3xs);
+  }
+  .radio18 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .socket2 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.438rem;
+  }
+  .frameParent20,
+  .radioParent16 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent16 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-96xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent20 {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+    min-width: 7.125rem;
+  }
+  .radio19 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .white2 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent17 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-65xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio20 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .black2 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.75rem;
+  }
+  .radioParent18 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-67xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent12,
+  .frameParent21,
+  .wallLightsParent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .frameParent21 {
+    flex: 0.9145;
+    flex-direction: column;
+    padding: 0 var(--padding-mini) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+    min-width: 7.125rem;
+  }
+  .frameParent12,
+  .wallLightsParent {
+    align-self: stretch;
+  }
+  .wallLightsParent {
+    flex-direction: row;
+    padding: 0 var(--padding-xl);
+    gap: var(--gap-xl);
+  }
+  .frameParent12 {
+    flex-direction: column;
+    gap: var(--gap-11xl);
+  }
+  .sensors,
+  .wiring1 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .sensors {
+    width: 10rem;
+    flex-shrink: 0;
+  }
+  .wiring1 {
+    flex: 1;
+    min-width: 2.438rem;
+    max-width: 100%;
+  }
+  .sensorsParent {
+    align-self: stretch;
+    border-radius: var(--br-5xs);
+    background-color: var(--color-whitesmoke-100);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-mini) var(--padding-xl);
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+    max-width: 100%;
+    color: var(--color-dimgray-100);
+  }
+  .window {
+    width: 10rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .radio21,
+  .window,
+  .wired {
+    position: relative;
+  }
+  .radio21 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .wired {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.938rem;
+  }
+  .radioParent19 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .radio22 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .battery {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.688rem;
+  }
+  .frameParent23,
+  .radioParent20,
+  .windowParent {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .radioParent20 {
+    align-items: center;
+    gap: var(--gap-3xs);
+  }
+  .frameParent23,
+  .windowParent {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .frameParent23 {
+    flex: 1;
+    align-items: flex-start;
+    padding: 0 var(--padding-547xl) 0 0;
+    gap: var(--gap-11xl);
+    min-width: 10.375rem;
+  }
+  .windowParent {
+    align-self: stretch;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 var(--padding-xl);
+    gap: var(--gap-xl);
+  }
+  .door,
+  .radio23 {
+    position: relative;
+  }
+  .door {
+    width: 10rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .radio23 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .wired1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.938rem;
+  }
+  .radioParent21 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .radio24 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .battery1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.688rem;
+  }
+  .doorParent,
+  .frameParent24,
+  .radioParent22 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .radioParent22 {
+    align-items: center;
+    gap: var(--gap-3xs);
+  }
+  .doorParent,
+  .frameParent24 {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .frameParent24 {
+    flex: 1;
+    align-items: flex-start;
+    padding: 0 var(--padding-547xl) 0 0;
+    gap: var(--gap-11xl);
+    min-width: 10.375rem;
+  }
+  .doorParent {
+    align-self: stretch;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 var(--padding-xl);
+    gap: var(--gap-xl);
+  }
+  .leakage {
+    width: 10rem;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .radio25 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .wired2 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.938rem;
+  }
+  .radioParent23 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .radio26 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .battery2 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.688rem;
+  }
+  .frameParent25,
+  .leakageParent,
+  .radioParent24 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .radioParent24 {
+    align-items: center;
+    gap: var(--gap-3xs);
+  }
+  .frameParent25,
+  .leakageParent {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .frameParent25 {
+    flex: 1;
+    align-items: flex-start;
+    padding: 0 var(--padding-547xl) 0 0;
+    gap: var(--gap-11xl);
+    min-width: 10.375rem;
+  }
+  .leakageParent {
+    align-self: stretch;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 var(--padding-xl);
+    gap: var(--gap-xl);
+  }
+  .presence {
+    width: 10rem;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .radio27 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .wired3 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.938rem;
+  }
+  .radioParent25 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .radio28 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .battery3 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.688rem;
+  }
+  .frameParent26,
+  .presenceParent,
+  .radioParent26 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .radioParent26 {
+    align-items: center;
+    gap: var(--gap-3xs);
+  }
+  .frameParent26,
+  .presenceParent {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .frameParent26 {
+    flex: 1;
+    align-items: flex-start;
+    padding: 0 var(--padding-547xl) 0 0;
+    gap: var(--gap-11xl);
+    min-width: 10.375rem;
+  }
+  .presenceParent {
+    align-self: stretch;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 var(--padding-xl);
+    gap: var(--gap-xl);
+  }
+  .radio29,
+  .smoke {
+    position: relative;
+  }
+  .smoke {
+    width: 10rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .radio29 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .wired4 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.938rem;
+  }
+  .radioParent27 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .radio30 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .battery4 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.688rem;
+  }
+  .radioParent28 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .frameParent22,
+  .frameParent27,
+  .smokeParent {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .frameParent27 {
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0 var(--padding-547xl) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-11xl);
+    min-width: 10.375rem;
+  }
+  .frameParent22,
+  .smokeParent {
+    align-self: stretch;
+  }
+  .smokeParent {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 var(--padding-xl);
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .frameParent22 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-11xl);
+  }
+  .blinds {
+    width: 10rem;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .color1,
+  .type,
+  .wiring2 {
+    width: 8.125rem;
+    flex-shrink: 0;
+  }
+  .color1,
+  .direction,
+  .sizeInInches,
+  .type,
+  .wiring2 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .direction {
+    width: 7.5rem;
+    flex-shrink: 0;
+  }
+  .sizeInInches {
+    flex: 1;
+    min-width: 5.875rem;
+  }
+  .blindsParent {
+    align-self: stretch;
+    border-radius: var(--br-5xs);
+    background-color: var(--color-whitesmoke-100);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-mini) var(--padding-xl);
+    gap: var(--gap-xl);
+    color: var(--color-dimgray-100);
+  }
+  .leftWindowBlind {
+    width: 10rem;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .radio31 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .roller {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent29 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-65xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio32 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .venetian {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 4.313rem;
+  }
+  .frameParent29,
+  .radioParent30 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent30 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-42xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent29 {
+    width: 8.125rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .radio33 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .wired5 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.938rem;
+  }
+  .radioParent31 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-64xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio34 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .battery5 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.688rem;
+  }
+  .frameParent30,
+  .radioParent32 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent32 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-52xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent30 {
+    width: 8.125rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .radio35 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .white3 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent33 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-65xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio36 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .black3 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.75rem;
+  }
+  .frameParent31,
+  .radioParent34 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent34 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-67xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent31 {
+    width: 8.125rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .front,
+  .radio37 {
+    position: relative;
+  }
+  .radio37 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .front {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.625rem;
+  }
+  .radioParent35 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-69xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .back,
+  .radio38 {
+    position: relative;
+  }
+  .radio38 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .back {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.438rem;
+  }
+  .frameParent32,
+  .radioParent36 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent36 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-72xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent32 {
+    width: 7.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .startAdornmentIcon {
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: none;
+  }
+  .widthXHeight {
+    flex: 1;
+    position: relative;
+    line-height: 1.25rem;
+  }
+  .endAdornmentIcon {
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    display: none;
+  }
+  .content,
+  .leftWindowBlindParent {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .content {
+    flex: 1;
+    border-radius: var(--br-7xs);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    padding: var(--padding-xs) var(--padding-mini);
+    gap: var(--gap-5xs);
+    min-width: 7rem;
+    color: var(--color-dimgray-100);
+    font-family: var(--font-abeezee);
+  }
+  .leftWindowBlindParent {
+    align-self: stretch;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0 var(--padding-xl);
+    gap: var(--gap-xl);
+  }
+  .frameChild16 {
+    align-self: stretch;
+    height: 0.063rem;
+    position: relative;
+    background-color: var(--color-gainsboro-500);
+  }
+  .rightWindowBlind {
+    width: 10rem;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .radio39 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .roller1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent37 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-65xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio40 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .venetian1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 4.313rem;
+  }
+  .frameParent33,
+  .radioParent38 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent38 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-42xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent33 {
+    width: 8.125rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .radio41 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .wired6 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.938rem;
+  }
+  .radioParent39 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-64xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio42 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .battery6 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.688rem;
+  }
+  .frameParent34,
+  .radioParent40 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent40 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-52xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent34 {
+    width: 8.125rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .radio43 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .white4 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent41 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-65xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .radio44 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .black4 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.75rem;
+  }
+  .frameParent35,
+  .radioParent42 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent42 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-67xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent35 {
+    width: 8.125rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .radio45 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .front1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.625rem;
+  }
+  .radioParent43 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-69xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .back1,
+  .radio46 {
+    position: relative;
+  }
+  .radio46 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .back1 {
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.438rem;
+  }
+  .frameParent36,
+  .radioParent44 {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .radioParent44 {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--padding-72xl) 0 0;
+    gap: var(--gap-3xs);
+  }
+  .frameParent36 {
+    width: 7.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+  }
+  .startAdornmentIcon1 {
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: none;
+  }
+  .widthXHeight1 {
+    flex: 1;
+    position: relative;
+    line-height: 1.25rem;
+  }
+  .endAdornmentIcon1 {
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    display: none;
+  }
+  .content1 {
+    flex: 1;
+    border-radius: var(--br-7xs);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-xs) var(--padding-mini);
+    gap: var(--gap-5xs);
+    min-width: 7rem;
+    color: var(--color-dimgray-100);
+    font-family: var(--font-abeezee);
+  }
+  .frameParent28,
+  .rightWindowBlindParent {
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .rightWindowBlindParent {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 var(--padding-xl);
+    gap: var(--gap-xl);
+  }
+  .frameParent28 {
+    flex-direction: column;
+    gap: var(--gap-11xl);
+  }
+  .controls {
+    width: 11.25rem;
+    flex-shrink: 0;
+  }
+  .color2,
+  .controls,
+  .noOfButtons {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .noOfButtons {
+    width: 8.75rem;
+    flex-shrink: 0;
+  }
+  .color2 {
+    flex: 1;
+    min-width: 2.063rem;
+    max-width: 100%;
+  }
+  .controlsParent {
+    align-self: stretch;
+    border-radius: var(--br-5xs);
+    background-color: var(--color-whitesmoke-100);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-mini) var(--padding-xl);
+    box-sizing: border-box;
+    gap: var(--gap-xl);
+    max-width: 100%;
+    color: var(--color-dimgray-100);
+  }
+  .switchByEntrance {
+    flex: 1;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 7.313rem;
+  }
+  .startAdornmentIcon2 {
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .endAdornmentIcon2,
+  .startAdornmentIcon2 {
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    display: none;
+  }
+  .frameChild17 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background-color: var(--color-whitesmoke-100);
+    width: 100%;
+    height: 100%;
+  }
+  .div {
+    position: absolute;
+    top: 0.375rem;
+    left: 0.5rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.5rem;
+    z-index: 1;
+  }
+  .ellipseGroup {
+    height: 1.5rem;
+    flex: 1;
+    position: relative;
+  }
+  .b {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.688rem;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-11xs) 0 0;
+    color: var(--color-gray-400);
+  }
+  .frameChild18 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background-color: var(--color-whitesmoke-100);
+    width: 100%;
+    height: 100%;
+  }
+  .div1 {
+    position: absolute;
+    top: 0.375rem;
+    left: 0.438rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.688rem;
+    z-index: 1;
+  }
+  .ellipseParent1 {
+    height: 1.5rem;
+    flex: 1;
+    position: relative;
+  }
+  .content2,
+  .contentWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .content2 {
+    align-self: stretch;
+    border-radius: var(--br-7xs);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    flex-direction: row;
+    padding: var(--padding-xs) var(--padding-2xs);
+    gap: var(--gap-lg-5);
+  }
+  .contentWrapper {
+    width: 8.75rem;
+    flex-direction: column;
+    padding: 0 var(--padding-xl) 0 0;
+    box-sizing: border-box;
+    color: var(--color-dimgray-100);
+  }
+  .radio47 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .white5 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent45 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .radio48 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .black5 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.75rem;
+  }
+  .radioParent46 {
+    flex-direction: row;
+    gap: var(--gap-3xs);
+  }
+  .frameParent38,
+  .frameWrapper2,
+  .radioParent46,
+  .switchByEntranceParent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .frameParent38 {
+    flex-direction: column;
+    gap: var(--gap-xl);
+  }
+  .frameWrapper2,
+  .switchByEntranceParent {
+    flex-direction: row;
+    max-width: 100%;
+  }
+  .switchByEntranceParent {
+    flex: 1;
+    flex-wrap: wrap;
+    gap: var(--gap-xl);
+  }
+  .frameWrapper2 {
+    width: 29.75rem;
+    padding: 0 var(--padding-xl);
+    box-sizing: border-box;
+  }
+  .frameChild19 {
+    align-self: stretch;
+    height: 0.063rem;
+    position: relative;
+    background-color: var(--color-gainsboro-500);
+  }
+  .switchByWindow {
+    width: 11.25rem;
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .startAdornmentIcon3 {
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .endAdornmentIcon3,
+  .startAdornmentIcon3 {
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    display: none;
+  }
+  .frameChild20 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background-color: var(--color-whitesmoke-100);
+    width: 100%;
+    height: 100%;
+  }
+  .div2 {
+    position: absolute;
+    top: 0.375rem;
+    left: 0.5rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.5rem;
+    z-index: 1;
+  }
+  .ellipseParent2 {
+    height: 1.5rem;
+    flex: 1;
+    position: relative;
+  }
+  .b1 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.688rem;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-11xs) 0 0;
+    color: var(--color-gray-400);
+  }
+  .frameChild21 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background-color: var(--color-whitesmoke-100);
+    width: 100%;
+    height: 100%;
+  }
+  .div3 {
+    position: absolute;
+    top: 0.375rem;
+    left: 0.438rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.688rem;
+    z-index: 1;
+  }
+  .ellipseParent3 {
+    height: 1.5rem;
+    flex: 1;
+    position: relative;
+  }
+  .content3 {
+    width: 7.5rem;
+    border-radius: var(--br-7xs);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-xs) var(--padding-2xs);
+    gap: var(--gap-lg-5);
+  }
+  .radio49 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .white6 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.875rem;
+  }
+  .radioParent47 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .radio50 {
+    cursor: pointer;
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    position: relative;
+  }
+  .black6 {
+    position: relative;
+    line-height: 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 2.75rem;
+  }
+  .frameParent39,
+  .radioParent48 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .frameParent39 {
+    flex-direction: column;
+    gap: var(--gap-xl);
+    color: var(--color-gray-400);
+  }
+  .contentParent,
+  .frameWrapper3,
+  .switchByWindowParent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .contentParent {
+    flex: 1;
+    justify-content: space-between;
+    min-width: 9.563rem;
+    gap: var(--gap-xl);
+    color: var(--color-dimgray-100);
+  }
+  .frameWrapper3,
+  .switchByWindowParent {
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .switchByWindowParent {
+    flex: 1;
+    flex-wrap: wrap;
+    gap: var(--gap-xl);
+  }
+  .frameWrapper3 {
+    width: 29.75rem;
+    padding: 0 var(--padding-xl);
+    box-sizing: border-box;
+  }
+  .frameParent11,
+  .frameParent37 {
+    align-self: stretch;
+    flex-direction: column;
+    max-width: 100%;
+  }
+  .frameParent37 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-11xl);
+  }
+  .frameParent11 {
+    gap: var(--gap-41xl);
+  }
+  .frameParent11,
+  .frameSection,
+  .frameWrapper1 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .frameWrapper1 {
+    flex: 1;
+    flex-direction: column;
+    padding: var(--padding-11xl) 0 0;
+    box-sizing: border-box;
+    max-width: calc(100% - 338px);
+    color: var(--color-gray-400);
+    font-family: var(--font-alegreya-sans-sc);
+  }
+  .frameSection {
+    position: absolute;
+    top: 0;
+    left: 3.75rem;
+    width: 82.5rem;
+    flex-direction: row;
+    gap: var(--gap-11xl);
+    max-width: 100%;
+    text-align: left;
+    font-size: var(--font-size-base);
+    color: var(--color-dimgray-100);
+    font-family: var(--font-abeezee);
+  }
+  .lineParent {
+    align-self: stretch;
+    height: 104.063rem;
+    position: relative;
+    max-width: 100%;
+  }
+  .frameChild22 {
+    position: absolute;
+    top: 0.063rem;
+    left: 0;
+    border-top: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 90.063rem;
+    height: 0.063rem;
+  }
+  .b2,
+  .finalPrice {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+  .finalPrice {
+    display: inline-block;
+    min-width: 5.5rem;
+  }
+  .b2 {
+    flex: 1;
+    font-size: var(--font-size-xl);
+    color: var(--color-gray-400);
+    text-align: center;
+  }
+  .finalPriceParent {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+    min-width: 9rem;
+  }
+  .b3,
+  .rebate {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .rebate {
+    min-width: 3.813rem;
+  }
+  .b3 {
+    width: 3.125rem;
+    font-size: var(--font-size-xl);
+    color: var(--color-gray-400);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .frameParent41,
+  .rebateParent {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .rebateParent {
+    align-items: flex-start;
+    gap: var(--gap-3xs);
+  }
+  .frameParent41 {
+    flex: 1;
+    background-color: var(--default-white);
+    border-top: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    padding: 0.875rem 40.312rem var(--padding-base) var(--padding-41xl);
+    gap: 2rem;
+    max-width: 100%;
+  }
+  .confirmProceed {
+    flex: 1;
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.5rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--default-white);
+    text-align: left;
+  }
+  .chevronRightIcon1 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-height: 1.5rem;
+  }
+  .confirmProceedToOrderParent,
+  .frameButton,
+  .frameParent40 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .confirmProceedToOrderParent {
+    flex: 1;
+    align-items: center;
+    gap: var(--gap-xl);
+  }
+  .frameButton,
+  .frameParent40 {
+    max-width: 100%;
+  }
+  .frameButton {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-lg) var(--padding-xl) var(--padding-lg)
+      var(--padding-11xl);
+    background-color: var(--color-royalblue);
+    width: 22.5rem;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  .frameParent40 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 20px;
+    height: 100%;
+    z-index: 2;
+  }
+  .lineGroup,
+  .step5 {
+    position: relative;
+    font-family: var(--font-alegreya-sans-sc);
+  }
+  .lineGroup {
+    align-self: stretch;
+    height: 3.75rem;
+    max-width: 100%;
+    text-align: left;
+    font-size: var(--font-size-base);
+    color: var(--color-dimgray-100);
+  }
+  .step5 {
+    width: 100%;
+    background-color: var(--default-white);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    font-size: var(--font-size-13xl);
+    color: var(--color-gray-400);
+  }
+  @media screen and (max-width: 1275px) {
+    .frameParent1 {
+      flex-wrap: wrap;
+    }
+    .lineGroup {
+      height: auto;
+      min-height: 60;
+    }
+  }
+  @media screen and (max-width: 1100px) {
+    .frameParent {
+      display: none;
+    }
+    .spotLightParent {
+      flex-wrap: wrap;
+    }
+    .radioParent7,
+    .radioParent8,
+    .radioParent9 {
+      justify-content: center;
+    }
+    .pendantsParent {
+      flex-wrap: wrap;
+    }
+    .radioParent14,
+    .radioParent15,
+    .radioParent16 {
+      justify-content: center;
+    }
+    .wallLightsParent {
+      flex-wrap: wrap;
+    }
+    .lineParent {
+      height: auto;
+      min-height: 1665;
+    }
+    .frameParent41 {
+      flex-wrap: wrap;
+      padding-left: var(--padding-11xl);
+      padding-right: 20.125rem;
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 750px) {
+    .frameParent {
+      gap: var(--gap-11xl);
+    }
+    .header1 {
+      padding-left: var(--padding-11xl);
+      box-sizing: border-box;
+    }
+    .defineTechDetails {
+      font-size: 1.625rem;
+      line-height: 2.188rem;
+    }
+    .defineTechDetailsForYourSWrapper {
+      padding-left: 2.188rem;
+      padding-right: 2.25rem;
+      box-sizing: border-box;
+    }
+    .step5Inner {
+      padding-left: var(--padding-11xl);
+      padding-right: var(--padding-11xl);
+      box-sizing: border-box;
+    }
+    .frameChild13,
+    .frameWrapper {
+      display: none;
+    }
+    .frameParent23,
+    .frameParent24,
+    .frameParent25,
+    .frameParent26,
+    .frameParent27 {
+      flex-wrap: wrap;
+    }
+    .frameWrapper1 {
+      max-width: 100%;
+    }
+    .frameSection {
+      padding-left: var(--padding-11xl);
+      padding-right: var(--padding-11xl);
+      box-sizing: border-box;
+    }
+    .frameParent41 {
+      gap: 1rem;
+      padding-right: 10.063rem;
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .defineTechDetails {
+      font-size: var(--font-size-lgi);
+      line-height: 1.625rem;
+    }
+    .house {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .groundFloor {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .house2 {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .firstFloor {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .manCave {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .groundFloor1 {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .carGarage {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .frontGarden,
+    .groundFloor2 {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .frameParent13,
+    .frameParent15,
+    .frameParent16,
+    .frameParent18,
+    .frameParent19,
+    .frameParent21,
+    .vectorContainer,
+    .vectorGroup,
+    .vectorParent {
+      flex: 1;
+    }
+    .b2,
+    .b3 {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .frameParent41 {
+      padding-right: var(--padding-xl);
+      box-sizing: border-box;
+      min-width: 100%;
+    }
+    .confirmProceed {
+      font-size: var(--font-size-base);
+      line-height: 1.188rem;
+    }
+    .frameButton {
+      gap: 2.563rem;
+    }
+  }

@@ -1,0 +1,1973 @@
+
+.testProject {
+    margin: 0;
+    align-self: stretch;
+    position: relative;
+    font-size: inherit;
+    line-height: 2.75rem;
+    font-weight: 600;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .testProjectWrapper {
+    width: 10.375rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-11xs) 0 0;
+    box-sizing: border-box;
+  }
+  .frameChild {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background-color: #ebe8e8;
+    width: 100%;
+    height: 100%;
+  }
+  .div {
+    position: absolute;
+    top: 0.275rem;
+    left: 1.113rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.688rem;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .ellipseParent {
+    height: 3rem;
+    width: 3rem;
+    position: relative;
+  }
+  .projectStructure {
+    align-self: stretch;
+    position: relative;
+    line-height: 2.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .frameGroup,
+  .projectStructureWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .projectStructureWrapper {
+    flex: 1;
+    flex-direction: column;
+    padding: var(--padding-11xs) 0 0;
+    font-size: var(--font-size-xl);
+    color: #000;
+  }
+  .frameGroup {
+    width: 14.125rem;
+    flex-direction: row;
+    gap: var(--gap-smi);
+    color: var(--color-royalblue);
+  }
+  .frameItem {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 0 solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .div1 {
+    position: absolute;
+    top: 0.275rem;
+    left: 1.056rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.875rem;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .ellipseGroup {
+    height: 3rem;
+    width: 3rem;
+    position: relative;
+  }
+  .projectFunction {
+    position: relative;
+    line-height: 2.75rem;
+    white-space: nowrap;
+  }
+  .frameContainer,
+  .projectFunctionWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .projectFunctionWrapper {
+    flex-direction: column;
+    padding: var(--padding-11xs) 0 0;
+    font-size: var(--font-size-xl);
+    font-family: var(--font-abeezee);
+  }
+  .frameContainer {
+    flex-direction: row;
+    gap: var(--gap-smi);
+  }
+  .frameInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 0 solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .div2 {
+    position: absolute;
+    top: 0.275rem;
+    left: 1.056rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 0.875rem;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .ellipseContainer {
+    height: 3rem;
+    width: 3rem;
+    position: relative;
+  }
+  .projectDetailing {
+    position: relative;
+    line-height: 2.75rem;
+    white-space: nowrap;
+  }
+  .frameDiv,
+  .frameParent,
+  .projectDetailingWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .projectDetailingWrapper {
+    flex-direction: column;
+    padding: var(--padding-11xs) 0 0;
+    font-size: var(--font-size-xl);
+    font-family: var(--font-abeezee);
+  }
+  .frameDiv,
+  .frameParent {
+    flex-direction: row;
+    gap: 0.562rem;
+  }
+  .frameParent {
+    gap: 3.75rem;
+    max-width: 100%;
+    font-size: var(--font-size-2xl-3);
+    color: var(--color-dimgray-100);
+  }
+  .xIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .header1,
+  .xWrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  .xWrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: var(--padding-9xs) 0 0;
+  }
+  .header1 {
+    align-self: stretch;
+    background-color: var(--default-white);
+    border-bottom: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.75rem var(--padding-21xl) 1.625rem var(--padding-41xl);
+    top: 0;
+    z-index: 99;
+    position: sticky;
+    max-width: 100%;
+    gap: var(--gap-xl);
+    text-align: center;
+    font-size: var(--font-size-13xl);
+    color: var(--color-gray-400);
+    font-family: var(--font-alegreya-sans-sc);
+  }
+  .defineRoomsWithin {
+    margin: 0;
+    width: 26.75rem;
+    position: relative;
+    font-size: inherit;
+    line-height: 2.75rem;
+    font-weight: 600;
+    font-family: inherit;
+    display: inline-block;
+  }
+  .defineRoomsWithinEachFloorWrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 var(--padding-xl);
+  }
+  .forEachSelected {
+    align-self: stretch;
+    position: relative;
+    font-size: var(--font-size-base);
+    line-height: 1.75rem;
+    font-family: var(--font-abeezee);
+    color: var(--color-dimgray-100);
+  }
+  .frameParent1,
+  .step2Inner {
+    display: flex;
+    align-items: flex-start;
+    max-width: 100%;
+  }
+  .frameParent1 {
+    width: 39.688rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--gap-smi);
+  }
+  .step2Inner {
+    align-self: stretch;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 var(--padding-xl);
+    box-sizing: border-box;
+    text-align: center;
+    font-size: var(--font-size-13xl);
+    color: var(--color-gray-400);
+    font-family: var(--font-alegreya-sans-sc);
+  }
+  .house,
+  .lineDiv {
+    position: relative;
+  }
+  .lineDiv {
+    align-self: stretch;
+    height: 0.063rem;
+    border-top: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  .house {
+    font-size: var(--font-size-xl);
+    line-height: 1.75rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    display: inline-block;
+    min-width: 3.875rem;
+  }
+  .rectangleDiv {
+    width: 0.063rem;
+    height: 1.25rem;
+    position: relative;
+    background-color: var(--color-dimgray-100);
+  }
+  .rectangleWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-9xs) 0 0;
+  }
+  .house1 {
+    position: relative;
+    line-height: 1.5rem;
+    display: inline-block;
+    min-width: 3.063rem;
+  }
+  .houseWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-11xs) 0 0;
+  }
+  .ellipseDiv {
+    width: 0.25rem;
+    height: 0.25rem;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--color-dimgray-100);
+  }
+  .ellipseWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-xs) 0 0;
+  }
+  .indoor {
+    position: relative;
+    line-height: 1.5rem;
+    display: inline-block;
+    min-width: 3.125rem;
+  }
+  .houseParent,
+  .indoorWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .indoorWrapper {
+    flex-direction: column;
+    padding: var(--padding-11xs) 0 0;
+  }
+  .houseParent {
+    align-self: stretch;
+    flex-direction: row;
+    gap: var(--gap-3xs-8);
+  }
+  .groundFloor {
+    position: relative;
+    font-size: var(--font-size-5xl);
+    line-height: 2.25rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-gray-400);
+  }
+  .frameParent4 {
+    width: 12.813rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-5xs);
+  }
+  .groupIcon {
+    height: 3.75rem;
+    width: 3.75rem;
+    position: relative;
+  }
+  .frameParent3 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+    flex-shrink: 0;
+  }
+  .basement {
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.75rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-royalblue);
+    text-align: left;
+    display: inline-block;
+    min-width: 4.625rem;
+  }
+  .basementWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    background-color: var(--color-royalblue);
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component4,
+  .copy06Wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component4 {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement1 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 5.438rem;
+  }
+  .basementContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxItem {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon1 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox1 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick1 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon1 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component5,
+  .copy06Container {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Container {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component5 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement2 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 5.875rem;
+  }
+  .basementFrame {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxInner {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    background-color: var(--color-royalblue);
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon2 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox2 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick2 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon2 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component6,
+  .copy06Frame {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Frame {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component6 {
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--color-royalblue);
+  }
+  .basement3 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 4.938rem;
+  }
+  .basementWrapper1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild1 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon3 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox3 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick3 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon3 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component8,
+  .copy06Wrapper1 {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper1 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component8 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement4 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 3.5rem;
+  }
+  .basementWrapper2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild2 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon4 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox4 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick4 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon4 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component7,
+  .copy06Wrapper2 {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper2 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component7 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement5 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 4.563rem;
+  }
+  .basementWrapper3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild3 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon5 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox5 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick5 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon5 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component10,
+  .copy06Wrapper3 {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper3 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component10 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement6 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 5.438rem;
+  }
+  .basementWrapper4 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild4 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon6 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox6 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick6 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon6 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component11,
+  .copy06Wrapper4 {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper4 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component11 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement7 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 7.625rem;
+  }
+  .basementWrapper5 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild5 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon7 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox7 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick7 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon7 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component12,
+  .copy06Wrapper5 {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper5 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component12 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement8 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 7.375rem;
+  }
+  .basementWrapper6 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild6 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon8 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox8 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick8 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon8 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component9,
+  .copy06Wrapper6 {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper6 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component9 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement9 {
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.75rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-royalblue);
+    text-align: left;
+    display: inline-block;
+    min-width: 8rem;
+  }
+  .basementWrapper7 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild7 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    background-color: var(--color-royalblue);
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon9 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox9 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick9 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon9 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component13,
+  .copy06Wrapper7 {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper7 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component13 {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement10 {
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.75rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-royalblue);
+    text-align: left;
+    display: inline-block;
+    min-width: 7.313rem;
+  }
+  .basementWrapper8 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild8 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    background-color: var(--color-royalblue);
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon10 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox10 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick10 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon10 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .component14,
+  .copy06Wrapper8 {
+    display: flex;
+    flex-direction: row;
+  }
+  .copy06Wrapper8 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .component14 {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .basement11 {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 4.563rem;
+  }
+  .basementWrapper9 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkboxChild9 {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--br-20xl);
+    background-color: var(--color-royalblue);
+    width: 100%;
+    height: 100%;
+  }
+  .checkIcon11 {
+    position: absolute;
+    top: 0.188rem;
+    left: 0.188rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .checkbox11 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+  }
+  .chipTick11 {
+    border-radius: var(--br-31xl);
+    background-color: var(--default-white);
+    border: 1px solid var(--color-gainsboro-500);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) var(--padding-mini) var(--padding-3xs)
+      var(--padding-4xl);
+    gap: var(--gap-base);
+  }
+  .copy06Icon11 {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    border-radius: var(--br-86xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .copy06Wrapper9 {
+    width: 6.25rem;
+    border-radius: var(--br-31xl);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--padding-5xs);
+    z-index: 1;
+    margin-left: -6.25rem;
+  }
+  .addAnother,
+  .component15 {
+    color: var(--color-royalblue);
+  }
+  .component15 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .addAnother {
+    position: relative;
+    font-size: var(--font-size-base);
+    line-height: 1.5rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 6.688rem;
+  }
+  .component4Parent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--padding-41xl) 0 0;
+    gap: 1.25rem 1.187rem;
+    min-height: 12.25rem;
+    flex-shrink: 0;
+    font-size: var(--font-size-xl);
+    color: var(--color-gray-400);
+    font-family: var(--font-alegreya-sans-sc);
+  }
+  .component4Parent,
+  .frameChild1,
+  .lineParent {
+    align-self: stretch;
+    box-sizing: border-box;
+  }
+  .frameChild1 {
+    height: 0.063rem;
+    position: relative;
+    border-top: 1px solid var(--color-gainsboro-500);
+    flex-shrink: 0;
+  }
+  .lineParent {
+    height: 24.25rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-21xl);
+    gap: var(--gap-20xl-7);
+  }
+  .house2 {
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.75rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    display: inline-block;
+    min-width: 3.875rem;
+  }
+  .frameChild2 {
+    width: 0.063rem;
+    height: 1.25rem;
+    position: relative;
+    background-color: var(--color-dimgray-100);
+  }
+  .rectangleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-9xs) 0 0;
+  }
+  .house3 {
+    position: relative;
+    line-height: 1.5rem;
+    display: inline-block;
+    min-width: 3.063rem;
+  }
+  .houseContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-11xs) 0 0;
+  }
+  .frameChild3 {
+    width: 0.25rem;
+    height: 0.25rem;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--color-dimgray-100);
+  }
+  .ellipseFrame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-xs) 0 0;
+  }
+  .indoor1 {
+    position: relative;
+    line-height: 1.5rem;
+    display: inline-block;
+    min-width: 3.125rem;
+  }
+  .houseGroup,
+  .indoorContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .indoorContainer {
+    flex-direction: column;
+    padding: var(--padding-11xs) 0 0;
+  }
+  .houseGroup {
+    align-self: stretch;
+    flex-direction: row;
+    gap: var(--gap-3xs-8);
+  }
+  .firstFloor {
+    position: relative;
+    font-size: var(--font-size-5xl);
+    line-height: 2.25rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-gray-400);
+    display: inline-block;
+    min-width: 7rem;
+  }
+  .frameParent6 {
+    width: 12.813rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-5xs);
+  }
+  .frameChild4 {
+    height: 3.75rem;
+    width: 3.75rem;
+    position: relative;
+  }
+  .frameParent5 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+  }
+  .frameChild5 {
+    align-self: stretch;
+    height: 0.063rem;
+    position: relative;
+    border-top: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+  }
+  .manCave {
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.75rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    display: inline-block;
+    min-width: 5.875rem;
+  }
+  .frameChild6 {
+    width: 0.063rem;
+    height: 1.25rem;
+    position: relative;
+    background-color: var(--color-dimgray-100);
+  }
+  .rectangleFrame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-9xs) 0 0;
+  }
+  .house4 {
+    position: relative;
+    line-height: 1.5rem;
+    display: inline-block;
+    min-width: 3.063rem;
+  }
+  .houseFrame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-11xs) 0 0;
+  }
+  .frameChild7 {
+    width: 0.25rem;
+    height: 0.25rem;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--color-dimgray-100);
+  }
+  .ellipseWrapper1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-xs) 0 0;
+  }
+  .indoor2 {
+    position: relative;
+    line-height: 1.5rem;
+    display: inline-block;
+    min-width: 3.125rem;
+  }
+  .indoorFrame,
+  .manCaveParent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .indoorFrame {
+    flex-direction: column;
+    padding: var(--padding-11xs) 0 0;
+  }
+  .manCaveParent {
+    align-self: stretch;
+    flex-direction: row;
+    gap: var(--gap-3xs-8);
+  }
+  .firstFloor1 {
+    position: relative;
+    font-size: var(--font-size-5xl);
+    line-height: 2.25rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-gray-400);
+    display: inline-block;
+    min-width: 7rem;
+  }
+  .frameParent8 {
+    width: 14.813rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-5xs);
+  }
+  .frameChild8 {
+    height: 3.75rem;
+    width: 3.75rem;
+    position: relative;
+  }
+  .frameChild9,
+  .frameParent7 {
+    align-self: stretch;
+    box-sizing: border-box;
+  }
+  .frameParent7 {
+    height: 3.875rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 0 var(--padding-11xs);
+    gap: var(--gap-xl);
+  }
+  .frameChild9 {
+    height: 0.063rem;
+    position: relative;
+    border-top: 1px solid var(--color-gainsboro-500);
+  }
+  .carGarage {
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.75rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    display: inline-block;
+    min-width: 6.813rem;
+  }
+  .frameChild10 {
+    width: 0.063rem;
+    height: 1.25rem;
+    position: relative;
+    background-color: var(--color-dimgray-100);
+  }
+  .rectangleWrapper1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-9xs) 0 0;
+  }
+  .house5 {
+    position: relative;
+    line-height: 1.5rem;
+    display: inline-block;
+    min-width: 3.063rem;
+  }
+  .houseWrapper1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-11xs) 0 0;
+  }
+  .frameChild11 {
+    width: 0.25rem;
+    height: 0.25rem;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--color-dimgray-100);
+  }
+  .ellipseWrapper2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-xs) 0 0;
+  }
+  .indoor3 {
+    position: relative;
+    line-height: 1.5rem;
+    display: inline-block;
+    min-width: 3.125rem;
+  }
+  .carGarageParent,
+  .indoorWrapper1 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .indoorWrapper1 {
+    flex-direction: column;
+    padding: var(--padding-11xs) 0 0;
+  }
+  .carGarageParent {
+    align-self: stretch;
+    flex-direction: row;
+    gap: var(--gap-3xs-8);
+  }
+  .firstFloor2 {
+    position: relative;
+    font-size: var(--font-size-5xl);
+    line-height: 2.25rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-gray-400);
+    display: inline-block;
+    min-width: 7rem;
+  }
+  .frameParent10 {
+    width: 15.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-5xs);
+  }
+  .frameChild12 {
+    height: 3.75rem;
+    width: 3.75rem;
+    position: relative;
+  }
+  .frameParent9 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+  }
+  .frameChild13 {
+    align-self: stretch;
+    height: 0.063rem;
+    position: relative;
+    border-top: 1px solid var(--color-gainsboro-500);
+    box-sizing: border-box;
+  }
+  .frameParent2,
+  .step2Child {
+    display: flex;
+    align-items: flex-start;
+    max-width: 100%;
+  }
+  .frameParent2 {
+    width: 58.125rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--gap-20xl-7);
+  }
+  .step2Child {
+    align-self: stretch;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 var(--padding-xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--font-size-base);
+    color: var(--color-dimgray-100);
+    font-family: var(--font-abeezee);
+  }
+  .chevronRightIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-height: 1.5rem;
+  }
+  .label {
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.5rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--color-royalblue);
+    text-align: left;
+    display: inline-block;
+    min-width: 3rem;
+  }
+  .button {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-lg) var(--padding-xl);
+    background-color: var(--color-whitesmoke-100);
+    width: 7.5rem;
+    border-radius: var(--br-31xl);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    gap: 0.25rem;
+  }
+  .button:hover {
+    background-color: #dedede;
+  }
+  .frameChild14,
+  .frameChild15,
+  .frameChild16 {
+    height: 0.625rem;
+    width: 0.625rem;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--color-gainsboro-600);
+  }
+  .frameChild16 {
+    background-color: var(--color-royalblue);
+  }
+  .ellipseParent1,
+  .frameWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .ellipseParent1 {
+    flex-direction: row;
+    gap: var(--gap-3xs);
+  }
+  .frameWrapper {
+    flex-direction: column;
+    padding: 1.562rem 0 0;
+  }
+  .label1 {
+    flex: 1;
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 1.5rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: var(--default-white);
+    text-align: left;
+  }
+  .chevronRightIcon1 {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-height: 1.5rem;
+  }
+  .button1,
+  .frameParent11 {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .button1 {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-lg) 1.5rem var(--padding-lg) 2rem;
+    background-color: var(--color-royalblue);
+    flex: 1;
+    border-radius: var(--br-31xl);
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    gap: var(--gap-3xs);
+    min-width: 12.375rem;
+    white-space: nowrap;
+  }
+  .button1:hover {
+    background-color: #478fff;
+  }
+  .frameParent11 {
+    width: 30.688rem;
+    gap: 8.5rem;
+    max-width: 100%;
+  }
+  .buttonParent,
+  .frameFooter,
+  .frameParent11,
+  .step2 {
+    display: flex;
+    align-items: flex-start;
+  }
+  .buttonParent {
+    width: 58.313rem;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 100%;
+    gap: var(--gap-xl);
+  }
+  .frameFooter,
+  .step2 {
+    box-sizing: border-box;
+  }
+  .frameFooter {
+    align-self: stretch;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 var(--padding-xl);
+    max-width: 100%;
+  }
+  .step2 {
+    width: 100%;
+    position: relative;
+    background-color: var(--default-white);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-41xl);
+    gap: 3.731rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+  @media screen and (max-width: 1200px) {
+    .component4Parent {
+      padding-right: var(--padding-11xl);
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 1050px) {
+    .frameParent {
+      gap: var(--gap-11xl);
+    }
+    .defineRoomsWithin {
+      font-size: 1.625rem;
+      line-height: 2.188rem;
+    }
+  }
+  @media screen and (max-width: 750px) {
+    .header1 {
+      padding-left: var(--padding-11xl);
+      box-sizing: border-box;
+    }
+    .frameParent11 {
+      gap: 4.25rem;
+    }
+    .buttonParent {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .step2 {
+      gap: var(--gap-11xl);
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .defineRoomsWithin {
+      font-size: var(--font-size-lgi);
+      line-height: 1.625rem;
+    }
+    .house {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .groundFloor {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .frameParent3 {
+      flex-wrap: wrap;
+    }
+    .basement,
+    .basement1,
+    .basement10,
+    .basement11,
+    .basement2,
+    .basement3,
+    .basement4,
+    .basement5,
+    .basement6,
+    .basement7,
+    .basement8,
+    .basement9 {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .lineParent {
+      height: auto;
+      gap: var(--gap-xl);
+    }
+    .house2 {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .firstFloor {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .frameParent5 {
+      flex-wrap: wrap;
+    }
+    .manCave {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .firstFloor1 {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .carGarage {
+      font-size: var(--font-size-base);
+      line-height: 1.375rem;
+    }
+    .firstFloor2 {
+      font-size: var(--font-size-lgi);
+      line-height: 1.813rem;
+    }
+    .frameParent9 {
+      flex-wrap: wrap;
+    }
+    .frameParent2 {
+      gap: var(--gap-xl);
+    }
+    .label {
+      font-size: var(--font-size-base);
+      line-height: 1.188rem;
+    }
+    .frameParent11 {
+      flex-wrap: wrap;
+    }
+  }

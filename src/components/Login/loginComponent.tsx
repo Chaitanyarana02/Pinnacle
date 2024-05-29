@@ -40,7 +40,9 @@ const Login: FunctionComponent = () => {
           </div>
           <div className={styles.buttonParent}>
             <button className={styles.button}>
-              <div className={styles.label1}>Log In</div>
+              <div className={styles.label1} onClick={() => {
+                  navigate("/dashboard");
+              }}>Log In</div>
             </button>
             <div className={styles.newHereParent}>
               <div className={styles.newHere}>{`New here? `}</div>
