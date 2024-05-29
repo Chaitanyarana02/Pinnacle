@@ -1,7 +1,9 @@
 import { useCallback } from "react";
 import styles from "./step4.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Step4 = () => {
+  const navigate = useNavigate();
   const onFrameContainerClick = useCallback(() => {
     // Please sync "Add Details 5" to the project
   }, []);
@@ -691,7 +693,7 @@ const Step4 = () => {
         </footer>
         <button
           className={styles.confirmAddTechDetailsParent}
-          onClick={onFrameButton2Click}
+          onClick={() => navigate('/step5')}
         >
           <div
             className={styles.confirmAdd}

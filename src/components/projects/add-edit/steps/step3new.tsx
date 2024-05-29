@@ -1,7 +1,9 @@
 import {  useCallback } from "react";
 import styles from "./step3new.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Step3new = () => {
+  const navigate = useNavigate()
   const onXIconClick = useCallback(() => {
     // Please sync "Dashboard" to the project
   }, []);
@@ -178,11 +180,11 @@ const Step3new = () => {
       <div className={styles.step3newChild}>
         <div className={styles.frameParent10}>
           <div className={styles.buttonWrapper}>
-            <button className={styles.button}>
+            <button className={styles.button} onClick={()  => navigate('/step2')}>
               <img
                 className={styles.chevronRightIcon}
                 alt=""
-                src="chevrons-right.svg"
+                src="chevron-right.svg"
               />
               <b className={styles.label}>Back</b>
             </button>
@@ -194,7 +196,7 @@ const Step3new = () => {
               <div className={styles.frameChild18} />
             </div>
           </div>
-          <button className={styles.button1}>
+          <button className={styles.button1} onClick={()  => navigate('/step4')}>
             <div className={styles.label1}>{`Save & Proceed`}</div>
           </button>
         </div>

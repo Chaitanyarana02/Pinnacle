@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./step2.module.css";
 
 const Step2 = () => {
-
+  const navigate = useNavigate()
   return (
     <div className={styles.step2}>
       <header className={styles.header1}>
@@ -419,11 +420,11 @@ const Step2 = () => {
       </section>
       <footer className={styles.frameFooter}>
         <div className={styles.buttonParent}>
-          <button className={styles.button}>
+          <button className={styles.button} onClick={() => navigate('/step1')}>
             <img
               className={styles.chevronRightIcon}
               alt=""
-              src="/chevronright.svg"
+              src="chevron-right.svg"
             />
             <div className={styles.label}>Back</div>
           </button>
@@ -435,12 +436,12 @@ const Step2 = () => {
                 <div className={styles.frameChild16} />
               </div>
             </div>
-            <button className={styles.button1}>
+            <button className={styles.button1} onClick={() => navigate('/step3')}>
               <div className={styles.label1}>Review Final Structure</div>
               <img
                 className={styles.chevronRightIcon1}
                 alt=""
-                src="/chevronright-1.svg"
+                src="chevron-right.svg"
               />
             </button>
           </div>

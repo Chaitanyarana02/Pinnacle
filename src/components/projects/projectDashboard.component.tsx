@@ -13,7 +13,9 @@ import {
   projectScope,
   projectType,
 } from "../../enums/project.enum";
+import { useNavigate } from "react-router-dom";
 const ProjectDashboard = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const productListState = useAppSelector((state) => state.projectListState);
   const [isCreateProjectVisible, setCreateProjectVisible] =
@@ -365,7 +367,7 @@ const ProjectDashboard = () => {
                       </div>
                     </div>
                     <div className={styles.buttonParent}>
-                      <button className={styles.button1}>
+                      <button className={styles.button1} onClick={() => navigate('/step1Info')}>
                         <div className={styles.button2}>Resume</div>
                       </button>
                       <div className={styles.projectActionIconsWrapper}>
@@ -405,7 +407,7 @@ const ProjectDashboard = () => {
                         </div>
                       </div>
                     </div>
-                    <button className={styles.button3}>
+                    <button className={styles.button3} onClick={() => navigate('/step1Info')}>
                       <div className={styles.button4}>View Details</div>
                     </button>
                   </div>
@@ -431,7 +433,7 @@ const ProjectDashboard = () => {
                         </div>
                       </div>
                     </div>
-                    <button className={styles.button5}>
+                    <button className={styles.button5} onClick={() => navigate('/step1Info')}>
                       <div className={styles.button6}>View Details</div>
                     </button>
                   </div>

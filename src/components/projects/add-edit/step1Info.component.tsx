@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./step1Info.module.css";
 const Step1Info = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className={styles.addDetailCustom}>
@@ -150,7 +152,7 @@ const Step1Info = () => {
                   </div>
                 </section>
                 <div className={styles.buttonWrapper}>
-                  <button className={styles.button}>
+                  <button className={styles.button} onClick={() => navigate('/step1')}>
                     <div className={styles.label}>Let’s Begin</div>
                   </button>
                 </div>

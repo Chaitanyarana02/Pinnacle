@@ -1,7 +1,9 @@
 import { useCallback } from "react";
 import styles from "./infoStep.module.css";
+import { useNavigate } from "react-router-dom";
 
 const InfoStep = () => {
+  const navigate = useNavigate();
   const onXIconClick = useCallback(() => {
     // Please sync "Dashboard" to the project
   }, []);
@@ -107,7 +109,7 @@ const InfoStep = () => {
         </div>
       </section>
       <div className={styles.buttonWrapper}>
-        <button className={styles.button}>
+        <button className={styles.button}  onClick={() => navigate('/step1')}>
           <b className={styles.label}>Let’s Begin</b>
         </button>
       </div>

@@ -391,6 +391,7 @@
     text-align: center;
     font-size: var(--font-size-27xl-7);
     color: var(--color-royalblue);
+    margin-right: 20%;
   }
   .label {
     position: relative;

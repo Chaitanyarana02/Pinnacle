@@ -1,22 +1,26 @@
-import { useCallback } from "react";
-import styles from "./step5.module.css"
+import {useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./step5.module.css";
 
+import { InputSwitch } from 'primereact/inputswitch';
 const Step5 = () => {
+  const navigate = useNavigate();
+  const [checked , setChecked] = useState(true)
   const onFrameContainerClick = useCallback(() => {
-    // Please sync "Add Details 5" to the project
-  }, []);
+    navigate("/add-details-5");
+  }, [navigate]);
 
   const onFrameContainer1Click = useCallback(() => {
-    // Please sync "Add Details 6" to the project
-  }, []);
+    navigate("/add-details-6");
+  }, [navigate]);
 
   const onXIconClick = useCallback(() => {
-    // Please sync "Dashboard" to the project
-  }, []);
+    navigate("/dashboard");
+  }, [navigate]);
 
   const onFrameButton1Click = useCallback(() => {
-    // Please sync "Add Details 8" to the project
-  }, []);
+    navigate("/add-details-8");
+  }, [navigate]);
 
   return (
     <div className={styles.step5}>
@@ -27,26 +31,21 @@ const Step5 = () => {
           </div>
           <nav className={styles.frameParent}>
             <div className={styles.frameGroup} onClick={onFrameContainerClick}>
-              <img
-                className={styles.frameChild}
-                loading="lazy"
-                alt=""
-                src="/group-5.svg"
-              />
+            <div className={styles.ellipseParent}>
+                <div className={styles.frameInner} />
+                <a className={styles.a}>1</a>
+              </div>
               <div className={styles.projectStructureWrapper}>
                 <a className={styles.projectStructure}>Project Structure</a>
               </div>
             </div>
             <div
               className={styles.frameContainer}
-              onClick={onFrameContainer1Click}
             >
-              <img
-                className={styles.frameItem}
-                loading="lazy"
-                alt=""
-                src="/group-5-1.svg"
-              />
+             <div className={styles.ellipseParent}>
+                <div className={styles.frameInner} />
+                <a className={styles.a}>2</a>
+              </div>
               <div className={styles.projectFunctionWrapper}>
                 <a className={styles.projectFunction}>Project Function</a>
               </div>
@@ -66,7 +65,7 @@ const Step5 = () => {
               className={styles.xIcon}
               loading="lazy"
               alt=""
-              src="/x.svg"
+              src="x.svg"
               onClick={onXIconClick}
             />
           </div>
@@ -79,7 +78,7 @@ const Step5 = () => {
               <img
                 className={styles.chevronRightIcon}
                 alt=""
-                src="/chevronright.svg"
+                src="chevron-right.svg"
               />
               <b className={styles.label}>Edit Functions</b>
             </button>
@@ -97,7 +96,7 @@ const Step5 = () => {
           </div>
           <div className={styles.buttonContainer}>
             <button className={styles.button1}>
-              <img className={styles.printerIcon} alt="" src="/printer.svg" />
+              <img className={styles.printerIcon} alt="" src="/printer1.svg" />
               <div className={styles.label1}>Print Sales Brochure</div>
             </button>
           </div>
@@ -240,12 +239,8 @@ const Step5 = () => {
                 <div className={styles.spotLightParent}>
                   <b className={styles.spotLight}>Spot Light</b>
                   <div className={styles.vectorParent}>
-                    <img
-                      className={styles.vectorIcon}
-                      loading="lazy"
-                      alt=""
-                      src="/vector.svg"
-                    />
+               
+<InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
                     <b className={styles.yes}>Yes</b>
                   </div>
                   <div className={styles.frameParent13}>
@@ -317,12 +312,8 @@ const Step5 = () => {
                 <div className={styles.pendantsParent}>
                   <b className={styles.pendants}>Pendants</b>
                   <div className={styles.vectorGroup}>
-                    <img
-                      className={styles.vectorIcon1}
-                      loading="lazy"
-                      alt=""
-                      src="/vector-1.svg"
-                    />
+                
+                    <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
                     <b className={styles.no}>No</b>
                   </div>
                   <div className={styles.frameParent16}>
@@ -394,12 +385,8 @@ const Step5 = () => {
                 <div className={styles.wallLightsParent}>
                   <b className={styles.wallLights}>Wall Lights</b>
                   <div className={styles.vectorContainer}>
-                    <img
-                      className={styles.vectorIcon2}
-                      loading="lazy"
-                      alt=""
-                      src="/vector-2.svg"
-                    />
+                
+<InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
                     <b className={styles.no1}>No</b>
                   </div>
                   <div className={styles.frameParent19}>
@@ -668,13 +655,13 @@ const Step5 = () => {
                     <img
                       className={styles.startAdornmentIcon}
                       alt=""
-                      src="/startadornment.svg"
+                      src="/startadornment11.svg"
                     />
                     <div className={styles.widthXHeight}>width x height</div>
                     <img
                       className={styles.endAdornmentIcon}
                       alt=""
-                      src="/endadornment.svg"
+                      src="/startadornment11.svg"
                     />
                   </div>
                 </div>
@@ -759,13 +746,13 @@ const Step5 = () => {
                     <img
                       className={styles.startAdornmentIcon1}
                       alt=""
-                      src="/startadornment.svg"
+                      src="/startadornment11.svg"
                     />
                     <div className={styles.widthXHeight1}>width x height</div>
                     <img
                       className={styles.endAdornmentIcon1}
                       alt=""
-                      src="/endadornment.svg"
+                      src="/startadornment11.svg"
                     />
                   </div>
                 </div>
@@ -786,12 +773,12 @@ const Step5 = () => {
                         <img
                           className={styles.startAdornmentIcon2}
                           alt=""
-                          src="/startadornment.svg"
+                          src="/startadornment11.svg"
                         />
                         <img
                           className={styles.endAdornmentIcon2}
                           alt=""
-                          src="/endadornment.svg"
+                          src="/startadornment11.svg"
                         />
                         <div className={styles.ellipseGroup}>
                           <div className={styles.frameChild17} />
@@ -837,12 +824,12 @@ const Step5 = () => {
                         <img
                           className={styles.startAdornmentIcon3}
                           alt=""
-                          src="/startadornment.svg"
+                          src="/startadornment11.svg"
                         />
                         <img
                           className={styles.endAdornmentIcon3}
                           alt=""
-                          src="/endadornment.svg"
+                          src="/startadornment11.svg"
                         />
                         <div className={styles.ellipseParent2}>
                           <div className={styles.frameChild20} />
@@ -895,7 +882,7 @@ const Step5 = () => {
               <b className={styles.b3}>£164</b>
             </div>
           </div>
-          <button className={styles.frameButton} onClick={onFrameButton1Click}>
+          <button className={styles.frameButton} onClick={ () => navigate('/payment')}>
             <div className={styles.confirmProceedToOrderParent}>
               <div
                 className={styles.confirmProceed}
@@ -903,7 +890,7 @@ const Step5 = () => {
               <img
                 className={styles.chevronRightIcon1}
                 alt=""
-                src="/chevronright-1.svg"
+                src="/chevronright-11.svg"
               />
             </div>
           </button>

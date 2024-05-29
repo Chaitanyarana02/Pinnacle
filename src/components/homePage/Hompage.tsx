@@ -1,9 +1,10 @@
 import { FunctionComponent } from "react";
 import styles from "./Hompage.module.css";
 import HomepageSectionComponent from "./HomepageSectionComponent";
+import { useNavigate } from "react-router-dom";
 
 const Hompage: FunctionComponent = () => {
-  
+  const navigate = useNavigate()
   return (
     <div className={styles.hompageDraft1}>
       <section className={styles.autoLayoutVertical}>
@@ -16,7 +17,7 @@ const Hompage: FunctionComponent = () => {
             Unrivaled Integration, Security, and Simplicity
           </h1>
         </div>
-        <button className={styles.button}>
+        <button className={styles.button} onClick={() => navigate('/dashboard')}>
           <div className={styles.label3}>Get Started</div>
         </button>
       </section>
@@ -226,7 +227,7 @@ const Hompage: FunctionComponent = () => {
             and designed for everyone.
           </span>
         </h3>
-        <button className={styles.button3}>
+        <button className={styles.button3} onClick={() => navigate('/dashboard')}>
           <div className={styles.label6}>Get Started</div>
         </button>
       </section>
@@ -356,7 +357,7 @@ const Hompage: FunctionComponent = () => {
               home.
             </div>
           </div>
-          <button className={styles.button4}>
+          <button className={styles.button4} onClick={() => navigate('/dashboard')}>
             <div className={styles.label7}>Get Started</div>
           </button>
         </div>
@@ -531,7 +532,7 @@ const Hompage: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <button className={styles.button5}>
+        <button className={styles.button5} onClick={() => navigate('/dashboard')}>
           <div className={styles.label8}>Get Started</div>
         </button>
       </section>
@@ -619,7 +620,7 @@ const Hompage: FunctionComponent = () => {
             automation system.
           </p>
         </h1>
-        <button className={styles.button6}>
+        <button className={styles.button6} onClick={() => navigate('/dashboard')}>
           <div className={styles.label9}>Get Started</div>
         </button>
       </section>
