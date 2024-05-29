@@ -1,800 +1,258 @@
-.pinnaqle {
-    text-decoration: none;
-    position: relative;
-    line-height: 1.75rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: inherit;
-    white-space: nowrap;
-  }
-  .pinnaqleWrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    cursor: pointer;
-  }
-  .doSomething {
-    text-decoration: none;
-    position: relative;
-    font-size: var(--font-size-xl);
-    line-height: 1.5rem;
-    font-weight: 600;
-    font-family: var(--font-alegreya-sans-sc);
-    color: var(--color-royalblue);
-    text-align: left;
-    display: inline-block;
-    min-width: 2.125rem;
-    white-space: nowrap;
-  }
-  .stylefilled {
-    cursor: pointer;
-    border: 0;
-    padding: var(--padding-lg) var(--padding-smi);
-    background-color: #f4f8ff;
-    border-radius: var(--br-31xl);
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  .stylefilled:hover {
-    background-color: #dbdee6;
-  }
-  .alexMurphy,
-  .designer {
-    position: relative;
-    font-weight: 600;
-    display: inline-block;
-  }
-  .alexMurphy {
-    text-decoration: none;
-    line-height: 1.5rem;
-    color: inherit;
-    min-width: 6.125rem;
-    white-space: nowrap;
-  }
-  .designer {
-    font-size: var(--font-size-xs);
-    line-height: 1.25rem;
-    color: var(--default-white);
-    min-width: 3.313rem;
-  }
-  .alexMurphyParent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0.125rem;
-  }
-  .header1,
-  .stylefilledParent {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: var(--gap-3xs);
-    font-size: var(--body-base-text-size);
-    color: var(--color-black);
-    font-family: var(--font-alegreya-sans-sc);
-  }
-  .header1 {
-    align-self: stretch;
-    background-color: var(--default-white);
-    border-bottom: 1px solid var(--color-gainsboro-500);
-    overflow: hidden;
-    justify-content: space-between;
-    padding: var(--padding-xl) var(--padding-41xl) var(--padding-lg);
-    top: 0;
-    z-index: 99;
-    position: sticky;
-    gap: var(--gap-xl);
-    text-align: left;
-    font-size: var(--font-size-18xl-3);
-    color: var(--color-gray-400);
-    font-family: var(--font-mohave);
-  }
+
+.yourProjects {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 2.75rem;
+  font-weight: 600;
+  font-family: inherit;
+}
+.yourProjectsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-5xs) 0 0;
+}
+.frameGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-self: stretch;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+
+
+.residentialParent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs-1);
+  color: var(--color-gray-400);
+}
+.projectParentFrame {
+  width: 16.688rem;
+  flex-direction: column;
+  gap: var(--gap-base);
+}
+
+.buttonParent,
+.frameParent1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.frameParent1 {
+  border-radius: var(--br-11xl);
+  background-color: var(--default-white);
+  border: 1px solid var(--color-gainsboro-500);
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: var(--padding-19xl) var(--padding-20xl);
+  gap: var(--gap-61xl);
+  z-index: 1;
+}
+.techDetailsPending {
+  position: relative;
+  letter-spacing: 1px;
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.techDetailsPendingWrapper {
+  align-self: stretch;
+  border-radius: 0 0 var(--br-11xl) var(--br-11xl);
+  background-color: #eee;
+  border: 1px solid var(--color-gainsboro-500);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--padding-11xl) var(--padding-xl) 0;
+  white-space: nowrap;
+  margin-top: -1.875rem;
+  font-size: var(--font-size-sm);
+  color: #919191;
+  font-family: var(--font-alegreya-sans-sc);
+}
+.frameDiv {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 19.688rem;
+  max-width: 100%;
+}
+.projectAbc {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 2.25rem;
+  font-weight: 600;
+  font-family: var(--font-alegreya-sans-sc);
+}
+
+.frameContainer,
+.frameWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  max-width: 100%;
+}
+.frameContainer {
+  flex: 1;
+  flex-wrap: wrap;
+  gap: var(--gap-11xl);
+}
+.frameWrapper {
+  align-self: stretch;
+  padding: 0 var(--padding-10xs) 7rem;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--body-base-text-size);
+  color: var(--color-black);
+  font-family: var(--font-abeezee);
+}
+.rectangleDiv {
+  align-self: stretch;
+  width: 6.25rem;
+  position: relative;
+}
+.rectangleWrapper {
+  width: 47.75rem;
+  height: 6.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.dashboard,
+.dashboardInner,
+.frameParent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameParent {
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-21xl);
+  max-width: 100%;
+}
+.dashboard,
+.dashboardInner {
+  box-sizing: border-box;
+}
+.dashboardInner {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 0 3.562rem;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-13xl);
+  color: var(--color-gray-400);
+  font-family: var(--font-alegreya-sans-sc);
+}
+.dashboard {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-gray-100);
+  flex-direction: column;
+  padding: 0 0 var(--padding-2xl);
+  gap: var(--gap-21xl);
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 750px) {
   .yourProjects {
-    margin: 0;
-    position: relative;
-    font-size: inherit;
-    line-height: 2.75rem;
-    font-weight: 600;
-    font-family: inherit;
-  }
-  .yourProjectsWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-5xs) 0 0;
-  }
-  .label {
-    position: relative;
-    font-size: var(--font-size-xl);
-    line-height: 1.5rem;
-    font-weight: 600;
-    font-family: var(--font-alegreya-sans-sc);
-    color: var(--default-white);
-    text-align: left;
-    display: inline-block;
-    min-width: 7.25rem;
-  }
-  .button,
-  .frameGroup {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  .button {
-    cursor: pointer;
-    border: 0;
-    padding: var(--padding-lg) var(--padding-13xl);
-    background-color: var(--color-royalblue);
-    border-radius: var(--br-31xl);
-    justify-content: flex-start;
-    white-space: nowrap;
-  }
-  .button:hover {
-    background-color: var(--color-dodgerblue);
-  }
-  .frameGroup {
-    align-self: stretch;
-    justify-content: space-between;
-    gap: var(--gap-xl);
-  }
-  .residential,
-  .testProject {
-    position: relative;
-    display: inline-block;
-  }
-  .testProject {
-    margin: 0;
-    font-size: var(--font-size-5xl);
-    line-height: 2.25rem;
-    font-weight: 600;
-    font-family: var(--font-alegreya-sans-sc);
-    min-width: 7.938rem;
-  }
-  .residential {
-    flex: 1;
-    line-height: 1.5rem;
-    min-width: 5.25rem;
-    flex-shrink: 0;
-  }
-  .projectShape {
-    width: 0.25rem;
-    height: 0.25rem;
-    position: relative;
-    border-radius: 50%;
-    background-color: var(--color-gray-400);
-  }
-  .projectShapeWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-3xs) 0 0;
-  }
-  .flat {
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 1.875rem;
-    flex-shrink: 0;
-  }
-  .frameChild {
-    width: 0.25rem;
-    height: 0.25rem;
-    position: relative;
-    border-radius: 50%;
-    background-color: var(--color-gray-400);
-  }
-  .ellipseWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-3xs) 0 0;
-  }
-  .newBuild {
-    flex: 1;
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 4.813rem;
-    flex-shrink: 0;
-  }
-  .residentialParent {
-    width: 14.188rem;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: var(--gap-5xs-1);
-    color: var(--color-gray-400);
-  }
-  .address,
-  .kemmerOverpassSuite {
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 4.188rem;
-  }
-  .kemmerOverpassSuite {
-    flex: 1;
-    color: var(--color-gray-400);
-    min-width: 7.125rem;
-  }
-  .addressParent,
-  .testProjectParent {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .addressParent {
-    align-self: stretch;
-    flex-direction: row;
-    gap: var(--gap-3xs);
-    color: var(--default-white);
-  }
-  .testProjectParent {
-    width: 16.688rem;
-    flex-direction: column;
-    gap: var(--gap-base);
-  }
-  .button2 {
-    position: relative;
-    font-size: var(--font-size-xl);
-    line-height: 1.5rem;
-    font-weight: 600;
-    font-family: var(--font-alegreya-sans-sc);
-    color: var(--color-royalblue);
-    text-align: left;
-    display: inline-block;
-    min-width: 4.813rem;
-  }
-  .button1 {
-    cursor: pointer;
-    border: 1px solid var(--color-gainsboro-500);
-    padding: var(--padding-base) var(--padding-8xl);
-    background-color: var(--default-white);
-    border-radius: var(--br-31xl);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .button1:hover,
-  .button3:hover,
-  .button5:hover {
-    background-color: var(--color-gainsboro-100);
-    border: 1px solid var(--color-silver-100);
-    box-sizing: border-box;
-  }
-  .edit,
-  .trash2Icon {
-    height: 1.5rem;
-    width: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-    min-height: 1.5rem;
-  }
-  .edit {
-    margin: 0;
-  }
-  .trash2Icon {
-    cursor: pointer;
-  }
-  .projectActionIcons {
-    align-self: stretch;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--gap-xl);
-  }
-  .projectActionIconsWrapper {
-    width: 4.875rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-lg) 0 0;
-    box-sizing: border-box;
-  }
-  .buttonParent,
-  .frameParent1 {
-    align-self: stretch;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--gap-xl);
-  }
-  .frameParent1 {
-    border-radius: var(--br-11xl);
-    background-color: var(--default-white);
-    border: 1px solid var(--color-gainsboro-500);
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: var(--padding-19xl) var(--padding-20xl);
-    gap: var(--gap-61xl);
-    z-index: 1;
-  }
-  .techDetailsPending {
-    position: relative;
-    letter-spacing: 1px;
-    line-height: 1.5rem;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  .techDetailsPendingWrapper {
-    align-self: stretch;
-    border-radius: 0 0 var(--br-11xl) var(--br-11xl);
-    background-color: #eee;
-    border: 1px solid var(--color-gainsboro-500);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    padding: var(--padding-11xl) var(--padding-xl) 0;
-    white-space: nowrap;
-    margin-top: -1.875rem;
-    font-size: var(--font-size-sm);
-    color: #919191;
-    font-family: var(--font-alegreya-sans-sc);
-  }
-  .frameDiv {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    min-width: 19.688rem;
-    max-width: 100%;
-  }
-  .projectAbc {
-    margin: 0;
-    position: relative;
-    font-size: var(--font-size-5xl);
-    line-height: 2.25rem;
-    font-weight: 600;
-    font-family: var(--font-alegreya-sans-sc);
-  }
-  .commercial {
-    flex: 1;
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 5.625rem;
-  }
-  .frameItem {
-    width: 0.25rem;
-    height: 0.25rem;
-    position: relative;
-    border-radius: 50%;
-    background-color: var(--color-gray-400);
-  }
-  .ellipseContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-3xs) 0 0;
-  }
-  .onlySystem {
-    flex: 1;
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 5.938rem;
-  }
-  .commercialParent {
-    width: 12.813rem;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: var(--gap-5xs);
-    color: var(--color-gray-400);
-  }
-  .address1,
-  .kemmerOverpassSuite1 {
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 4.188rem;
-  }
-  .kemmerOverpassSuite1 {
-    flex: 1;
-    color: var(--color-gray-400);
-    min-width: 7.125rem;
-  }
-  .addressGroup,
-  .projectAbcParent {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .addressGroup {
-    align-self: stretch;
-    flex-direction: row;
-    gap: var(--gap-3xs);
-    color: var(--default-white);
-  }
-  .projectAbcParent {
-    width: 16.688rem;
-    flex-direction: column;
-    gap: var(--gap-base);
-  }
-  .button4 {
-    position: relative;
-    font-size: var(--font-size-xl);
-    line-height: 1.5rem;
-    font-weight: 600;
-    font-family: var(--font-alegreya-sans-sc);
-    color: var(--color-royalblue);
-    text-align: left;
-    display: inline-block;
-    min-width: 7.438rem;
-  }
-  .button3,
-  .frameParent3 {
-    background-color: var(--default-white);
-    border: 1px solid var(--color-gainsboro-500);
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .button3 {
-    cursor: pointer;
-    padding: var(--padding-base) var(--padding-8xl);
-    border-radius: var(--br-31xl);
-    flex-direction: row;
-    white-space: nowrap;
-  }
-  .frameParent3 {
-    align-self: stretch;
-    border-radius: var(--br-11xl);
-    flex-direction: column;
-    padding: var(--padding-19xl) var(--padding-21xl);
-    gap: var(--gap-61xl);
-    z-index: 1;
-  }
-  .inTransit {
-    position: relative;
-    letter-spacing: 1px;
-    line-height: 1.5rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    display: inline-block;
-    min-width: 5.75rem;
-  }
-  .frameParent2,
-  .inTransitWrapper {
-    display: flex;
-    align-items: flex-start;
-  }
-  .inTransitWrapper {
-    align-self: stretch;
-    border-radius: 0 0 var(--br-11xl) var(--br-11xl);
-    background-color: #fff5e2;
-    border: 1px solid var(--color-gainsboro-500);
-    flex-direction: row;
-    justify-content: center;
-    padding: var(--padding-11xl) var(--padding-xl) 0;
-    white-space: nowrap;
-    margin-top: -1.875rem;
-    font-size: var(--font-size-sm);
-    color: #9c9600;
-    font-family: var(--font-alegreya-sans-sc);
-  }
-  .frameParent2 {
-    flex: 1;
-    flex-direction: column;
-    justify-content: flex-start;
-    min-width: 19.688rem;
-    max-width: 100%;
-  }
-  .projectXyz {
-    margin: 0;
-    position: relative;
-    font-size: var(--font-size-5xl);
-    line-height: 2.25rem;
-    font-weight: 600;
-    font-family: var(--font-alegreya-sans-sc);
-  }
-  .commercial1 {
-    flex: 1;
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 5.625rem;
-  }
-  .frameInner {
-    width: 0.25rem;
-    height: 0.25rem;
-    position: relative;
-    border-radius: 50%;
-    background-color: var(--color-gray-400);
-  }
-  .ellipseFrame {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-3xs) 0 0;
-  }
-  .onlySystem1 {
-    flex: 1;
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 5.938rem;
-  }
-  .commercialGroup {
-    width: 12.813rem;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: var(--gap-5xs);
-    color: var(--color-gray-400);
-  }
-  .address2,
-  .kemmerOverpassSuite2 {
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 4.188rem;
-  }
-  .kemmerOverpassSuite2 {
-    flex: 1;
-    color: var(--color-gray-400);
-    min-width: 7.125rem;
-  }
-  .addressContainer,
-  .projectXyzParent {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .addressContainer {
-    align-self: stretch;
-    flex-direction: row;
-    gap: var(--gap-3xs);
-    color: var(--default-white);
-  }
-  .projectXyzParent {
-    width: 16.688rem;
-    flex-direction: column;
-    gap: var(--gap-base);
-  }
-  .button6 {
-    position: relative;
-    font-size: var(--font-size-xl);
-    line-height: 1.5rem;
-    font-weight: 600;
-    font-family: var(--font-alegreya-sans-sc);
-    color: var(--color-royalblue);
-    text-align: left;
-    display: inline-block;
-    min-width: 7.438rem;
-  }
-  .button5,
-  .frameParent5 {
-    background-color: var(--default-white);
-    border: 1px solid var(--color-gainsboro-500);
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .button5 {
-    cursor: pointer;
-    padding: var(--padding-base) var(--padding-8xl);
-    border-radius: var(--br-31xl);
-    flex-direction: row;
-    white-space: nowrap;
-  }
-  .frameParent5 {
-    align-self: stretch;
-    border-radius: var(--br-11xl);
-    flex-direction: column;
-    padding: var(--padding-19xl) var(--padding-21xl);
-    gap: var(--gap-61xl);
-    z-index: 1;
-  }
-  .deliveryCompleted {
-    position: relative;
-    letter-spacing: 1px;
-    line-height: 1.5rem;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  .deliveryCompletedWrapper {
-    align-self: stretch;
-    border-radius: 0 0 var(--br-11xl) var(--br-11xl);
-    background-color: #e0f6e0;
-    border: 1px solid var(--color-gainsboro-500);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    padding: var(--padding-11xl) var(--padding-xl) 0;
-    white-space: nowrap;
-    margin-top: -1.875rem;
-    font-size: var(--font-size-sm);
-    color: #039309;
-    font-family: var(--font-alegreya-sans-sc);
-  }
-  .frameContainer,
-  .frameParent4,
-  .frameWrapper {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    max-width: 100%;
-  }
-  .frameParent4 {
-    flex: 1;
-    flex-direction: column;
-    min-width: 19.688rem;
-  }
-  .frameContainer,
-  .frameWrapper {
-    flex-direction: row;
-  }
-  .frameContainer {
-    flex: 1;
-    flex-wrap: wrap;
-    gap: var(--gap-11xl);
-  }
-  .frameWrapper {
-    align-self: stretch;
-    padding: 0 var(--padding-10xs) 7rem;
-    box-sizing: border-box;
-    text-align: left;
-    font-size: var(--body-base-text-size);
-    color: var(--color-black);
-    font-family: var(--font-abeezee);
-  }
-  .rectangleDiv {
-    align-self: stretch;
-    width: 6.25rem;
-    position: relative;
-  }
-  .rectangleWrapper {
-    width: 47.75rem;
-    height: 6.25rem;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0 var(--padding-xl);
-    box-sizing: border-box;
-    max-width: 100%;
-  }
-  .dashboard,
-  .dashboardInner,
-  .frameParent {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .frameParent {
-    flex: 1;
-    flex-direction: column;
-    gap: var(--gap-21xl);
-    max-width: 100%;
-  }
-  .dashboard,
-  .dashboardInner {
-    box-sizing: border-box;
+    font-size: var(--font-size-7xl);
+    line-height: 2.188rem;
   }
   .dashboardInner {
-    align-self: stretch;
-    flex-direction: row;
-    padding: 0 3.562rem;
-    max-width: 100%;
-    text-align: center;
-    font-size: var(--font-size-13xl);
-    color: var(--color-gray-400);
-    font-family: var(--font-alegreya-sans-sc);
+    padding-left: var(--padding-9xl);
+    padding-right: var(--padding-9xl);
+    box-sizing: border-box;
   }
   .dashboard {
-    width: 100%;
-    position: relative;
-    background-color: var(--color-gray-100);
-    flex-direction: column;
-    padding: 0 0 var(--padding-2xl);
+    gap: var(--gap-xl);
+  }
+}
+@media screen and (max-width: 675px) {
+  .frameWrapper {
+    padding-bottom: var(--padding-54xl);
+    box-sizing: border-box;
+  }
+  .frameParent {
+    gap: var(--gap-xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .header1 {
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    box-sizing: border-box;
+  }
+  .yourProjects {
+    font-size: var(--font-size-lgi);
+    line-height: 1.625rem;
+  }
+  .frameGroup {
+    flex-wrap: wrap;
+  }
+  .testProject {
+    font-size: var(--font-size-lgi);
+    line-height: 1.813rem;
+  }
+  .addressParent {
+    flex-wrap: wrap;
+  }
+  .button2 {
+    font-size: var(--body-base-text-size);
+    line-height: 1.188rem;
+  }
+  .buttonParent {
+    flex-wrap: wrap;
+  }
+  .frameParent1 {
     gap: var(--gap-21xl);
-    line-height: normal;
-    letter-spacing: normal;
+    padding-top: var(--padding-6xl);
+    padding-bottom: var(--padding-6xl);
+    box-sizing: border-box;
   }
-  @media screen and (max-width: 750px) {
-    .yourProjects {
-      font-size: var(--font-size-7xl);
-      line-height: 2.188rem;
-    }
-    .dashboardInner {
-      padding-left: var(--padding-9xl);
-      padding-right: var(--padding-9xl);
-      box-sizing: border-box;
-    }
-    .dashboard {
-      gap: var(--gap-xl);
-    }
+  .projectAbc {
+    font-size: var(--font-size-lgi);
+    line-height: 1.813rem;
   }
-  @media screen and (max-width: 675px) {
-    .frameWrapper {
-      padding-bottom: var(--padding-54xl);
-      box-sizing: border-box;
-    }
-    .frameParent {
-      gap: var(--gap-xl);
-    }
+  .addressGroup {
+    flex-wrap: wrap;
   }
-  @media screen and (max-width: 450px) {
-    .header1 {
-      padding-left: var(--padding-xl);
-      padding-right: var(--padding-xl);
-      box-sizing: border-box;
-    }
-    .yourProjects {
-      font-size: var(--font-size-lgi);
-      line-height: 1.625rem;
-    }
-    .frameGroup {
-      flex-wrap: wrap;
-    }
-    .testProject {
-      font-size: var(--font-size-lgi);
-      line-height: 1.813rem;
-    }
-    .addressParent {
-      flex-wrap: wrap;
-    }
-    .button2 {
-      font-size: var(--body-base-text-size);
-      line-height: 1.188rem;
-    }
-    .buttonParent {
-      flex-wrap: wrap;
-    }
-    .frameParent1 {
-      gap: var(--gap-21xl);
-      padding-top: var(--padding-6xl);
-      padding-bottom: var(--padding-6xl);
-      box-sizing: border-box;
-    }
-    .projectAbc {
-      font-size: var(--font-size-lgi);
-      line-height: 1.813rem;
-    }
-    .addressGroup {
-      flex-wrap: wrap;
-    }
-    .frameParent3 {
-      gap: var(--gap-21xl);
-      padding-top: var(--padding-6xl);
-      padding-bottom: var(--padding-6xl);
-      box-sizing: border-box;
-    }
-    .projectXyz {
-      font-size: var(--font-size-lgi);
-      line-height: 1.813rem;
-    }
-    .addressContainer {
-      flex-wrap: wrap;
-    }
-    .frameParent5 {
-      gap: var(--gap-21xl);
-      padding-top: var(--padding-6xl);
-      padding-bottom: var(--padding-6xl);
-      box-sizing: border-box;
-    }
+  .frameParent3 {
+    gap: var(--gap-21xl);
+    padding-top: var(--padding-6xl);
+    padding-bottom: var(--padding-6xl);
+    box-sizing: border-box;
   }
-  
+  .projectXyz {
+    font-size: var(--font-size-lgi);
+    line-height: 1.813rem;
+  }
+  .addressContainer {
+    flex-wrap: wrap;
+  }
+  .frameParent5 {
+    gap: var(--gap-21xl);
+    padding-top: var(--padding-6xl);
+    padding-bottom: var(--padding-6xl);
+    box-sizing: border-box;
+  }
+}

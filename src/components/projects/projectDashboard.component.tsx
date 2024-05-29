@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchProjectList } from "../../store/fearure/project-list.slice";
-import { useAppDispatch } from "../../store/store.utils";
+import { useAppDispatch, useAppSelector } from "../../store/store.utils";
 import { ProjectBasicDetail } from "../../interfaces/project.interface";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -11,13 +11,12 @@ import {
   projectColorScheme,
   projectResidentType,
   projectScope,
+  projectStatus,
   projectType,
 } from "../../enums/project.enum";
-import { useNavigate } from "react-router-dom";
 const ProjectDashboard = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const productListState = useAppSelector((state) => state.projectListState);
+  const productListState = useAppSelector((state) => state.projectListState);
   const [isCreateProjectVisible, setCreateProjectVisible] =
     useState<boolean>(false);
   const [newProjectData, setNewProjectData] = useState<ProjectBasicDetail>({
@@ -26,6 +25,39 @@ const ProjectDashboard = () => {
     projectScope: projectScope.newBuild,
     projectColorScheme: projectColorScheme.white,
   } as ProjectBasicDetail);
+
+  const projectStatusColors: {
+    [key in projectStatus]: { color: string; backGroundColor: string };
+  } = {
+    [projectStatus.transition]: {
+      color: "#9c9600",
+      backGroundColor: "#fff5e2",
+    },
+    [projectStatus.pending]: { color: "#919191", backGroundColor: "#eee" },
+    [projectStatus.delivered]: { color: "#039309", backGroundColor: "#e0f6e0" },
+  };
+  const projectResidentLabels: {
+    [key in projectResidentType]: string;
+  } = {
+    [projectResidentType.flat]: "Flat",
+    [projectResidentType.house]: "House",
+  };
+
+  const projectTypeLabels: { [key in projectType]: string } = {
+    [projectType.residential]: "Residential",
+    [projectType.commercial]: "Commercial",
+  };
+  const projectScopeLabels: { [key in projectScope]: string } = {
+    [projectScope.fullRefurbishment]: "Full Refurbishment",
+    [projectScope.newBuild]: "New Build",
+    [projectScope.systemInstallation]: "System Installation Only",
+  };
+
+  const projectStatusLabels: { [key in projectStatus]: string } = {
+    [projectStatus.transition]: "IN TRANSIT",
+    [projectStatus.pending]: "TECH DETAILS PENDING",
+    [projectStatus.delivered]: "DELIVERY COMPLETED",
+  };
   useEffect(() => {
     dispatch(fetchProjectList());
   }, []);
@@ -45,35 +77,6 @@ const ProjectDashboard = () => {
   );
   return (
     <>
-      {/* <div className="off-white-background">
-                <div className="flex justify-content-between p-4">
-                    <div>
-                        <span className="text-4xl font-bold ">Your Projects</span>
-                    </div>
-                    <div>
-                        <Button label="Proceed" className="p-button-rounded" />
-                    </div>
-                </div>
-                <div className="grid ml-4">
-                    {
-                        productListState.projectList.map((projectDetail: ProjectBasicDetail) => {
-                            return (
-                                <div key={projectDetail.id} className="col-4">
-                                    <div className="border-solid border-1 border-200 border-round-3xl z-2 relative">
-                                        <div className="p-4 ">
-                                            <span className="text-2xl font-bold">{projectDetail.name}</span>
-                                            <p className="">{projectDetail.address}</p>
-                                        </div>
-                                    </div>
-                                    <div className={"relative border-solid border-1 border-200 border-round-3xl h-5rem -mt-6 surface-200 z-1"}>
-
-                                    </div>
-                                </div>
-                            )   
-                        })
-                    }
-                </div>
-            </div> */}
       <div className={styles.dashboard}>
         <main className={styles.dashboardInner}>
           <div className={styles.frameParent}>
@@ -344,105 +347,86 @@ const ProjectDashboard = () => {
             </div>
             <div className={styles.frameWrapper}>
               <div className={styles.frameContainer}>
-                <div className={styles.frameDiv}>
-                  <div className={styles.frameParent1}>
-                    <div className={styles.testProjectParent}>
-                      <h3 className={styles.testProject}>Test Project</h3>
-                      <div className={styles.residentialParent}>
-                        <div className={styles.residential}>Residential</div>
-                        <div className={styles.projectShapeWrapper}>
-                          <div className={styles.projectShape} />
+                {productListState.projectList.map(
+                  (projectDetail: ProjectBasicDetail) => {
+                    return (
+                      <div className={styles.frameDiv} key={projectDetail.id}>
+                        <div className={styles.frameParent1}>
+                          <div className={styles.projectParentFrame}>
+                            <h3 className="text-2xl mt-0">
+                              {projectDetail.name}
+                            </h3>
+                            <div className={styles.residentialParent}>
+                              <span>
+                                {projectTypeLabels[projectDetail.projectType]}{" "}
+                              </span>
+                              <span>&#8226;</span>
+                              <span>
+                                {
+                                  projectResidentLabels[
+                                    projectDetail.projectResidentType
+                                  ]
+                                }
+                              </span>
+                              <span>&#8226;</span>
+                              <span>
+                                {projectScopeLabels[projectDetail.projectScope]}
+                              </span>
+                            </div>
+                            <div className="flex mt-1">
+                              <span className="text-500 font-medium">
+                                Address:
+                              </span>
+                              <span className="ml-2">
+                                {projectDetail.address}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex fle justify-content-between w-full">
+                            <Button
+                              label={
+                                projectDetail.projectStatus ===
+                                projectStatus.pending
+                                  ? "Resume"
+                                  : "View Details"
+                              }
+                              outlined
+                              rounded
+                            />
+                            {projectDetail.projectStatus ===
+                            projectStatus.pending ? (
+                              <div className="pt-2 mr-3">
+                                <i className="pi pi-file-edit text-3xl text-500 ml-3"></i>
+                                <i className="pi pi-trash text-3xl text-500 ml-3"></i>
+                              </div>
+                            ) : null}
+                          </div>
                         </div>
-                        <div className={styles.flat}>Flat</div>
-                        <div className={styles.ellipseWrapper}>
-                          <div className={styles.frameChild} />
-                        </div>
-                        <div className={styles.newBuild}>New Build</div>
-                      </div>
-                      <div className={styles.addressParent}>
-                        <div className={styles.address}>Address:</div>
-                        <div className={styles.kemmerOverpassSuite}>
-                          39547 Kemmer Overpass Suite 971
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.buttonParent}>
-                      <button className={styles.button1} onClick={() => navigate('/step1Info')}>
-                        <div className={styles.button2}>Resume</div>
-                      </button>
-                      <div className={styles.projectActionIconsWrapper}>
-                        <div className={styles.projectActionIcons}>
-                          <input className={styles.edit} type="checkbox" />
-                          <img
-                            className={styles.trash2Icon}
-                            loading="lazy"
-                            alt=""
-                            src="/trash2.svg"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.techDetailsPendingWrapper}>
-                    <div className={styles.techDetailsPending}>
-                      Tech Details Pending
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.frameParent2}>
-                  <div className={styles.frameParent3}>
-                    <div className={styles.projectAbcParent}>
-                      <h3 className={styles.projectAbc}>Project ABC</h3>
-                      <div className={styles.commercialParent}>
-                        <div className={styles.commercial}>Commercial</div>
-                        <div className={styles.ellipseContainer}>
-                          <div className={styles.frameItem} />
-                        </div>
-                        <div className={styles.onlySystem}>Only System</div>
-                      </div>
-                      <div className={styles.addressGroup}>
-                        <div className={styles.address1}>Address:</div>
-                        <div className={styles.kemmerOverpassSuite1}>
-                          39547 Kemmer Overpass Suite 971
-                        </div>
-                      </div>
-                    </div>
-                    <button className={styles.button3} onClick={() => navigate('/step1Info')}>
-                      <div className={styles.button4}>View Details</div>
-                    </button>
-                  </div>
-                  <div className={styles.inTransitWrapper}>
-                    <div className={styles.inTransit}>In Transit</div>
-                  </div>
-                </div>
-                <div className={styles.frameParent4}>
-                  <div className={styles.frameParent5}>
-                    <div className={styles.projectXyzParent}>
-                      <h3 className={styles.projectXyz}>Project XYZ</h3>
-                      <div className={styles.commercialGroup}>
-                        <div className={styles.commercial1}>Commercial</div>
-                        <div className={styles.ellipseFrame}>
-                          <div className={styles.frameInner} />
-                        </div>
-                        <div className={styles.onlySystem1}>Only System</div>
-                      </div>
-                      <div className={styles.addressContainer}>
-                        <div className={styles.address2}>Address:</div>
-                        <div className={styles.kemmerOverpassSuite2}>
-                          39547 Kemmer Overpass Suite 971
+                        <div
+                          className={styles.techDetailsPendingWrapper}
+                          style={{
+                            backgroundColor:
+                              projectStatusColors[
+                                projectDetail.projectStatus as projectStatus
+                              ]?.backGroundColor,
+                            color:
+                              projectStatusColors[
+                                projectDetail.projectStatus as projectStatus
+                              ]?.color,
+                          }}
+                        >
+                          <div className={styles.techDetailsPending}>
+                            {
+                              projectStatusLabels[
+                                projectDetail.projectStatus as projectStatus
+                              ]
+                            }
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <button className={styles.button5} onClick={() => navigate('/step1Info')}>
-                      <div className={styles.button6}>View Details</div>
-                    </button>
-                  </div>
-                  <div className={styles.deliveryCompletedWrapper}>
-                    <div className={styles.deliveryCompleted}>
-                      Delivery Completed
-                    </div>
-                  </div>
-                </div>
+                    );
+                  }
+                )}
               </div>
             </div>
             <div className={styles.rectangleWrapper}>
