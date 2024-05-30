@@ -1,9 +1,12 @@
-import {  useCallback } from "react";
+import { useCallback } from "react";
 import styles from "./step3new.module.css";
 import { useNavigate } from "react-router-dom";
+import { Divider } from "primereact/divider";
+import { useAppSelector } from "../../../../store/store.utils";
 
 const Step3new = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const projectDetailState = useAppSelector((state) => state.projectDetailState);
   const onXIconClick = useCallback(() => {
     // Please sync "Dashboard" to the project
   }, []);
@@ -58,6 +61,56 @@ const Step3new = () => {
           Project Structure Review
         </h2>
       </div>
+      <section className="flex w-full justify-content-center" >
+        <div className="" style={{ width: '55rem', backgroundColor: 'rgb(247, 247, 247)' }}>
+          <div className="p-4">
+            <div className="flex justify-content-between text-xl text-500">
+              <b >Selected areas</b>
+              <b >Selected floors</b>
+              <b >Selected rooms</b>
+            </div>
+
+            <div>
+              {
+                projectDetailState.projectDetail?.buildingAreas?.indoorArea.map(area => {
+                  return (
+                    <>
+                      <Divider className="m-0 p-4 " />
+                      <div className="flex justify-content-between ">
+                        <div>
+                          <div>
+                            <span className="text-xl font-semibold text-500">{area.name}</span>
+                          </div>
+                          <div className="text-500 text-sm">
+                            <span>{area.internalName}</span>
+                            <span className="mr-1 ml-1">&#8226;</span>
+                            <span>{'Indoor'}</span>
+                          </div>
+
+                        </div>
+                        <div className="flex flex-column align-items-start -ml-7">
+                          {
+                            area.floors.map(floor => {
+                              return (
+                                <span className="text-xl font-semibold text-500 mb-5">{floor.name}</span>
+                              )
+                            })
+                          }
+                        </div>
+                        <div>
+                          
+                        </div>
+                      </div>
+
+                    </>
+                  )
+                })
+              }
+            </div>
+
+          </div>
+        </div>
+      </section>
       <section className={styles.step3newInner}>
         <div className={styles.frameParent1}>
           <div className={styles.frameParent2}>
@@ -180,7 +233,7 @@ const Step3new = () => {
       <div className={styles.step3newChild}>
         <div className={styles.frameParent10}>
           <div className={styles.buttonWrapper}>
-            <button className={styles.button} onClick={()  => navigate('/step2')}>
+            <button className={styles.button} onClick={() => navigate('/step2')}>
               <img
                 className={styles.chevronRightIcon}
                 alt=""
@@ -196,7 +249,7 @@ const Step3new = () => {
               <div className={styles.frameChild18} />
             </div>
           </div>
-          <button className={styles.button1} onClick={()  => navigate('/step4')}>
+          <button className={styles.button1} onClick={() => navigate('/step4')}>
             <div className={styles.label1}>{`Save & Proceed`}</div>
           </button>
         </div>
