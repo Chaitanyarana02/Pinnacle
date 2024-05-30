@@ -2,142 +2,175 @@ import { useCallback, useEffect } from "react";
 import styles from "./step1New.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store/store.utils";
-import { fetchProjectDetail, updateIndoorAreaData, updateProjectData, updateoutdoorAreaData } from "../../../../store/fearure/project-detail.slice";
-import { ProjectAreaSystemDetails, ProjectAreas } from "../../../../interfaces/project.interface";
+import {
+  fetchProjectDetail,
+  updateIndoorAreaData,
+  updateProjectData,
+  updateoutdoorAreaData,
+} from "../../../../store/fearure/project-detail.slice";
+import {
+  ProjectAreaSystemDetails,
+  ProjectAreas,
+} from "../../../../interfaces/project.interface";
 import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
 
-import { Divider } from 'primereact/divider';
-import { Button } from "primereact/button";
-
+import { Divider } from "primereact/divider";
 
 const Step1new = () => {
-  const projectDetailState = useAppSelector((state) => state.projectDetailState);
+  const projectDetailState = useAppSelector(
+    (state) => state.projectDetailState
+  );
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const defaultIndoorAreas: ProjectAreas[] = [
     {
-      name: 'House',
-      internalName: 'house',
-      description: 'test',
+      name: "House",
+      internalName: "house",
+      description: "test",
       isSelected: false,
-      floors: [{
-        name:'Basement',
-        isSelected: false,
-        functions:[],
-        systemDetails:{} as ProjectAreaSystemDetails
-      },
-      {
-        name:'Lower Ground',
-        isSelected: false,
-        functions:[],
-        systemDetails:{} as ProjectAreaSystemDetails
-      },
-      {
-        name:'Ground Floor',
-        isSelected: false,
-        functions:[],
-        systemDetails:{} as ProjectAreaSystemDetails
-      },
-      {
-        name:'First Floor',
-        isSelected: true,
-        functions:[],
-        systemDetails:{} as ProjectAreaSystemDetails
-      },
-      {
-        name:'Second Floor',
-        isSelected: true,
-        functions:[],
-        systemDetails:{} as ProjectAreaSystemDetails
-      },
-      {
-        name:'Third Floor',
-        isSelected: false,
-        functions:[],
-        systemDetails:{} as ProjectAreaSystemDetails
-      }]
+      floors: [
+        {
+          name: "Basement",
+          isSelected: false,
+
+          floorRooms: [
+            {
+              name: "Bedroom",
+              isSelected: false,
+              functions: [],
+              systemDetails: {} as ProjectAreaSystemDetails,
+            },
+            {
+              name: "Living Room",
+              isSelected: true,
+              functions: [],
+              systemDetails: {} as ProjectAreaSystemDetails,
+            },
+            {
+              name: "Kitchen",
+              isSelected: false,
+              functions: [],
+              systemDetails: {} as ProjectAreaSystemDetails,
+            },
+            {
+              name: "Guest Bedroom",
+              isSelected: true,
+              functions: [],
+              systemDetails: {} as ProjectAreaSystemDetails,
+            }
+          ],
+        },
+        {
+          name: "Lower Ground",
+          isSelected: false,
+
+          floorRooms: [],
+        },
+        {
+          name: "Ground Floor",
+          isSelected: false,
+
+          floorRooms: [],
+        },
+        {
+          name: "First Floor",
+          isSelected: true,
+
+          floorRooms: [],
+        },
+        {
+          name: "Second Floor",
+          isSelected: true,
+
+          floorRooms: [],
+        },
+        {
+          name: "Third Floor",
+          isSelected: false,
+
+          floorRooms: [],
+        },
+      ],
     },
     {
-      name: 'Garage',
-      internalName: 'garage',
-      description: 'test',
+      name: "Garage",
+      internalName: "garage",
+      description: "test",
       isSelected: false,
-      floors: []
+      floors: [],
     },
     {
-      name: 'Shed',
-      internalName: 'shed',
-      description: 'test',
+      name: "Shed",
+      internalName: "shed",
+      description: "test",
       isSelected: false,
-      floors: []
-    }
+      floors: [],
+    },
   ];
 
   const defaultOutDoorAreas: ProjectAreas[] = [
     {
-      name: 'Front Garden',
-      internalName: 'Front Garden',
-      description: '',
+      name: "Front Garden",
+      internalName: "Front Garden",
+      description: "",
       isSelected: false,
-      floors: []
+      floors: [],
     },
     {
-      name: 'Back Garden',
-      internalName: 'back',
-      description: '',
+      name: "Back Garden",
+      internalName: "back",
+      description: "",
       isSelected: false,
-      floors: []
+      floors: [],
     },
     {
-      name: 'Terrace',
-      internalName: 'Terrace',
-      description: '',
+      name: "Terrace",
+      internalName: "Terrace",
+      description: "",
       isSelected: false,
-      floors: []
+      floors: [],
     },
     {
-      name: 'Right of House',
-      internalName: 'Right of House',
-      description: '',
+      name: "Right of House",
+      internalName: "Right of House",
+      description: "",
       isSelected: false,
-      floors: []
+      floors: [],
     },
     {
-      name: 'Left of House',
-      internalName: 'Left of House',
-      description: '',
+      name: "Left of House",
+      internalName: "Left of House",
+      description: "",
       isSelected: false,
-      floors: []
+      floors: [],
     },
     {
-      name: 'Balcony',
-      internalName: 'Balcony',
-      description: '',
+      name: "Balcony",
+      internalName: "Balcony",
+      description: "",
       isSelected: false,
-      floors: []
+      floors: [],
     },
-
-  ]
+  ];
   useEffect(() => {
     console.log(id);
 
     if (id) {
-      dispatch(fetchProjectDetail(''));
-
+      dispatch(fetchProjectDetail(""));
     } else {
-      console.log('.........');
+      console.log(".........");
 
-      dispatch(updateProjectData({
-        indoorArea: defaultIndoorAreas,
-        outDoorArea: defaultOutDoorAreas
-      }))
+      dispatch(
+        updateProjectData({
+          indoorArea: defaultIndoorAreas,
+          outDoorArea: defaultOutDoorAreas,
+        })
+      );
     }
   }, []);
-  const onXIconClick = useCallback(() => {
-
-  }, []);
-  const navigate = useNavigate()
+  const onXIconClick = useCallback(() => {}, []);
+  const navigate = useNavigate();
   return (
     <div className={styles.step1new}>
       <header className={styles.header2}>
@@ -186,9 +219,7 @@ const Step1new = () => {
       <section className={styles.step1newInner}>
         <div className={styles.frameParent1}>
           <div className={styles.defineBuildingAreasWrapper}>
-            <h2 >
-              Define building areas
-            </h2>
+            <h2>Define building areas</h2>
           </div>
           <p className="text-500 text-lg -mt-5">
             Choose the areas included in your building by selecting from the
@@ -197,69 +228,140 @@ const Step1new = () => {
         </div>
       </section>
 
-
-
       <section className="flex w-full justify-content-center p-5">
-        <div style={{ width: '58rem' }}>
+        <div style={{ width: "58rem" }}>
           <div className="w-full">
-            <span
-              className="text-2xl font-semibold"
-            >Indoor Area</span>
+            <span className="text-2xl font-semibold">Indoor Area</span>
 
             <Divider className="m-0 mt-4" />
           </div>
           <div className="flex flex-column w-full mt-3">
-            {
-              projectDetailState.projectDetail?.buildingAreas?.indoorArea?.map((area, index) => {
+            {projectDetailState.projectDetail?.buildingAreas?.indoorArea?.map(
+              (area, index) => {
                 return (
-                  <div className="flex justify-content-between align-items-center  h-4rem" key={area.name + '_' + index}>
+                  <div
+                    className="flex justify-content-between align-items-center  h-4rem"
+                    key={area.name + "_" + index}
+                  >
                     <div className="w-14rem">
-                      <Checkbox onChange={e => {
-                        dispatch(updateIndoorAreaData({ index, value: { ...area, isSelected: e.checked } }))
-                      }} checked={area.isSelected || false}></Checkbox>
-                      <span className="text-xl font-semibold text-600"> {area.internalName}</span>
+                      <Checkbox
+                        onChange={(e) => {
+                          dispatch(
+                            updateIndoorAreaData({
+                              index,
+                              value: { ...area, isSelected: e.checked },
+                            })
+                          );
+                        }}
+                        checked={area.isSelected || false}
+                      ></Checkbox>
+                      <span className="text-xl font-semibold text-600">
+                        {" "}
+                        {area.internalName}
+                      </span>
                     </div>
-                    <InputText placeholder={area.name} value={area.name} onChange={(e) => dispatch(updateIndoorAreaData({ index, value: { ...area, name: e.target?.value } }))} autoFocus />
-                    <InputText className="w-18rem" placeholder="Additional Comment (Optional)" value={area.description} onChange={(e) => dispatch(updateIndoorAreaData({ index, value: { ...area, description: e.target?.value } }))} />
+                    <InputText
+                      placeholder={area.name}
+                      value={area.name}
+                      onChange={(e) =>
+                        dispatch(
+                          updateIndoorAreaData({
+                            index,
+                            value: { ...area, name: e.target?.value },
+                          })
+                        )
+                      }
+                      autoFocus
+                    />
+                    <InputText
+                      className="w-18rem"
+                      placeholder="Additional Comment (Optional)"
+                      value={area.description}
+                      onChange={(e) =>
+                        dispatch(
+                          updateIndoorAreaData({
+                            index,
+                            value: { ...area, description: e.target?.value },
+                          })
+                        )
+                      }
+                    />
                   </div>
-                )
-              })
-            }
-            <b className="text-primary mt-3"><i className="pi pi-plus" /> Add another</b>
+                );
+              }
+            )}
+            <b className="text-primary mt-3">
+              <i className="pi pi-plus" /> Add another
+            </b>
           </div>
         </div>
       </section>
 
-
-
       <section className="flex w-full justify-content-center p-5">
-        <div style={{ width: '58rem' }}>
+        <div style={{ width: "58rem" }}>
           <div className="w-full">
-            <span
-              className="text-2xl font-semibold">
-              Outdoor Area
-            </span>
+            <span className="text-2xl font-semibold">Outdoor Area</span>
 
             <Divider className="m-0 mt-4" />
           </div>
           <div className="flex flex-column w-full mt-3">
-            {
-              projectDetailState.projectDetail?.buildingAreas?.outDoorArea?.map((area, index) => {
+            {projectDetailState.projectDetail?.buildingAreas?.outDoorArea?.map(
+              (area, index) => {
                 return (
-                  <div className="flex justify-content-between align-items-center  h-4rem" key={area.name + '_' + index}>
+                  <div
+                    className="flex justify-content-between align-items-center  h-4rem"
+                    key={area.name + "_" + index}
+                  >
                     <div className="w-14rem">
-                      <Checkbox onChange={e => {
-                        dispatch(updateoutdoorAreaData({ index, value: { ...area, isSelected: e.checked } }))
-                      }} checked={area.isSelected || false}></Checkbox>
-                      <span className="text-xl font-semibold text-600"> {area.internalName}</span>
+                      <Checkbox
+                        onChange={(e) => {
+                          dispatch(
+                            updateoutdoorAreaData({
+                              index,
+                              value: { ...area, isSelected: e.checked },
+                            })
+                          );
+                        }}
+                        checked={area.isSelected || false}
+                      ></Checkbox>
+                      <span className="text-xl font-semibold text-600">
+                        {" "}
+                        {area.internalName}
+                      </span>
                     </div>
-                    <InputText placeholder={area.name} value={area.name} onChange={(e) => dispatch(updateoutdoorAreaData({ index, value: { ...area, name: e.target?.value } }))} autoFocus />
-                    <InputText className="w-18rem" placeholder="Additional Comment (Optional)" value={area.description} onChange={(e) => dispatch(updateoutdoorAreaData({ index, value: { ...area, description: e.target?.value } }))} />
+                    <InputText
+                      placeholder={area.name}
+                      value={area.name}
+                      onChange={(e) =>
+                        dispatch(
+                          updateoutdoorAreaData({
+                            index,
+                            value: { ...area, name: e.target?.value },
+                          })
+                        )
+                      }
+                      autoFocus
+                    />
+                    <InputText
+                      className="w-18rem"
+                      placeholder="Additional Comment (Optional)"
+                      value={area.description}
+                      onChange={(e) =>
+                        dispatch(
+                          updateoutdoorAreaData({
+                            index,
+                            value: { ...area, description: e.target?.value },
+                          })
+                        )
+                      }
+                    />
                   </div>
-                )
-              })
-            }
-            <b className="text-primary mt-3"><i className="pi pi-plus" /> Add another</b>
+                );
+              }
+            )}
+            <b className="text-primary mt-3">
+              <i className="pi pi-plus" /> Add another
+            </b>
           </div>
         </div>
       </section>
@@ -615,7 +717,10 @@ const Step1new = () => {
       <div className={styles.step1newInner1}>
         <div className={styles.frameParent10}>
           <div className={styles.buttonWrapper}>
-            <button className={styles.button} onClick={() => navigate('/step1Info')}>
+            <button
+              className={styles.button}
+              onClick={() => navigate("/step1Info")}
+            >
               <img
                 className={styles.chevronRightIcon}
                 alt=""
@@ -631,7 +736,7 @@ const Step1new = () => {
               <div className={styles.frameChild3} />
             </div>
           </div>
-          <button className={styles.button1} onClick={() => navigate('/step2')}>
+          <button className={styles.button1} onClick={() => navigate("/step2")}>
             <b className={styles.label19}>Define Floors</b>
             <img
               className={styles.chevronRightIcon1}

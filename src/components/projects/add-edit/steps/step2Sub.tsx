@@ -1,18 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./step2.module.css";
 import { Divider } from "primereact/divider";
-import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Accordion, AccordionTab } from "primereact/accordion";
 import { useAppSelector } from "../../../../store/store.utils";
-import { ProjectAreas } from "../../../../interfaces/project.interface";
+import { ProjectAreaFloors, ProjectAreas, ProjectFloorRooms } from "../../../../interfaces/project.interface";
 
-const Step2 = () => {
+const Step2Sub = () => {
   const navigate = useNavigate();
-  const projectDetailState = useAppSelector((state) => state.projectDetailState);
+  const projectDetailState = useAppSelector(
+    (state) => state.projectDetailState
+  );
   // const dispatch = useAppDispatch();
-  const headerTemplate = (areaName: string, areaType: string, areaDisplayName: string) => {
+  const headerTemplate = (
+    areaName: string,
+    areaType: string,
+    areaDisplayName: string
+  ) => {
     return (
       <>
-        <div style={{ width: '50rem' }}>
+        <div style={{ width: "50rem" }}>
           <div className="flex justify-content-between">
             <div>
               <div className="text-500 text-sm">
@@ -26,48 +32,65 @@ const Step2 = () => {
             </div>
 
             <span className="">
-              <i className="pi pi-chevron-down border-circle surface-200 p-3" style={{ fontSize: '1.5rem' }}></i>
+              <i
+                className="pi pi-chevron-down border-circle surface-200 p-3"
+                style={{ fontSize: "1.5rem" }}
+              ></i>
             </span>
           </div>
-
-
         </div>
       </>
-    )
+    );
   };
-  const getSection = (area: ProjectAreas, type: string) => {
-    return (<div className="flex w-full justify-content-center pl-5 mt-0 pr-5">
-
-      <div style={{ width: '58rem' }}>
-        <Divider className="m-0 mt-4" />
-        <div className="mt-2">
-
-          <Accordion activeIndex={0}>
-            <AccordionTab header="Header I" headerTemplate={headerTemplate(area.internalName, type, area.name)}>
-              <div className="flex align-items-center flex-wrap">
-                {
-                  area.floors.map((floor) => {
+  const getSection = (floor: ProjectAreaFloors, type: string) => {
+    return (
+      <div className="flex w-full justify-content-center pl-5 mt-0 pr-5">
+        <div style={{ width: "58rem" }}>
+          <Divider className="m-0 mt-4" />
+          <div className="mt-2">
+            <Accordion activeIndex={0}>
+              <AccordionTab
+                header="Header I"
+                headerTemplate={headerTemplate(
+                  floor.name,
+                  type,
+                  floor.name
+                )}
+              >
+                <div className="flex align-items-center flex-wrap">
+                  {floor?.floorRooms?.map((room) => {
                     return (
-                      <div className="inline p-3 font-semibold text-lg m-2  " style={{ border: '1px solid #ddd', borderRadius: '2rem' }}>
-                        {floor.name}
-                        <i className="pi pi-check ml-4 mr-2 p-1 bg-primary" style={{ border: '1px solid #2D74FE', borderRadius: '1.5rem' }}></i>
+                      <div
+                        className="inline p-3 font-semibold text-lg m-2  "
+                        style={{
+                          border: "1px solid #ddd",
+                          borderRadius: "2rem",
+                        }}
+                      >
+                        {room.name}
+                        <i
+                          className="pi pi-check ml-4 mr-2 p-1 bg-primary"
+                          style={{
+                            border: "1px solid #2D74FE",
+                            borderRadius: "1.5rem",
+                          }}
+                        ></i>
                       </div>
-
-                    )
-                  })
-                }
-                <div>
-                  <b className="text-primary mt-3"><i className="pi pi-plus" /> Add another</b>
+                    );
+                  })}
+                  <div>
+                    <b className="text-primary mt-3">
+                      <i className="pi pi-plus" /> Add another
+                    </b>
+                  </div>
                 </div>
-              </div>
-
-            </AccordionTab>
-          </Accordion>
-
+              </AccordionTab>
+            </Accordion>
+          </div>
         </div>
       </div>
-    </div>)
-  }
+    );
+  };
   return (
     <div className={styles.step2}>
       <header className={styles.header1}>
@@ -104,29 +127,25 @@ const Step2 = () => {
           </div>
         </div>
         <div className={styles.xWrapper}>
-          <img
-            className={styles.xIcon}
-            loading="lazy"
-            alt=""
-            src="x.svg"
-          />
+          <img className={styles.xIcon} loading="lazy" alt="" src="x.svg" />
         </div>
       </header>
 
       <section className={styles.step2Inner}>
-        <div >
+        <div>
           <div>
-            <h4>
-            Define floors within each area
-            </h4>
+            <h4>Define rooms within each floor</h4>
           </div>
-          <p className="text-500 text-lg -mt-5"
-          >{`For each selected area, choose the relevant floors from the available options. `}</p>
+          <p className="text-500 text-lg -mt-5">For each selected area, choose the relevant Rooms from the available options. </p>
         </div>
       </section>
       <div className="w-full">
-        {projectDetailState?.projectDetail?.buildingAreas?.indoorArea.map((area) => getSection(area, 'Indoor'))}
-        {projectDetailState?.projectDetail?.buildingAreas?.outDoorArea.map((area) => getSection(area, 'Outdoor'))}
+        {projectDetailState?.projectDetail?.buildingAreas?.indoorArea[0].floors.map(
+          (area) => getSection(area, "Indoor")
+        )}
+        {projectDetailState?.projectDetail?.buildingAreas?.outDoorArea[0].floors.map(
+          (area) => getSection(area, "Outdoor")
+        )}
       </div>
 
       {/* <section className="flex w-full justify-content-center p-5">
@@ -155,7 +174,7 @@ const Step2 = () => {
 
       <footer className={styles.frameFooter}>
         <div className={styles.buttonParent}>
-          <button className={styles.button} onClick={() => navigate('/step1')}>
+          <button className={styles.button} onClick={() => navigate("/step2")}>
             <img
               className={styles.chevronRightIcon}
               alt=""
@@ -171,7 +190,10 @@ const Step2 = () => {
                 <div className={styles.frameChild16} />
               </div>
             </div>
-            <button className={styles.button1} onClick={() => navigate('/step2Sub')}>
+            <button
+              className={styles.button1}
+              onClick={() => navigate("/step3")}
+            >
               <div className={styles.label1}>Review Final Structure</div>
               <img
                 className={styles.chevronRightIcon1}
@@ -186,4 +208,4 @@ const Step2 = () => {
   );
 };
 
-export default Step2;
+export default Step2Sub;

@@ -49,7 +49,7 @@ const InfoStep = () => {
             </div>
             <div className={styles.createStructureParent}>
               <b className={styles.createStructure}>Create Structure</b>
-              <p className={styles.designYourClients}>
+              <p className="text-xl text-600">
                 Design your client's dream smart home in three easy steps: map
                 their property (indoor/outdoor), plan floors within each
                 building, and then integrate smart features room by room.
@@ -72,7 +72,7 @@ const InfoStep = () => {
             </div>
             <div className={styles.defineFunctionsParent}>
               <h3 className={styles.defineFunctions}>Define Functions</h3>
-              <p className={styles.craftThePerfect}>
+              <p className="text-xl text-600">
                 Craft the perfect harmony for your client's space. Simply drag
                 and drop functionalities like spotlights, switches, or sensors
                 into each room. Watch the estimated price adjust as you build
@@ -98,7 +98,7 @@ const InfoStep = () => {
               <h3 className={styles.provideTechDetails}>
                 Provide Tech Details
               </h3>
-              <p className={styles.polishTheFinal}>
+              <p className="text-xl text-600">
                 Polish the final details! Here you'll specify things like light
                 dimming options, power levels, and blind sizes. Fill out details
                 directly or print a handy form for on-site data collection. This

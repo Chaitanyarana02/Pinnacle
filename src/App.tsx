@@ -22,6 +22,7 @@ import Step5 from "./components/projects/add-edit/steps/step5";
 import Step1new from "./components/projects/add-edit/steps/step1New";
 import { useState } from "react";
 import worker from "./mock/mock.api";
+import Step2Sub from "./components/projects/add-edit/steps/step2Sub";
 // import HomeOwners from './components/homeOwners/homeOwners'
 // import Hompage from './components/homePage/Hompage'
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/step1/:id" element={<Step1new />}></Route>
         <Route path="/step1" element={<Step1new />}></Route>
         <Route path="/step2" element={<Step2 />}></Route>
+        <Route path="/step2Sub" element={<Step2Sub />}></Route>
         <Route path="/step3" element={<Step3new />}></Route>
         <Route path="/step4" element={<Step4 />}></Route>
         <Route path="/step5" element={<Step5 />}></Route>

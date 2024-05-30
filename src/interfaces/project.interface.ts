@@ -29,11 +29,15 @@ export interface ProjectAreas {
 
 export interface ProjectAreaFloors {
     name: string;
+    isSelected: boolean;
+    floorRooms: ProjectFloorRooms[];
+}
+export interface ProjectFloorRooms {
+    name: string;
     functions: [];
     isSelected: boolean;
     systemDetails: ProjectAreaSystemDetails
 }
-
 export interface ProjectFloorFunction {
     name: string;
     count: number;
