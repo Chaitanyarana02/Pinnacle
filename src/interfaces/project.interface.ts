@@ -23,12 +23,14 @@ export interface ProjectAreas {
     name: string;
     internalName: string;
     description: string;
+    isSelected?: boolean;
     floors: ProjectAreaFloors[];
 }
 
 export interface ProjectAreaFloors {
     name: string;
     functions: [];
+    isSelected: boolean;
     systemDetails: ProjectAreaSystemDetails
 }
 

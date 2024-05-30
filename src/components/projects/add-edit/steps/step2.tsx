@@ -1,8 +1,74 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./step2.module.css";
+import { Divider } from "primereact/divider";
+import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Button } from "primereact/button";
+import { useAppSelector, useAppDispatch } from "../../../../store/store.utils";
+import { ProjectAreas } from "../../../../interfaces/project.interface";
 
 const Step2 = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const projectDetailState = useAppSelector((state) => state.projectDetailState);
+  // const dispatch = useAppDispatch();
+  const headerTemplate = (areaName: string, areaType: string, areaDisplayName: string) => {
+    return (
+      <>
+        <div style={{ width: '50rem' }}>
+          <div className="flex justify-content-between">
+            <div>
+              <div className="text-500 text-sm">
+                <span>{areaName}</span>
+                <span className="mr-1 ml-1">&#8226;</span>
+                <span>{areaType}</span>
+              </div>
+              <div>
+                <h3>{areaDisplayName}</h3>
+              </div>
+            </div>
+
+            <span className="">
+              <i className="pi pi-chevron-down border-circle surface-200 p-3" style={{ fontSize: '1.5rem' }}></i>
+            </span>
+          </div>
+
+
+        </div>
+      </>
+    )
+  };
+  const getSection = (area: ProjectAreas, type: string) => {
+    return (<div className="flex w-full justify-content-center pl-5 mt-0 pr-5">
+
+      <div style={{ width: '58rem' }}>
+        <Divider className="m-0 mt-4" />
+        <div className="mt-2">
+
+          <Accordion activeIndex={0}>
+            <AccordionTab header="Header I" headerTemplate={headerTemplate(area.internalName, type, area.name)}>
+              <div className="flex align-items-center flex-wrap">
+                {
+                  area.floors.map((floor) => {
+                    return (
+                      <div className="inline p-3 font-semibold text-lg m-2  " style={{ border: '1px solid #ddd', borderRadius: '2rem' }}>
+                        {floor.name}
+                        <i className="pi pi-check ml-4 mr-2 p-1 bg-primary" style={{ border: '1px solid #2D74FE', borderRadius: '1.5rem' }}></i>
+                      </div>
+
+                    )
+                  })
+                }
+                <div>
+                  <b className="text-primary mt-3"><i className="pi pi-plus" /> Add another</b>
+                </div>
+              </div>
+
+            </AccordionTab>
+          </Accordion>
+
+        </div>
+      </div>
+    </div>)
+  }
   return (
     <div className={styles.step2}>
       <header className={styles.header1}>
@@ -47,377 +113,47 @@ const Step2 = () => {
           />
         </div>
       </header>
+
       <section className={styles.step2Inner}>
-        <div className={styles.frameParent1}>
-          <div className={styles.defineRoomsWithinEachFloorWrapper}>
-            <h2 className={styles.defineRoomsWithin}>
+        <div >
+          <div>
+            <h4>
               Define rooms within each floor
-            </h2>
+            </h4>
           </div>
-          <div
-            className={styles.forEachSelected}
-          >{`For each selected area, choose the relevant floors from the available options. `}</div>
+          <p className="text-500 text-lg -mt-5"
+          >{`For each selected area, choose the relevant floors from the available options. `}</p>
         </div>
       </section>
-      <section className={styles.step2Child}>
-        <div className={styles.frameParent2}>
-          <div className={styles.lineParent}>
-            <div className={styles.lineDiv} />
-            <div className={styles.frameParent3}>
-              <div className={styles.frameParent4}>
-                <div className={styles.houseParent}>
-                  <div className={styles.house}>House</div>
-                  <div className={styles.rectangleWrapper}>
-                    <div className={styles.rectangleDiv} />
+      <div className="w-full">
+        {projectDetailState?.projectDetail?.buildingAreas?.indoorArea.map((area, index) => getSection(area, 'Indoor'))}
+        {projectDetailState?.projectDetail?.buildingAreas?.outDoorArea.map((area, index) => getSection(area, 'Outdoor'))}
+      </div>
+
+      {/* <section className="flex w-full justify-content-center p-5">
+
+        <div style={{ width: '58rem' }}>
+          <Divider className="m-0 mt-4" />
+          <div className="mt-2">
+
+            <Accordion activeIndex={0}>
+              <AccordionTab header="Header I" headerTemplate={headerTemplate()}>
+                <div className="flex align-items-center flex-wrap">
+                  <div className="inline p-3 font-semibold text-lg" style={{ border: '1px solid #ddd', borderRadius: '2rem' }}>
+                    Basement
+                    <i className="pi pi-check ml-4 mr-2 p-1 bg-primary" style={{ border: '1px solid #2D74FE', borderRadius: '1.5rem' }}></i>
                   </div>
-                  <div className={styles.houseWrapper}>
-                    <div className={styles.house1}>House</div>
-                  </div>
-                  <div className={styles.ellipseWrapper}>
-                    <div className={styles.ellipseDiv} />
-                  </div>
-                  <div className={styles.indoorWrapper}>
-                    <div className={styles.indoor}>Indoor</div>
-                  </div>
-                </div>
-                <div className={styles.groundFloor}>Ground Floor</div>
-              </div>
-              <img
-                className={styles.groupIcon}
-                loading="lazy"
-                alt=""
-                src="/group-5.svg"
-              />
-            </div>
-            <div className={styles.component4Parent}>
-              <button className={styles.component4}>
-                <div className={styles.chipTick}>
-                  <div className={styles.basementWrapper}>
-                    <div className={styles.basement}>Kitchen</div>
-                  </div>
-                  <div className={styles.checkbox}>
-                    <div className={styles.checkboxChild} />
-                    <img className={styles.checkIcon} alt="" src="/check.svg" />
+                  <div>
+                    <b className="text-primary mt-3"><i className="pi pi-plus" /> Add another</b>
                   </div>
                 </div>
-                <div className={styles.copy06Wrapper}>
-                  <img className={styles.copy06Icon} alt="" src="/copy06.svg" />
-                </div>
-              </button>
-              <div className={styles.component5}>
-                <div className={styles.chipTick1}>
-                  <div className={styles.basementContainer}>
-                    <div className={styles.basement1}>Bedroom</div>
-                  </div>
-                  <div className={styles.checkbox1}>
-                    <div className={styles.checkboxItem} />
-                    <img
-                      className={styles.checkIcon1}
-                      alt=""
-                      src="/check-1.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Container}>
-                  <img
-                    className={styles.copy06Icon1}
-                    alt=""
-                    src="/copy06-1.svg"
-                  />
-                </div>
-              </div>
-              <div className={styles.component6}>
-                <div className={styles.chipTick2}>
-                  <div className={styles.basementFrame}>
-                    <div className={styles.basement2}>Bathroom</div>
-                  </div>
-                  <div className={styles.checkbox2}>
-                    <div className={styles.checkboxInner} />
-                    <img
-                      className={styles.checkIcon2}
-                      alt=""
-                      src="/check-2.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Frame}>
-                  <img
-                    className={styles.copy06Icon2}
-                    alt=""
-                    src="/copy06-2.svg"
-                  />
-                </div>
-              </div>
-              <div className={styles.component8}>
-                <div className={styles.chipTick3}>
-                  <div className={styles.basementWrapper1}>
-                    <div className={styles.basement3}>Laundry</div>
-                  </div>
-                  <div className={styles.checkbox3}>
-                    <div className={styles.checkboxChild1} />
-                    <img
-                      className={styles.checkIcon3}
-                      alt=""
-                      src="/check-3.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper1}>
-                  <img
-                    className={styles.copy06Icon3}
-                    alt=""
-                    src="/copy06-3.svg"
-                  />
-                </div>
-              </div>
-              <div className={styles.component7}>
-                <div className={styles.chipTick4}>
-                  <div className={styles.basementWrapper2}>
-                    <div className={styles.basement4}>Stairs</div>
-                  </div>
-                  <div className={styles.checkbox4}>
-                    <div className={styles.checkboxChild2} />
-                    <img
-                      className={styles.checkIcon4}
-                      alt=""
-                      src="/check-4.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper2}>
-                  <img
-                    className={styles.copy06Icon4}
-                    alt=""
-                    src="/copy06.svg"
-                  />
-                </div>
-              </div>
-              <div className={styles.component10}>
-                <div className={styles.chipTick5}>
-                  <div className={styles.basementWrapper3}>
-                    <div className={styles.basement5}>Shower</div>
-                  </div>
-                  <div className={styles.checkbox5}>
-                    <div className={styles.checkboxChild3} />
-                    <img
-                      className={styles.checkIcon5}
-                      alt=""
-                      src="/check-5.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper3}>
-                  <img
-                    className={styles.copy06Icon5}
-                    alt=""
-                    src="/copy06.svg"
-                  />
-                </div>
-              </div>
-              <div className={styles.component11}>
-                <div className={styles.chipTick6}>
-                  <div className={styles.basementWrapper4}>
-                    <div className={styles.basement6}>TV Room</div>
-                  </div>
-                  <div className={styles.checkbox6}>
-                    <div className={styles.checkboxChild4} />
-                    <img
-                      className={styles.checkIcon6}
-                      alt=""
-                      src="/check-6.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper4}>
-                  <img
-                    className={styles.copy06Icon6}
-                    alt=""
-                    src="/copy06.svg"
-                  />
-                </div>
-              </div>
-              <div className={styles.component12}>
-                <div className={styles.chipTick7}>
-                  <div className={styles.basementWrapper5}>
-                    <div className={styles.basement7}>Dining Room</div>
-                  </div>
-                  <div className={styles.checkbox7}>
-                    <div className={styles.checkboxChild5} />
-                    <img
-                      className={styles.checkIcon7}
-                      alt=""
-                      src="/check-7.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper5}>
-                  <img
-                    className={styles.copy06Icon7}
-                    alt=""
-                    src="/copy06.svg"
-                  />
-                </div>
-              </div>
-              <div className={styles.component9}>
-                <div className={styles.chipTick8}>
-                  <div className={styles.basementWrapper6}>
-                    <div className={styles.basement8}>Living Room</div>
-                  </div>
-                  <div className={styles.checkbox8}>
-                    <div className={styles.checkboxChild6} />
-                    <img
-                      className={styles.checkIcon8}
-                      alt=""
-                      src="/check-8.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper6}>
-                  <img
-                    className={styles.copy06Icon8}
-                    alt=""
-                    src="/copy06.svg"
-                  />
-                </div>
-              </div>
-              <button className={styles.component13}>
-                <div className={styles.chipTick9}>
-                  <div className={styles.basementWrapper7}>
-                    <div className={styles.basement9}>Entrance Hall</div>
-                  </div>
-                  <div className={styles.checkbox9}>
-                    <div className={styles.checkboxChild7} />
-                    <img
-                      className={styles.checkIcon9}
-                      alt=""
-                      src="/check-9.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper7}>
-                  <img
-                    className={styles.copy06Icon9}
-                    alt=""
-                    src="/copy06.svg"
-                  />
-                </div>
-              </button>
-              <button className={styles.component14}>
-                <div className={styles.chipTick10}>
-                  <div className={styles.basementWrapper8}>
-                    <div className={styles.basement10}>Utility Room</div>
-                  </div>
-                  <div className={styles.checkbox10}>
-                    <div className={styles.checkboxChild8} />
-                    <img
-                      className={styles.checkIcon10}
-                      alt=""
-                      src="/check-10.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper8}>
-                  <img
-                    className={styles.copy06Icon10}
-                    alt=""
-                    src="/copy06.svg"
-                  />
-                </div>
-              </button>
-              <div className={styles.component15}>
-                <div className={styles.chipTick11}>
-                  <div className={styles.basementWrapper9}>
-                    <div className={styles.basement11}>Cinema</div>
-                  </div>
-                  <div className={styles.checkbox11}>
-                    <div className={styles.checkboxChild9} />
-                    <img
-                      className={styles.checkIcon11}
-                      alt=""
-                      src="/check-11.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.copy06Wrapper9}>
-                  <img
-                    className={styles.copy06Icon11}
-                    alt=""
-                    src="/copy06.svg"
-                  />
-                </div>
-              </div>
-              <div className={styles.addAnother}>+Add another</div>
-            </div>
-            <div className={styles.frameChild1} />
+              </AccordionTab>
+            </Accordion>
+
           </div>
-          <div className={styles.frameParent5}>
-            <div className={styles.frameParent6}>
-              <div className={styles.houseGroup}>
-                <div className={styles.house2}>House</div>
-                <div className={styles.rectangleContainer}>
-                  <div className={styles.frameChild2} />
-                </div>
-                <div className={styles.houseContainer}>
-                  <div className={styles.house3}>House</div>
-                </div>
-                <div className={styles.ellipseFrame}>
-                  <div className={styles.frameChild3} />
-                </div>
-                <div className={styles.indoorContainer}>
-                  <div className={styles.indoor1}>Indoor</div>
-                </div>
-              </div>
-              <div className={styles.firstFloor}>First Floor</div>
-            </div>
-            <img className={styles.frameChild4} alt="" src="/group-5-1.svg" />
-          </div>
-          <div className={styles.frameChild5} />
-          <div className={styles.frameParent7}>
-            <div className={styles.frameParent8}>
-              <div className={styles.manCaveParent}>
-                <div className={styles.manCave}>Man Cave</div>
-                <div className={styles.rectangleFrame}>
-                  <div className={styles.frameChild6} />
-                </div>
-                <div className={styles.houseFrame}>
-                  <div className={styles.house4}>House</div>
-                </div>
-                <div className={styles.ellipseWrapper1}>
-                  <div className={styles.frameChild7} />
-                </div>
-                <div className={styles.indoorFrame}>
-                  <div className={styles.indoor2}>Indoor</div>
-                </div>
-              </div>
-              <div className={styles.firstFloor1}>First Floor</div>
-            </div>
-            <img className={styles.frameChild8} alt="" src="/group-5-2.svg" />
-          </div>
-          <div className={styles.frameChild9} />
-          <div className={styles.frameParent9}>
-            <div className={styles.frameParent10}>
-              <div className={styles.carGarageParent}>
-                <div className={styles.carGarage}>Car Garage</div>
-                <div className={styles.rectangleWrapper1}>
-                  <div className={styles.frameChild10} />
-                </div>
-                <div className={styles.houseWrapper1}>
-                  <div className={styles.house5}>House</div>
-                </div>
-                <div className={styles.ellipseWrapper2}>
-                  <div className={styles.frameChild11} />
-                </div>
-                <div className={styles.indoorWrapper1}>
-                  <div className={styles.indoor3}>Indoor</div>
-                </div>
-              </div>
-              <div className={styles.firstFloor2}>First Floor</div>
-            </div>
-            <img className={styles.frameChild12} alt="" src="/group-5-3.svg" />
-          </div>
-          <div className={styles.frameChild13} />
         </div>
-      </section>
+      </section> */}
+
       <footer className={styles.frameFooter}>
         <div className={styles.buttonParent}>
           <button className={styles.button} onClick={() => navigate('/step1')}>

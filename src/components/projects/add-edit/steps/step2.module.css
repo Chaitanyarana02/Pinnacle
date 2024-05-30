@@ -1,4 +1,8 @@
+.accordionHeader{
+  background-color: #478fff;
+  border-style: none !important;
 
+}
 .testProject {
     margin: 0;
     align-self: stretch;

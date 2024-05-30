@@ -2,7 +2,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { createAppSlice } from "../store.utils";
 import ProjectService from "../../services/project.service";
-import { ProjectDetail } from "../../interfaces/project.interface";
+import { ProjectAreaFloors, ProjectAreas, ProjectDetail } from "../../interfaces/project.interface";
 interface ProjectDetailState {
     projectDetail: ProjectDetail,
     isLoading: boolean;
@@ -36,8 +36,22 @@ const projectDetailSlice = createAppSlice({
                 },
             }
         ),
+        updateProjectData: create.reducer<{
+            indoorArea: ProjectAreas[],
+            outDoorArea: ProjectAreas[],
+        }>((state, action) => {
+            state.projectDetail.buildingAreas = action.payload
+        }),
+        updateIndoorAreaData: create.reducer<{index: number  , value: ProjectAreas}>((state , action) => {
+            const { index , value} = action.payload
+            state.projectDetail.buildingAreas.indoorArea[index] = value
+        }),
+        updateoutdoorAreaData: create.reducer<{index: number  , value: ProjectAreas}>((state , action) => {
+            const { index , value} = action.payload
+            state.projectDetail.buildingAreas.outDoorArea[index] = value
+        })
 
     })
 });
-export const { fetchProjectDetail } = projectDetailSlice.actions;
+export const { fetchProjectDetail , updateProjectData, updateIndoorAreaData, updateoutdoorAreaData} = projectDetailSlice.actions;
 export default projectDetailSlice.reducer;

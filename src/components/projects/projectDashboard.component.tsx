@@ -14,7 +14,10 @@ import {
   projectStatus,
   projectType,
 } from "../../enums/project.enum";
+import { useNavigate } from "react-router-dom";
+
 const ProjectDashboard = () => {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const productListState = useAppSelector((state) => state.projectListState);
   const [isCreateProjectVisible, setCreateProjectVisible] =
@@ -384,7 +387,9 @@ const ProjectDashboard = () => {
                           </div>
                           <div className="flex fle justify-content-between w-full">
                             <Button
+                              onClick={() => navigate('/step1Info')}
                               label={
+                                
                                 projectDetail.projectStatus ===
                                 projectStatus.pending
                                   ? "Resume"

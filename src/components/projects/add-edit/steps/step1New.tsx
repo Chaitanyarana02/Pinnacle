@@ -1,10 +1,141 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import styles from "./step1New.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../../store/store.utils";
+import { fetchProjectDetail, updateIndoorAreaData, updateProjectData, updateoutdoorAreaData } from "../../../../store/fearure/project-detail.slice";
+import { ProjectAreaSystemDetails, ProjectAreas } from "../../../../interfaces/project.interface";
+import { Checkbox } from "primereact/checkbox";
+import { InputText } from "primereact/inputtext";
+
+import { Divider } from 'primereact/divider';
+import { Button } from "primereact/button";
+
 
 const Step1new = () => {
+  const projectDetailState = useAppSelector((state) => state.projectDetailState);
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const defaultIndoorAreas: ProjectAreas[] = [
+    {
+      name: 'House',
+      internalName: 'house',
+      description: 'test',
+      isSelected: false,
+      floors: [{
+        name:'Basement',
+        isSelected: false,
+        functions:[],
+        systemDetails:{} as ProjectAreaSystemDetails
+      },
+      {
+        name:'Lower Ground',
+        isSelected: false,
+        functions:[],
+        systemDetails:{} as ProjectAreaSystemDetails
+      },
+      {
+        name:'Ground Floor',
+        isSelected: false,
+        functions:[],
+        systemDetails:{} as ProjectAreaSystemDetails
+      },
+      {
+        name:'First Floor',
+        isSelected: true,
+        functions:[],
+        systemDetails:{} as ProjectAreaSystemDetails
+      },
+      {
+        name:'Second Floor',
+        isSelected: true,
+        functions:[],
+        systemDetails:{} as ProjectAreaSystemDetails
+      },
+      {
+        name:'Third Floor',
+        isSelected: false,
+        functions:[],
+        systemDetails:{} as ProjectAreaSystemDetails
+      }]
+    },
+    {
+      name: 'Garage',
+      internalName: 'garage',
+      description: 'test',
+      isSelected: false,
+      floors: []
+    },
+    {
+      name: 'Shed',
+      internalName: 'shed',
+      description: 'test',
+      isSelected: false,
+      floors: []
+    }
+  ];
+
+  const defaultOutDoorAreas: ProjectAreas[] = [
+    {
+      name: 'Front Garden',
+      internalName: 'Front Garden',
+      description: '',
+      isSelected: false,
+      floors: []
+    },
+    {
+      name: 'Back Garden',
+      internalName: 'back',
+      description: '',
+      isSelected: false,
+      floors: []
+    },
+    {
+      name: 'Terrace',
+      internalName: 'Terrace',
+      description: '',
+      isSelected: false,
+      floors: []
+    },
+    {
+      name: 'Right of House',
+      internalName: 'Right of House',
+      description: '',
+      isSelected: false,
+      floors: []
+    },
+    {
+      name: 'Left of House',
+      internalName: 'Left of House',
+      description: '',
+      isSelected: false,
+      floors: []
+    },
+    {
+      name: 'Balcony',
+      internalName: 'Balcony',
+      description: '',
+      isSelected: false,
+      floors: []
+    },
+
+  ]
+  useEffect(() => {
+    console.log(id);
+
+    if (id) {
+      dispatch(fetchProjectDetail(''));
+
+    } else {
+      console.log('.........');
+
+      dispatch(updateProjectData({
+        indoorArea: defaultIndoorAreas,
+        outDoorArea: defaultOutDoorAreas
+      }))
+    }
+  }, []);
   const onXIconClick = useCallback(() => {
-    // Please sync "Dashboard" to the project
+
   }, []);
   const navigate = useNavigate()
   return (
@@ -65,193 +196,74 @@ const Step1new = () => {
           </p>
         </div>
       </section>
-      <section className={styles.step1newChild}>
-        <div className={styles.frameParent2}>
-          <div className={styles.indoorAreaParent}>
+
+
+
+      <section className="flex w-full justify-content-center p-5">
+        <div style={{ width: '58rem' }}>
+          <div className="w-full">
             <span
-              className="text-2xl font-bold"
+              className="text-2xl font-semibold"
             >Indoor Area</span>
-            <div className={styles.rectangleDiv} />
+
+            <Divider className="m-0 mt-4" />
           </div>
-          <div className={styles.frameParent3}>
-            <div className={styles.frameParent4}>
-              <div className={styles.checkboxIconscheckedParent}>
-                <div className={styles.checkboxIconschecked}>
-                  <div className={styles.checkboxIconscheckedChild} />
-                  <input className={styles.check} type="checkbox" />
-                </div>
-                <b className={styles.house}>House</b>
-              </div>
-              <div className={styles.input}>
-                <div className={styles.label}>Label</div>
-                <div className={styles.content}>
-                  <img
-                    className={styles.startAdornmentIcon}
-                    alt=""
-                    src="/startadornment.svg"
-                  />
-                  <input
-                    className={styles.placeholder}
-                    placeholder="House"
-                    type="text"
-                  />
-                  <img
-                    className={styles.endAdornmentIcon}
-                    alt=""
-                    src="/endadornment.svg"
-                  />
-                  <img
-                    className={styles.selectarrowIcon}
-                    alt=""
-                    src="/selectarrow.svg"
-                  />
-                </div>
-                <div className={styles.helptext}>HelpText</div>
-              </div>
-              <div className={styles.input1}>
-                <div className={styles.label1}>Label</div>
-                <div className={styles.content1}>
-                  <img
-                    className={styles.startAdornmentIcon1}
-                    alt=""
-                    src="/startadornment.svg"
-                  />
-                  <div className={styles.placeholder1}>
-                    Additional Comment (Optional)
+          <div className="flex flex-column w-full mt-3">
+            {
+              projectDetailState.projectDetail?.buildingAreas?.indoorArea?.map((area, index) => {
+                return (
+                  <div className="flex justify-content-between align-items-center  h-4rem" key={area.name + '_' + index}>
+                    <div className="w-14rem">
+                      <Checkbox onChange={e => {
+                        dispatch(updateIndoorAreaData({ index, value: { ...area, isSelected: e.checked } }))
+                      }} checked={area.isSelected || false}></Checkbox>
+                      <span className="text-xl font-semibold text-600"> {area.internalName}</span>
+                    </div>
+                    <InputText placeholder={area.name} value={area.name} onChange={(e) => dispatch(updateIndoorAreaData({ index, value: { ...area, name: e.target?.value } }))} autoFocus />
+                    <InputText className="w-18rem" placeholder="Additional Comment (Optional)" value={area.description} onChange={(e) => dispatch(updateIndoorAreaData({ index, value: { ...area, description: e.target?.value } }))} />
                   </div>
-                  <img
-                    className={styles.endAdornmentIcon1}
-                    alt=""
-                    src="/endadornment.svg"
-                  />
-                  <img
-                    className={styles.selectarrowIcon1}
-                    alt=""
-                    src="/selectarrow.svg"
-                  />
-                </div>
-                <div className={styles.helptext1}>HelpText</div>
-              </div>
-            </div>
-            <div className={styles.frameParent5}>
-              <div className={styles.checkboxIconscheckedGroup}>
-                <div className={styles.checkboxIconschecked1}>
-                  <div className={styles.checkboxIconscheckedItem} />
-                  <input className={styles.check1} type="checkbox" />
-                </div>
-                <b className={styles.garage}>Garage</b>
-              </div>
-              <div className={styles.input2}>
-                <div className={styles.label2}>Label</div>
-                <div className={styles.content2}>
-                  <img
-                    className={styles.startAdornmentIcon2}
-                    alt=""
-                    src="/startadornment.svg"
-                  />
-                  <input
-                    className={styles.placeholder2}
-                    placeholder="Car Garage"
-                    type="text"
-                  />
-                  <img
-                    className={styles.endAdornmentIcon2}
-                    alt=""
-                    src="/endadornment.svg"
-                  />
-                  <img
-                    className={styles.selectarrowIcon2}
-                    alt=""
-                    src="/selectarrow.svg"
-                  />
-                </div>
-                <div className={styles.helptext2}>HelpText</div>
-              </div>
-              <div className={styles.input3}>
-                <div className={styles.label3}>Label</div>
-                <div className={styles.content3}>
-                  <img
-                    className={styles.startAdornmentIcon3}
-                    alt=""
-                    src="/startadornment.svg"
-                  />
-                  <div className={styles.placeholder3}>
-                    Additional Comment (Optional)
-                  </div>
-                  <img
-                    className={styles.endAdornmentIcon3}
-                    alt=""
-                    src="/endadornment.svg"
-                  />
-                  <img
-                    className={styles.selectarrowIcon3}
-                    alt=""
-                    src="/selectarrow.svg"
-                  />
-                </div>
-                <div className={styles.helptext3}>HelpText</div>
-              </div>
-            </div>
-            <div className={styles.frameParent6}>
-              <div className={styles.checkboxIconscheckedContainer}>
-                <div className={styles.checkboxIconschecked2}>
-                  <div className={styles.checkboxIconscheckedInner} />
-                  <input className={styles.check2} type="checkbox" />
-                </div>
-                <b className={styles.shed}>{`Shed `}</b>
-              </div>
-              <div className={styles.input4}>
-                <div className={styles.label4}>Label</div>
-                <div className={styles.content4}>
-                  <img
-                    className={styles.startAdornmentIcon4}
-                    alt=""
-                    src="/startadornment.svg"
-                  />
-                  <div className={styles.placeholder4}>Man Cave</div>
-                  <img
-                    className={styles.endAdornmentIcon4}
-                    alt=""
-                    src="/endadornment.svg"
-                  />
-                  <img
-                    className={styles.selectarrowIcon4}
-                    alt=""
-                    src="/selectarrow.svg"
-                  />
-                </div>
-                <div className={styles.helptext4}>HelpText</div>
-              </div>
-              <div className={styles.input5}>
-                <div className={styles.label5}>Label</div>
-                <div className={styles.content5}>
-                  <img
-                    className={styles.startAdornmentIcon5}
-                    alt=""
-                    src="/startadornment.svg"
-                  />
-                  <div className={styles.placeholder5}>
-                    Additional Comment (Optional)
-                  </div>
-                  <img
-                    className={styles.endAdornmentIcon5}
-                    alt=""
-                    src="/endadornment.svg"
-                  />
-                  <img
-                    className={styles.selectarrowIcon5}
-                    alt=""
-                    src="/selectarrow.svg"
-                  />
-                </div>
-                <div className={styles.helptext5}>HelpText</div>
-              </div>
-            </div>
-            <b className={styles.addAnother}>+Add another</b>
+                )
+              })
+            }
+            <b className="text-primary mt-3"><i className="pi pi-plus" /> Add another</b>
           </div>
         </div>
       </section>
-      <section className={styles.frameSection}>
+
+
+
+      <section className="flex w-full justify-content-center p-5">
+        <div style={{ width: '58rem' }}>
+          <div className="w-full">
+            <span
+              className="text-2xl font-semibold">
+              Outdoor Area
+            </span>
+
+            <Divider className="m-0 mt-4" />
+          </div>
+          <div className="flex flex-column w-full mt-3">
+            {
+              projectDetailState.projectDetail?.buildingAreas?.outDoorArea?.map((area, index) => {
+                return (
+                  <div className="flex justify-content-between align-items-center  h-4rem" key={area.name + '_' + index}>
+                    <div className="w-14rem">
+                      <Checkbox onChange={e => {
+                        dispatch(updateoutdoorAreaData({ index, value: { ...area, isSelected: e.checked } }))
+                      }} checked={area.isSelected || false}></Checkbox>
+                      <span className="text-xl font-semibold text-600"> {area.internalName}</span>
+                    </div>
+                    <InputText placeholder={area.name} value={area.name} onChange={(e) => dispatch(updateoutdoorAreaData({ index, value: { ...area, name: e.target?.value } }))} autoFocus />
+                    <InputText className="w-18rem" placeholder="Additional Comment (Optional)" value={area.description} onChange={(e) => dispatch(updateoutdoorAreaData({ index, value: { ...area, description: e.target?.value } }))} />
+                  </div>
+                )
+              })
+            }
+            <b className="text-primary mt-3"><i className="pi pi-plus" /> Add another</b>
+          </div>
+        </div>
+      </section>
+      {/* <section className={styles.frameSection}>
         <div className={styles.frameParent7}>
           <div className={styles.outdoorAreaParent}>
             <input
@@ -599,7 +611,7 @@ const Step1new = () => {
             <b className={styles.addAnother1}>+Add another</b>
           </div>
         </div>
-      </section>
+      </section> */}
       <div className={styles.step1newInner1}>
         <div className={styles.frameParent10}>
           <div className={styles.buttonWrapper}>

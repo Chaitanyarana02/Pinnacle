@@ -46,6 +46,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/dashboard" element={<ProjectDashboard />}></Route>
         <Route path="/step1Info" element={<InfoStep />}></Route>
+        <Route path="/step1/:id" element={<Step1new />}></Route>
         <Route path="/step1" element={<Step1new />}></Route>
         <Route path="/step2" element={<Step2 />}></Route>
         <Route path="/step3" element={<Step3new />}></Route>
