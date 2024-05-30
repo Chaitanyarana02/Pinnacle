@@ -11,3 +11,42 @@ export interface ProjectBasicDetail {
     projectStatus?: projectStatus;
 
 }
+
+export interface ProjectDetail extends ProjectBasicDetail {
+    buildingAreas : {
+        indoorArea: ProjectAreas[],
+        outDoorArea: ProjectAreas[],
+    }
+}
+
+export interface ProjectAreas {
+    name: string;
+    internalName: string;
+    description: string;
+    floors: ProjectAreaFloors[];
+}
+
+export interface ProjectAreaFloors {
+    name: string;
+    functions: [];
+    systemDetails: ProjectAreaSystemDetails
+}
+
+export interface ProjectFloorFunction {
+    name: string;
+    count: number;
+    interName?: string;
+}
+
+
+// need to update this for last step
+export interface ProjectAreaSystemDetails {
+    light: {
+        spotLight: unknown
+    };
+    sensors: {
+        window: { wired: boolean; battery: boolean;}
+    };
+    blinds: unknown;
+    controls: unknown;
+}

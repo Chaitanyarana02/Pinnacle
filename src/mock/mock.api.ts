@@ -2,6 +2,7 @@ import { setupWorker } from 'msw/browser'
 import { http, HttpResponse } from 'msw'
 import UtilityService from '../services/utilit.service'
 import projectListData from './projectListData.mock'
+import projectDetailMockData from './projectDetailData.mock'
 
 const worker = setupWorker(
 
@@ -9,7 +10,11 @@ const worker = setupWorker(
 
     return HttpResponse.json(projectListData)
   }),
-
+  http.get(UtilityService.getBaseUrl() + 'getProjectDetail/:id', ( {params}) => {
+    console.log(params.id);
+    
+    return HttpResponse.json(projectDetailMockData)
+  }),
 )
 
 export default worker

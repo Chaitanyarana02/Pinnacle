@@ -55,11 +55,11 @@ const Step1new = () => {
       <section className={styles.step1newInner}>
         <div className={styles.frameParent1}>
           <div className={styles.defineBuildingAreasWrapper}>
-            <h1 className={styles.defineBuildingAreas}>
+            <h2 >
               Define building areas
-            </h1>
+            </h2>
           </div>
-          <p className={styles.chooseTheAreas}>
+          <p className="text-500 text-lg -mt-5">
             Choose the areas included in your building by selecting from the
             options below. These are grouped by Indoor and Outdoor locations.
           </p>
@@ -68,11 +68,9 @@ const Step1new = () => {
       <section className={styles.step1newChild}>
         <div className={styles.frameParent2}>
           <div className={styles.indoorAreaParent}>
-            <input
-              className={styles.indoorArea}
-              placeholder="Indoor Area"
-              type="text"
-            />
+            <span
+              className="text-2xl font-bold"
+            >Indoor Area</span>
             <div className={styles.rectangleDiv} />
           </div>
           <div className={styles.frameParent3}>
