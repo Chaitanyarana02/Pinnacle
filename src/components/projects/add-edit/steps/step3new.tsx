@@ -267,7 +267,7 @@ const Step3new = () => {
               <div className={styles.frameChild18} />
             </div>
           </div>
-          <button className={styles.button1} onClick={() => navigate("/step4")}>
+          <button className={styles.button1} onClick={() => navigate("/step5")}>
             <div className={styles.label1}>{`Save & Proceed`}</div>
           </button>
         </div>
