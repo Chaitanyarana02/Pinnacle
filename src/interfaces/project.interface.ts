@@ -13,11 +13,10 @@ export interface ProjectBasicDetail {
 }
 
 export interface ProjectDetail extends ProjectBasicDetail {
-    buildingAreas : {
-        indoorArea: ProjectAreas[],
-        outDoorArea: ProjectAreas[],
-    }
+    buildingAreas: Array<BuildingAreas>
+
 }
+export interface BuildingAreas { name: string, areas: ProjectAreas[] }
 
 export interface ProjectAreas {
     name: string;
@@ -51,7 +50,7 @@ export interface ProjectAreaSystemDetails {
         spotLight: unknown
     };
     sensors: {
-        window: { wired: boolean; battery: boolean;}
+        window: { wired: boolean; battery: boolean; }
     };
     blinds: unknown;
     controls: unknown;

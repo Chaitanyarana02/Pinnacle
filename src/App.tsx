@@ -6,7 +6,6 @@ import Header from "./components/common/header/header";
 import HomeOwners from "./components/homeOwners/homeOwners";
 import Hompage from "./components/homePage/Hompage";
 import Login from "./components/Login/loginComponent";
-import ProjectDashboard from "./components/projects/projectDashboard.component";
 // import { useState } from 'react'
 // import worker from './mock/mock.api'
 // import AddEditProject from './components/projects/add-edit/addProject.component'
@@ -23,6 +22,8 @@ import Step1new from "./components/projects/add-edit/steps/step1New";
 import { useState } from "react";
 import worker from "./mock/mock.api";
 import Step2Sub from "./components/projects/add-edit/steps/step2Sub";
+import ProjectDashboard from "./components/add-edit-product/projectDashboard.component";
+import AddEditComoponent from "./components/add-edit-product/add-edit.component";
 // import HomeOwners from './components/homeOwners/homeOwners'
 // import Hompage from './components/homePage/Hompage'
 
@@ -34,11 +35,12 @@ function App() {
     "/professionals",
     "/login",
     "/dashboard",
+    "/add",
     "/",
   ];
   const routes = (
     <BrowserRouter>
-      {paths.includes(window.location.pathname) ? <Header></Header> : null}
+      {!paths.includes(window.location.pathname) ? <Header></Header> : null}
 
       <Routes>
         <Route path="/" element={<Hompage />}></Route>
@@ -55,6 +57,7 @@ function App() {
         <Route path="/step4" element={<Step4 />}></Route>
         <Route path="/step5" element={<Step5 />}></Route>
         <Route path="/payment" element={<Payment />}></Route>
+        <Route path="/add" element={<AddEditComoponent/>}></Route>
       </Routes>
       {!paths.includes(window.location.pathname) ? <FrameComponent /> : null}
     </BrowserRouter>
