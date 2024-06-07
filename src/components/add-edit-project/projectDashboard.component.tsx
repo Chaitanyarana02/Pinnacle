@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchProjectList } from "../../store/fearure/project-list.slice";
+import { fetchProjectList } from "../../store/feature/project-list.slice";
 import { useAppDispatch, useAppSelector } from "../../store/store.utils";
 import { ProjectBasicDetail } from "../../interfaces/project.interface";
 import { Button } from "primereact/button";

@@ -187,6 +187,41 @@
     --primary-800:#204887;
     --primary-900:#183462;
   }
+  .sidebar {
+    height: 100%;
+    width: 250px;
+    min-width: 150px;
+    max-width: 400px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    overflow-y: auto;
+    transition: width 0.3s ease;
+    padding-inline: 8px;
+    border-right: 1px solid #eee;
+  }
+  
+
+  
+
+
+  .content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .content {
+      margin-left: 0;
+    }
+  }
   .p-editor-container .p-editor-toolbar {
     background: #f9fafb;
     border-top-right-radius: 6px;

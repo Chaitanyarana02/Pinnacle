@@ -22,8 +22,13 @@ import Step1new from "./components/projects/add-edit/steps/step1New";
 import { useState } from "react";
 import worker from "./mock/mock.api";
 import Step2Sub from "./components/projects/add-edit/steps/step2Sub";
-import ProjectDashboard from "./components/add-edit-product/projectDashboard.component";
-import AddEditComoponent from "./components/add-edit-product/add-edit.component";
+import ProjectDashboard from "./components/add-edit-project/projectDashboard.component";
+import AddEditComoponent from "./components/add-edit-project/add-edit.component";
+import AdminDashboardComponent from "./components/admin/admin-dashboard.component";
+import UsersListComponent from "./components/admin/users-list.component";
+import ProjectListAdminComponent from "./components/admin/project-list-admin.component";
+import ProjectCategoryComponent from "./components/admin/project-category.component";
+import CustomizationOptionsComponent from "./components/admin/customization-options.component";
 // import HomeOwners from './components/homeOwners/homeOwners'
 // import Hompage from './components/homePage/Hompage'
 
@@ -36,11 +41,12 @@ function App() {
     "/login",
     "/dashboard",
     "/add",
+    "/admin",
     "/",
   ];
   const routes = (
     <BrowserRouter>
-      {!paths.includes(window.location.pathname) ? <Header></Header> : null}
+      {/* {!paths.includes(window.location.pathname) ? <Header></Header> : null} */}
 
       <Routes>
         <Route path="/" element={<Hompage />}></Route>
@@ -58,8 +64,15 @@ function App() {
         <Route path="/step5" element={<Step5 />}></Route>
         <Route path="/payment" element={<Payment />}></Route>
         <Route path="/add" element={<AddEditComoponent/>}></Route>
+        <Route path="/admin" element={<AdminDashboardComponent/>}>
+          <Route path="user-list" element={<UsersListComponent/>}></Route>
+          <Route path="project-list" element={<ProjectListAdminComponent/>}></Route>
+          <Route path="product-category" element={<ProjectCategoryComponent/>}></Route>
+          <Route path="customization-options" element={<CustomizationOptionsComponent/>}></Route>
+        </Route>
+      
       </Routes>
-      {!paths.includes(window.location.pathname) ? <FrameComponent /> : null}
+      {/* {!paths.includes(window.location.pathname) ? <FrameComponent /> : null} */}
     </BrowserRouter>
   );
   return <>

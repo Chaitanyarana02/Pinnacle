@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import { apiSlice } from "./feature/qr.api.slice";
-import projectListReducer from './fearure/project-list.slice'
-import projectDetailReducer from './fearure/project-detail.slice'
-import projectStepReducer from './fearure/project-step.slice'
+import projectListReducer from './feature/project-list.slice'
+import projectDetailReducer from './feature/project-detail.slice'
+import projectStepReducer from './feature/project-step.slice';
+import customizationReducer from './feature/customization-options.slice';
 export const store = configureStore({
     reducer: {
         projectListState: projectListReducer,
         projectDetailState: projectDetailReducer,
-        projectStepState: projectStepReducer
+        projectStepState: projectStepReducer,
+        customizationState: customizationReducer
         // [apiSlice.reducerPath]: apiSlice.reducer
     },
     // middleware: (getDefaultMiddleWare) => {
