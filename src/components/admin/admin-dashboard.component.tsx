@@ -5,7 +5,7 @@ const AdminDashboardComponent = () => {
   return (
     <>
       <AdminSideBarComponent />
-      <div className="flex" style={{marginLeft: "400px"}}>
+      <div className="" style={{marginLeft: "250px"}}>
         <Outlet />
       </div>
     </>

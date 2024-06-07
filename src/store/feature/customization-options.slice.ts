@@ -37,8 +37,21 @@ const customizationSlice = createAppSlice({
                 },
             }
         ),
+        deleteCustomization: create.asyncThunk(
+            async (id: string) => {
+                const response: AxiosResponse<CustomizationProduct[]> = await AdminService.deleteCustomization(id);
+                return id;
+            },
+            {
+                ...pendingStateHandling,
+                fulfilled: (state : CustomizationInitialState, action: PayloadAction<string>) => {
+                    state.isLoading = false;
+                    state.customizationList = state.customizationList.filter(customization => customization.id !== action.payload);
+                }
+            }
+        )
     })
 })
 
 export default customizationSlice.reducer;
-export const { fetchCustomizationList } = customizationSlice.actions;
+export const { fetchCustomizationList, deleteCustomization } = customizationSlice.actions;
