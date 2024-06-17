@@ -23,7 +23,7 @@ import { useState } from "react";
 import worker from "./mock/mock.api";
 import Step2Sub from "./components/projects/add-edit/steps/step2Sub";
 import ProjectDashboard from "./components/add-edit-project/projectDashboard.component";
-import AddEditComoponent from "./components/add-edit-project/add-edit.component";
+import AddEditComponent from "./components/add-edit-project/add-edit.component";
 import AdminDashboardComponent from "./components/admin/admin-dashboard.component";
 import UsersListComponent from "./components/admin/users-list.component";
 import ProjectListAdminComponent from "./components/admin/project-list-admin.component";
@@ -63,7 +63,7 @@ function App() {
         <Route path="/step4" element={<Step4 />}></Route>
         <Route path="/step5" element={<Step5 />}></Route>
         <Route path="/payment" element={<Payment />}></Route>
-        <Route path="/add" element={<AddEditComoponent/>}></Route>
+        <Route path="/add" element={<AddEditComponent/>}></Route>
         <Route path="/admin" element={<AdminDashboardComponent/>}>
           <Route path="user-list" element={<UsersListComponent/>}></Route>
           <Route path="project-list" element={<ProjectListAdminComponent/>}></Route>

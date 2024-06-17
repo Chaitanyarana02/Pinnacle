@@ -6,7 +6,7 @@ import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { fetchProjectDetail, updateProjectData, updatebuildingAreaData } from "../../../store/feature/project-detail.slice";
+import { fetchProjectDetail, updateProjectData, updateBuildingAreaData } from "../../../store/feature/project-detail.slice";
 import { updateCurrentStep, updateIsStepVisible } from "../../../store/feature/project-step.slice";
 import { Button } from "primereact/button";
 
@@ -193,7 +193,7 @@ const ProjectStructureComponent = () => {
                                                         <Checkbox
                                                             onChange={(e) => {
                                                                 dispatch(
-                                                                    updatebuildingAreaData({
+                                                                    updateBuildingAreaData({
                                                                         buildingAreaIndex,
                                                                         index,
                                                                         value: { ...area, isSelected: e.checked },
@@ -212,7 +212,7 @@ const ProjectStructureComponent = () => {
                                                         value={area.name}
                                                         onChange={(e) =>
                                                             dispatch(
-                                                                updatebuildingAreaData({
+                                                                updateBuildingAreaData({
                                                                     buildingAreaIndex,
                                                                     index,
                                                                     value: { ...area, name: e.target?.value },
@@ -227,7 +227,7 @@ const ProjectStructureComponent = () => {
                                                         value={area.description}
                                                         onChange={(e) =>
                                                             dispatch(
-                                                                updatebuildingAreaData({
+                                                                updateBuildingAreaData({
                                                                     buildingAreaIndex,
                                                                     index,
                                                                     value: { ...area, description: e.target?.value },

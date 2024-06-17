@@ -37,9 +37,10 @@ const customizationSlice = createAppSlice({
                 },
             }
         ),
+    
         deleteCustomization: create.asyncThunk(
             async (id: string) => {
-                const response: AxiosResponse<CustomizationProduct[]> = await AdminService.deleteCustomization(id);
+                await AdminService.deleteCustomization(id);
                 return id;
             },
             {
@@ -49,9 +50,36 @@ const customizationSlice = createAppSlice({
                     state.customizationList = state.customizationList.filter(customization => customization.id !== action.payload);
                 }
             }
+        ),
+        addCustomization: create.asyncThunk(
+            async (customization: CustomizationProduct) => {
+                const response: AxiosResponse<{id: string}> = await AdminService.addCustomization(customization.optionName, customization.customizationType);
+                customization.id = response.data.id;
+                return customization;
+            },
+            {
+               ...pendingStateHandling,
+                fulfilled: (state: CustomizationInitialState, action: PayloadAction<CustomizationProduct>) => {
+                    state.isLoading = false;
+                    state.customizationList = [...state.customizationList, action.payload];
+                }
+            }
+        ),
+        updateCustomization: create.asyncThunk(
+            async (customization: CustomizationProduct) => {
+                await AdminService.updateCustomization(customization.id, customization.optionName, customization.customizationType);
+                return customization;
+            },
+            {
+               ...pendingStateHandling,
+                fulfilled: (state: CustomizationInitialState, action: PayloadAction<CustomizationProduct>) => {
+                    state.isLoading = false;
+                    state.customizationList = state.customizationList.map(customization => customization.id === action.payload.id? action.payload : customization);
+                }
+            }
         )
     })
 })
 
 export default customizationSlice.reducer;
-export const { fetchCustomizationList, deleteCustomization } = customizationSlice.actions;
+export const { fetchCustomizationList, deleteCustomization, addCustomization, updateCustomization} = customizationSlice.actions;

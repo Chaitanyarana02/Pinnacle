@@ -4,12 +4,14 @@ import projectListReducer from './feature/project-list.slice'
 import projectDetailReducer from './feature/project-detail.slice'
 import projectStepReducer from './feature/project-step.slice';
 import customizationReducer from './feature/customization-options.slice';
+import userListReducer from './feature/users.slice'
 export const store = configureStore({
     reducer: {
         projectListState: projectListReducer,
         projectDetailState: projectDetailReducer,
         projectStepState: projectStepReducer,
-        customizationState: customizationReducer
+        customizationState: customizationReducer,
+        userListState: userListReducer
         // [apiSlice.reducerPath]: apiSlice.reducer
     },
     // middleware: (getDefaultMiddleWare) => {

@@ -39,7 +39,7 @@ const projectDetailSlice = createAppSlice({
         updateProjectData: create.reducer<BuildingAreas[]>((state, action) => {
             state.projectDetail.buildingAreas = action.payload
         }),
-        updatebuildingAreaData: create.reducer<{buildingAreaIndex: number, index: number  , value: ProjectAreas}>((state , action) => {
+        updateBuildingAreaData: create.reducer<{buildingAreaIndex: number, index: number  , value: ProjectAreas}>((state , action) => {
             const {buildingAreaIndex, index , value} = action.payload;
             if(state.projectDetail.buildingAreas.length) {
                 state.projectDetail.buildingAreas[buildingAreaIndex].areas[index] = value
@@ -50,5 +50,5 @@ const projectDetailSlice = createAppSlice({
 
     })
 });
-export const { fetchProjectDetail , updateProjectData, updatebuildingAreaData} = projectDetailSlice.actions;
+export const { fetchProjectDetail , updateProjectData, updateBuildingAreaData} = projectDetailSlice.actions;
 export default projectDetailSlice.reducer;
