@@ -5,13 +5,15 @@ import projectDetailReducer from './feature/project-detail.slice'
 import projectStepReducer from './feature/project-step.slice';
 import customizationReducer from './feature/customization-options.slice';
 import userListReducer from './feature/users.slice'
+import productCategoryReducer from './feature/project-category.slice'
 export const store = configureStore({
     reducer: {
         projectListState: projectListReducer,
         projectDetailState: projectDetailReducer,
         projectStepState: projectStepReducer,
         customizationState: customizationReducer,
-        userListState: userListReducer
+        userListState: userListReducer,
+        productCategoryState: productCategoryReducer,
         // [apiSlice.reducerPath]: apiSlice.reducer
     },
     // middleware: (getDefaultMiddleWare) => {
