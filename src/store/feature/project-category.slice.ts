@@ -21,7 +21,7 @@ const pendingStateHandling = {
     },
 }
 const productCustomization = createAppSlice({
-    name: 'productCategoryInterface',
+    name: 'productCategory',
     initialState,
     reducers: (create) => ({
         fetchProductCategoryList: create.asyncThunk(

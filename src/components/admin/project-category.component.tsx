@@ -8,11 +8,13 @@ import { useAppDispatch, useAppSelector } from "../../store/store.utils";
 import { useEffect, useRef, useState } from "react";
 import { ProductCategoryInterface } from "../../interfaces/ProductCategory.interface";
 import { Button } from "primereact/button";
-import { updateCustomization, addCustomization } from "../../store/feature/customization-options.slice";
 import { addProductCategory, deleteProductCategory, fetchProductCategoryList, updateProductCategory } from "../../store/feature/project-category.slice";
+import { Dropdown } from "primereact/dropdown";
+import { fetchCustomizationList } from "../../store/feature/customization-options.slice";
 
 const ProjectCategoryComponent = () => {
-    const productCategoryState = useAppSelector(state => state.productCategoryState)
+    const productCategoryState = useAppSelector(state => state.productCategoryState);
+    const customizationState = useAppSelector(state => state.customizationState);
     const dispatch = useAppDispatch();
     const emptyProductCategory: ProductCategoryInterface = {
         id: "",
@@ -28,6 +30,7 @@ const ProjectCategoryComponent = () => {
       const toast = useRef<Toast>(null);
       useEffect(() => {
         dispatch(fetchProductCategoryList());
+        dispatch(fetchCustomizationList())
       }, []);
     
       const confirmDeleteProductCategory = (rowData: ProductCategoryInterface) => {
@@ -187,14 +190,14 @@ const ProjectCategoryComponent = () => {
           <Dialog
             visible={addEditDialog}
             style={{ width: "450px" }}
-            header="Customization Details"
+            header="Product category"
             modal
             className="p-fluid"
             footer={productDialogFooter}
             onHide={hideAddEditDialog}
           >
             <div className="field">
-              <label htmlFor="optionName">Option Name</label>
+              <label htmlFor="optionName">Category name</label>
               <InputText
                 id="optionName"
                 value={productCategory.category}
@@ -212,21 +215,21 @@ const ProjectCategoryComponent = () => {
               {/* {submitted && !product.name && <small className="p-invalid">Name is required.</small>} */}
             </div>
             <div className="field">
-              <label htmlFor="optionType">Option Type</label>
-              {/* <Dropdown
-                value={customization.customizationType}
+              <label htmlFor="optionType">Select customization</label>
+              <Dropdown
+                value={productCategory.customizationOptionId}
                 onChange={(e) => {  
-                  setCustomization({
-                  ...customization,
-                  customizationType: e.value,
+                  setProductCategory({
+                  ...productCategory,
+                  customizationOptionId: e.value,
                 })}}
-                options={customizationTypeOptions}
-                optionLabel="label"
-                optionValue="value"
+                options={customizationState.customizationList}
+                optionLabel="optionName"
+                optionValue="id"
                 id="optionType"
                 placeholder="Select a Type"
                 className="w-full"
-              /> */}
+              />
             </div>
           </Dialog>
           <Dialog
