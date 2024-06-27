@@ -8,154 +8,162 @@ import { useAppDispatch, useAppSelector } from "../../store/store.utils";
 import { useEffect, useRef, useState } from "react";
 import { ProductCategoryInterface } from "../../interfaces/ProductCategory.interface";
 import { Button } from "primereact/button";
-import { addProductCategory, deleteProductCategory, fetchProductCategoryList, updateProductCategory } from "../../store/feature/project-category.slice";
+import {
+  addProductCategory,
+  deleteProductCategory,
+  fetchProductCategoryList,
+  updateProductCategory,
+} from "../../store/feature/project-category.slice";
 import { Dropdown } from "primereact/dropdown";
 import { fetchCustomizationList } from "../../store/feature/customization-options.slice";
 
 const ProjectCategoryComponent = () => {
-    const productCategoryState = useAppSelector(state => state.productCategoryState);
-    const customizationState = useAppSelector(state => state.customizationState);
-    const dispatch = useAppDispatch();
-    const emptyProductCategory: ProductCategoryInterface = {
-        id: "",
-        category: "",
-        customizationOptionId: "",
-        options: "",
-      };
-      const [deleteProductCategoryDialog, setDeleteProductCategoryDialog] =
-        useState<boolean>(false);
-      const [addEditDialog, setAddEditDialog] = useState<boolean>(false);
-      const [productCategory, setProductCategory] =
-        useState<ProductCategoryInterface>(emptyProductCategory);
-      const toast = useRef<Toast>(null);
-      useEffect(() => {
-        dispatch(fetchProductCategoryList());
-        dispatch(fetchCustomizationList())
-      }, []);
-    
-      const confirmDeleteProductCategory = (rowData: ProductCategoryInterface) => {
-        setProductCategory(rowData);
-        setDeleteProductCategoryDialog(true);
-      };
-      const editProductCategory = (rowData: ProductCategoryInterface) => {
-        setProductCategory(rowData);
-        setAddEditDialog(true);
-      };
-      const actionBodyTemplate = (rowData: ProductCategoryInterface) => {
-        return (
-          <>
-            <Button
-              icon="pi pi-pencil"
-              rounded
-              outlined
-              className="mr-2"
-              onClick={() => editProductCategory(rowData)}
-            />
-            <Button
-              icon="pi pi-trash"
-              rounded
-              outlined
-              severity="warning"
-              onClick={() => confirmDeleteProductCategory(rowData)}
-            />
-          </>
-        );
-      };
-    
-      // Delete dialog
-      const hideDeleteProductDialog = () => {
-        setDeleteProductCategoryDialog(false);
-      };
-    
-      const deleteProduct = () => {
-        dispatch(deleteProductCategory(productCategory.id || ''));
-        setDeleteProductCategoryDialog(false);
-        setProductCategory(emptyProductCategory);
+  const productCategoryState = useAppSelector(
+    (state) => state.productCategoryState
+  );
+  const customizationState = useAppSelector(
+    (state) => state.customizationState
+  );
+  const dispatch = useAppDispatch();
+  const emptyProductCategory: ProductCategoryInterface = {
+    id: "",
+    category: "",
+    customizationOptions: [{ customizationOptionId: "1", options: [] }],
+  };
+  const [deleteProductCategoryDialog, setDeleteProductCategoryDialog] =
+    useState<boolean>(false);
+  const [addEditDialog, setAddEditDialog] = useState<boolean>(false);
+  const [productCategory, setProductCategory] =
+    useState<ProductCategoryInterface>(emptyProductCategory);
+  const toast = useRef<Toast>(null);
+  useEffect(() => {
+    dispatch(fetchProductCategoryList());
+    dispatch(fetchCustomizationList());
+  }, []);
+
+  const confirmDeleteProductCategory = (rowData: ProductCategoryInterface) => {
+    setProductCategory(rowData);
+    setDeleteProductCategoryDialog(true);
+  };
+  const editProductCategory = (rowData: ProductCategoryInterface) => {
+    setProductCategory(rowData);
+    setAddEditDialog(true);
+  };
+  const actionBodyTemplate = (rowData: ProductCategoryInterface) => {
+    return (
+      <>
+        <Button
+          icon="pi pi-pencil"
+          rounded
+          outlined
+          className="mr-2"
+          onClick={() => editProductCategory(rowData)}
+        />
+        <Button
+          icon="pi pi-trash"
+          rounded
+          outlined
+          severity="warning"
+          onClick={() => confirmDeleteProductCategory(rowData)}
+        />
+      </>
+    );
+  };
+
+  // Delete dialog
+  const hideDeleteProductDialog = () => {
+    setDeleteProductCategoryDialog(false);
+  };
+
+  const deleteProduct = () => {
+    dispatch(deleteProductCategory(productCategory.id || ""));
+    setDeleteProductCategoryDialog(false);
+    setProductCategory(emptyProductCategory);
+    toast.current?.show({
+      severity: "success",
+      summary: "Successful",
+      detail: "Customization Deleted",
+      life: 3000,
+    });
+  };
+  const deleteProductDialogFooter = (
+    <>
+      <Button
+        label="No"
+        icon="pi pi-times"
+        text
+        onClick={hideDeleteProductDialog}
+      />
+      <Button
+        label="Yes"
+        icon="pi pi-check"
+        severity="warning"
+        text
+        onClick={deleteProduct}
+      />
+    </>
+  );
+
+  // add edit dialog
+  const hideAddEditDialog = () => {
+    setAddEditDialog(false);
+  };
+  const saveCustomization = () => {
+    if (productCategory.category.trim()) {
+      if (productCategory.id) {
+        dispatch(updateProductCategory(productCategory));
         toast.current?.show({
           severity: "success",
           summary: "Successful",
-          detail: "Customization Deleted",
-          life: 3000,
+          detail: "Customization Updated",
+          life: 2000,
         });
-      };
-      const deleteProductDialogFooter = (
-        <>
-          <Button
-            label="No"
-            icon="pi pi-times"
-            text
-            onClick={hideDeleteProductDialog}
-          />
-          <Button
-            label="Yes"
-            icon="pi pi-check"
-            severity="warning"
-            text
-            onClick={deleteProduct}
-          />
-        </>
-      );
-    
-      // add edit dialog
-      const hideAddEditDialog = () => {
-        setAddEditDialog(false);
-      };
-      const saveCustomization = () => {
-        if (productCategory.category.trim()) {
-          if (productCategory.id) {
-            dispatch(updateProductCategory(productCategory))
-            toast.current?.show({
-              severity: "success",
-              summary: "Successful",
-              detail: "Customization Updated",
-              life: 2000,
-            });
-          } else {
-            dispatch(addProductCategory(productCategory))
-            toast.current?.show({
-              severity: "success",
-              summary: "Successful",
-              detail: "Customization Updated",
-              life: 2000,
-            });
-          }
-          setAddEditDialog(false);
-          setProductCategory(emptyProductCategory);
-        }
-      };
-      const productDialogFooter = (
-        <>
-          <Button
-            label="Cancel"
-            icon="pi pi-times"
-            text
-            onClick={hideAddEditDialog}
-          />
-          <Button
-            label="Save"
-            icon="pi pi-check"
-            text
-            onClick={saveCustomization}
-          />
-        </>
-      );
-    
-      const openNew = () => {
-        setProductCategory(emptyProductCategory);
-        setAddEditDialog(true);
-      };
-      const toolBarTemplate = (
-        <div className="my-2">
-          <Button
-            label="New"
-            icon="pi pi-plus"
-            className=" mr-2"
-            onClick={openNew}
-          />
-        </div>
-      );
-    return (
-        <>
+      } else {
+        dispatch(addProductCategory(productCategory));
+        toast.current?.show({
+          severity: "success",
+          summary: "Successful",
+          detail: "Customization Updated",
+          life: 2000,
+        });
+      }
+      setAddEditDialog(false);
+      setProductCategory(emptyProductCategory);
+    }
+  };
+  const productDialogFooter = (
+    <>
+      <Button
+        label="Cancel"
+        icon="pi pi-times"
+        text
+        onClick={hideAddEditDialog}
+      />
+      <Button
+        label="Save"
+        icon="pi pi-check"
+        text
+        onClick={saveCustomization}
+      />
+    </>
+  );
+
+  const openNew = () => {
+    setProductCategory(emptyProductCategory);
+    setAddEditDialog(true);
+  };
+  const toolBarTemplate = (
+    <div className="my-2">
+      <Button
+        label="New"
+        icon="pi pi-plus"
+        className=" mr-2"
+        onClick={openNew}
+      />
+    </div>
+  );
+  return (
+    <>
       {productCategoryState.isLoading ? null : (
         <>
           <Toast ref={toast} />
@@ -173,14 +181,14 @@ const ProjectCategoryComponent = () => {
           >
             <Column field="id" header="id"></Column>
             <Column field="category" header="Category"></Column>
-            <Column
+            {/* <Column
               field="customizationOptionId"
               header="Customization Option id"
             ></Column>
                <Column
               field="options"
               header="Options"
-            ></Column>
+            ></Column> */}
             <Column
               body={actionBodyTemplate}
               headerStyle={{ minWidth: "10rem" }}
@@ -189,7 +197,7 @@ const ProjectCategoryComponent = () => {
 
           <Dialog
             visible={addEditDialog}
-            style={{ width: "450px" }}
+            style={{ width: "600px" }}
             header="Product category"
             modal
             className="p-fluid"
@@ -197,9 +205,9 @@ const ProjectCategoryComponent = () => {
             onHide={hideAddEditDialog}
           >
             <div className="field">
-              <label htmlFor="optionName">Category name</label>
+              <label htmlFor="category">Category name</label>
               <InputText
-                id="optionName"
+                id="category"
                 value={productCategory.category}
                 onChange={(e) =>
                   setProductCategory({
@@ -215,8 +223,30 @@ const ProjectCategoryComponent = () => {
               {/* {submitted && !product.name && <small className="p-invalid">Name is required.</small>} */}
             </div>
             <div className="field">
-              <label htmlFor="optionType">Select customization</label>
-              <Dropdown
+              <span className="font-bold ">Select customization</span>
+              <div>
+                <div className="flex mt-3 justify-content-between">
+                  <Dropdown
+                    value={productCategory.customizationOptions[0].customizationOptionId}
+                    // onChange={(e) => {
+                    //   setProductCategory({
+                    //     ...productCategory,
+                    //     customizationOptions[0].customizationOptionId: e.value,
+                    //   });
+                    // }}
+                    options={customizationState.customizationList}
+                    optionLabel="optionName"
+                    optionValue="id"
+                    id="optionType"
+                    placeholder="Select a Type"
+                    className="w-4"
+                  />
+                  <Button icon="pi pi-times" outlined severity="danger" aria-label="Remove" />
+                </div>  
+                <Button className="mt-3" icon="pi pi-plus" outlined  aria-label="Add" />
+
+              </div>
+              {/* <Dropdown
                 value={productCategory.customizationOptionId}
                 onChange={(e) => {  
                   setProductCategory({
@@ -229,7 +259,7 @@ const ProjectCategoryComponent = () => {
                 id="optionType"
                 placeholder="Select a Type"
                 className="w-full"
-              />
+              /> */}
             </div>
           </Dialog>
           <Dialog
@@ -256,7 +286,7 @@ const ProjectCategoryComponent = () => {
         </>
       )}
     </>
-    );
-}
+  );
+};
 
 export default ProjectCategoryComponent;
