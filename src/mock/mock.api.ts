@@ -7,6 +7,7 @@ import customizationData from './customizationData.mock'
 // import { CustomizationProduct } from '../interfaces/customizationProduct.interface'
 import { userList } from './user-list.mock'
 import { productCategoryMock } from './productCategory.mock'
+import { ProjectListMockData } from './productList.mock'
 
 const worker = setupWorker(
 
@@ -57,6 +58,23 @@ const worker = setupWorker(
     return HttpResponse.json({})
   }),
 
+  
+  http.get(UtilityService.getBaseUrl() + 'products', () => {
+
+    return HttpResponse.json(ProjectListMockData)
+  }),
+  http.post(UtilityService.getBaseUrl() + 'product', () => {
+
+    return HttpResponse.json({id: (Date.now()).toString()})
+  }),
+  http.put(UtilityService.getBaseUrl() + 'product/:id', ({params}) => {
+    console.log(params.id);
+    return HttpResponse.json({})
+  }),
+  http.delete(UtilityService.getBaseUrl() + 'product/:id', ({params}) => {
+    console.log(params.id);
+    return HttpResponse.json({})
+  }),
 
 
   http.get(UtilityService.getBaseUrl() + 'users', () => {

@@ -29,6 +29,7 @@ import UsersListComponent from "./components/admin/users-list.component";
 import ProjectListAdminComponent from "./components/admin/project-list-admin.component";
 import ProjectCategoryComponent from "./components/admin/project-category.component";
 import CustomizationOptionsComponent from "./components/admin/customization-options.component";
+import ProductListAdminComponent from "./components/admin/product-list-admin.component";
 // import HomeOwners from './components/homeOwners/homeOwners'
 // import Hompage from './components/homePage/Hompage'
 
@@ -67,6 +68,8 @@ function App() {
         <Route path="/admin" element={<AdminDashboardComponent/>}>
           <Route path="user-list" element={<UsersListComponent/>}></Route>
           <Route path="project-list" element={<ProjectListAdminComponent/>}></Route>
+          <Route path="product-list" element={<ProductListAdminComponent/>}></Route>
+        
           <Route path="product-category" element={<ProjectCategoryComponent/>}></Route>
           <Route path="customization-options" element={<CustomizationOptionsComponent/>}></Route>
         </Route>

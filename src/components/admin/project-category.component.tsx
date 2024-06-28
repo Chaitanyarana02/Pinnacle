@@ -16,7 +16,9 @@ import {
 } from "../../store/feature/project-category.slice";
 import { Dropdown } from "primereact/dropdown";
 import { fetchCustomizationList } from "../../store/feature/customization-options.slice";
-
+import { CustomizationProductTypeEnum } from "../../enums/customizationProduct.enum";
+import { Chips } from "primereact/chips";
+import { FloatLabel } from "primereact/floatlabel";
 const ProjectCategoryComponent = () => {
   const productCategoryState = useAppSelector(
     (state) => state.productCategoryState
@@ -169,7 +171,7 @@ const ProjectCategoryComponent = () => {
           <Toast ref={toast} />
           <Toolbar
             className="mb-4"
-            start={<h3> Customization List</h3>}
+            start={<h3>Product category</h3>}
             end={toolBarTemplate}
           ></Toolbar>
 
@@ -197,7 +199,7 @@ const ProjectCategoryComponent = () => {
 
           <Dialog
             visible={addEditDialog}
-            style={{ width: "600px" }}
+            style={{ width: "700px" }}
             header="Product category"
             modal
             className="p-fluid"
@@ -225,26 +227,104 @@ const ProjectCategoryComponent = () => {
             <div className="field">
               <span className="font-bold ">Select customization</span>
               <div>
-                <div className="flex mt-3 justify-content-between">
-                  <Dropdown
-                    value={productCategory.customizationOptions[0].customizationOptionId}
-                    // onChange={(e) => {
-                    //   setProductCategory({
-                    //     ...productCategory,
-                    //     customizationOptions[0].customizationOptionId: e.value,
-                    //   });
-                    // }}
-                    options={customizationState.customizationList}
-                    optionLabel="optionName"
-                    optionValue="id"
-                    id="optionType"
-                    placeholder="Select a Type"
-                    className="w-4"
-                  />
-                  <Button icon="pi pi-times" outlined severity="danger" aria-label="Remove" />
-                </div>  
-                <Button className="mt-3" icon="pi pi-plus" outlined  aria-label="Add" />
+                {productCategory.customizationOptions.map((option, index) => {
+                  return (
+                    <>
+                      <div className="flex mt-4 justify-content-between">
+                        <Dropdown
+                          value={option.customizationOptionId}
+                          onChange={(e) => {
+                            setProductCategory({
+                              ...productCategory,
+                              customizationOptions:
+                                productCategory.customizationOptions.map(
+                                  (cus, i) =>
+                                    index == i
+                                      ? {
+                                          customizationOptionId: e.value,
+                                          options: cus.options,
+                                        }
+                                      : cus
+                                ),
+                            });
+                          }}
+                          options={customizationState.customizationList}
+                          optionLabel="optionName"
+                          optionValue="id"
+                          id="optionType"
+                          placeholder="Select a Type"
+                          className="w-4"
+                        />
+                        {customizationState?.customizationList?.find(
+                          (cus) => cus.id === option?.customizationOptionId
+                        )?.customizationType ===
+                        CustomizationProductTypeEnum.RADIO ? (
+                          <div className="w-6">
+                            <FloatLabel>
+                              <Chips
+                                id="options"
+                                value={option.options}
+                                onChange={(e) =>
+                                  setProductCategory({
+                                    ...productCategory,
+                                    customizationOptions:
+                                      productCategory.customizationOptions.map(
+                                        (cus, i) =>
+                                          i == index
+                                            ? {
+                                                customizationOptionId:
+                                                  option.customizationOptionId,
+                                                options: [
+                                                  ...(e.value as string[]),
+                                                ],
+                                              }
+                                            : cus
+                                      ),
+                                  })
+                                }
+                              />
+                              <label htmlFor="options">Options</label>
+                            </FloatLabel>
+                          </div>
+                        ) : null}
+                        <Button
+                          icon="pi pi-times"
+                          outlined
+                          severity="danger"
+                          aria-label="Remove"
+                          onClick={() =>
+                            setProductCategory({
+                              ...productCategory,
+                              customizationOptions:
+                                productCategory.customizationOptions.filter(
+                                  (cus, i) => i !== index
+                                ),
+                            })
+                          }
+                        />
+                      </div>
+                    </>
+                  );
+                })}
 
+                <Button
+                  className="mt-3"
+                  icon="pi pi-plus"
+                  outlined
+                  aria-label="Add"
+                  onClick={() =>{
+                    setProductCategory({
+                     ...productCategory,
+                      customizationOptions: [
+                       ...productCategory.customizationOptions,
+                      {
+                        customizationOptionId: '',
+                        options: [],
+                      }
+                      ],
+                    });
+                  }}
+                />
               </div>
               {/* <Dropdown
                 value={productCategory.customizationOptionId}

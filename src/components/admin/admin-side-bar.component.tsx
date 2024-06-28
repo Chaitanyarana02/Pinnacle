@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 const AdminSideBarComponent = () => {
   const sideBar: Array<{ label: string; route: string; icon: string }> = [
     { label: "Users", route: "user-list", icon: "" },
-    { label: "projects", route: "project-list", icon: "" },
+    // { label: "projects", route: "project-list", icon: "" },
+    { label: "product", route: "product-list", icon: "" },
     { label: "product Categories", route: "product-category", icon: "" },
     {
       label: "Customization Options",

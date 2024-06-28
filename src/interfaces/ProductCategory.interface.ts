@@ -1,8 +1,8 @@
 export interface ProductCategoryInterface {
     id?: string,
     category: string,
-    customizationOptions: Array<{
+    customizationOptions: {
         customizationOptionId: string,
-        options: Array<string>
-    }>,
+        options: string[]
+    }[],
 }
