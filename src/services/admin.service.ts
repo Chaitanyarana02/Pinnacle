@@ -6,16 +6,16 @@ import { ProductList } from "../interfaces/ProductList.interface";
 
 export class AdminService {
     static getCustomizations() {
-        return axios.get(`${UtilityService.getBaseUrl()}customization`);
+        return axios.get(`${UtilityService.getBaseUrl()}api/admin/customization-options`);
     }
     static deleteCustomization(id: string) {
-        return axios.delete(`${UtilityService.getBaseUrl()}customization/${id}`);
+        return axios.delete(`${UtilityService.getBaseUrl()}api/admin/customization-options/${id}`);
     }
     static addCustomization(optionName: string, customizationType: CustomizationProductTypeEnum) {
-        return axios.post(`${UtilityService.getBaseUrl()}customization`, {optionName, customizationType});
+        return axios.post(`${UtilityService.getBaseUrl()}api/admin/customization-options`, {customizationOption:optionName, type:customizationType});
     }
     static updateCustomization(id: string, optionName: string, customizationType: CustomizationProductTypeEnum) {
-        return axios.put(`${UtilityService.getBaseUrl()}customization/${id}`, {optionName, customizationType});
+        return axios.put(`${UtilityService.getBaseUrl()}api/admin/customization-options/${id}`, {customizationOption:optionName, type:customizationType});
     }
 
     static getProductCategories() {

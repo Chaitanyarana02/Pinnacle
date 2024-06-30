@@ -9,12 +9,25 @@ import { Toolbar } from "primereact/toolbar";
 import { useState, useRef, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store.utils";
 import { ProductList } from "../../interfaces/ProductList.interface";
-import { addProduct, deleteProduct, fetchProductList, updateProduct } from "../../store/feature/product-list.slice";
+import {
+  addProduct,
+  deleteProduct,
+  fetchProductList,
+  updateProduct,
+} from "../../store/feature/product-list.slice";
+import { fetchCustomizationList } from "../../store/feature/customization-options.slice";
+import { fetchProductCategoryList } from "../../store/feature/project-category.slice";
+import { ProductCategoryInterface } from "../../interfaces/ProductCategory.interface";
+import { CustomizationProductTypeEnum } from "../../enums/customizationProduct.enum";
 
 const ProductListAdminComponent = () => {
   const dispatch = useAppDispatch();
-  const productListState = useAppSelector(
-    (state) => state.productListState
+  const productListState = useAppSelector((state) => state.productListState);
+  const productCategoryListState = useAppSelector(
+    (state) => state.productCategoryState
+  );
+  const customizationListState = useAppSelector(
+    (state) => state.customizationState
   );
   const emptyProduct: ProductList = {
     id: "",
@@ -25,11 +38,12 @@ const ProductListAdminComponent = () => {
   const [deleteProductDialog, setDeleteProductDialog] =
     useState<boolean>(false);
   const [addEditDialog, setAddEditDialog] = useState<boolean>(false);
-  const [product, setProduct] =
-    useState<ProductList>(emptyProduct);
+  const [product, setProduct] = useState<ProductList>(emptyProduct);
   const toast = useRef<Toast>(null);
   useEffect(() => {
     dispatch(fetchProductList());
+    dispatch(fetchProductCategoryList());
+    dispatch(fetchCustomizationList());
   }, []);
 
   const confirmDeleteProduct = (rowData: ProductList) => {
@@ -130,12 +144,7 @@ const ProductListAdminComponent = () => {
         text
         onClick={hideAddEditDialog}
       />
-      <Button
-        label="Save"
-        icon="pi pi-check"
-        text
-        onClick={saveProduct}
-      />
+      <Button label="Save" icon="pi pi-check" text onClick={saveProduct} />
     </>
   );
 
@@ -153,6 +162,44 @@ const ProductListAdminComponent = () => {
       />
     </div>
   );
+
+  function getVariants(): { price: number; sku: string[] }[] {
+    let sets: string[][] = [[]];
+    const options: { [key: string]: string[] } = {};
+    const customization = productCategoryListState.productCategoryList.find(
+      (cat) => cat.id === product.categoryId
+    );
+    if (customization) {
+      customization.customizationOptions.forEach((option) => {
+        const cus = customizationListState.customizationList.find(
+          (c) => c.id === option.customizationOptionId
+        );
+        if (cus) {
+          options[cus.optionName] =
+            cus.customizationType === CustomizationProductTypeEnum.RADIO
+              ? option.options
+              : [cus.optionName, ''];
+        }
+      });
+      console.log(options);
+
+      Object.keys(options).forEach((key) => {
+        const new_sets: unknown[] = [];
+        options[key].forEach((v) => {
+          new_sets.push(Array.from(sets, (set) => [...set, v]));
+        });
+        sets = new_sets.flatMap((set) => set) as string[][];
+      });
+    }
+
+    const variants: { price: number; sku: string[] }[] = sets.map((set) => ({
+      price: 0,
+      sku: set.filter((v) => v),
+    })).filter(v => v.sku.length);
+    console.log(variants);
+    
+    return variants
+  }
   return (
     <>
       {productListState.isLoading ? null : (
@@ -172,11 +219,7 @@ const ProductListAdminComponent = () => {
           >
             <Column field="id" header="id"></Column>
             <Column field="name" header="Product Name"></Column>
-            <Column
-              field="categoryId"
-              header="Category"
-
-            ></Column>
+            <Column field="categoryId" header="Category"></Column>
             <Column
               body={actionBodyTemplate}
               headerStyle={{ minWidth: "10rem" }}
@@ -185,48 +228,75 @@ const ProductListAdminComponent = () => {
 
           <Dialog
             visible={addEditDialog}
-            style={{ width: "450px" }}
+            style={{ width: "550px" }}
             header="Product"
             modal
             className="p-fluid"
             footer={productDialogFooter}
             onHide={hideAddEditDialog}
           >
-            <div className="field">
-              <label htmlFor="name">Product Name</label>
-              <InputText
-                id="name"
-                value={product.name}
-                onChange={(e) =>
-                  setProduct({
-                    ...product,
-                    name: e.target.value,
-                  })
-                }
-                required
-                autoFocus
-                className=""
-              />
-
-              {/* {submitted && !product.name && <small className="p-invalid">Name is required.</small>} */}
+            <div className="flex justify-content-between">
+              <div className="w-6">
+                <label htmlFor="name">Product Name</label>
+                <InputText
+                  id="name"
+                  value={product.name}
+                  onChange={(e) =>
+                    setProduct({
+                      ...product,
+                      name: e.target.value,
+                    })
+                  }
+                  required
+                  autoFocus
+                />
+                {/* {submitted && !product.name && <small className="p-invalid">Name is required.</small>} */}
+              </div>
+              <div className="w-5">
+                <label htmlFor="optionType">Option Type</label>
+                <Dropdown
+                  value={product.categoryId}
+                  onChange={(e) => {
+                    setProduct({
+                      ...product,
+                      categoryId: e.value,
+                    });
+                  }}
+                  options={productCategoryListState.productCategoryList}
+                  optionLabel="category"
+                  optionValue="id"
+                  id="optionType"
+                  placeholder="Select a Type"
+                />
+              </div>
             </div>
-            <div className="field">
-              <label htmlFor="optionType">Option Type</label>
-              {/* <Dropdown
-                value={product.customizationType}
-                onChange={(e) => {
-                  setProduct({
-                    ...product,
-                    customizationType: e.value,
-                  });
-                }}
-                options={customizationTypeOptions}
-                optionLabel="label"
-                optionValue="value"
-                id="optionType"
-                placeholder="Select a Type"
-                className="w-full"
-              /> */}
+            <div className="mt-3">
+              <h4>
+                Product Variants Price
+              </h4>
+              {getVariants()?.map((v) => (
+                <>
+                  <div className="flex justify-content-between mt-5 ">
+                    <div>
+                      {v.sku.map((vv, i) => (
+                        <span>
+                          &nbsp;{vv}{" "}
+                          {i == v.sku.length - 1 ? null : <>&bull;</>}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="w-3">
+                        <InputText
+                          id="name"
+                          // value={v.price}
+                          placeholder="5"
+                          required
+                          autoFocus
+                        />
+                    </div>
+                  </div>
+                </>
+              ))}
             </div>
           </Dialog>
           <Dialog
@@ -244,8 +314,7 @@ const ProductListAdminComponent = () => {
               />
               {product && (
                 <span>
-                  Are you sure you want to delete{" "}
-                  <b>{product.name}</b>?
+                  Are you sure you want to delete <b>{product.name}</b>?
                 </span>
               )}
             </div>

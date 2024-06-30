@@ -35,7 +35,7 @@ import ProductListAdminComponent from "./components/admin/product-list-admin.com
 
 function App() {
   const [render, setRender] = useState(false);
-  worker.start().then(() => setRender(true));
+  // worker.start().then(() => setRender(true));
   const paths: string[] = [
     "/home-owners",
     "/professionals",
@@ -79,7 +79,8 @@ function App() {
     </BrowserRouter>
   );
   return <>
-   {render ? routes : null}
+  {routes}
+   {/* {render ? routes : null} */}
   </>;
 }
 
