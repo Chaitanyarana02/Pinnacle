@@ -35,7 +35,7 @@ export interface ProjectFloorRooms {
     name: string;
     functions: ProjectFloorFunction[];
     isSelected: boolean;
-    systemDetails: ProjectAreaSystemDetails
+    systemDetails?: ProjectAreaSystemDetails
 }
 export interface ProjectFloorFunction {
     name: string;

@@ -2458,14 +2458,14 @@
       flex: 1;
     }
     .p-button.p-button-secondary, .p-button-group.p-button-secondary > .p-button, .p-splitbutton.p-button-secondary > .p-button, .p-fileupload-choose.p-button-secondary {
-      color: #ffffff;
-      background: #64748b;
-      border: 1px solid #64748b;
+      color: #2D74FE;
+      background: #F7F7F7;
+      border: 1px solid #F7F7F7;
     }
     .p-button.p-button-secondary:not(:disabled):hover, .p-button-group.p-button-secondary > .p-button:not(:disabled):hover, .p-splitbutton.p-button-secondary > .p-button:not(:disabled):hover, .p-fileupload-choose.p-button-secondary:not(:disabled):hover {
-      background: #475569;
-      color: #ffffff;
-      border-color: #475569;
+      background: #F1F1F1;
+      color: #2D74FE;
+      border-color: #F7F7F7;
     }
     .p-button.p-button-secondary:not(:disabled):focus, .p-button-group.p-button-secondary > .p-button:not(:disabled):focus, .p-splitbutton.p-button-secondary > .p-button:not(:disabled):focus, .p-fileupload-choose.p-button-secondary:not(:disabled):focus {
       box-shadow: 0 0 0 0.2rem #e2e8f0;
