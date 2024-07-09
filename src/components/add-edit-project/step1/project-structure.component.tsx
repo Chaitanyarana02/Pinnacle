@@ -173,7 +173,7 @@ const BuildingAreasComponent = () => {
             </section>
           )
         )}
-        <div className="flex justify-content-between align-content-center">
+        <div className="flex justify-content-between align-content-center mb-4">
           <div>
             <Button
               label="Back"
