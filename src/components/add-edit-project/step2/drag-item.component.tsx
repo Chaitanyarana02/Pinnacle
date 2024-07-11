@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
+import { DefaultProduct } from '../../../interfaces/ProductList.interface';
 
-const DragItem = ({ name }: {name: string}) => {
+const DragItem = ({ product }: {product: DefaultProduct}) => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'item',
-        item: { name },
+        item: { ...product },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
@@ -28,7 +29,7 @@ const DragItem = ({ name }: {name: string}) => {
                    borderRadius: "20px",
                  }}
                >
-                 {name}
+                 {product.name}
                  {/* <img src="dragIcon.png"  style={{
                  }} alt="" /> */}
                </span>

@@ -4,3 +4,11 @@ export interface ProductList {
     categoryId: string;
     price:  unknown[]
 }
+
+export interface DefaultProduct {
+    name: string;
+    minPrice: number;
+    maxPrice: number;
+    id: number;
+    count?: number;
+  }

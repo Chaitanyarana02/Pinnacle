@@ -7,6 +7,7 @@ import {
   ProjectAreaFloors,
   ProjectAreas,
   ProjectDetail,
+  ProjectFloorFunction,
   ProjectFloorRooms,
 } from "../../interfaces/project.interface";
 interface ProjectDetailState {
@@ -120,6 +121,43 @@ const projectDetailSlice = createAppSlice({
           value;
       }
     }),
+    addFunctionToRoom: create.reducer<{
+      buildingAreaIndex: number;
+      areaIndex: number;
+      floorIndex: number;
+      roomIndex: number;
+      value: ProjectFloorFunction;
+    }>((state, action) => {
+      const {buildingAreaIndex, areaIndex, floorIndex, roomIndex, value } = action.payload;
+      if(state.projectDetail.buildingAreas[buildingAreaIndex]?.areas[areaIndex]?.floors[floorIndex]?.floorRooms[roomIndex]) {
+          state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex].functions.push(value);
+      }
+    }),
+    updateRoomFunction: create.reducer<{
+      buildingAreaIndex: number;
+      areaIndex: number;
+      floorIndex: number;
+      roomIndex: number;
+      functionIndex: number;
+      count: number;
+    }>((state, action) => {
+      const { buildingAreaIndex, areaIndex, floorIndex, roomIndex, functionIndex, count } = action.payload;
+      if(state.projectDetail.buildingAreas[buildingAreaIndex]?.areas[areaIndex]?.floors[floorIndex]?.floorRooms[roomIndex]?.functions[functionIndex]) {
+          state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex].functions[functionIndex].count = count;
+      }
+    }),
+    removeRoomFunction: create.reducer<{
+      buildingAreaIndex: number;
+      areaIndex: number;
+      floorIndex: number;
+      roomIndex: number;
+      functionIndex: number;
+    }>((state, action) => {
+      const { buildingAreaIndex, areaIndex, floorIndex, roomIndex, functionIndex } = action.payload;
+      if(state.projectDetail.buildingAreas[buildingAreaIndex]?.areas[areaIndex]?.floors[floorIndex]?.floorRooms[roomIndex]?.functions[functionIndex]) {
+          state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex].functions.splice(functionIndex, 1);
+      }
+    }),
   }),
 });
 export const {
@@ -131,5 +169,8 @@ export const {
   updateFloorSelection,
   addRoomToForProject,
   updateRoomSelection,
+  addFunctionToRoom,
+  updateRoomFunction,
+  removeRoomFunction
 } = projectDetailSlice.actions;
 export default projectDetailSlice.reducer;

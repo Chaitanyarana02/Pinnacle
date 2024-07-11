@@ -5,54 +5,54 @@ import {
   ProjectAreas,
   ProjectAreaFloors,
 } from "../../../interfaces/project.interface";
-import { updateRoomSelection } from "../../../store/feature/project-detail.slice";
-import { useAppSelector } from "../../../store/store.utils";
+import { addFunctionToRoom, updateRoomSelection } from "../../../store/feature/project-detail.slice";
+import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DragItem from "./drag-item.component";
+import DropZone from "./drop-zone.component";
+import { DefaultProduct } from "../../../interfaces/ProductList.interface";
+import { updateCurrentStep } from "../../../store/feature/project-step.slice";
 
 const ProjectStep2Component = () => {
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
+  const dispatch = useAppDispatch();
   const products: Array<{
     categoryName: string;
-    products: Array<{
-      name: string;
-      minPrice: number;
-      maxPrice: number;
-    }>;
+    products: Array<DefaultProduct>;
   }> = [
     {
       categoryName: "Light",
       products: [
-        { name: "LED Light", minPrice: 50, maxPrice: 100 },
-        { name: "CFL Light", minPrice: 75, maxPrice: 150 },
-        { name: "LED Ceiling Light", minPrice: 100, maxPrice: 200 },
+        { name: "LED Light", minPrice: 50, maxPrice: 100, id: 1, count: 1 },
+        { name: "CFL Light", minPrice: 75, maxPrice: 150, id: 2, count: 1 },
+        { name: "LED Ceiling Light", minPrice: 100, maxPrice: 200, id: 3, count: 1 },
       ],
     },
     {
       categoryName: "Socket",
       products: [
-        { name: "LED Socket", minPrice: 50, maxPrice: 100 },
-        { name: "Smart Socket", minPrice: 75, maxPrice: 150 },
-        { name: "LED Smart Socket", minPrice: 100, maxPrice: 200 },
+        { name: "LED Socket", minPrice: 50, maxPrice: 100, id: 4, count: 1 },
+        { name: "Smart Socket", minPrice: 75, maxPrice: 150, id: 5, count: 1 },
+        { name: "LED Smart Socket", minPrice: 100, maxPrice: 200, id: 6, count: 1 },
       ],
     },
     {
       categoryName: "Sensors",
       products: [
-        { name: "Temperature Sensor", minPrice: 50, maxPrice: 100 },
-        { name: "Humidity Sensor", minPrice: 75, maxPrice: 150 },
-        { name: "Light Sensor", minPrice: 100, maxPrice: 200 },
+        { name: "Temperature Sensor", minPrice: 50, maxPrice: 100, id: 7, count: 1 },
+        { name: "Humidity Sensor", minPrice: 75, maxPrice: 150, id: 8, count: 1 },
+        { name: "Light Sensor", minPrice: 100, maxPrice: 200, id: 9, count: 1 },
       ],
     },
     {
       categoryName: "Shades",
       products: [
-        { name: "LED Shade", minPrice: 50, maxPrice: 100 },
-        { name: "Smart Shade", minPrice: 75, maxPrice: 150 },
-        { name: "LED Smart Shade", minPrice: 100, maxPrice: 200 },
+        { name: "LED Shade", minPrice: 50, maxPrice: 100, id: 10, count: 1 },
+        { name: "Smart Shade", minPrice: 75, maxPrice: 150, id: 11, count: 1 },
+        { name: "LED Smart Shade", minPrice: 100, maxPrice: 200, id: 12, count: 1 },
       ],
     },
   ];
@@ -102,72 +102,74 @@ const ProjectStep2Component = () => {
     floorIndex: number
   ) => {
     return (
-        <div
-          className="flex w-full justify-content-between pl-5 mt-0 pr-5"
-          key={buildingAreaIndex + "_" + areaIndex + "_" + floorIndex}
-        >
-          <div style={{ width: "58rem" }}>
-            <Divider className="m-0 mt-4" />
-            <div className="mt-2">
-              <Accordion activeIndex={0}>
-                <AccordionTab
-                  header="Header I"
-                  headerTemplate={headerTemplate(
-                    buildingAreaName,
-                    buildingAreaIndex,
-                    area,
-                    areaIndex,
-                    floor,
-                    floorIndex
-                  )}
-                >
-                  <div className="flex align-items-center flex-wrap">
-                    {floor.floorRooms.map((room, roomIndex) => {
-                      return (
-                        <div className="w-full">
-                          <div className="flex justify-content-between mt-4">
-                            <div
-                              className="text-xl text-1000"
-              
-                            >
-                              {room.name}
-                            </div>
-                            <div className="text-primary">Reset</div>
-                          </div>
-                          <div
-                          className="mt-4"
-                            style={{
-                              border: "2px dashed #DDD",
-                              borderRadius:"30px",
-                              height: "150px",
-                              overflow:"auto",
-                              backgroundColor: "#FAFAFA"
-                            }}
-                          ></div>
+      <div
+        className="flex w-full justify-content-between pl-5 mt-0 pr-5"
+        key={buildingAreaIndex + "_" + areaIndex + "_" + floorIndex}
+      >
+        <div style={{ width: "58rem" }}>
+          <Divider className="m-0 mt-4" />
+          <div className="mt-2">
+            <Accordion activeIndex={0}>
+              <AccordionTab
+                header="Header I"
+                headerTemplate={headerTemplate(
+                  buildingAreaName,
+                  buildingAreaIndex,
+                  area,
+                  areaIndex,
+                  floor,
+                  floorIndex
+                )}
+              >
+                <div className="flex align-items-center flex-wrap">
+                  {floor.floorRooms.map((room, roomIndex) => {
+                    return (
+                      <div className="w-full">
+                        <div className="flex justify-content-between mt-4">
+                          <div className="text-xl text-1000">{room.name}</div>
+                          <div className="text-primary">Reset</div>
                         </div>
-                      );
-                    })}
-                  </div>
-                </AccordionTab>
-              </Accordion>
-            </div>
+                       <DropZone functions={room.functions} onDrop={(item: DefaultProduct) => {
+                        console.log(item);
+                        dispatch(addFunctionToRoom({
+                          buildingAreaIndex,
+                          areaIndex,
+                          floorIndex,
+                          roomIndex,
+                          value: {
+                            name: item.name,
+                            count: 1,
+                            id: item.id
+                          }
+                        }))
+                       }}>
+                       </DropZone>
+                      </div>
+                    );
+                  })}
+                </div>
+              </AccordionTab>
+            </Accordion>
           </div>
         </div>
+      </div>
     );
   };
   return (
     <DndProvider backend={HTML5Backend}>
-    
       <div className="p-4 mt-6">
-        <div className="flex justify-content-between mb-3">
-          <Button
-            label="Edit Structure"
-            icon="pi pi-angle-left"
-            rounded
-            severity="secondary"
-            size="large"
-            onClick={() => {}}
-          />
+        <div className="flex justify-content-between mb-6">
+          <div>
+            <Button
+              label="Edit Structure"
+              icon="pi pi-angle-left"
+              rounded
+              severity="secondary"
+              size="large"
+              onClick={() => dispatch(updateCurrentStep(1))}
+            />
+          </div>
+
           <div>
             <div className="m-auto max-w-max text-4xl font-semibold">
               Define Functions for each room
@@ -177,14 +179,16 @@ const ProjectStep2Component = () => {
               Structure.
             </p>
           </div>
-          <Button
-            label="Print Sales Brochure"
-            icon="pi pi-print"
-            rounded
-            severity="secondary"
-            size="large"
-            onClick={() => {}}
-          />
+          <div>
+            <Button
+              label="Print Sales Brochure"
+              icon="pi pi-print"
+              rounded
+              severity="secondary"
+              size="large"
+              onClick={() => {}}
+            />
+          </div>
         </div>
         <div className="flex justify-content-between">
           <div>
@@ -253,7 +257,10 @@ const ProjectStep2Component = () => {
                           {product.products.map(
                             (productItem, productItemIndex) => {
                               return (
-                                <DragItem name={productItem.name} key={productItemIndex} />
+                                <DragItem
+                                product={productItem}
+                                  key={productItemIndex}
+                                />
                               );
                             }
                           )}

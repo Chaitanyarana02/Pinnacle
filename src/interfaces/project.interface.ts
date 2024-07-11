@@ -40,7 +40,7 @@ export interface ProjectFloorRooms {
 export interface ProjectFloorFunction {
     name: string;
     count: number;
-    interName?: string;
+    id: number;
 }
 
 
