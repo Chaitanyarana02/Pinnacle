@@ -4,58 +4,91 @@ import { Divider } from "primereact/divider";
 import {
   ProjectAreas,
   ProjectAreaFloors,
+  RoomFunctions,
+  DefaultProduct,
 } from "../../../interfaces/project.interface";
-import { addFunctionToRoom, updateRoomSelection } from "../../../store/feature/project-detail.slice";
+import {
+  addFunctionToRoom,
+  updateRoomSelection,
+} from "../../../store/feature/project-detail.slice";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DragItem from "./drag-item.component";
 import DropZone from "./drop-zone.component";
-import { DefaultProduct } from "../../../interfaces/ProductList.interface";
 import { updateCurrentStep } from "../../../store/feature/project-step.slice";
+import { RadioButton } from "primereact/radiobutton";
+import { PriceCategoryEnum } from "../../../enums/price-category.enum";
+import { useState } from "react";
 
 const ProjectStep2Component = () => {
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
+  const [priceCategory, setPriceCategory] = useState<number>(
+    PriceCategoryEnum.BUDGET
+  );
+  const [products, setProducts] = useState<RoomFunctions[]>([]);
   const dispatch = useAppDispatch();
-  const products: Array<{
-    categoryName: string;
-    products: Array<DefaultProduct>;
-  }> = [
-    {
-      categoryName: "Light",
-      products: [
-        { name: "LED Light", minPrice: 50, maxPrice: 100, id: 1, count: 1 },
-        { name: "CFL Light", minPrice: 75, maxPrice: 150, id: 2, count: 1 },
-        { name: "LED Ceiling Light", minPrice: 100, maxPrice: 200, id: 3, count: 1 },
-      ],
-    },
-    {
-      categoryName: "Socket",
-      products: [
-        { name: "LED Socket", minPrice: 50, maxPrice: 100, id: 4, count: 1 },
-        { name: "Smart Socket", minPrice: 75, maxPrice: 150, id: 5, count: 1 },
-        { name: "LED Smart Socket", minPrice: 100, maxPrice: 200, id: 6, count: 1 },
-      ],
-    },
-    {
-      categoryName: "Sensors",
-      products: [
-        { name: "Temperature Sensor", minPrice: 50, maxPrice: 100, id: 7, count: 1 },
-        { name: "Humidity Sensor", minPrice: 75, maxPrice: 150, id: 8, count: 1 },
-        { name: "Light Sensor", minPrice: 100, maxPrice: 200, id: 9, count: 1 },
-      ],
-    },
-    {
-      categoryName: "Shades",
-      products: [
-        { name: "LED Shade", minPrice: 50, maxPrice: 100, id: 10, count: 1 },
-        { name: "Smart Shade", minPrice: 75, maxPrice: 150, id: 11, count: 1 },
-        { name: "LED Smart Shade", minPrice: 100, maxPrice: 200, id: 12, count: 1 },
-      ],
-    },
-  ];
+  // const products: RoomFunctions[] = [
+  //   {
+  //     categoryName: "Light",
+  //     products: [
+  //       { name: "LED Light", minPrice: 50, maxPrice: 100, id: 1 },
+  //       { name: "CFL Light", minPrice: 75, maxPrice: 150, id: 2 },
+  //       {
+  //         name: "LED Ceiling Light",
+  //         minPrice: 100,
+  //         maxPrice: 200,
+  //         id: 3,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     categoryName: "Socket",
+  //     products: [
+  //       { name: "LED Socket", minPrice: 50, maxPrice: 100, id: 4 },
+  //       { name: "Smart Socket", minPrice: 75, maxPrice: 150, id: 5},
+  //       {
+  //         name: "LED Smart Socket",
+  //         minPrice: 100,
+  //         maxPrice: 200,
+  //         id: 6,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     categoryName: "Sensors",
+  //     products: [
+  //       {
+  //         name: "Temperature Sensor",
+  //         minPrice: 50,
+  //         maxPrice: 100,
+  //         id: 7,
+  //       },
+  //       {
+  //         name: "Humidity Sensor",
+  //         minPrice: 75,
+  //         maxPrice: 150,
+  //         id: 8,
+  //       },
+  //       { name: "Light Sensor", minPrice: 100, maxPrice: 200, id: 9, count: 1 },
+  //     ],
+  //   },
+  //   {
+  //     categoryName: "Shades",
+  //     products: [
+  //       { name: "LED Shade", minPrice: 50, maxPrice: 100, id: 10, count: 1 },
+  //       { name: "Smart Shade", minPrice: 75, maxPrice: 150, id: 11, count: 1 },
+  //       {
+  //         name: "LED Smart Shade",
+  //         minPrice: 100,
+  //         maxPrice: 200,
+  //         id: 12,
+  //       },
+  //     ],
+  //   },
+  // ];
   const headerTemplate = (
     buildingAreaName: string,
     buildingAreaIndex: number,
@@ -129,21 +162,27 @@ const ProjectStep2Component = () => {
                           <div className="text-xl text-1000">{room.name}</div>
                           <div className="text-primary">Reset</div>
                         </div>
-                       <DropZone functions={room.functions} onDrop={(item: DefaultProduct) => {
-                        console.log(item);
-                        dispatch(addFunctionToRoom({
-                          buildingAreaIndex,
-                          areaIndex,
-                          floorIndex,
-                          roomIndex,
-                          value: {
-                            name: item.name,
-                            count: 1,
-                            id: item.id
-                          }
-                        }))
-                       }}>
-                       </DropZone>
+                        <DropZone
+                          room={room}
+                          products={products}
+                          functions={room.functions}
+                          onDrop={(item: DefaultProduct) => {
+                            console.log(item);
+                            dispatch(
+                              addFunctionToRoom({
+                                buildingAreaIndex,
+                                areaIndex,
+                                floorIndex,
+                                roomIndex,
+                                value: {
+                                  name: item.name,
+                                  count: 1,
+                                  id: item.id,
+                                },
+                              })
+                            );
+                          }}
+                        ></DropZone>
                       </div>
                     );
                   })}
@@ -186,7 +225,9 @@ const ProjectStep2Component = () => {
               rounded
               severity="secondary"
               size="large"
-              onClick={() => {}}
+              onClick={() => {
+                dispatch(updateCurrentStep(3));
+              }}
             />
           </div>
         </div>
@@ -258,7 +299,7 @@ const ProjectStep2Component = () => {
                             (productItem, productItemIndex) => {
                               return (
                                 <DragItem
-                                product={productItem}
+                                  product={productItem}
                                   key={productItemIndex}
                                 />
                               );
@@ -301,6 +342,66 @@ const ProjectStep2Component = () => {
               </span>
             </div>
           </div>
+        </div>
+      </div>
+      <div
+        className="w-full flex justify-content-between align-content-center flex-wrap"
+        style={{
+          height: "40px",
+          borderTop: "1px solid #DDD",
+        }}
+      >
+        <div className="flex justify-content-between flex-wrap align-content-center">
+          <div>
+            <div className="pl-2">Set Quality Level:</div>
+          </div>
+          <div className="flex justify-content-between w-18rem align-content-center ml-3 flex-wrap">
+            <div>
+              <RadioButton
+                inputId="productQUality1"
+                name="productQUality"
+                value={PriceCategoryEnum.BUDGET}
+                onChange={(e) => setPriceCategory(e.value)}
+                checked={priceCategory === PriceCategoryEnum.BUDGET}
+              />
+              <label htmlFor="productQUality1" className="ml-1">
+                Budget
+              </label>
+            </div>
+            <div>
+              <RadioButton
+                inputId="productQUality2"
+                name="productQUality"
+                value={PriceCategoryEnum.STANDARD}
+                onChange={(e) => setPriceCategory(e.value)}
+                checked={priceCategory === PriceCategoryEnum.STANDARD}
+              />
+              <label htmlFor="productQUality2" className="ml-1">
+                Standard
+              </label>
+            </div>
+            <div>
+              <RadioButton
+                inputId="productQUality3"
+                name="productQUality"
+                value={PriceCategoryEnum.PREMIUM}
+                onChange={(e) => setPriceCategory(e.value)}
+                checked={priceCategory === PriceCategoryEnum.PREMIUM}
+              />
+              <label htmlFor="productQUality3" className="ml-1">
+                Premium
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          className="bg-primary align-content-center pl-2 pr-2"
+          style={{
+            height: "40px",
+            borderTop: "1px solid #DDD",
+          }}
+        >
+          Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
         </div>
       </div>
     </DndProvider>

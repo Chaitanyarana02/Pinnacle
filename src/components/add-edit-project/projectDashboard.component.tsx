@@ -387,7 +387,7 @@ const ProjectDashboard = () => {
                           </div>
                           <div className="flex fle justify-content-between w-full">
                             <Button
-                              onClick={() => navigate('/step1Info')}
+                              onClick={() => navigate(`/edit/${projectDetail.id}`)}
                               label={
                                 
                                 projectDetail.projectStatus ===

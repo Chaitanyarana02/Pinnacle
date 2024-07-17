@@ -7076,4 +7076,8 @@
       color: #ffffff;
     }
   }
+  .function-model .p-dialog-content {
+    padding: 0px !important;
+    padding-bottom: 1.5rem !important;
+  }
   

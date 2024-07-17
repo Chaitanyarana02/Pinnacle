@@ -4,10 +4,25 @@ import UtilityService from "./utilit.service";
 class ProjectService {
     
     static getProjectList() { // they can get userId from token
-        return axios.get(`${UtilityService.getBaseUrl()}getProjects`)
+        return axios.get(`${UtilityService.getBaseUrl()}api/users/projects`)
     }
     static getProjectDetail(projectId: string) {
         return axios.get(`${UtilityService.getBaseUrl()}getProjectDetail/${projectId}`)
     }
-}
+    static getBuildingAreas() {
+        return axios.get(`${UtilityService.getBaseUrl()}api/admin/building-area`)
+    }
+    static getAreaSpaces() { 
+        return axios.get(`${UtilityService.getBaseUrl()}api/admin/area-space`)
+    }
+    static getFloors() {
+        return axios.get(`${UtilityService.getBaseUrl()}api/admin/floor`)
+    }
+    static getFloorRooms() {
+        return axios.get(`${UtilityService.getBaseUrl()}api/admin/room`)
+    }
+    static getProducts() {
+        return axios.get(`${UtilityService.getBaseUrl()}api/admin/product`)
+    }
+} 
 export default ProjectService;

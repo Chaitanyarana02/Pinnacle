@@ -14,7 +14,7 @@ const InfoStep = () => {
           Designing a system consists of 3 steps
         </h1>
       </div>
-      <section className={styles.infostepInner}>
+      <section className="flex justify-content-around">
         <div className={styles.frameParent}>
           <div className={styles.frameGroup}>
             <div className={styles.frameContainer}>

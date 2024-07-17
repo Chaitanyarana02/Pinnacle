@@ -5,10 +5,3 @@ export interface ProductList {
     price:  unknown[]
 }
 
-export interface DefaultProduct {
-    name: string;
-    minPrice: number;
-    maxPrice: number;
-    id: number;
-    count?: number;
-  }

@@ -1,7 +1,7 @@
 import { projectColorScheme, projectResidentType, projectScope, projectStatus, projectType } from "../enums/project.enum";
 
 export interface ProjectBasicDetail {
-    id?: string;
+    id?: number;
     name: string;
     address: string;
     projectType: projectType;
@@ -16,25 +16,28 @@ export interface ProjectDetail extends ProjectBasicDetail {
     buildingAreas: Array<BuildingAreas>
 
 }
-export interface BuildingAreas { name: string, areas: ProjectAreas[] }
+export interface BuildingAreas { name: string, areas: ProjectAreas[], id?: number }
 
 export interface ProjectAreas {
+    id?: number;
     name: string;
-    internalName: string;
-    description: string;
+    internalName?: string;
+    description?: string;
     isSelected?: boolean;
     floors: ProjectAreaFloors[];
 }
 
 export interface ProjectAreaFloors {
+    id?: number;
     name: string;
-    isSelected: boolean;
+    isSelected?: boolean;
     floorRooms: ProjectFloorRooms[];
 }
 export interface ProjectFloorRooms {
+    id?: number;
     name: string;
     functions: ProjectFloorFunction[];
-    isSelected: boolean;
+    isSelected?: boolean;
     systemDetails?: ProjectAreaSystemDetails
 }
 export interface ProjectFloorFunction {
@@ -55,3 +58,13 @@ export interface ProjectAreaSystemDetails {
     blinds: unknown;
     controls: unknown;
 }
+export interface DefaultProduct {
+    name: string;
+    minPrice: number;
+    maxPrice: number;
+    id: number;
+  }
+export interface RoomFunctions {
+    categoryName: string;
+    products: Array<DefaultProduct>;
+  }

@@ -17,13 +17,11 @@ import {
 } from "../../../store/feature/project-step.slice";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import {
-  defaultIndoorAreas,
-  defaultOutDoorAreas,
-} from "../../../mock/defaultBuildingArea.mock";
+import { getDefaultConfig } from "../../../store/feature/default-config.slice";
 
 const BuildingAreasComponent = () => {
   const projectStepState = useAppSelector((state) => state.projectStepState);
+  const defaultConfigState = useAppSelector((state) => state.defaultConfigState);
   const [addEditDialog, setAddEditDialog] = useState<boolean>(false);
   const [areaIndex, setAreaIndex] = useState<number>(0);
   const [dialogState, setDialogState] = useState<string>("");
@@ -38,16 +36,20 @@ const BuildingAreasComponent = () => {
     dispatch(updateIsStepVisible(true));
 
     if (id) {
+      console.log('data fatch');
+      
       dispatch(fetchProjectDetail(""));
     } else {
-      dispatch(
-        updateProjectData([
-          { name: "Indoor Area", areas: defaultIndoorAreas },
-          { name: "OutDoor Area", areas: defaultOutDoorAreas },
-        ])
-      );
+      dispatch(getDefaultConfig())
+    
     }
   }, []);
+  useEffect(() => {
+    dispatch(
+      updateProjectData(defaultConfigState.defaultAreas)
+    );
+
+  }, [defaultConfigState])
   const addEditDialogFooter = (
     <>
       <Button

@@ -103,24 +103,7 @@ const ProjectStructureReviewComponent = () => {
               onClick={() => dispatch(updateCurrentSubStepOne(2))}
             />
           </div>
-          <div className="flex">
-            {[2, 3, 4].map((v) => (
-              <div
-                className=" mr-2"
-                key={v}
-                style={{
-                  height: "0.625rem",
-                  width: "0.625rem",
-                  borderRadius: "50%",
-
-                  background:
-                    v == projectStepState.currentSubStepOfOne
-                      ? "#2D74FE"
-                      : "#D9D9D9",
-                }}
-              ></div>
-            ))}
-          </div>
+         
           <div>
             <Button
               label="Save & Proceed"

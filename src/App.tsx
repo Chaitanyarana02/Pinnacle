@@ -24,16 +24,12 @@ import worker from "./mock/mock.api";
 import Step2Sub from "./components/projects/add-edit/steps/step2Sub";
 import ProjectDashboard from "./components/add-edit-project/projectDashboard.component";
 import AddEditComponent from "./components/add-edit-project/add-edit.component";
-import AdminDashboardComponent from "./components/admin/admin-dashboard.component";
-import UsersListComponent from "./components/admin/users-list.component";
-import ProjectListAdminComponent from "./components/admin/project-list-admin.component";
-import ProjectCategoryComponent from "./components/admin/project-category.component";
-import CustomizationOptionsComponent from "./components/admin/customization-options.component";
-import ProductListAdminComponent from "./components/admin/product-list-admin.component";
+import axios from "axios";
 // import HomeOwners from './components/homeOwners/homeOwners'
 // import Hompage from './components/homePage/Hompage'
 
 function App() {
+  axios.defaults.headers.common['authtoken'] = '004f46c9-3ec4-4978-b035-769ba3ce6639'
   const [render, setRender] = useState(false);
   // worker.start().then(() => setRender(true));
   const paths: string[] = [
@@ -65,14 +61,8 @@ function App() {
         <Route path="/step5" element={<Step5 />}></Route>
         <Route path="/payment" element={<Payment />}></Route>
         <Route path="/add" element={<AddEditComponent/>}></Route>
-        <Route path="/admin" element={<AdminDashboardComponent/>}>
-          <Route path="user-list" element={<UsersListComponent/>}></Route>
-          <Route path="project-list" element={<ProjectListAdminComponent/>}></Route>
-          <Route path="product-list" element={<ProductListAdminComponent/>}></Route>
-        
-          <Route path="product-category" element={<ProjectCategoryComponent/>}></Route>
-          <Route path="customization-options" element={<CustomizationOptionsComponent/>}></Route>
-        </Route>
+        <Route path="/edit/:id" element={<AddEditComponent/>}></Route>
+      
       
       </Routes>
       {/* {!paths.includes(window.location.pathname) ? <FrameComponent /> : null} */}

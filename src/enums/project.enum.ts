@@ -1,23 +1,23 @@
 export enum projectType {
-    residential = 'residential',
-    commercial = 'commercial',
+    residential = 'RESIDENTIAL',
+    commercial = 'COMMERCIAL',
 }
 
 export enum projectResidentType {
-    flat = 'flat',
-    house = 'house',
+    flat = 'FLAT',
+    house = 'HOUSE',
 }
 
 export enum projectScope {
-    fullRefurbishment = 'full-refurbishment',
+    fullRefurbishment = 'FULL  REFURBISHMENT',
     newBuild = 'new-build',
     systemInstallation = 'system-installation',
 }
 
 export enum projectColorScheme {
-    white = 'white',
-    black = 'black',
-    Mixed = 'mixed',
+    white = 'WHITE',
+    black = 'BLACK',
+    Mixed = 'MIXED',
 }
 export enum projectStatus {
     pending = 'pending',
