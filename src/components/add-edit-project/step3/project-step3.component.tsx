@@ -6,12 +6,36 @@ import {
   ProjectAreas,
   ProjectAreaFloors,
 } from "../../../interfaces/project.interface";
+import { useEffect } from "react";
+import ProjectService from "../../../services/project.service";
 
 const ProjectStep3Component = () => {
   const dispatch = useAppDispatch();
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
+  useEffect(() => {
+      const productIds: number[] = [];
+      projectDetailState.projectDetail?.buildingAreas?.forEach(areas => {
+        areas?.areas.forEach(area => {
+          area?.floors.forEach(floor => {
+            floor?.floorRooms.forEach(room => {
+              room.functions.forEach( fun => {
+                if(!productIds.includes(fun?.id)) {
+                    productIds.push(fun?.id);
+                }
+              });
+            })
+          })
+        })
+      });
+      console.log(productIds);
+      ProjectService.getProductsByCategoryOptions(productIds).then(res => {
+        console.log(res);
+        
+      })
+
+  }, [])
   const headerTemplate = (
     buildingAreaName: string,
     buildingAreaIndex: number,

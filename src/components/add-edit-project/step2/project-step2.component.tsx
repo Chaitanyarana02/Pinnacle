@@ -19,7 +19,8 @@ import DropZone from "./drop-zone.component";
 import { updateCurrentStep } from "../../../store/feature/project-step.slice";
 import { RadioButton } from "primereact/radiobutton";
 import { PriceCategoryEnum } from "../../../enums/price-category.enum";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ProjectService from "../../../services/project.service";
 
 const ProjectStep2Component = () => {
   const projectDetailState = useAppSelector(
@@ -30,6 +31,29 @@ const ProjectStep2Component = () => {
   );
   const [products, setProducts] = useState<RoomFunctions[]>([]);
   const dispatch = useAppDispatch();
+  useEffect(() => {
+      ProjectService.getProductsCategoryWise().then((res) => {
+        const data = res.data.data
+        const prod: RoomFunctions[] = []
+        Object.keys(data).forEach( cat => {
+          if(data[cat].length) {
+            prod.push({
+              categoryName: cat,
+              products: data[cat].map((p: {id: number, name: string, min_price: number , max_price: number }) => ({
+                name: p.name,
+                minPrice: p.min_price,
+                maxPrice: p.max_price,
+                id: p.id,
+              }))
+            })
+          }
+  
+        });
+
+        setProducts(prod);
+        
+      })
+  }, [])
   // const products: RoomFunctions[] = [
   //   {
   //     categoryName: "Light",

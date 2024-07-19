@@ -29,7 +29,7 @@ import axios from "axios";
 // import Hompage from './components/homePage/Hompage'
 
 function App() {
-  axios.defaults.headers.common['authtoken'] = '004f46c9-3ec4-4978-b035-769ba3ce6639'
+  axios.defaults.headers.common['authtoken'] = 'a2a82dd3-69ad-42c6-a125-e7b336990c5c'
   const [render, setRender] = useState(false);
   // worker.start().then(() => setRender(true));
   const paths: string[] = [

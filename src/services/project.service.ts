@@ -21,8 +21,11 @@ class ProjectService {
     static getFloorRooms() {
         return axios.get(`${UtilityService.getBaseUrl()}api/admin/room`)
     }
-    static getProducts() {
-        return axios.get(`${UtilityService.getBaseUrl()}api/admin/product`)
+    static getProductsCategoryWise() {
+        return axios.get(`${UtilityService.getBaseUrl()}api/users/category/products`)
+    }
+    static getProductsByCategoryOptions(ids: number[]) {
+        return axios.get(`${UtilityService.getBaseUrl()}api/users/products/customization-options?productIds=${ids.join(',')}`)
     }
 } 
 export default ProjectService;
