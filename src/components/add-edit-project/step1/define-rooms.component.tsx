@@ -193,16 +193,17 @@ const DefineRoomsComponent = () => {
             <section key={buildingAreaIndex}>
               {buildingArea.areas.map((area, areaIndex) => 
               <>
-                {
+                { 
                   area.floors.map((floor, floorIndex) => {
-                      return getSection(
+                    return floor.isSelected ? 
+                     getSection(
                         floor,
                         buildingArea.name,
                         buildingAreaIndex,
                         area,
                         areaIndex,
                         floorIndex,
-                      )
+                      ) : null
                   })
                 }
               </>

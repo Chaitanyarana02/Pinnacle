@@ -133,6 +133,18 @@ const projectDetailSlice = createAppSlice({
           state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex].functions.push(value);
       }
     }),
+    addFunctionsToRoom: create.reducer<{
+      buildingAreaIndex: number;
+      areaIndex: number;
+      floorIndex: number;
+      roomIndex: number;
+      values: ProjectFloorFunction[];
+    }>((state, action) => {
+      const {buildingAreaIndex, areaIndex, floorIndex, roomIndex, values } = action.payload;
+      if(state.projectDetail.buildingAreas[buildingAreaIndex]?.areas[areaIndex]?.floors[floorIndex]?.floorRooms[roomIndex]) {
+          state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex].functions = [...values];
+      }
+    }),
     updateRoomFunction: create.reducer<{
       buildingAreaIndex: number;
       areaIndex: number;
@@ -158,6 +170,23 @@ const projectDetailSlice = createAppSlice({
           state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex].functions.splice(functionIndex, 1);
       }
     }),
+    updateFunctionOptions: create.reducer<{
+      buildingAreaIndex: number;
+      areaIndex: number;
+      floorIndex: number;
+      roomIndex: number;
+      functionIndex: number;
+      key: string;
+      value: string | boolean;
+    }>((state, action) => {
+      
+      const { buildingAreaIndex, areaIndex, floorIndex, roomIndex, functionIndex , key, value} = action.payload;
+      console.log(buildingAreaIndex, floorIndex, roomIndex , functionIndex, key, value);
+
+      if(state.projectDetail.buildingAreas[buildingAreaIndex]?.areas[areaIndex]?.floors[floorIndex]?.floorRooms[roomIndex]?.functions[functionIndex]) {
+          state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex].functions[functionIndex].systemDetails[key] = value
+      }
+    }),
   }),
 });
 export const {
@@ -170,7 +199,9 @@ export const {
   addRoomToForProject,
   updateRoomSelection,
   addFunctionToRoom,
+  addFunctionsToRoom,
   updateRoomFunction,
-  removeRoomFunction
+  removeRoomFunction,
+  updateFunctionOptions
 } = projectDetailSlice.actions;
 export default projectDetailSlice.reducer;

@@ -6,9 +6,13 @@ import {
   ProjectAreaFloors,
   RoomFunctions,
   DefaultProduct,
+  ProjectFloorFunction,
 } from "../../../interfaces/project.interface";
 import {
   addFunctionToRoom,
+  addFunctionsToRoom,
+  removeRoomFunction,
+  updateRoomFunction,
   updateRoomSelection,
 } from "../../../store/feature/project-detail.slice";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
@@ -30,6 +34,9 @@ const ProjectStep2Component = () => {
     PriceCategoryEnum.BUDGET
   );
   const [products, setProducts] = useState<RoomFunctions[]>([]);
+  const [defaultProducts, setDefaultProducts] = useState<DefaultProduct[]>([]);
+  const [price, setPrice] = useState<{min: number, max: number}>()
+
   const dispatch = useAppDispatch();
   useEffect(() => {
       ProjectService.getProductsCategoryWise().then((res) => {
@@ -39,10 +46,10 @@ const ProjectStep2Component = () => {
           if(data[cat].length) {
             prod.push({
               categoryName: cat,
-              products: data[cat].map((p: {id: number, name: string, min_price: number , max_price: number }) => ({
+              products: data[cat].map((p: {id: number, name: string, minPrice: number , maxPrice: number }) => ({
                 name: p.name,
-                minPrice: p.min_price,
-                maxPrice: p.max_price,
+                minPrice: p.minPrice,
+                maxPrice: p.maxPrice,
                 id: p.id,
               }))
             })
@@ -52,8 +59,42 @@ const ProjectStep2Component = () => {
 
         setProducts(prod);
         
+        const defProds: DefaultProduct[] = []
+        prod.forEach(cat => {
+            defProds.push(... cat.products)
+        });
+        console.log(defProds);
+
+        setDefaultProducts(defProds)
+        
       })
-  }, [])
+  }, []);
+  useEffect(() => {
+    const price: {min: number , max: number} = {
+      min: 0,
+      max: 0,
+    }
+    projectDetailState.projectDetail.buildingAreas.forEach(bArea => {
+      bArea.areas.forEach(area => {
+        area.floors.forEach(floor => {
+          floor.floorRooms.forEach(room => {
+            room.functions.forEach(fun => {
+              const prod = defaultProducts.find(p => p.id === fun.id);
+              console.log(prod , fun, defaultProducts);
+              
+              if(prod) {
+                price.min += fun.count * prod.minPrice;
+                price.max += fun.count * prod.maxPrice;
+              }
+            });
+          });
+        });
+      });
+    });
+    console.log('price updated' , price);
+    
+    setPrice({...price});
+  },[projectDetailState , defaultProducts])
   // const products: RoomFunctions[] = [
   //   {
   //     categoryName: "Light",
@@ -180,8 +221,9 @@ const ProjectStep2Component = () => {
               >
                 <div className="flex align-items-center flex-wrap">
                   {floor.floorRooms.map((room, roomIndex) => {
-                    return (
-                      <div className="w-full">
+
+                    return room.isSelected ?  (
+                      <div className="w-full" key={roomIndex}>
                         <div className="flex justify-content-between mt-4">
                           <div className="text-xl text-1000">{room.name}</div>
                           <div className="text-primary">Reset</div>
@@ -191,7 +233,6 @@ const ProjectStep2Component = () => {
                           products={products}
                           functions={room.functions}
                           onDrop={(item: DefaultProduct) => {
-                            console.log(item);
                             dispatch(
                               addFunctionToRoom({
                                 buildingAreaIndex,
@@ -202,13 +243,53 @@ const ProjectStep2Component = () => {
                                   name: item.name,
                                   count: 1,
                                   id: item.id,
+                                  systemDetails: {}
                                 },
                               })
                             );
                           }}
+                          setProducts= {
+                            (newProducts :ProjectFloorFunction[] ) => {
+                              dispatch(
+                                addFunctionsToRoom({
+                                  buildingAreaIndex,
+                                  areaIndex,
+                                  floorIndex,
+                                  roomIndex,
+                                  values: newProducts
+                                })
+                              );
+
+                            }
+                          }
+                          removeProduct={(functionIndex: number) => {
+                            dispatch(
+                              removeRoomFunction({
+                                buildingAreaIndex,
+                                areaIndex,
+                                floorIndex,
+                                roomIndex,
+                                functionIndex,
+                              })
+                            );
+
+                          }}
+                          updateProduct={(functionIndex: number , count: number) => {
+                            dispatch(
+                              updateRoomFunction({
+                                buildingAreaIndex,
+                                areaIndex,
+                                floorIndex,
+                                roomIndex,
+                                functionIndex,
+                                count,
+                              })
+                            );
+
+                          }}
                         ></DropZone>
                       </div>
-                    );
+                    ): null;
                   })}
                 </div>
               </AccordionTab>
@@ -250,7 +331,8 @@ const ProjectStep2Component = () => {
               severity="secondary"
               size="large"
               onClick={() => {
-                dispatch(updateCurrentStep(3));
+                // Print sales brochure
+                console.log("Print sales brochure");
               }}
             />
           </div>
@@ -261,17 +343,23 @@ const ProjectStep2Component = () => {
               (buildingArea, buildingAreaIndex) => (
                 <section key={buildingAreaIndex}>
                   {buildingArea.areas.map((area, areaIndex) => (
-                    <>
+                    <> {
+                        area.isSelected ?  <>
                       {area.floors.map((floor, floorIndex) => {
-                        return getSection(
+
+                        return  floor.isSelected && floor.floorRooms.length ? getSection(
                           floor,
                           buildingArea.name,
                           buildingAreaIndex,
                           area,
                           areaIndex,
                           floorIndex
-                        );
+                        ): null;
                       })}
+                      </>
+                      : null
+                    }
+                      
                     </>
                   ))}
                 </section>
@@ -379,7 +467,7 @@ const ProjectStep2Component = () => {
           <div>
             <div className="pl-2">Set Quality Level:</div>
           </div>
-          <div className="flex justify-content-between w-18rem align-content-center ml-3 flex-wrap">
+          <div className="flex justify-content-between w-19rem align-content-center ml-3 pr-3 flex-wrap border-right-2 border-300">
             <div>
               <RadioButton
                 inputId="productQUality1"
@@ -418,12 +506,22 @@ const ProjectStep2Component = () => {
             </div>
           </div>
         </div>
+        <div className="align-content-center">
+          <div>
+          Estimated Price Range: 
+          <span className="font-semibold"> 
+          £{price?.min || 0}-£{price?.max || 0}
+
+            </span>
+          </div>
+        </div>
         <div
           className="bg-primary align-content-center pl-2 pr-2"
           style={{
             height: "40px",
             borderTop: "1px solid #DDD",
           }}
+          onClick={() => dispatch(updateCurrentStep(3))}
         >
           Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
         </div>

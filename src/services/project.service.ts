@@ -27,5 +27,8 @@ class ProjectService {
     static getProductsByCategoryOptions(ids: number[]) {
         return axios.get(`${UtilityService.getBaseUrl()}api/users/products/customization-options?productIds=${ids.join(',')}`)
     }
+    static getAllProductCustomizationPrice() {
+        return axios.get(`${UtilityService.getBaseUrl()}api/users/products/price`)
+    }
 } 
 export default ProjectService;

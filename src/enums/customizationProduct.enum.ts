@@ -1,7 +1,7 @@
 export enum CustomizationProductTypeEnum {
-    BOOLEAN= 'boolean',
-    STRING = 'string',
+    BOOLEAN= 'Boolean',
+    STRING = 'String',
     RADIO = 'Radio',
-    QUANTITY = 'quality',
-    SIZE = 'size',
+    QUANTITY = 'Quality',
+    SIZE = 'Size',
 }

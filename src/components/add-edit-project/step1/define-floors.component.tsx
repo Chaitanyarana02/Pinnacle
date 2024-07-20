@@ -181,12 +181,13 @@ const DefineFloorsComponent = () => {
           (buildingArea, buildingAreaIndex) => (
             <section key={buildingAreaIndex}>
               {buildingArea.areas.map((area, areaIndex) =>
+              area.isSelected ? 
                 getSection(
                   area,
                   buildingArea.name,
                   buildingAreaIndex,
                   areaIndex
-                )
+                ): null
               )}
             </section>
           )

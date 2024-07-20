@@ -11,16 +11,23 @@ import { Button } from "primereact/button";
 
 const DropZone = ({
   onDrop,
+  setProducts,
+  updateProduct,
+  removeProduct,
   functions,
   room,
   products,
 }: {
   onDrop: (item: DefaultProduct) => void;
+  setProducts: (products: ProjectFloorFunction[]) => void;
+  updateProduct: (productIndex: number, count: number) => void;
+  removeProduct: (productIndex: number) => void;
   functions: ProjectFloorFunction[];
   room: ProjectFloorRooms;
   products: RoomFunctions[];
 }) => {
   const [showDialog, setShowDialog] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
   const [, drop] = useDrop(() => ({
     accept: "item",
     drop: (item) => onDrop(item as DefaultProduct),
@@ -34,7 +41,24 @@ const DropZone = ({
         label="Save & Continue"
         style={{ float: "left" }}
         rounded
-        onClick={() => {}}
+        onClick={() => {
+          const prods: ProjectFloorFunction[] = [];
+          products.forEach((cat) => {
+            cat.products.forEach((p) => {
+              if (selectedProducts.includes(p.id)) {
+                prods.push({
+                  id: p.id,
+                  count: 1,
+                  name: p.name,
+                  systemDetails: {}
+                });
+              }
+            });
+          });
+          setProducts(prods);
+          setSelectedProducts([]);
+          setShowDialog(false);
+        }}
       />
     </>
   );
@@ -68,6 +92,9 @@ const DropZone = ({
               style={{
                 fontSize: "0.7rem",
               }}
+              onClick={() => {
+                removeProduct(index);
+              }}
             ></i>
 
             <i
@@ -75,12 +102,18 @@ const DropZone = ({
               style={{
                 fontSize: "0.7rem",
               }}
+              onClick={() => {
+                updateProduct(index, functionItem.count - 1)
+              }}
             ></i>
             <span className="m-2">{functionItem.count}</span>
             <i
               className="pi pi-plus"
               style={{
                 fontSize: "0.7rem",
+              }}
+              onClick={() => {
+                updateProduct(index, functionItem.count+ 1)
               }}
             ></i>
           </span>
@@ -122,11 +155,14 @@ const DropZone = ({
                 <div className="font-bold text-400">{product.categoryName}</div>
                 <div className="flex flex-wrap" style={{ width: "500px" }}>
                   {product.products.map((productItem, productItemIndex) => {
+                    const isSelected = selectedProducts.includes(
+                      productItem.id
+                    );
                     return (
                       <div
                         key={productItemIndex}
                         className={
-                          productItemIndex
+                          isSelected
                             ? "inline p-2 font-semibold text-sm m-2 text-primary"
                             : "inline p-2 font-semibold text-sm m-2"
                         }
@@ -137,14 +173,22 @@ const DropZone = ({
                       >
                         {productItem.name}
                         <i
-                          onClick={() => {}}
+                          onClick={() => {
+                            setSelectedProducts(
+                              selectedProducts.includes(productItem.id)
+                                ? selectedProducts.filter(
+                                    (id) => id !== productItem.id
+                                  )
+                                : [...selectedProducts, productItem.id]
+                            );
+                          }}
                           className={
-                            productIndex
+                            isSelected
                               ? "pi pi-check ml-4 mr-2 p-1 bg-primary"
                               : "pi pi-check ml-4 mr-2 p-1 text-white"
                           }
                           style={{
-                            border: productIndex
+                            border: isSelected
                               ? "1px solid #2D74FE"
                               : "1px solid #ddd",
                             borderRadius: "1.5rem",

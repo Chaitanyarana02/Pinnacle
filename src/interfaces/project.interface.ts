@@ -38,25 +38,19 @@ export interface ProjectFloorRooms {
     name: string;
     functions: ProjectFloorFunction[];
     isSelected?: boolean;
-    systemDetails?: ProjectAreaSystemDetails
 }
 export interface ProjectFloorFunction {
     name: string;
     count: number;
     id: number;
+    systemDetails: ProjectAreaSystemDetails
+
 }
 
 
 // need to update this for last step
 export interface ProjectAreaSystemDetails {
-    light: {
-        spotLight: unknown
-    };
-    sensors: {
-        window: { wired: boolean; battery: boolean; }
-    };
-    blinds: unknown;
-    controls: unknown;
+    [key: string]: string | boolean
 }
 export interface DefaultProduct {
     name: string;
