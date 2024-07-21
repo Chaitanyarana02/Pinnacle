@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const AddEditHeaderComponent = ({ projectName, isVisible, currentStep }: { projectName: string, isVisible: boolean, currentStep: number }) => {
+    const navigate = useNavigate()
     const getStep = (number: number) => {
         return (
             <div className={`border-circle border-1 w-3rem h-3rem flex align-items-center justify-content-center font-bold text-500  ${(currentStep > number ? 'text-white bg-green-500 border-white' : 'surface-border')} ${(currentStep === number ? ' surface-300 text-primary' : '')}`}>
@@ -38,7 +41,9 @@ const AddEditHeaderComponent = ({ projectName, isVisible, currentStep }: { proje
                     </div>
                     : null}
                 <div>
-                    <i className="pi pi-times text-4xl text-500"></i>
+                    <i className="pi pi-times text-4xl text-500 cursor-pointer" onClick={() => {
+                        navigate('/dashboard')
+                    }}></i>
                 </div>
             </div>
         </>

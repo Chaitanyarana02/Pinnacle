@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchProjectList } from "../../store/feature/project-list.slice";
+import { createProjectApi, deleteProjectApi, fetchProjectList } from "../../store/feature/project-list.slice";
 import { useAppDispatch, useAppSelector } from "../../store/store.utils";
 import { ProjectBasicDetail } from "../../interfaces/project.interface";
 import { Button } from "primereact/button";
@@ -15,6 +15,8 @@ import {
   projectType,
 } from "../../enums/project.enum";
 import { useNavigate } from "react-router-dom";
+import { setProjectDetail } from "../../store/feature/project-detail.slice";
+import { updateProjectStepProjectName } from "../../store/feature/project-step.slice";
 
 const ProjectDashboard = () => {
   const navigate = useNavigate()
@@ -75,7 +77,14 @@ const ProjectDashboard = () => {
   );
   const footerContent = (
     <div className="text-left">
-      <Button label="Save & Continue" className="p-button-rounded"></Button>
+      <Button label="Save & Continue" className="p-button-rounded" onClick={() => {
+
+        dispatch(createProjectApi({
+          ...newProjectData,
+          buildingAreas: []
+        }))
+        setCreateProjectVisible(false);
+      }}></Button>
     </div>
   );
   return (
@@ -351,7 +360,7 @@ const ProjectDashboard = () => {
             <div className={styles.frameWrapper}>
               <div className={styles.frameContainer}>
                 {productListState.projectList.map(
-                  (projectDetail: ProjectBasicDetail) => {
+                  (projectDetail) => {
                     return (
                       <div className={styles.frameDiv} key={projectDetail.id}>
                         <div className={styles.frameParent1}>
@@ -387,22 +396,32 @@ const ProjectDashboard = () => {
                           </div>
                           <div className="flex fle justify-content-between w-full">
                             <Button
-                              onClick={() => navigate(`/edit/${projectDetail.id}`)}
+                              onClick={() => {
+                                  dispatch(updateProjectStepProjectName(projectDetail.name))
+                                  dispatch(setProjectDetail(projectDetail))
+                                  navigate(`/edit/${projectDetail.id}`)
+
+                              } }
                               label={
                                 
-                                projectDetail.projectStatus ===
-                                projectStatus.pending
+                                !projectDetail.projectStatus
                                   ? "Resume"
                                   : "View Details"
                               }
                               outlined
                               rounded
                             />
-                            {projectDetail.projectStatus ===
-                            projectStatus.pending ? (
+                            {!projectDetail.projectStatus  ? (
                               <div className="pt-2 mr-3">
-                                <i className="pi pi-file-edit text-3xl text-500 ml-3"></i>
-                                <i className="pi pi-trash text-3xl text-500 ml-3"></i>
+                                <i className="pi pi-file-edit text-xl text-500 ml-3 cursor-pointer"  onClick={() => {
+                                  dispatch(updateProjectStepProjectName(projectDetail.name))
+                                  dispatch(setProjectDetail(projectDetail))
+                                  navigate(`/edit/${projectDetail.id}`)
+
+                              } }></i>
+                                <i className="pi pi-trash text-xl text-500 ml-3 cursor-pointer" onClick={() => {
+                                  dispatch(deleteProjectApi(projectDetail.id as number))
+                                }}></i>
                               </div>
                             ) : null}
                           </div>

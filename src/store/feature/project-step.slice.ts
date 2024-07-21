@@ -6,7 +6,7 @@ interface ProjectStepState {
     currentSubStepOfOne: number
 }
 const initialState: ProjectStepState = {
-    projectName: 'Test Project',
+    projectName: '',
     isVisible: false,
     currentStep: 1,
     currentSubStepOfOne: 1

@@ -37,17 +37,34 @@ const BuildingAreasComponent = () => {
 
     if (id) {
       console.log('data fatch');
-      
-      dispatch(fetchProjectDetail(""));
+      if(!projectDetailState.projectDetail.buildingAreas.length) {
+        dispatch(getDefaultConfig())
+
+      }
+      // dispatch(fetchProjectDetail(id));
     } else {
       dispatch(getDefaultConfig())
     
     }
+
+    
   }, []);
   useEffect(() => {
-    dispatch(
-      updateProjectData(defaultConfigState.defaultAreas)
-    );
+    if (id) {
+      console.log('data fatch');
+      if(!projectDetailState.projectDetail.buildingAreas.length) {
+        dispatch(
+          updateProjectData(defaultConfigState.defaultAreas)
+        );
+
+      }
+      // dispatch(fetchProjectDetail(id));
+    }else {
+      dispatch(
+        updateProjectData(defaultConfigState.defaultAreas)
+      );
+    }
+  
 
   }, [defaultConfigState])
   const addEditDialogFooter = (

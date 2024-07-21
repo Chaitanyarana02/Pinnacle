@@ -10,8 +10,8 @@ export enum projectResidentType {
 
 export enum projectScope {
     fullRefurbishment = 'FULL  REFURBISHMENT',
-    newBuild = 'new-build',
-    systemInstallation = 'system-installation',
+    newBuild = 'NEW BUILD',
+    systemInstallation = 'SYSTEM INSTALLATION',
 }
 
 export enum projectColorScheme {

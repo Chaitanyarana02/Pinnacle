@@ -16,6 +16,7 @@ import { Column } from "primereact/column";
 import OptionRendererComponent from "./option-renderer.component";
 import { updateFunctionOptions } from "../../../store/feature/project-detail.slice";
 import { func } from "prop-types";
+import { updateProjectDetails } from "../../../store/feature/project-list.slice";
 export interface CustomizationProductOptions {
   id: number;
   productCategoryId: number;
@@ -475,7 +476,10 @@ const ProjectStep3Component = () => {
             height: "40px",
             borderTop: "1px solid #DDD",
           }}
-          onClick={() => dispatch(updateCurrentStep(3))}
+          onClick={() => {
+            dispatch(updateProjectDetails(projectDetailState.projectDetail))
+            dispatch(updateCurrentStep(3))}
+          }
         >
           Confirm & Proceed to Order <i className="pi pi-angle-right"></i>
         </div>

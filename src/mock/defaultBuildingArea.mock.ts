@@ -1,4 +1,4 @@
-import { ProjectAreaSystemDetails, ProjectAreas } from "../interfaces/project.interface";
+import { ProjectAreas } from "../interfaces/project.interface";
 
 export const defaultIndoorAreas: ProjectAreas[] = [
     {
@@ -16,25 +16,25 @@ export const defaultIndoorAreas: ProjectAreas[] = [
                         name: "Bedroom",
                         isSelected: false,
                         functions: [],
-                        systemDetails: {} as ProjectAreaSystemDetails,
+                        
                     },
                     {
                         name: "Living Room",
                         isSelected: true,
                         functions: [],
-                        systemDetails: {} as ProjectAreaSystemDetails,
+                        
                     },
                     {
                         name: "Kitchen",
                         isSelected: false,
                         functions: [],
-                        systemDetails: {} as ProjectAreaSystemDetails,
+                        
                     },
                     {
                         name: "Guest Bedroom",
                         isSelected: true,
                         functions: [],
-                        systemDetails: {} as ProjectAreaSystemDetails,
+                        
                     }
                 ],
             },

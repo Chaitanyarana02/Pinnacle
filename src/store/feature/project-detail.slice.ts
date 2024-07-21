@@ -47,6 +47,11 @@ const projectDetailSlice = createAppSlice({
         },
       }
     ),
+    setProjectDetail: create.reducer<ProjectDetail>((state, action) => {
+      console.log(action.payload.buildingAreas);
+      
+      state.projectDetail = {...action.payload};
+    }),
     updateProjectData: create.reducer<BuildingAreas[]>((state, action) => {
       state.projectDetail.buildingAreas = action.payload;
     }),
@@ -191,6 +196,7 @@ const projectDetailSlice = createAppSlice({
 });
 export const {
   fetchProjectDetail,
+  setProjectDetail,
   updateProjectData,
   updateBuildingAreaData,
   addAreaToProject,

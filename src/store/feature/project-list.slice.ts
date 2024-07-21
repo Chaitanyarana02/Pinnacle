@@ -2,10 +2,10 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { createAppSlice } from "../store.utils";
 import ProjectService from "../../services/project.service";
-import { ProjectBasicDetail } from "../../interfaces/project.interface";
+import { BuildingAreas, ProjectDetail } from "../../interfaces/project.interface";
 import { projectColorScheme, projectResidentType, projectScope, projectStatus, projectType } from "../../enums/project.enum";
 interface ProjectListState {
-  projectList: ProjectBasicDetail[];
+  projectList: ProjectDetail[];
   isLoading: boolean;
 }
 const initialState: ProjectListState = {
@@ -36,14 +36,14 @@ const projectListSlice = createAppSlice({
             residenceType: projectResidentType;
             scope: projectScope;
             colourScheme: projectColorScheme;
-            requirementsMeta: string;
+            requirementsMeta: Array<BuildingAreas>;
             creationStepsCompleted: string;
             deliveryStatus: projectStatus;
             createdAt: string;
             updatedAt: string;
           }[];
         }> = await ProjectService.getProjectList();
-        const data: ProjectBasicDetail[] = response.data.data.map(d => {
+        const data: ProjectDetail[] = response.data.data.map(d => {
             return {
               id: d.id,
               name: d.name,
@@ -53,6 +53,7 @@ const projectListSlice = createAppSlice({
               projectScope: d.scope,
               projectColorScheme: d.colourScheme,
               projectStatus: d.deliveryStatus,
+              buildingAreas: d.requirementsMeta|| []
             };
         })
         return data;
@@ -61,14 +62,85 @@ const projectListSlice = createAppSlice({
         ...pendingStateHandling,
         fulfilled: (
           state: ProjectListState,
-          action: PayloadAction<ProjectBasicDetail[]>
+          action: PayloadAction<ProjectDetail[]>
         ) => {
           state.isLoading = false;
           state.projectList = action.payload;
         },
       }
     ),
+    createProjectApi: create.asyncThunk(
+      async (project: ProjectDetail) => {
+        const data: AxiosResponse<{data: {id: number}}> = await ProjectService.createProject({
+          name: project.name,
+          address: project.address,
+          type: project.projectType,
+          residenceType: project.projectResidentType,
+          scope: project.projectScope,
+          colourScheme: project.projectColorScheme,
+          requirementsMeta: project.buildingAreas,
+          deliveryStatus: project.projectStatus || projectStatus.pending,
+          creationStepsCompleted: 1,
+        });
+        console.log(data);
+        
+        project.id = data.data.data.id;
+          return project
+      },
+      {
+        ...pendingStateHandling,
+        fulfilled: (
+          state: ProjectListState,
+          action: PayloadAction<ProjectDetail>
+        ) => {
+          state.isLoading = false;
+          state.projectList.push(action.payload);
+        },
+      }
+    ),
+    updateProjectDetails: create.asyncThunk(
+      async (project: ProjectDetail) => {
+        await ProjectService.updateProject(project.id as number,{
+          name: project.name,
+          address: project.address,
+          type: project.projectType,
+          residenceType: project.projectResidentType,
+          scope: project.projectScope,
+          colourScheme: project.projectColorScheme,
+          requirementsMeta: project.buildingAreas,
+          deliveryStatus: project.projectStatus || projectStatus.pending,
+          creationStepsCompleted: 1,
+      });
+        return project;
+      },
+      {
+        ...pendingStateHandling,
+        fulfilled: (
+          state,
+          action: PayloadAction<ProjectDetail>
+        ) => {
+          state.isLoading = false;
+          state.projectList = state.projectList.map(p => p.id == action.payload.id ? action.payload : p);
+        },
+      }
+    ),
+    deleteProjectApi: create.asyncThunk(
+      async (id: number) => {
+        await ProjectService.deleteProject(id);
+        return id;
+      },
+      {
+        ...pendingStateHandling,
+        fulfilled: (
+          state: ProjectListState,
+          action: PayloadAction<number>
+        ) => {
+          state.isLoading = false;
+          state.projectList = state.projectList.filter(pl=> pl.id !== action.payload)
+        },
+      }
+    )
   }),
 });
-export const { fetchProjectList } = projectListSlice.actions;
+export const { fetchProjectList, deleteProjectApi, createProjectApi, updateProjectDetails } = projectListSlice.actions;
 export default projectListSlice.reducer;
