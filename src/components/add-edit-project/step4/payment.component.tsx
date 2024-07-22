@@ -64,37 +64,49 @@ const Payment = () => {
                   <div className={styles.radiobg} />
                   <img
                     className={styles.vectorIcon}
-                    loading="lazy"
                     alt=""
-                    src="/vector.svg"
+                    src="./Vector.svg"
                   />
                 </div>
                 <div className={styles.projectStructure}>Project Structure</div>
-              </div>
-              <div className={styles.frameParent2}>
-                <div className={styles.radiobgGroup}>
-                  <div className={styles.radiobg1} />
-                  <img
-                    className={styles.vectorIcon1}
+                <img
                     alt=""
-                    src="/vector-1.svg"
+                    src="/edit.svg"
+                  />
+              </div>
+              <div className={styles.frameParent1}>
+                <div className={styles.radiobgParent}>
+                  <div className={styles.radiobg} />
+                  <img
+                    className={styles.vectorIcon}
+                    alt=""
+                    src="/Vector.svg"
                   />
                 </div>
-                <div className={styles.projectFunctions}>Project Functions</div>
+                <div className={styles.projectStructure}>Project Functions</div>
+                <img
+                    alt=""
+                    src="/edit.svg"
+                  /> 
               </div>
               <div className={styles.frameParent3}>
-                <div className={styles.frameParent4}>
-                  <div className={styles.radiobgContainer}>
-                    <div className={styles.radiobg2} />
+                <div className={styles.frameParent1}>
+                  <div className={styles.radiobgParent}>
+                    <div className={styles.radiobg} />
                     <img
-                      className={styles.vectorIcon2}
+                      className={styles.vectorIcon}
                       alt=""
-                      src="/vector-2.svg"
+                      src="/Vector.svg"
                     />
+                    
                   </div>
                   <div className={styles.projectTechDetails}>
                     Project Tech Details
                   </div>
+                  <img
+                    alt=""
+                    src="/edit.svg"
+                  />
                 </div>
                 <div className={styles.frameParent5}>
                   <div className={styles.frameParent6}>
@@ -104,7 +116,7 @@ const Payment = () => {
                         className={styles.icon}
                         loading="lazy"
                         alt=""
-                        src="/icon.svg"
+                        src="./Icon.svg"
                       />
                     </div>
                     <div className={styles.contractApproval}>
@@ -115,7 +127,7 @@ const Payment = () => {
                   <div className={styles.frameParent7}>
                     <div className={styles.radiobgParent2}>
                       <div className={styles.radiobg4} />
-                      <img className={styles.icon1} alt="" src="/icon-1.svg" />
+                      <img className={styles.icon} alt="" src="./Icon.svg" />
                     </div>
                     <div className={styles.finalPayment}>Final Payment</div>
                   </div>
@@ -123,7 +135,7 @@ const Payment = () => {
                 <div className={styles.frameParent8}>
                   <div className={styles.radiobgParent3}>
                     <div className={styles.radiobg5} />
-                    <img className={styles.icon2} alt="" src="/icon-2.svg" />
+                    <img className={styles.icon} alt="" src="./Icon.svg" />
                   </div>
                   <div className={styles.delivery}>Delivery</div>
                 </div>
@@ -152,7 +164,7 @@ const Payment = () => {
                   className={styles.fileDownload03Icon}
                   loading="lazy"
                   alt=""
-                  src="/filedownload03.svg"
+                  src="/file-download-03.svg"
                 />
                 <div className={styles.downloadTechSpecification}>
                   Download Tech Specification Sheet
@@ -162,7 +174,7 @@ const Payment = () => {
                 <img
                   className={styles.fileDownload03Icon1}
                   alt=""
-                  src="/filedownload03-1.svg"
+                  src="/file-download-03.svg"
                 />
                 <div className={styles.downloadSalesBrochure}>
                   Download Sales Brochure
@@ -179,9 +191,23 @@ const Payment = () => {
                 <div className={styles.contractSignedSuccessfully}>
                   Contract Signed Successfully
                 </div>
+                <p className={styles.pMessage}>
+                Review the contract details and electronically sign to secure your dream smart home.
+                </p>
+                <button className={styles.button3}>
+                <div className={styles.label}>Review & Sign Contract</div>
+              </button>
+              <p className={styles.pMessage}>
+              Want to sign physically? 
+              </p>
+              <button className={styles.button4}>
+                <img src="/printer.svg"/>
+                <div className={styles.labelBlue}>Print Contract</div>
+              </button>
               </div>
             </div>
             <div className={styles.frameParent13}>
+              <div className={styles.dFlexColum}>
               <div className={styles.paymentParent}>
                 <h1 className={styles.payment}>Payment</h1>
                 <div className={styles.oncePaymentIs}>
@@ -195,6 +221,8 @@ const Payment = () => {
                   <b>39547 Kemmer Overpass Suite 971</b>
                 </p>
               </div>
+              </div>
+              
               <button className={styles.button2}>
                 <div className={styles.label}>Proceed to Pay</div>
               </button>

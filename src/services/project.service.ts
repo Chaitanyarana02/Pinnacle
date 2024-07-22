@@ -2,6 +2,8 @@ import axios from "axios";
 import UtilityService from "./utilit.service";
 import { BuildingAreas, ProjectDetail } from "../interfaces/project.interface";
 import { projectType, projectResidentType, projectScope, projectColorScheme, projectStatus } from "../enums/project.enum";
+import { UserSignUpData } from "../components/Login/signUp.component";
+import { LoginData } from "../components/Login/loginComponent";
 
 class ProjectService {
     
@@ -64,6 +66,12 @@ class ProjectService {
         console.log('update');
         
         return axios.patch(`${UtilityService.getBaseUrl()}api/users/projects/${id}`, project)
+    }
+    static createUser(data: UserSignUpData) {
+        return axios.post(`${UtilityService.getBaseUrl()}api/users/register`, data)
+    }
+    static loginUser(data: LoginData) {
+        return axios.post(`${UtilityService.getBaseUrl()}api/users/login`, data)
     }
 } 
 export default ProjectService;

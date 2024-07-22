@@ -1417,15 +1417,19 @@
     }
     ::-webkit-input-placeholder {
       color: #6b7280;
+      font-size:small ;
     }
     :-moz-placeholder {
       color: #6b7280;
+      font-size:small ;
     }
     ::-moz-placeholder {
       color: #6b7280;
+      font-size:small ;
     }
     :-ms-input-placeholder {
       color: #6b7280;
+      font-size:small ;
     }
     .p-input-filled .p-inputtext {
       background-color: #f3f4f6;

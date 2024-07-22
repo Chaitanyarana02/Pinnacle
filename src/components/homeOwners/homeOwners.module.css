@@ -1,3 +1,14 @@
+.homeOwnerContainer {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-gray-100);
+  width: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+
 .homeowners {
     align-self: stretch;
     position: relative;
@@ -20,11 +31,7 @@
   .someExamples {
     color: var(--color-gray-400);
   }
-  .areThereAnyOpenWindowsIn1,
-  .closeAllBlindsOnTheGround,
-  .openAllBlindsInTheHouse,
-  .setTheLightInTheLibraryT,
-  .whatIsTheTemperatureInThe {
+  .areThereAnyOpenWindowsIn1 {
     white-space: pre-wrap;
   }
   .areThereAnyOpenWindowsIn {
@@ -37,17 +44,10 @@
   .siriWillInform {
     margin: 0;
   }
-  .aDoorOrWindowIsLeftOpen1,
   .aSmokeAlarmWentOff,
   .airQualityInTheLivingRoom,
   .thereIsALeakInTheKitchen {
     white-space: pre-wrap;
-  }
-  .aDoorOrWindowIsLeftOpen {
-    margin: 0;
-    /* font-family: inherit; */
-    font-size: inherit;
-    padding-left: var(--padding-13xl);
   }
   .heySiriWhatContainer,
   .pleaseNoteThat {
@@ -57,13 +57,14 @@
   }
   .heySiriWhatContainer {
     width: 71rem;
-    height: 58.5rem;
+    height:100%;
     font-size: var(--font-size-5xl);
     /* font-family: var(--font-alegreya-sans-sc); */
     text-align: left;
     display: inline-block;
     max-width: 100%;
     color: var(--color-dimgray-100);
+    margin-bottom: 4rem;
   }
   .pleaseNoteThat {
     align-self: stretch;
@@ -88,6 +89,7 @@
     min-height: 13.625rem;
     max-width: 100%;
     color: var(--color-gray-400);
+    margin-top: -60px;
   }
   .label {
     position: relative;
@@ -100,17 +102,25 @@
   }
   .button {
     cursor: pointer;
-    border: 0;
-    padding: var(--padding-5xl) var(--padding-13xl);
-    background-color: var(--color-royalblue);
-    border-radius: var(--br-31xl);
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
+  border: 0;
+  padding: 1rem 2rem;
+  background-color: var(--color-royalblue);
+  border-radius: var(--br-31xl);
+  overflow: hidden;
+  flex-direction: row;
+  justify-content: center;
+  white-space: nowrap;
   }
+  .label3 {
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 1.5rem;
+  text-transform: capitalize;
+  color: white;
+  text-align: left;
+  display: inline-block;
+  min-width: 7.813rem;
+}
   .button:hover {
     background-color: var(--color-dodgerblue);
   }
@@ -122,15 +132,15 @@
   }
   .autoLayoutVerticalParent {
     align-self: stretch;
-    background-color: var(--color-gray-100);
     align-items: center;
-    padding: var(--padding-101xl) var(--padding-xl);
+    padding: 4rem 3rem;
     box-sizing: border-box;
     gap: var(--gap-61xl);
     max-width: 100%;
     text-align: center;
     font-size: var(--font-size-45xl);
     color: var(--color-gray-400);
+    background-color: var(--color-gray-100);
     /* font-family: var(--font-alegreya-sans-sc); */
   }
   .homeownersPage {

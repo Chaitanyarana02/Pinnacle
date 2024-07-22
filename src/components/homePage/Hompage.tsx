@@ -1,83 +1,79 @@
 import { FunctionComponent } from "react";
 import styles from "./Hompage.module.css";
 import HomepageSectionComponent from "./HomepageSectionComponent";
-import { useNavigate } from "react-router-dom";
-
+import { Button } from "primereact/button";
 const Hompage: FunctionComponent = () => {
-  const navigate = useNavigate()
+  
   return (
-    <div className={styles.hompageDraft1}>
-      <section className={styles.autoLayoutVertical}>
-        <div className={styles.autoLayoutVertical1}>
-          <div className={styles.smartSecureSimple}>Smart, Secure, Simple</div>
-          <h1 className={styles.experienceTheFuture}>
+    <div className={styles.pageMainCss}>
+      <section className={styles.section1 + ' ' + styles.displayFlexFlexDirectionColumnAlignCenter}>
+        <div className={styles.section1Container}> {/* autoLayoutVertical1 */}
+          <div className={styles.capitalizeDivWidth38Weight500 + ' ' + styles.widhtFull}>Smart, Secure, Simple</div>
+          <h1 className={styles.h1Title64}> {/* experienceTheFuture */}
             Experience the Future of Smart Living with Apple HomeKit
           </h1>
-          <h1 className={styles.unrivaledIntegrationSecurit}>
+          <h1 className={styles.h1Title34}> {/* unrivaledIntegrationSecurit */}
             Unrivaled Integration, Security, and Simplicity
           </h1>
         </div>
-        <button className={styles.button} onClick={() => navigate('/dashboard')}>
-          <div className={styles.label3}>Get Started</div>
-        </button>
+        <Button className={styles.button} severity="info" rounded >
+          <span className={styles.buttonLabel}>Get Started</span>
+        </Button>
       </section>
-      <section className={styles.automationBenefits}>
-        <h1 className={styles.homeAutomationUsedContainer}>
-          <p
-            className={styles.homeAutomationUsed}
-          >{`Home Automation used to be complicated and expensive. `}</p>
-          <p className={styles.notAnymoreThe}>
+      <section className={styles.section2 + ' ' + styles.displayFlexFlexDirectionColumnAlignCenter}>
+        <h1 className={styles.h1Title32}>
+        Home Automation used to be complicated and expensive.
             Not anymore. The ultimate home automation one-stop-shop is here.
-          </p>
         </h1>
-        <h1
-          className={styles.pinnaqleHomeIs}
-        >{`Pinnaqle Home is a home automation provider of systems based on Apple HomeKit. `}</h1>
-        <div className={styles.bestChoice}>
-          <h3 className={styles.pinnaqleHomeIs1}>
+        <h1 className={styles.h1Title32 + ' ' + styles.colorGray400 + ' ' + styles.maxWidth43Rem}>Pinnaqle Home is a home automation provider of systems based on Apple HomeKit.</h1>
+        <div className={styles.h3Title24  + ' ' + styles.displayFlexFlexDirectionColumnAlignCenter}>
+          <h3 className={styles.h3Label + ' ' + styles.colorDimGray100}>
             Pinnaqle Home is the best choice for:
           </h3>
-          <div className={styles.benefits}>
-            <div className={styles.benefitImages}>
+          <div className={styles.photoInRow}>
+            <div className={styles.section2Photo}>
               <img
-                className={styles.image21Icon}
+                className={styles.section2Img}
                 loading="lazy"
                 alt=""
                 src="/image21.png"
               />
-              <button className={styles.button1}>
-                <div className={styles.label4}>I’m a Homeowner</div>
-              </button>
+               <Button className={styles.photoBttn} severity="info" rounded >
+                  <span className={styles.blueTitle20}>I’m a Homeowner</span>
+               </Button>
             </div>
-            <div className={styles.benefitImages1}>
+            <div className={styles.section2Photo}>
               <img
-                className={styles.image21Icon1}
+                className={styles.section2Img}
                 loading="lazy"
                 alt=""
                 src="/image212.png"
               />
-              <button className={styles.button2}>
-                <div className={styles.label5}>I’m a Professional</div>
-              </button>
+              <Button className={styles.photoBttn} severity="info" rounded >
+                  <span className={styles.blueTitle20}>I’m a Professional</span>
+               </Button>
             </div>
+
           </div>
         </div>
       </section>
-      <section className={styles.targetAudience}>
+      <section className={styles.section3 + ' ' +  styles.displayFlexFlexDirectionColumnAlignCenter}>
         <div className={styles.professionals}>
           <div
-            className={styles.architectsDesigners}
-          >{`Architects, Designers & Builders`}</div>
-          <h1 className={styles.effortlessDesignProfessiona}>
+            className={styles.capitalizeDivWidth38Weight500}
+          >Architects, Designers & Builders</div>
+          <h1 className={styles.h1Title48}>
             Effortless Design, Professional Results
           </h1>
-          <h3 className={styles.tailoredSmartHome}>
+          <h3 className={styles.h3Label + ' ' + styles.colorDimGray100 + ' ' + styles.fontSize24 + ' ' + styles.h3LabelM450}>
             Tailored Smart Home Systems in Minutes
           </h3>
         </div>
         <div className={styles.guidedDesign}>
           <div className={styles.designProcess}>
-            <div className={styles.websiteProcess}>
+          {['Guided design process right here on this website', ' Best certified components that work well together',
+          ' Multiple price packages from budget to premium', 'Full package, carefully labelled, with instructions, and ready to install delivered to your door', 'Freedom to tweak, upgrade, or replace components or system inthe future'].map((message)=>{
+              return <div className={styles.websiteProcess}>
               <img
                 className={styles.outlineinterfacecheckIcon}
                 loading="lazy"
@@ -85,155 +81,75 @@ const Hompage: FunctionComponent = () => {
                 src="/check.svg"
               />
               <div className={styles.guidedDesignProcess}>
-                Guided design process right here on this website
+                {message}
               </div>
             </div>
-            <div className={styles.componentQuality}>
-              <img
-                className={styles.outlineinterfacecheckIcon1}
-                loading="lazy"
-                alt=""
-                src="/check.svg"
-              />
-              <div className={styles.bestCertifiedComponents}>
-                Best certified components that work well together
-              </div>
-            </div>
-            <div className={styles.pricePackages}>
-              <img
-                className={styles.outlineinterfacecheckIcon2}
-                loading="lazy"
-                alt=""
-                src="/check.svg"
-              />
-              <div className={styles.multiplePricePackages}>
-                Multiple price packages from budget to premium
-              </div>
-            </div>
-            <div className={styles.packageInstructions}>
-              <img
-                className={styles.outlineinterfacecheckIcon3}
-                loading="lazy"
-                alt=""
-                src="/check.svg"
-              />
-              <div className={styles.fullPackageCarefully}>
-                Full package, carefully labelled, with instructions, and ready
-                to install delivered to your door
-              </div>
-            </div>
-            <div className={styles.componentFlexibility}>
-              <img
-                className={styles.outlineinterfacecheckIcon4}
-                loading="lazy"
-                alt=""
-                src="/check.svg"
-              />
-              <div className={styles.freedomToTweak}>
-                Freedom to tweak, upgrade, or replace components or system in
-                the future
-              </div>
-            </div>
+            })}
           </div>
-          <div className={styles.designProcess1}>
-            <div className={styles.tdesigncloseParent}>
+          <div className={styles.designProcess}>
+            {['Expensive consultants and agonising design process',
+              'Rip-off maintenance contracts',
+              'Glitchy complexity that’s impossible to tweak as needed',
+              'Painful research of components that end up not working well together',
+              'Proprietary systems and being stuck with one supplier forever'
+            ].map((message) =>{
+              return <div className={styles.websiteProcess}>
               <img
                 className={styles.tdesigncloseIcon}
                 loading="lazy"
                 alt=""
                 src="/close.svg"
               />
-              <div className={styles.expensiveConsultantsAnd}>
-                Expensive consultants and agonising design process
+              <div className={styles.guidedDesignProcess}>
+               {message}
               </div>
             </div>
-            <div className={styles.tdesigncloseGroup}>
-              <img
-                className={styles.tdesigncloseIcon1}
-                loading="lazy"
-                alt=""
-                src="/close.svg"
-              />
-              <div className={styles.ripOffMaintenanceContracts}>
-                Rip-off maintenance contracts
-              </div>
-            </div>
-            <div className={styles.tdesigncloseContainer}>
-              <img
-                className={styles.tdesigncloseIcon2}
-                loading="lazy"
-                alt=""
-                src="/close.svg"
-              />
-              <div className={styles.glitchyComplexityThats}>
-                Glitchy complexity that’s impossible to tweak as needed
-              </div>
-            </div>
-            <div className={styles.frameDiv}>
-              <img
-                className={styles.tdesigncloseIcon3}
-                alt=""
-                src="/close.svg"
-              />
-              <div className={styles.painfulResearchOf}>
-                Painful research of components that end up not working well
-                together
-              </div>
-            </div>
-            <div className={styles.tdesigncloseParent1}>
-              <img
-                className={styles.tdesigncloseIcon4}
-                alt=""
-                src="/close.svg"
-              />
-              <div className={styles.proprietarySystemsAnd}>
-                Proprietary systems and being stuck with one supplier forever
-              </div>
-            </div>
+            })}
           </div>
         </div>
       </section>
       <section className={styles.callToAction}>
-        <div className={styles.family}>
-          <h1 className={styles.joinThePinnaqle}>
+        <div className={'w-full'}>
+          <h1 className={styles.h1Title48}>
             Join the Pinnaqle Home Family Today
           </h1>
         </div>
         <div className={styles.frameParent}>
-          <div className={styles.homeownersParent}>
-            <h1 className={styles.homeowners}>Homeowners</h1>
-            <div className={styles.experienceTheEase}>
-              Experience the ease and elegance of Apple HomeKit with Pinnaqle
-              Home. Our user-friendly system puts smart living control at your
-              fingertips
+          {
+            [
+              {
+                title: 'Homeowners',
+               messsage: 'Experience the ease and elegance of Apple HomeKit with Pinnaqle Home. Our user-friendly system puts smart living control at your fingertips'
+              },
+              {
+                title: 'Professionals',
+               messsage: ' Create and order top-notch smart home systems quickly and efficiently with our exceptional process and competitive terms.',
+               css: styles.pb6rem
+              }
+            ].map((obj)=>{
+              return <div className={styles.homeownersParent + ' ' + obj.css}>
+              <h1 className={styles.homeowners}>{obj.title}</h1>
+              <div className={styles.experienceTheEase}>
+                {obj.messsage}
+              </div>
             </div>
-          </div>
-          <div className={styles.professionalsParent}>
-            <h1 className={styles.professionals1}>Professionals</h1>
-            <div className={styles.createAndOrder}>
-              {" "}
-              Create and order top-notch smart home systems quickly and
-              efficiently with our exceptional process and competitive terms.
-            </div>
-          </div>
+            })
+          }
         </div>
-        <h3 className={styles.implementPinnaqleHomeContainer}>
-          <span>{`Implement Pinnaqle Home and experience the `}</span>
-          <i>best</i>
+        <h3 className={styles.h3GrayItalic24}>
           <span>
-            {" "}
-            of home automation. It's not just about controlling your home; it's
+            Implement Pinnaqle Home and experience the best of home automation. It's not just about controlling your home; it's
             about enhancing your life with technology that's secure, intuitive,
             and designed for everyone.
           </span>
         </h3>
-        <button className={styles.button3} onClick={() => navigate('/dashboard')}>
-          <div className={styles.label6}>Get Started</div>
-        </button>
+        <Button className={styles.button} severity="info" rounded >
+          <span className={styles.buttonLabel}>Get Started</span>
+        </Button>
       </section>
       <HomepageSectionComponent sectionTitle="Why Home Automation" sectionNo={1}></HomepageSectionComponent>
 
-      <section className={styles.futureLivingParent}>
+      <section className={styles.section5 + ' ' +  styles.displayFlexFlexDirectionColumnAlignCenter}>
         <div className={styles.futureLiving}>
           <div className={styles.welcomeMessages}>
             <h1 className={styles.welcomeToThe}>
@@ -246,8 +162,7 @@ const Hompage: FunctionComponent = () => {
           </div>
           <div className={styles.welcomeMessages1}>
             <h1 className={styles.embraceTheChangeContainer}>
-              <p className={styles.embraceTheChange}>Embrace the Change —</p>
-              <p className={styles.welcomeToYour}>Welcome to Your Smart Home</p>
+              <p className={styles.embraceTheChange}>Embrace the Change — Welcome to Your Smart Home</p>
             </h1>
             <div className={styles.inTheWorld}>
               In the world where technology evolves at an unprecedented pace,
@@ -283,21 +198,21 @@ const Hompage: FunctionComponent = () => {
               </div>
             </div>
           </div>
-          <div className={styles.benefitsGrid1}>
-            <div className={styles.energyEfficiencyParent}>
-              <h3 className={styles.energyEfficiency}>Energy Efficiency</h3>
-              <div className={styles.embraceSustainabilityWith}>
+          <div className={styles.benefitsGrid}>
+            <div className={styles.convenienceAtYourFingertipsParent}>
+              <h3 className={styles.convenienceAtYour}>Energy Efficiency</h3>
+              <div className={styles.goneAreThe}>
                 Embrace sustainability with smart thermostats and
                 energy-efficient appliances. Home automation systems optimize
                 energy usage, reduce your carbon footprint, and can
                 significantly lower your utility bills.
               </div>
             </div>
-            <div className={styles.comfortAndEntertainmentParent}>
-              <h3 className={styles.comfortAndEntertainment}>
+            <div className={styles.enhancedSecurityParent}>
+              <h3 className={styles.enhancedSecurity}>
                 Comfort and Entertainment
               </h3>
-              <div className={styles.yourHomeShould}>
+              <div className={styles.peaceOfMind}>
                 Your home should be your sanctuary. Home automation systems
                 offer personalized comfort settings and integrate entertainment
                 systems for a unique experience tailored just for you and your
@@ -305,20 +220,20 @@ const Hompage: FunctionComponent = () => {
               </div>
             </div>
           </div>
-          <div className={styles.benefitsGrid2}>
-            <div className={styles.easyInstallationParent}>
-              <h3 className={styles.easyInstallation}>Easy Installation</h3>
-              <div className={styles.thinkItsComplicated}>
+          <div className={styles.benefitsGrid}>
+            <div className={styles.convenienceAtYourFingertipsParent}>
+              <h3 className={styles.convenienceAtYour}>Easy Installation</h3>
+              <div className={styles.goneAreThe}>
                 Think it's complicated? Think again. Apple HomeKit allows a
                 smooth and hassle-free installation process, making your
                 transition to a smart home as seamless as possible.
               </div>
             </div>
-            <div className={styles.tailoredToYourLifestyleParent}>
-              <h3 className={styles.tailoredToYour}>
+            <div className={styles.enhancedSecurityParent}>
+              <h3 className={styles.enhancedSecurity}>
                 Tailored to Your Lifestyle
               </h3>
-              <div className={styles.everyHomeIs}>
+              <div className={styles.peaceOfMind}>
                 Every home is unique, and so are your needs. Apple HomeKit is
                 designed to fit your lifestyle, ensuring that your home
                 automation system is the perfect match for you.
@@ -335,6 +250,7 @@ const Hompage: FunctionComponent = () => {
             alt=""
             src="/image22.png"
           />
+         
         </div>
         <div className={styles.revolutionContent1}>
           <div className={styles.joinRevolution}>
@@ -351,15 +267,15 @@ const Hompage: FunctionComponent = () => {
             <h3 className={styles.joinTheSmart}>
               Join the Smart Home Revolution
             </h3>
-            <div className={styles.stepIntoThe}>
+            <div className={styles.homeAutomationIs}>
               Step into the future and transform your living experience. Embark
               on a journey to a smarter, more efficient, and more comfortable
               home.
             </div>
           </div>
-          <button className={styles.button4} onClick={() => navigate('/dashboard')}>
-            <div className={styles.label7}>Get Started</div>
-          </button>
+          <Button className={styles.button} severity="info" rounded >
+            <span className={styles.buttonLabel}>Get Started</span>
+        </Button>
         </div>
       </section>
       <HomepageSectionComponent sectionNo={2} sectionTitle="Why Apple HomeKit"></HomepageSectionComponent>
@@ -374,7 +290,7 @@ const Hompage: FunctionComponent = () => {
             </h3>
           </div>
           <div className={styles.digitalEra}>
-            <div className={styles.inARapidly}>
+            <div className={styles.inTheWorld}>
               In a rapidly evolving digital era, the way we interact with our
               living spacesis transforming. Apple HomeKit is at the forefront of
               this revolution, offering a seamless, secure, and sophisticated
@@ -400,8 +316,8 @@ const Hompage: FunctionComponent = () => {
                   </span>
                 </p>
                 <p className={styles.blankLine}>&nbsp;</p>
-                <p className={styles.extensiveCompatibilityWith}>
-                  <b className={styles.extensiveCompatibility}>
+                <p className={styles.unifiedEcosystemAppleHomek}>
+                  <b className={styles.unifiedEcosystem}>
                     Extensive Compatibility:
                   </b>
                   <span>
@@ -414,13 +330,13 @@ const Hompage: FunctionComponent = () => {
                 </p>
               </div>
             </div>
-            <div className={styles.integrationPoints1}>
-              <h3 className={styles.unmatchedSecurityAnd}>
+            <div className={styles.integrationPoints}>
+              <h3 className={styles.seamlessIntegrationAcross}>
                 Unmatched Security and Privacy
               </h3>
-              <div className={styles.endToEndEncryptionAppleContainer}>
-                <p className={styles.endToEndEncryptionAppleI}>
-                  <b className={styles.endToEndEncryption}>
+              <div className={styles.unifiedEcosystemAppleContainer}>
+                <p className={styles.unifiedEcosystemAppleHomek}>
+                  <b className={styles.unifiedEcosystem}>
                     End-to-End Encryption:
                   </b>
                   <span>
@@ -431,9 +347,9 @@ const Hompage: FunctionComponent = () => {
                   </span>
                 </p>
                 <p className={styles.blankLine1}>&nbsp;</p>
-                <p className={styles.noPersonalDataTrackingUnl}>
+                <p className={styles.unifiedEcosystemAppleHomek}>
                   <b
-                    className={styles.noPersonalData}
+                    className={styles.unifiedEcosystem}
                   >{`No Personal Data Tracking: `}</b>
                   <span>
                     Unlike other systems, Apple HomeKit doesn’t track your
@@ -462,10 +378,10 @@ const Hompage: FunctionComponent = () => {
                   </span>
                 </p>
                 <p className={styles.blankLine2}>&nbsp;</p>
-                <p className={styles.voiceControlWithSiriJust}>
+                <p className={styles.intuitiveInterfaceApplesH}>
                   <b
-                    className={styles.voiceControlWith}
-                  >{`Voice Control with Siri: `}</b>
+                    className={styles.intuitiveInterface}
+                  >Voice Control with Siri</b>
                   <span>
                     Just say the word, and Siri does the rest. Control your home
                     with simple voice commands, making it accessible to everyone
@@ -474,14 +390,14 @@ const Hompage: FunctionComponent = () => {
                 </p>
               </div>
             </div>
-            <div className={styles.experiencePoints1}>
-              <h3 className={styles.automationAndPersonalization}>
+            <div className={styles.experiencePoints}>
+              <h3 className={styles.simplicityAndConvenience}>
                 Automation and Personalization
               </h3>
-              <div className={styles.smartAutomationSetContainer}>
-                <p className={styles.smartAutomationSetScenesA}>
+              <div className={styles.intuitiveInterfaceApplesContainer}>
+                <p className={styles.intuitiveInterfaceApplesH}>
                   <b
-                    className={styles.smartAutomation}
+                    className={styles.intuitiveInterface}
                   >{`Smart Automation: `}</b>
                   <span>
                     Set scenes and automations easily. Wake up toa warm house
@@ -490,8 +406,8 @@ const Hompage: FunctionComponent = () => {
                   </span>
                 </p>
                 <p className={styles.blankLine3}>&nbsp;</p>
-                <p className={styles.personalizedExperienceTailo}>
-                  <b className={styles.personalizedExperience}>
+                <p className={styles.intuitiveInterfaceApplesH}>
+                  <b className={styles.intuitiveInterface}>
                     Personalized Experience:
                   </b>
                   <span>
@@ -503,14 +419,14 @@ const Hompage: FunctionComponent = () => {
                 </p>
               </div>
             </div>
-            <div className={styles.experiencePoints2}>
-              <h3 className={styles.ecoFriendlyAndEnergy}>
+            <div className={styles.experiencePoints}>
+              <h3 className={styles.simplicityAndConvenience}>
                 Eco-Friendly and Energy Efficient
               </h3>
-              <div className={styles.reducedEnergyConsumptionContainer}>
-                <p className={styles.reducedEnergyConsumptionSm}>
+              <div className={styles.intuitiveInterfaceApplesContainer}>
+                <p className={styles.intuitiveInterfaceApplesH}>
                   <b
-                    className={styles.reducedEnergyConsumption}
+                    className={styles.intuitiveInterface}
                   >{`Reduced Energy Consumption: `}</b>
                   <span>
                     Smart technology means smarterenergy use. HomeKit helps in
@@ -518,8 +434,8 @@ const Hompage: FunctionComponent = () => {
                   </span>
                 </p>
                 <p className={styles.blankLine4}>&nbsp;</p>
-                <p className={styles.ecoConsciousProductsChoose}>
-                  <b className={styles.ecoConsciousProducts}>
+                <p className={styles.intuitiveInterfaceApplesH}>
+                  <b className={styles.intuitiveInterface}>
                     Eco-Conscious Products:
                   </b>
                   <span>
@@ -532,9 +448,9 @@ const Hompage: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <button className={styles.button5} onClick={() => navigate('/dashboard')}>
-          <div className={styles.label8}>Get Started</div>
-        </button>
+        <Button className={styles.button} severity="info" rounded >
+          <span className={styles.buttonLabel}>Get Started</span>
+        </Button>
       </section>
       <HomepageSectionComponent sectionNo={3} sectionTitle="Why Pinnaqle Home"></HomepageSectionComponent>
       <section className={styles.simpleHome}>
@@ -556,13 +472,12 @@ const Hompage: FunctionComponent = () => {
               </div>
 
             </div>
-            <div className={styles.packageAssembly}>
-              <h3 className={styles.weAssembledPackages}>
+            <div className={styles.valueFocus1}>
                 We assembled packages of equipment across all functions that are
                 good quality, provide adequate functionality, and work well
                 together.
-              </h3>
-            </div>
+              </div>
+           
           </div>
         </div>
         <h1 className={styles.ourWebsiteToolContainer}>
@@ -578,7 +493,7 @@ const Hompage: FunctionComponent = () => {
             </span>
           </p>
           <p className={styles.blankLine5}>&nbsp;</p>
-          <p className={styles.fullTransparencyOfPrices}>
+          <p className={styles.ourWebsiteToolWillExpertly}>
             <span>{`Full transparency of prices – you see the total bill live as you build your system. We offer `}</span>
             <span className={styles.budgetStandardAnd}>
               Budget, Standard, and Premium packages
@@ -620,9 +535,9 @@ const Hompage: FunctionComponent = () => {
             automation system.
           </p>
         </h1>
-        <button className={styles.button6} onClick={() => navigate('/dashboard')}>
-          <div className={styles.label9}>Get Started</div>
-        </button>
+        <Button className={styles.button} severity="info" rounded >
+          <span className={styles.buttonLabel}>Get Started</span>
+        </Button>
       </section>
     </div>
   );

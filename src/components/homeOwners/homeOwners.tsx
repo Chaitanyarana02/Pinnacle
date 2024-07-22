@@ -1,7 +1,8 @@
 import styles from './homeOwners.module.css'
+
 const HomeOwners = () => {
   return (
-    <div>
+    // <div className={styles.homeOwnerContainer}>
       <main className={styles.autoLayoutVerticalParent}>
         <div className={styles.autoLayoutVertical}>
           <h1 className={styles.homeowners}>Homeowners</h1>
@@ -39,34 +40,34 @@ const HomeOwners = () => {
             <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>Are there any open windows in the house?</span>
             </li>
-            <li className={styles.closeAllBlindsOnTheGround}>
+            <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>Close all blinds on the ground floor.</span>
             </li>
-            <li className={styles.whatIsTheTemperatureInThe}>
+            <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>What is the temperature in the baby room?</span>
             </li>
-            <li className={styles.openAllBlindsInTheHouse}>
+            <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>Open all blinds in the house</span>
             </li>
-            <li className={styles.setTheLightInTheLibraryT}>
+            <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>Set the light in the library to 50%.</span>
             </li>
           </ul>
           <p className={styles.blankLine5}>&nbsp;</p>
-          <p className={styles.siriWillInform}>
+          <p className={styles.blankLine}>
             Siri will inform you if, for example:
           </p>
-          <ul className={styles.aDoorOrWindowIsLeftOpen}>
-            <li className={styles.aDoorOrWindowIsLeftOpen1}>
+          <ul className={styles.areThereAnyOpenWindowsIn}>
+            <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>A door or window is left open.</span>
             </li>
-            <li className={styles.thereIsALeakInTheKitchen}>
+            <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>There is a leak in the kitchen.</span>
             </li>
-            <li className={styles.airQualityInTheLivingRoom}>
+            <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>Air quality in the living room is not good.</span>
             </li>
-            <li className={styles.aSmokeAlarmWentOff}>
+            <li className={styles.areThereAnyOpenWindowsIn1}>
               <span>A smoke alarm went off</span>
             </li>
           </ul>
@@ -80,10 +81,10 @@ const HomeOwners = () => {
           </div>
         </section>
         <button className={styles.button}>
-          <div className={styles.label}>Get Started</div>
+          <div className={styles.label3}>Get Started</div>
         </button>
       </main>
-    </div>
+    // </div>
   );
 }
 

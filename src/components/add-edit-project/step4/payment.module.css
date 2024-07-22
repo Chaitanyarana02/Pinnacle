@@ -65,6 +65,14 @@
     line-height: 2rem;
     font-family: var(--font-abeezee);
   }
+  .pMessage {
+    text-align: justify;
+    position: relative;
+    font-size: var(--font-size-xl);
+    line-height: 2rem;
+    font-family: var(--font-abeezee);
+    color: #6E6E73;
+  }
   .frameParent,
   .paymentPageInner {
     display: flex;
@@ -248,13 +256,10 @@
   }
   .vectorIcon {
     position: absolute;
-    height: 29.58%;
-    width: 42.92%;
     top: 35.83%;
     right: 28.33%;
     bottom: 34.58%;
     left: 28.75%;
-    max-width: 100%;
     overflow: hidden;
     max-height: 100%;
     z-index: 1;
@@ -273,10 +278,10 @@
     font-weight: 600;
   }
   .frameParent1 {
-    width: 10.75rem;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     gap: var(--gap-xs);
   }
@@ -382,15 +387,11 @@
     display: none;
   }
   .icon {
-    height: 33.33%;
-    width: 16.67%;
     top: 29.17%;
     right: 33.33%;
     bottom: 37.5%;
-    left: 50%;
-    max-width: 100%;
+    left: 43%;
     overflow: hidden;
-    max-height: 100%;
     z-index: 1;
   }
   .radiobgParent1 {
@@ -780,6 +781,22 @@
     font-family: var(--font-alegreya-sans-sc);
     color: var(--default-white);
   }
+  .labelBlue {
+    flex: 1;
+    line-height: 1.5rem;
+    font-weight: 600;
+    font-family: var(--font-alegreya-sans-sc);
+    color: #2D74FE;
+    position: relative;
+    font-size: var(--font-size-xl);
+    text-align: left;
+    justify-content: space-between;
+    margin-left: 10px;
+  }
+  .dFlexColum{
+    display: flex;
+    flex-direction: column;
+  }
   .button2 {
     cursor: pointer;
     border: 0;
@@ -794,11 +811,39 @@
     box-sizing: border-box;
     white-space: nowrap;
   }
+  .button3 {
+    cursor: pointer;
+    border: 0;
+    padding: 1.125rem var(--padding-13xl);
+    background-color: var(--color-royalblue);
+    width: 18rem;
+    border-radius: var(--br-31xl);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+  .button4 {
+    cursor: pointer;
+    border: 0;
+    padding: 1.125rem var(--padding-13xl);
+    background-color: #F4F4F4;
+    width: 15rem;
+    border-radius: var(--br-31xl);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+    color: #2D74FE;
+  }
   .button2:hover {
     background-color: #478fff;
   }
   .frameParent13 {
-    align-self: stretch;
     flex-direction: column;
     justify-content: flex-start;
     gap: var(--gap-21xl);
@@ -891,6 +936,9 @@
     }
   }
   @media screen and (max-width: 750px) {
+    .frameParent12{
+      flex: 0;
+    }
     .header1 {
       padding-left: 1.875rem;
       box-sizing: border-box;
@@ -916,7 +964,7 @@
       line-height: 1.625rem;
     }
     .projectCompleteReview {
-      font-size: var(--font-size-base);
+      /* font-size: var(--font-size-base); */
       line-height: 1.625rem;
     }
     .projectSummary,
@@ -928,7 +976,7 @@
       flex-wrap: wrap;
     }
     .finalPrice {
-      font-size: var(--font-size-base);
+      /* font-size: var(--font-size-base); */
       line-height: 1.375rem;
     }
     .div {
@@ -936,7 +984,7 @@
       line-height: 1.813rem;
     }
     .rebate {
-      font-size: var(--font-size-base);
+      /* font-size: var(--font-size-base); */
       line-height: 1.375rem;
     }
     .div1 {
@@ -958,7 +1006,7 @@
       line-height: 1.625rem;
     }
     .contractSignedSuccessfully {
-      font-size: var(--font-size-base);
+      /* font-size: var(--font-size-base); */
       line-height: 1.625rem;
     }
     .frameWrapper {
@@ -970,7 +1018,7 @@
     }
     .deliveryAddress39547Container,
     .oncePaymentIs {
-      font-size: var(--font-size-base);
+      /* font-size: var(--font-size-base); */
       line-height: 1.625rem;
     }
     .frameParent13 {

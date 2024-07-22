@@ -42,3 +42,8 @@
     color: var(--default-white);
     font-family: var(--font-alegreya-sans-sc);
   }
+  @media screen and (max-width: 800px) {
+    .sectionContent{
+      padding: 20px 20px
+    }
+  }

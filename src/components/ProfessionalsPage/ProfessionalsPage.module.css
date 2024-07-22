@@ -7,15 +7,15 @@
     font-weight: 600;
     display: inline-block;
     max-width: 100%;
+    color:  #222222;
   }
-  .appleIsThe,
-  .blankLine,
-  .blankLine1,
-  .ifYourClient,
-  .ourPlanningTool,
-  .youCanEasily {
+  .appleIsThe{
     margin: 0;
   }
+  /* .maxWidthContent{
+    width: max-content;
+    margin: 0;
+  } */
   .appleIsTheContainer,
   .label {
     position: relative;
@@ -43,15 +43,25 @@
   }
   .button {
     cursor: pointer;
-    border: 0;
-    padding: var(--padding-5xl) var(--padding-13xl);
-    background-color: var(--color-royalblue);
-    border-radius: var(--br-31xl);
-    overflow: hidden;
-    flex-direction: row;
-    justify-content: center;
-    white-space: nowrap;
+  border: 0;
+  padding: 1rem 2rem;
+  background-color: var(--color-royalblue);
+  border-radius: var(--br-31xl);
+  overflow: hidden;
+  flex-direction: row;
+  justify-content: center;
+  white-space: nowrap;
   }
+  .label3 {
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 1.5rem;
+  text-transform: capitalize;
+  color: white;
+  text-align: left;
+  display: inline-block;
+  min-width: 7.813rem;
+}
   .button1:hover,
   .button:hover {
     background-color: var(--color-dodgerblue);
@@ -61,13 +71,13 @@
     background-color: var(--color-gray-100);
     flex-direction: column;
     justify-content: flex-start;
-    padding: var(--padding-101xl) var(--padding-xl);
+    padding: 4rem var(--padding-xl);
     box-sizing: border-box;
     gap: var(--gap-21xl);
     max-width: 100%;
     text-align: center;
     font-size: var(--font-size-45xl);
-    color: var(--color-gray-400);
+    color: #6E6E73
     
   }
   .designDeliverDelight {
@@ -84,8 +94,7 @@
     position: relative;
     font-size: var(--font-size-5xl);
     line-height: 36px;
-    
-
+    color: #6E6E73;
     display: inline-block;
     max-width: 100%;
   }
@@ -106,10 +115,9 @@
     display: inline-block;
     max-width: 100%;
   }
-  .appleSystemsAre,
-  .itWillShow,
   .weWillProvide {
     margin-bottom: 10px;
+    color: #6E6E73;
   }
   .weWillProvideABeautifulP {
     margin: 0;
@@ -136,10 +144,11 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: var(--padding-29xl) var(--padding-xl) var(--padding-51xl)
+    padding: var(--padding-29xl) var(--padding-xl) 3rem
       var(--padding-21xl);
     gap: var(--gap-xl);
     max-width: 100%;
+      min-height: 420px;
   }
   .attractiveCommercialTerms {
     width: 460px;
@@ -149,10 +158,7 @@
     display: inline-block;
     max-width: 100%;
   }
-  .tradeRebatesAvailable,
-  .transparentPricing {
-    margin-bottom: 10px;
-  }
+
   .tradeRebatesAvailablePlea {
     margin: 0;
     
@@ -169,104 +175,7 @@
     display: inline-block;
     max-width: 100%;
   }
-  .offeringDetails1 {
-    width: 540px;
-    border-radius: var(--br-11xl);
-    border: 1px solid var(--color-gainsboro-500);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-29xl) var(--padding-xl) 56px var(--padding-21xl);
-    gap: var(--gap-xl);
-    max-width: 100%;
-  }
-  .easyDesignProcess {
-    width: 221px;
-    position: relative;
-    line-height: 36px;
-    font-weight: 600;
-    display: inline-block;
-  }
-  .anyProfessional,
-  .ourClickThroughTool {
-    margin-bottom: 10px;
-  }
-  .anyProfessionalArchitect {
-    margin: 0;
-    
-    font-size: inherit;
-    padding-left: var(--padding-2xl);
-  }
-  .anyProfessionalContainer {
-    width: 422px;
-    position: relative;
-    font-size: var(--body-base-text-size);
-    line-height: 24px;
-    
 
-    display: inline-block;
-    max-width: 100%;
-    max-height: 260px;
-    word-break: break-word;
-  }
-  .offeringDetails2 {
-    width: 540px;
-    border-radius: var(--br-11xl);
-    border: 1px solid var(--color-gainsboro-500);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-29xl) var(--padding-xl) var(--padding-13xl)
-      var(--padding-21xl);
-    gap: var(--gap-xl);
-    max-width: 100%;
-  }
-  .delivery {
-    width: 460px;
-    position: relative;
-    line-height: 36px;
-    font-weight: 600;
-    display: inline-block;
-    max-width: 100%;
-  }
-  .installationIsSimple,
-  .theSystemIs,
-  .weCanLabel {
-    margin-bottom: 10px;
-  }
-  .theSystemIsSuppliedReadyT {
-    margin: 0;
-    
-    font-size: inherit;
-    padding-left: var(--padding-2xl);
-  }
-  .theSystemIsContainer {
-    width: 460px;
-    position: relative;
-    font-size: var(--body-base-text-size);
-    line-height: 24px;
-    
-
-    display: inline-block;
-    max-width: 100%;
-  }
-  .offeringDetails3 {
-    width: 540px;
-    border-radius: var(--br-11xl);
-    border: 1px solid var(--color-gainsboro-500);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-29xl) var(--padding-xl) 94px var(--padding-21xl);
-    gap: var(--gap-xl);
-    max-width: 100%;
-  }
   .label1,
   .offeringDetailsParent {
     font-size: var(--font-size-5xl);
@@ -283,29 +192,6 @@
     min-height: 840px;
     max-width: 100%;
   }
-  .label1 {
-    position: relative;
-    line-height: 24px;
-    text-transform: capitalize;
-    font-weight: 600;
-    
-
-    display: inline-block;
-    min-width: 125px;
-  }
-  .button1 {
-    cursor: pointer;
-    border: 0;
-    padding: var(--padding-5xl) var(--padding-13xl);
-    background-color: var(--color-royalblue);
-    border-radius: var(--br-31xl);
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-  }
   .frameParent,
   .professionalsPage {
     background-color: var(--default-white);
@@ -319,7 +205,7 @@
     border-bottom: 1px solid var(--color-gainsboro-500);
     box-sizing: border-box;
     align-items: center;
-    padding: var(--padding-101xl) var(--padding-xl) var(--padding-99xl);
+    padding: 5rem var(--padding-xl) var(--padding-99xl);
     gap: var(--gap-61xl);
     text-align: center;
     font-size: var(--font-size-29xl);
@@ -338,6 +224,7 @@
       padding-bottom: var(--padding-58xl);
       box-sizing: border-box;
     }
+  
   }
   @media screen and (max-width: 1050px) {
     .professionals {
@@ -348,6 +235,7 @@
       font-size: var(--font-size-19xl);
       line-height: 48px;
     }
+   
   }
   @media screen and (max-width: 750px) {
     .content {
@@ -364,6 +252,10 @@
       padding-bottom: var(--padding-31xl);
       box-sizing: border-box;
     }
+    .offeringDetails {
+      height: 100%;
+      min-height: 0px;
+    }
   }
   @media screen and (max-width: 450px) {
     .professionals {
@@ -373,6 +265,10 @@
     .appleIsTheContainer {
       font-size: var(--font-size-lgi);
       line-height: 29px;
+    }
+    .offeringDetails {
+      height: 100% !important;
+      min-height: 0px;
     }
     .content {
       gap: var(--gap-xl);
@@ -395,28 +291,6 @@
       font-size: var(--font-size-lgi);
       line-height: 29px;
     }
-    .offeringDetails1 {
-      padding-top: var(--padding-12xl);
-      padding-bottom: var(--padding-17xl);
-      box-sizing: border-box;
-    }
-    .easyDesignProcess {
-      font-size: var(--font-size-lgi);
-      line-height: 29px;
-    }
-    .offeringDetails2 {
-      padding-top: var(--padding-12xl);
-      padding-bottom: var(--padding-2xl);
-      box-sizing: border-box;
-    }
-    .delivery {
-      font-size: var(--font-size-lgi);
-      line-height: 29px;
-    }
-    .offeringDetails3 {
-      padding-top: var(--padding-12xl);
-      padding-bottom: var(--padding-42xl);
-      box-sizing: border-box;
-    }
+  
   }
   
