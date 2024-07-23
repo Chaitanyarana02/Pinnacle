@@ -21,7 +21,7 @@ const DragItem = ({ product }: {product: DefaultProduct}) => {
             }}>
                     
                <span
-                 className="font-bold"
+                 className="font-semibold text-700"
                  style={{
                    border: "1px solid #DDD",
                    padding: "10px",

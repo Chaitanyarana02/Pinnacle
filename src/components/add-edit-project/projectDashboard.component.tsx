@@ -93,7 +93,7 @@ const ProjectDashboard = () => {
         <main className={styles.dashboardInner}>
           <div className={styles.frameParent}>
             <div className={styles.frameGroup}>
-              <div className={styles.yourProjectsWrapper}>
+              <div className={styles.yourProjectsWrapper }>
                 <h1 className={styles.yourProjects}>Your Projects</h1>
               </div>
               <Button
@@ -411,7 +411,7 @@ const ProjectDashboard = () => {
                               outlined
                               rounded
                             />
-                            {!projectDetail.projectStatus  ? (
+                            {/* {!projectDetail.projectStatus  ? ( */}
                               <div className="pt-2 mr-3">
                                 <i className="pi pi-file-edit text-xl text-500 ml-3 cursor-pointer"  onClick={() => {
                                   dispatch(updateProjectStepProjectName(projectDetail.name))
@@ -423,7 +423,7 @@ const ProjectDashboard = () => {
                                   dispatch(deleteProjectApi(projectDetail.id as number))
                                 }}></i>
                               </div>
-                            ) : null}
+                            {/* ) : null} */}
                           </div>
                         </div>
                         <div

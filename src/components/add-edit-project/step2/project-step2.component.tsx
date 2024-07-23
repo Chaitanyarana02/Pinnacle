@@ -91,10 +91,12 @@ const ProjectStep2Component = () => {
         });
       });
     });
+    price.max += (price.max * priceCategory/100);
+    price.min += (price.min * priceCategory/100);
     console.log('price updated' , price);
     
     setPrice({...price});
-  },[projectDetailState , defaultProducts])
+  },[projectDetailState , defaultProducts , priceCategory])
   // const products: RoomFunctions[] = [
   //   {
   //     categoryName: "Light",

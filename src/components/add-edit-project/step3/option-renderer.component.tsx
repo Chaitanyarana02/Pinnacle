@@ -3,6 +3,7 @@ import { CustomizationProductTypeEnum } from "../../../enums/customizationProduc
 import { CustomizationProductOptions } from "./project-step3.component";
 import { InputSwitch } from "primereact/inputswitch";
 import { RadioButton } from "primereact/radiobutton";
+import { InputText } from "primereact/inputtext";
 
 const OptionRendererComponent = ({
   value,
@@ -18,6 +19,10 @@ const OptionRendererComponent = ({
   useEffect(() => {
         if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.RADIO) {
           valueChanged(customizationOption.options[0])
+        }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.QUANTITY) {
+          valueChanged("0")
+        }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.SIZE) {
+          valueChanged("1,1")
         }
   }, [])
   const renderers: {
@@ -38,8 +43,57 @@ const OptionRendererComponent = ({
         }
     </> 
     },
-    [CustomizationProductTypeEnum.QUANTITY]: () => <div></div>,
-    [CustomizationProductTypeEnum.SIZE]: () => <div></div>,
+    [CustomizationProductTypeEnum.QUANTITY]: () => <div>
+    <span
+          className="font-bold w-max align-content-center m-2"
+          style={{
+            border: "1px solid #DDD",
+            padding: "5px 15px",
+            backgroundColor: "white",
+          }}
+        >
+
+          <i
+            className="pi pi-minus"
+            style={{
+              fontSize: "0.7rem",
+            }}
+            onClick={() => {
+              valueChanged((parseInt(value[dataKey] as string, 10) - 1).toString())
+            }}
+          ></i>
+          <span className="m-2">{value[dataKey] || 0}</span>
+          <i
+            className="pi pi-plus"
+            style={{
+              fontSize: "0.7rem",
+            }}
+            onClick={() => {
+              valueChanged((parseInt(value[dataKey] as string, 10) + 1).toString())
+            }}
+          ></i>
+        </span>
+    </div>,
+    [CustomizationProductTypeEnum.SIZE]: () => <div className="w-13rem">
+        <InputText 
+        type="number"
+        className="w-4 mr-2"
+        value={(value[dataKey] as string)?.split(',')[0]}
+        onChange={(e) => {
+                        valueChanged(e.target.value)
+                      }}
+                      placeholder="Width"/>
+        <span className="font-bold">X</span>
+        <InputText
+        className="w-4 ml-2"
+        type="number"
+        value={(value[dataKey] as string)?.split(',')[0]}
+
+        onChange={(e) => {
+          valueChanged(e.target.value)
+        }}
+        placeholder="Width"/>
+    </div>,
   };
   
   return renderers[customizationOption.type] ? renderers[customizationOption.type]() : null;

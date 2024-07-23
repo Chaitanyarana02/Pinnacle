@@ -101,7 +101,7 @@ const DefineFloorsComponent = () => {
               <AccordionTab
                 header="Header I"
                 headerTemplate={headerTemplate(
-                  area.internalName,
+                  area.internalName || '',
                   buildingAreaName,
                   area.name,
                   buildingAreaIndex,

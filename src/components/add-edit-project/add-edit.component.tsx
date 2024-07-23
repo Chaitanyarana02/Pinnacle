@@ -1,10 +1,23 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../store/store.utils";
 import AddEditHeaderComponent from "./common/add-edit-header.comonent";
 import ProjectStep1Component from "./step1/project-step1.component";
 import ProjectStep2Component from "./step2/project-step2.component";
 import ProjectStep3Component from "./step3/project-step3.component";
+import { useEffect } from "react";
 
 const AddEditComponent = () => {
+  const projectDetailState = useAppSelector(
+    (state) => state.projectDetailState
+  );
+  const navigate = useNavigate();
+  const { id } = useParams();
+  useEffect(() => {
+    if(id && !projectDetailState.projectDetail.id) {
+      navigate('/dashboard');
+      return;
+    }
+  },[])
   const projectStepState = useAppSelector((state) => state.projectStepState);
   const components: { [key: number]: unknown } = {
     1: (

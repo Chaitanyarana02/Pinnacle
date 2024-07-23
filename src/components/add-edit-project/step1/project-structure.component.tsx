@@ -29,6 +29,7 @@ const BuildingAreasComponent = () => {
     (state) => state.projectDetailState
   );
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const BuildingAreasComponent = () => {
   }, []);
   useEffect(() => {
     if (id) {
-      console.log('data fatch');
+    
       if(!projectDetailState.projectDetail.buildingAreas.length) {
         dispatch(
           updateProjectData(defaultConfigState.defaultAreas)

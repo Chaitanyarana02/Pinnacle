@@ -236,8 +236,7 @@ const ProjectStep3Component = () => {
         key={buildingAreaIndex + "_" + areaIndex + "_" + floorIndex}
       >
         <div style={{ width: "58rem" }}>
-          <Divider className="m-0 mt-4" />
-          <div className="mt-2">
+          <div className={!floorIndex ? "mt-2" : "pt-2 border-top-1 border-200"}>
             <div className="flex align-items-center flex-wrap">
               {headerTemplate(
                 buildingAreaName,
@@ -334,8 +333,10 @@ const ProjectStep3Component = () => {
       </div>
       <div className="border-1 border-200 flex">
         <div
+        className="border-right-1 border-200"
           style={{
             width: "25%",
+
           }}
         >
           {projectDetailState?.projectDetail?.buildingAreas?.map(
