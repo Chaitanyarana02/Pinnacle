@@ -28,7 +28,7 @@ function App() {
   const [cookie] = useCookies(['token']);
   axios.defaults.headers.common['authtoken'] = cookie['token']
   const [render, setRender] = useState(false);
-  // worker.start().then(() => setRender(true));
+  worker.start().then(() => setRender(true));
   const paths: string[] = [
     "/home-owners",
     "/professionals",
@@ -60,10 +60,10 @@ function App() {
     </BrowserRouter>
   );
   return <>
-  <CookiesProvider defaultSetOptions={{ path: '/' }}>
+  {/* <CookiesProvider defaultSetOptions={{ path: '/' }}>
   {routes}
-  </CookiesProvider>
-   {/* {render ? routes : null} */}
+  </CookiesProvider> */}
+   {render ? routes : null}
   </>;
 }
 
