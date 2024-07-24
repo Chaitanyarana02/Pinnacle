@@ -8,4 +8,5 @@ export interface UserList  {
     companyName: string;
     companyWebsite: string;
     companyAddress: string;
+    accessToken?: string;
 }

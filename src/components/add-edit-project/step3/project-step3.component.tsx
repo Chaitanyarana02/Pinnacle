@@ -345,7 +345,7 @@ const ProjectStep3Component = () => {
                 {buildingArea.areas.map((area, areaIndex) => (
                   <>
                     {area.floors.map((floor, floorIndex) => {
-                      return floor.isSelected
+                      return floor.isSelected && floor.floorRooms.length
                         ? getSection(
                             floor,
                             buildingArea.name,
@@ -392,6 +392,7 @@ const ProjectStep3Component = () => {
                             // this line creates options 
                             <OptionRendererComponent
                               value={ (() => {
+                                
                                 const data2 = projectDetailState.projectDetail.buildingAreas[
                                   selectedRoom.buildingAreaIndex
                                 ].areas[selectedRoom.areaIndex].floors[
@@ -407,6 +408,7 @@ const ProjectStep3Component = () => {
                                     ).productId
                                 )
                                 ?.systemDetails as { [key: string]: string | boolean; }
+
                                 return  data2
                               })()
                                 
@@ -417,6 +419,8 @@ const ProjectStep3Component = () => {
                                   .data as CustomizationProductOptions
                               }
                               valueChanged={(value) => {
+                                console.log(data , dataKay , value);
+
                                 dispatch(
                                   updateFunctionOptions({
                                     buildingAreaIndex: selectedRoom.buildingAreaIndex,
@@ -478,9 +482,12 @@ const ProjectStep3Component = () => {
             borderTop: "1px solid #DDD",
           }}
           onClick={() => {
-            dispatch(updateProjectDetails(projectDetailState.projectDetail))
-            dispatch(updateCurrentStep(3))}
-          }
+            dispatch(updateProjectDetails(projectDetailState.projectDetail)).then(() => {
+            
+              dispatch(updateCurrentStep(4));
+              
+            })
+          }}
         >
           Confirm & Proceed to Order <i className="pi pi-angle-right"></i>
         </div>

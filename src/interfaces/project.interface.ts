@@ -1,3 +1,4 @@
+import { CustomizationProductTypeEnum } from "../enums/customizationProduct.enum";
 import { projectColorScheme, projectResidentType, projectScope, projectStatus, projectType } from "../enums/project.enum";
 
 export interface ProjectBasicDetail {
@@ -43,6 +44,8 @@ export interface ProjectFloorFunction {
     name: string;
     count: number;
     id: number;
+    categoryType?: CustomizationProductTypeEnum;
+    categoryId?: number;
     systemDetails: ProjectAreaSystemDetails
 
 }
@@ -57,6 +60,7 @@ export interface DefaultProduct {
     minPrice: number;
     maxPrice: number;
     id: number;
+    categoryId?: number;
   }
 export interface RoomFunctions {
     categoryName: string;

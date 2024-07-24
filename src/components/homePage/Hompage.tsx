@@ -2,8 +2,9 @@ import { FunctionComponent } from "react";
 import styles from "./Hompage.module.css";
 import HomepageSectionComponent from "./HomepageSectionComponent";
 import { Button } from "primereact/button";
+import { useNavigate } from "react-router-dom";
 const Hompage: FunctionComponent = () => {
-  
+  const navigate = useNavigate();
   return (
     <div className={styles.pageMainCss}>
       <section className={styles.section1 + ' ' + styles.displayFlexFlexDirectionColumnAlignCenter}>
@@ -16,7 +17,9 @@ const Hompage: FunctionComponent = () => {
             Unrivaled Integration, Security, and Simplicity
           </h1>
         </div>
-        <Button className={styles.button} severity="info" rounded >
+        <Button className={styles.button} severity="info" rounded onClick={() => {
+                navigate('/dashboard');
+               }}>
           <span className={styles.buttonLabel}>Get Started</span>
         </Button>
       </section>
@@ -38,7 +41,9 @@ const Hompage: FunctionComponent = () => {
                 alt=""
                 src="/image21.png"
               />
-               <Button className={styles.photoBttn} severity="info" rounded >
+               <Button className={styles.photoBttn} severity="info" rounded  onClick={() => {
+                navigate('/home-owners');
+               }}>
                   <span className={styles.blueTitle20}>I’m a Homeowner</span>
                </Button>
             </div>
@@ -49,7 +54,9 @@ const Hompage: FunctionComponent = () => {
                 alt=""
                 src="/image212.png"
               />
-              <Button className={styles.photoBttn} severity="info" rounded >
+              <Button className={styles.photoBttn} severity="info" rounded  onClick={() => {
+                navigate('/professionals');
+               }}>
                   <span className={styles.blueTitle20}>I’m a Professional</span>
                </Button>
             </div>

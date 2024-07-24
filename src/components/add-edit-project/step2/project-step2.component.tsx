@@ -9,6 +9,7 @@ import {
   ProjectFloorFunction,
 } from "../../../interfaces/project.interface";
 import {
+  addFunctionToAllRoom,
   addFunctionToRoom,
   addFunctionsToRoom,
   removeRoomFunction,
@@ -46,11 +47,12 @@ const ProjectStep2Component = () => {
           if(data[cat].length) {
             prod.push({
               categoryName: cat,
-              products: data[cat].map((p: {id: number, name: string, minPrice: number , maxPrice: number }) => ({
+              products: data[cat].map((p: {id: number, name: string, minPrice: number , maxPrice: number, categoryId:number }) => ({
                 name: p.name,
                 minPrice: p.minPrice,
                 maxPrice: p.maxPrice,
                 id: p.id,
+                categoryId: p.categoryId
               }))
             })
           }
@@ -245,6 +247,7 @@ const ProjectStep2Component = () => {
                                   name: item.name,
                                   count: 1,
                                   id: item.id,
+                                  categoryId: item.categoryId,
                                   systemDetails: {}
                                 },
                               })
@@ -413,6 +416,21 @@ const ProjectStep2Component = () => {
                             (productItem, productItemIndex) => {
                               return (
                                 <DragItem
+                                dbClickedItem={
+                                  () => {
+                                    dispatch(
+                                      addFunctionToAllRoom({
+                                        value: {
+                                          categoryId: productItem.categoryId,
+                                          name: productItem.name,
+                                          count: 1,
+                                          id: productItem.id,
+                                          systemDetails: {}
+                                        },
+                                      })
+                                    );
+                                  }
+                                }
                                   product={productItem}
                                   key={productItemIndex}
                                 />
@@ -510,9 +528,9 @@ const ProjectStep2Component = () => {
         </div>
         <div className="align-content-center">
           <div>
-          Estimated Price Range: 
+          Estimated Price Range:&nbsp;
           <span className="font-semibold"> 
-          £{price?.min || 0}-£{price?.max || 0}
+           £{price?.min || 0} - £{price?.max || 0}
 
             </span>
           </div>

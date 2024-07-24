@@ -43,7 +43,7 @@ const OptionRendererComponent = ({
         }
     </> 
     },
-    [CustomizationProductTypeEnum.QUANTITY]: () => <div>
+    [CustomizationProductTypeEnum.QUANTITY]: () => <div className="w-13rem">
     <span
           className="font-bold w-max align-content-center m-2"
           style={{

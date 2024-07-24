@@ -3,17 +3,7 @@ import styles from "./payment.module.css"
 const Payment = () => {
   return (
     <div className={styles.paymentPage}>
-      <header className={styles.header1}>
-        <h1 className={styles.testProject}>Test Project</h1>
-        <div className={styles.xWrapper}>
-          <img
-            className={styles.xIcon}
-            loading="lazy"
-            alt=""
-            src="/x.svg"
-          />
-        </div>
-      </header>
+    
       <section className={styles.paymentPageInner}>
         <div className={styles.frameParent}>
           <div className={styles.congratulationsWrapper}>

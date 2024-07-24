@@ -12,10 +12,10 @@ const InfoStep = () => {
       <div style={{
         width: '58rem'
       }}>
-        <div>
-          <h1>
+        <div className="flex justify-content-around mt-4 text-3xl font-bold">
+          <span>
             Designing a system consists of 3 steps
-          </h1>
+          </span>
         </div>
         <section className="flex justify-content-around">
           <div className={styles.frameParent}>
@@ -30,7 +30,6 @@ const InfoStep = () => {
                     <div className={styles.frameItem} />
                     <img
                       className={styles.chevronsRightIcon}
-                      loading="lazy"
                       alt=""
                       src="chevrons-right.svg"
                     />

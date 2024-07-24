@@ -50,6 +50,7 @@ const DropZone = ({
                   id: p.id,
                   count: 1,
                   name: p.name,
+                  categoryId: p.categoryId,
                   systemDetails: {}
                 });
               }

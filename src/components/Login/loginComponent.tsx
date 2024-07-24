@@ -9,12 +9,16 @@ import { NotificationTypeEnum } from "../../enums/notificationType.enum";
 import UtilityService from "../../services/utilit.service";
 import { Checkbox } from "primereact/checkbox";
 import { useCookies } from "react-cookie";
+import { useAppDispatch } from "../../store/store.utils";
+import { UserList } from "../../interfaces/users.interface";
+import { setUserData } from "../../store/feature/user-data.slice";
 export interface LoginData {
   email: string;
   password: string;
 }
 const Login: FunctionComponent = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const toast = useRef<Toast>(null);
   const [, setCookie] = useCookies(['token']);
   const [checked, setChecked] = useState(false);
@@ -50,11 +54,12 @@ const Login: FunctionComponent = () => {
     if (validate()) {
       ProjectService.loginUser(formValues)
         .then((res: AxiosResponse<{data: {
-          data :{accessToken: string}
+          data : UserList
         }}>) => {
           console.log(res);
-          
-          setCookie('token', res?.data?.data?.data?.accessToken)
+          dispatch(setUserData(res?.data?.data?.data));
+          setCookie('token', res?.data?.data?.data?.accessToken);
+        
           UtilityService.ShowNotification(
             toast,
             NotificationTypeEnum.Success,
