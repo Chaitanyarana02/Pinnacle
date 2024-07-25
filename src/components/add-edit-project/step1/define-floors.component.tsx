@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../../store/store.utils";
 import { ProjectAreas } from "../../../interfaces/project.interface";
@@ -9,8 +9,12 @@ import { Accordion, AccordionTab } from "primereact/accordion";
 import { Divider } from "primereact/divider";
 import { updateCurrentSubStepOne } from "../../../store/feature/project-step.slice";
 import { addFloorToProject, updateFloorSelection } from "../../../store/feature/project-detail.slice";
+import { Toast } from "primereact/toast";
+import UtilityService from "../../../services/utilit.service";
+import { NotificationTypeEnum } from "../../../enums/notificationType.enum";
 
 const DefineFloorsComponent = () => {
+  const toast = useRef<Toast>(null);
   const projectStepState = useAppSelector((state) => state.projectStepState);
   const [addEditDialog, setAddEditDialog] = useState<boolean>(false);
   const [areaIndex, setAreaIndex] = useState<{
@@ -57,6 +61,7 @@ const DefineFloorsComponent = () => {
     areaIndex: number
   ) => {
     return (
+
       <div
         style={{ width: "50rem" }}
         key={buildingAreaIndex + "header" + areaIndex}
@@ -165,8 +170,25 @@ const DefineFloorsComponent = () => {
       </div>
     );
   };
+
+  const checkValidation = () =>{
+    let selected = 0;
+    projectDetailState.projectDetail.buildingAreas.forEach( buildingArea => {
+        buildingArea.areas.forEach(area => {
+          selected += area.floors.filter(v => v.isSelected).length;
+        })
+    })
+    if(selected) {
+      dispatch(updateCurrentSubStepOne(4))
+
+    }else{
+      UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one floor')
+    }
+  }
   return (
+    
     <div className="flex justify-content-around mt-3 mb-5">
+         <Toast ref={toast} />
       <div>
         <section className="mt-4">
           <div className="m-auto max-w-max text-4xl font-semibold">
@@ -229,7 +251,7 @@ const DefineFloorsComponent = () => {
               rounded
               iconPos="right"
               size="large"
-              onClick={() => dispatch(updateCurrentSubStepOne(4))}
+              onClick={() => checkValidation()}
             />
           </div>
         </div>

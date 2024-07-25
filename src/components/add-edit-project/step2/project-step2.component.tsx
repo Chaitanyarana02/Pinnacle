@@ -24,16 +24,19 @@ import DropZone from "./drop-zone.component";
 import { updateCurrentStep } from "../../../store/feature/project-step.slice";
 import { RadioButton } from "primereact/radiobutton";
 import { PriceCategoryEnum } from "../../../enums/price-category.enum";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProjectService from "../../../services/project.service";
+import { updatePrice } from "../../../store/feature/price-category.slice";
+import { Toast } from "primereact/toast";
+import { NotificationTypeEnum } from "../../../enums/notificationType.enum";
+import UtilityService from "../../../services/utilit.service";
 
 const ProjectStep2Component = () => {
+  const toast = useRef<Toast>(null);
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
-  const [priceCategory, setPriceCategory] = useState<number>(
-    PriceCategoryEnum.BUDGET
-  );
+  const priceCategory  = useAppSelector(state => state.priceCategorySlice)
   const [products, setProducts] = useState<RoomFunctions[]>([]);
   const [defaultProducts, setDefaultProducts] = useState<DefaultProduct[]>([]);
   const [price, setPrice] = useState<{min: number, max: number}>()
@@ -93,8 +96,8 @@ const ProjectStep2Component = () => {
         });
       });
     });
-    price.max += (price.max * priceCategory/100);
-    price.min += (price.min * priceCategory/100);
+    price.max += (price.max * priceCategory.value/100);
+    price.min += (price.min * priceCategory.value/100);
     console.log('price updated' , price);
     
     setPrice({...price});
@@ -304,8 +307,29 @@ const ProjectStep2Component = () => {
       </div>
     );
   };
+  const checkValidation = () =>{
+    let flag = true;
+    projectDetailState.projectDetail.buildingAreas.forEach( buildingArea => {
+        buildingArea.areas.forEach(area => {
+          area.floors.forEach(floor => {
+            floor.floorRooms.forEach(room => {
+              if(!room.functions.length && room.isSelected) {
+                flag = false
+              }
+            })
+          })
+        })
+    })
+    if(flag) {
+      dispatch(updateCurrentStep(3))
+
+    }else{
+      UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one Product for each room')
+    }
+  }
   return (
     <DndProvider backend={HTML5Backend}>
+         <Toast ref={toast} />
       <div className="p-4 mt-6">
         <div className="flex justify-content-between mb-6">
           <div>
@@ -493,8 +517,8 @@ const ProjectStep2Component = () => {
                 inputId="productQUality1"
                 name="productQUality"
                 value={PriceCategoryEnum.BUDGET}
-                onChange={(e) => setPriceCategory(e.value)}
-                checked={priceCategory === PriceCategoryEnum.BUDGET}
+                onChange={(e) => dispatch(updatePrice(e.value || 0))}
+                checked={priceCategory.value === PriceCategoryEnum.BUDGET}
               />
               <label htmlFor="productQUality1" className="ml-1">
                 Budget
@@ -505,8 +529,8 @@ const ProjectStep2Component = () => {
                 inputId="productQUality2"
                 name="productQUality"
                 value={PriceCategoryEnum.STANDARD}
-                onChange={(e) => setPriceCategory(e.value)}
-                checked={priceCategory === PriceCategoryEnum.STANDARD}
+                onChange={(e) =>  dispatch(updatePrice(e.value || 0))}
+                checked={priceCategory.value === PriceCategoryEnum.STANDARD}
               />
               <label htmlFor="productQUality2" className="ml-1">
                 Standard
@@ -517,8 +541,8 @@ const ProjectStep2Component = () => {
                 inputId="productQUality3"
                 name="productQUality"
                 value={PriceCategoryEnum.PREMIUM}
-                onChange={(e) => setPriceCategory(e.value)}
-                checked={priceCategory === PriceCategoryEnum.PREMIUM}
+                onChange={(e) =>  dispatch(updatePrice(e.value || 0))}
+                checked={priceCategory.value === PriceCategoryEnum.PREMIUM}
               />
               <label htmlFor="productQUality3" className="ml-1">
                 Premium
@@ -541,7 +565,7 @@ const ProjectStep2Component = () => {
             height: "40px",
             borderTop: "1px solid #DDD",
           }}
-          onClick={() => dispatch(updateCurrentStep(3))}
+          onClick={() => checkValidation()}
         >
           Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
         </div>

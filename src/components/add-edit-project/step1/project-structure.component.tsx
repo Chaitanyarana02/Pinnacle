@@ -2,7 +2,7 @@ import { Divider } from "primereact/divider";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   fetchProjectDetail,
@@ -18,8 +18,12 @@ import {
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { getDefaultConfig } from "../../../store/feature/default-config.slice";
+import { Toast } from "primereact/toast";
+import UtilityService from "../../../services/utilit.service";
+import { NotificationTypeEnum } from "../../../enums/notificationType.enum";
 
 const BuildingAreasComponent = () => {
+  const toast = useRef<Toast>(null);
   const projectStepState = useAppSelector((state) => state.projectStepState);
   const defaultConfigState = useAppSelector((state) => state.defaultConfigState);
   const [addEditDialog, setAddEditDialog] = useState<boolean>(false);
@@ -67,7 +71,19 @@ const BuildingAreasComponent = () => {
     }
   
 
-  }, [defaultConfigState])
+  }, [defaultConfigState]);
+  const checkValidation = () =>{
+      let selected = 0;
+      projectDetailState.projectDetail.buildingAreas.forEach( buildingArea => {
+        selected += buildingArea.areas.filter(area => area.isSelected).length;
+      })
+      if(selected) {
+        dispatch(updateCurrentSubStepOne(3))
+
+      }else{
+        UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at   list one area')
+      }
+    }
   const addEditDialogFooter = (
     <>
       <Button
@@ -94,6 +110,8 @@ const BuildingAreasComponent = () => {
   );
   return (
     <div className="flex justify-content-around mt-3">
+    <Toast ref={toast} />
+
       <div>
         <section className="mt-4">
           <div className="m-auto max-w-max text-4xl font-semibold">
@@ -229,7 +247,7 @@ const BuildingAreasComponent = () => {
               rounded
               iconPos="right"
               size="large"
-              onClick={() => dispatch(updateCurrentSubStepOne(3))}
+              onClick={() =>{ checkValidation()}}
             />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../../store/store.utils";
 import { ProjectAreaFloors, ProjectAreas } from "../../../interfaces/project.interface";
@@ -9,8 +9,12 @@ import { Accordion, AccordionTab } from "primereact/accordion";
 import { Divider } from "primereact/divider";
 import { updateCurrentSubStepOne } from "../../../store/feature/project-step.slice";
 import { addRoomToForProject, updateRoomSelection } from "../../../store/feature/project-detail.slice";
+import { Toast } from "primereact/toast";
+import { NotificationTypeEnum } from "../../../enums/notificationType.enum";
+import UtilityService from "../../../services/utilit.service";
 
 const DefineRoomsComponent = () => {
+  const toast = useRef<Toast>(null);
   const projectStepState = useAppSelector((state) => state.projectStepState);
   const [addEditDialog, setAddEditDialog] = useState<boolean>(false);
   const [areaIndex, setAreaIndex] = useState<{
@@ -178,8 +182,25 @@ const DefineRoomsComponent = () => {
       </div>
     );
   };
+  const checkValidation = () =>{
+    let selected = 0;
+    projectDetailState.projectDetail.buildingAreas.forEach( buildingArea => {
+        buildingArea.areas.forEach(area => {
+          area.floors.forEach(floor => {
+            selected += floor.floorRooms.filter(v => v.isSelected).length;
+          })
+        })
+    })
+    if(selected) {
+      dispatch(updateCurrentSubStepOne(5))
+
+    }else{
+      UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one Room')
+    }
+  }
   return (
     <div className="flex justify-content-around mt-3 mb-5">
+         <Toast ref={toast} />
       <div>
         <section className="mt-4">
           <div className="m-auto max-w-max text-4xl font-semibold">
@@ -249,7 +270,7 @@ const DefineRoomsComponent = () => {
               rounded
               iconPos="right"
               size="large"
-              onClick={() => dispatch(updateCurrentSubStepOne(5))}
+              onClick={() => checkValidation()}
             />
           </div>
         </div>

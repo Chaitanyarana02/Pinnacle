@@ -135,7 +135,10 @@ const projectDetailSlice = createAppSlice({
     }>((state, action) => {
       const {buildingAreaIndex, areaIndex, floorIndex, roomIndex, value } = action.payload;
       if(state.projectDetail.buildingAreas[buildingAreaIndex]?.areas[areaIndex]?.floors[floorIndex]?.floorRooms[roomIndex]) {
+        const room = state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex];
+        if(room.functions.findIndex(v => v.id === value.id) === -1) {
           state.projectDetail.buildingAreas[buildingAreaIndex].areas[areaIndex].floors[floorIndex].floorRooms[roomIndex].functions.push(value);
+        }
       }
     }),
     addFunctionToAllRoom: create.reducer<{
@@ -147,7 +150,9 @@ const projectDetailSlice = createAppSlice({
           area.floors.forEach((floor) => {
             floor.floorRooms.forEach((room) => {
               if(area.isSelected && floor.isSelected && room.isSelected && area.floors.length && floor.floorRooms.length) {
-                room.functions.push(value);
+                if(room.functions.findIndex(v => v.id === value.id) === -1) {
+                  room.functions.push(value);
+                }
               }
             })
           });

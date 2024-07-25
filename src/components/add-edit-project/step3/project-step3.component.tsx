@@ -8,7 +8,7 @@ import {
   ProjectFloorFunction,
   ProjectAreaSystemDetails,
 } from "../../../interfaces/project.interface";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProjectService from "../../../services/project.service";
 import { CustomizationProductTypeEnum } from "../../../enums/customizationProduct.enum";
 import { DataTable } from "primereact/datatable";
@@ -17,6 +17,7 @@ import OptionRendererComponent from "./option-renderer.component";
 import { updateFunctionOptions } from "../../../store/feature/project-detail.slice";
 import { func } from "prop-types";
 import { updateProjectDetails } from "../../../store/feature/project-list.slice";
+import { Toast } from "primereact/toast";
 export interface CustomizationProductOptions {
   id: number;
   productCategoryId: number;
@@ -68,6 +69,7 @@ interface ProductAllPrice {
   }[];
 }
 const ProjectStep3Component = () => {
+  const toast = useRef<Toast>(null);
   const dispatch = useAppDispatch();
   const [selectedRoom, setSelectedRoom] = useState<{
     buildingAreaIndex: number;
@@ -297,6 +299,7 @@ const ProjectStep3Component = () => {
   };
   return (
     <>
+       <Toast ref={toast} />
       <div className="p-4 mt-6">
         <div className="flex justify-content-between mb-6">
           <div>
