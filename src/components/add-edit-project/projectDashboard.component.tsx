@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { createProjectApi, deleteProjectApi, fetchProjectList } from "../../store/feature/project-list.slice";
+import {
+  createProjectApi,
+  deleteProjectApi,
+  fetchProjectList,
+} from "../../store/feature/project-list.slice";
 import { useAppDispatch, useAppSelector } from "../../store/store.utils";
 import { ProjectBasicDetail } from "../../interfaces/project.interface";
 import { Button } from "primereact/button";
@@ -17,9 +21,11 @@ import {
 import { useNavigate } from "react-router-dom";
 import { setProjectDetail } from "../../store/feature/project-detail.slice";
 import { updateProjectStepProjectName } from "../../store/feature/project-step.slice";
+import { Avatar } from "primereact/avatar";
 
 const ProjectDashboard = () => {
-  const navigate = useNavigate()
+  const user = useAppSelector((state) => state.userDataSlice);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const productListState = useAppSelector((state) => state.projectListState);
   const [isCreateProjectVisible, setCreateProjectVisible] =
@@ -77,23 +83,57 @@ const ProjectDashboard = () => {
   );
   const footerContent = (
     <div className="text-left">
-      <Button label="Save & Continue" className="p-button-rounded" onClick={() => {
-
-        dispatch(createProjectApi({
-          ...newProjectData,
-          buildingAreas: []
-        }))
-        setCreateProjectVisible(false);
-      }}></Button>
+      <Button
+        label="Save & Continue"
+        className="p-button-rounded"
+        onClick={() => {
+          dispatch(
+            createProjectApi({
+              ...newProjectData,
+              buildingAreas: [],
+            })
+          );
+          setCreateProjectVisible(false);
+        }}
+      ></Button>
     </div>
   );
   return (
     <>
       <div className={styles.dashboard}>
+        <div className="flex justify-content-between bg-white w-full p-4">
+          <div style={
+            {
+              fontSize: 'var(--font-size-18xl-3)',
+              position: 'relative',
+              lineHeight:'1.75rem',
+              fontWeight: 600,
+            }
+          }>PINNAQLE</div>
+          <div>
+            <div className="flex">
+              {user.userData.id ? (
+                <>
+                  <Avatar
+                    size="large"
+                    label={user.userData.name[0].toUpperCase()}
+                    style={{ backgroundColor: "#9c27b0", color: "#ffffff" }}
+                    shape="circle"
+                  />
+                  <div className="pl-2">
+                    <span className="font-bold">{user.userData.name}</span>
+                    <br />
+                    <span className="text-sm">{user.userData.profession}</span>
+                  </div>
+                </>
+              ) : null}
+            </div>
+          </div>
+        </div>
         <main className={styles.dashboardInner}>
           <div className={styles.frameParent}>
             <div className={styles.frameGroup}>
-              <div className={styles.yourProjectsWrapper }>
+              <div className={styles.yourProjectsWrapper}>
                 <h1 className={styles.yourProjects}>Your Projects</h1>
               </div>
               <Button
@@ -359,98 +399,107 @@ const ProjectDashboard = () => {
             </div>
             <div className={styles.frameWrapper}>
               <div className={styles.frameContainer}>
-                {productListState.projectList.map(
-                  (projectDetail) => {
-                    return (
-                      <div className={styles.frameDiv} key={projectDetail.id}>
-                        <div className={styles.frameParent1}>
-                          <div className={styles.projectParentFrame}>
-                            <h3 className="text-2xl mt-0">
-                              {projectDetail.name}
-                            </h3>
-                            <div className={styles.residentialParent}>
-                              <span>
-                                {projectTypeLabels[projectDetail.projectType]}{" "}
-                              </span>
-                              <span>&#8226;</span>
-                              <span>
-                                {
-                                  projectResidentLabels[
-                                    projectDetail.projectResidentType
-                                  ]
-                                }
-                              </span>
-                              <span>&#8226;</span>
-                              <span>
-                                {projectScopeLabels[projectDetail.projectScope]}
-                              </span>
-                            </div>
-                            <div className="flex mt-1">
-                              <span className="text-500 font-medium">
-                                Address:
-                              </span>
-                              <span className="ml-2">
-                                {projectDetail.address}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="flex fle justify-content-between w-full">
-                            <Button
-                              onClick={() => {
-                                  dispatch(updateProjectStepProjectName(projectDetail.name))
-                                  dispatch(setProjectDetail(projectDetail))
-                                  navigate(`/edit/${projectDetail.id}`)
-
-                              } }
-                              label={
-                                
-                                !projectDetail.projectStatus
-                                  ? "Resume"
-                                  : "View Details"
+                {productListState.projectList.map((projectDetail) => {
+                  return (
+                    <div className={styles.frameDiv} key={projectDetail.id}>
+                      <div className={styles.frameParent1}>
+                        <div className={styles.projectParentFrame}>
+                          <h3 className="text-2xl mt-0">
+                            {projectDetail.name}
+                          </h3>
+                          <div className={styles.residentialParent}>
+                            <span>
+                              {projectTypeLabels[projectDetail.projectType]}{" "}
+                            </span>
+                            <span>&#8226;</span>
+                            <span>
+                              {
+                                projectResidentLabels[
+                                  projectDetail.projectResidentType
+                                ]
                               }
-                              outlined
-                              rounded
-                            />
-                            {/* {!projectDetail.projectStatus  ? ( */}
-                              <div className="pt-2 mr-3">
-                                <i className="pi pi-file-edit text-xl text-500 ml-3 cursor-pointer"  onClick={() => {
-                                  dispatch(updateProjectStepProjectName(projectDetail.name))
-                                  dispatch(setProjectDetail(projectDetail))
-                                  navigate(`/edit/${projectDetail.id}`)
-
-                              } }></i>
-                                <i className="pi pi-trash text-xl text-500 ml-3 cursor-pointer" onClick={() => {
-                                  dispatch(deleteProjectApi(projectDetail.id as number))
-                                }}></i>
-                              </div>
-                            {/* ) : null} */}
+                            </span>
+                            <span>&#8226;</span>
+                            <span>
+                              {projectScopeLabels[projectDetail.projectScope]}
+                            </span>
+                          </div>
+                          <div className="flex mt-1">
+                            <span className="text-500 font-medium">
+                              Address:
+                            </span>
+                            <span className="ml-2">
+                              {projectDetail.address}
+                            </span>
                           </div>
                         </div>
-                        <div
-                          className={styles.techDetailsPendingWrapper}
-                          style={{
-                            backgroundColor:
-                              projectStatusColors[
-                                projectDetail.projectStatus as projectStatus
-                              ]?.backGroundColor,
-                            color:
-                              projectStatusColors[
-                                projectDetail.projectStatus as projectStatus
-                              ]?.color,
-                          }}
-                        >
-                          <div className={styles.techDetailsPending}>
-                            {
-                              projectStatusLabels[
-                                projectDetail.projectStatus as projectStatus
-                              ]
+                        <div className="flex fle justify-content-between w-full">
+                          <Button
+                            onClick={() => {
+                              dispatch(
+                                updateProjectStepProjectName(projectDetail.name)
+                              );
+                              dispatch(setProjectDetail(projectDetail));
+                              navigate(`/edit/${projectDetail.id}`);
+                            }}
+                            label={
+                              !projectDetail.projectStatus
+                                ? "Resume"
+                                : "View Details"
                             }
+                            outlined
+                            rounded
+                          />
+                          {/* {!projectDetail.projectStatus  ? ( */}
+                          <div className="pt-2 mr-3">
+                            <i
+                              className="pi pi-file-edit text-xl text-500 ml-3 cursor-pointer"
+                              onClick={() => {
+                                dispatch(
+                                  updateProjectStepProjectName(
+                                    projectDetail.name
+                                  )
+                                );
+                                dispatch(setProjectDetail(projectDetail));
+                                navigate(`/edit/${projectDetail.id}`);
+                              }}
+                            ></i>
+                            <i
+                              className="pi pi-trash text-xl text-500 ml-3 cursor-pointer"
+                              onClick={() => {
+                                dispatch(
+                                  deleteProjectApi(projectDetail.id as number)
+                                );
+                              }}
+                            ></i>
                           </div>
+                          {/* ) : null} */}
                         </div>
                       </div>
-                    );
-                  }
-                )}
+                      <div
+                        className={styles.techDetailsPendingWrapper}
+                        style={{
+                          backgroundColor:
+                            projectStatusColors[
+                              projectDetail.projectStatus as projectStatus
+                            ]?.backGroundColor,
+                          color:
+                            projectStatusColors[
+                              projectDetail.projectStatus as projectStatus
+                            ]?.color,
+                        }}
+                      >
+                        <div className={styles.techDetailsPending}>
+                          {
+                            projectStatusLabels[
+                              projectDetail.projectStatus as projectStatus
+                            ]
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className={styles.rectangleWrapper}>
