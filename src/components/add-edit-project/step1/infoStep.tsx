@@ -31,7 +31,7 @@ const InfoStep = () => {
                     <img
                       className={styles.chevronsRightIcon}
                       alt=""
-                      src="chevrons-right.svg"
+                      src="/chevrons-right.svg"
                     />
                   </div>
                 </div>
@@ -55,7 +55,7 @@ const InfoStep = () => {
                   <img
                     className={styles.chevronsRightIcon1}
                     alt=""
-                    src="chevrons-right.svg"
+                    src="/chevrons-right.svg"
                   />
                 </div>
               </div>

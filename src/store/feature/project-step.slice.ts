@@ -3,13 +3,15 @@ interface ProjectStepState {
     projectName: string, 
     isVisible: boolean, 
     currentStep: number ,
-    currentSubStepOfOne: number
+    currentSubStepOfOne: number,
+    currentSubStepOfLastStep?: number
 }
 const initialState: ProjectStepState = {
     projectName: '',
     isVisible: false,
     currentStep: 1,
-    currentSubStepOfOne: 1
+    currentSubStepOfOne: 1,
+    currentSubStepOfLastStep: 1
 }
 const projectStepSlice = createAppSlice({
     name: 'projectStep',
@@ -24,6 +26,9 @@ const projectStepSlice = createAppSlice({
         updateCurrentSubStepOne: create.reducer<number>((state, action) => {
             state.currentSubStepOfOne = action.payload;
         }),
+        updateCurrentSubStepOfLastStep: create.reducer<number>((state, action) => {
+            state.currentSubStepOfLastStep = action.payload;
+        }),
         updateIsStepVisible: create.reducer<boolean>((state, action) => {
             state.isVisible = action.payload;
         })
@@ -31,5 +36,5 @@ const projectStepSlice = createAppSlice({
 
 });
 
-export const {updateCurrentStep , updateIsStepVisible, updateProjectStepProjectName, updateCurrentSubStepOne} = projectStepSlice.actions
+export const {updateCurrentStep , updateIsStepVisible, updateProjectStepProjectName, updateCurrentSubStepOne, updateCurrentSubStepOfLastStep} = projectStepSlice.actions
 export default projectStepSlice.reducer;

@@ -6,6 +6,7 @@ import ProjectStep2Component from "./step2/project-step2.component";
 import ProjectStep3Component from "./step3/project-step3.component";
 import { useEffect } from "react";
 import Payment from "./step4/payment.component";
+import PaymentStepComponent from "./step4/payment-step.component";
 
 const AddEditComponent = () => {
   const projectDetailState = useAppSelector(
@@ -28,7 +29,7 @@ const AddEditComponent = () => {
     ),
     2: <ProjectStep2Component />,
     3: <ProjectStep3Component />,
-    4: <Payment></Payment>
+    4: <PaymentStepComponent  currentStep={projectStepState.currentSubStepOfLastStep || 1}></PaymentStepComponent>
   };
   return (
     <>

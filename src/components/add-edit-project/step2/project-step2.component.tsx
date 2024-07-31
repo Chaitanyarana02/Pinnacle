@@ -30,7 +30,8 @@ import { updatePrice } from "../../../store/feature/price-category.slice";
 import { Toast } from "primereact/toast";
 import { NotificationTypeEnum } from "../../../enums/notificationType.enum";
 import UtilityService from "../../../services/utilit.service";
-
+import { ActionCreators } from 'redux-undo';
+import { store } from "../../../store/store";
 const ProjectStep2Component = () => {
   const toast = useRef<Toast>(null);
   const projectDetailState = useAppSelector(
@@ -483,14 +484,18 @@ const ProjectStep2Component = () => {
                   rounded
                   severity="secondary"
                   className="mr-2"
-                  onClick={() => {}}
+                  onClick={() => {
+                    store.dispatch(ActionCreators.undo())
+                  }}
                 />
                 <Button
                   label="Redo"
                   icon="pi pi-angle-right"
                   rounded
                   severity="secondary"
-                  onClick={() => {}}
+                  onClick={() => {
+                    store.dispatch(ActionCreators.redo())
+                  }}
                 />
               </div>
               <span className="text-primary align-content-center">

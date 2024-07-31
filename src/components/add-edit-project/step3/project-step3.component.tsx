@@ -1,6 +1,6 @@
 import { Button } from "primereact/button";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
-import { updateCurrentStep } from "../../../store/feature/project-step.slice";
+import { updateCurrentStep, updateCurrentSubStepOfLastStep, updateIsStepVisible } from "../../../store/feature/project-step.slice";
 import { Divider } from "primereact/divider";
 import {
   ProjectAreas,
@@ -193,7 +193,6 @@ const ProjectStep3Component = () => {
         }
       });
     });
-    console.log(tableData);
 
     setTableData(tableData);
   };
@@ -249,7 +248,7 @@ const ProjectStep3Component = () => {
                 floorIndex
               )}
               <div
-                className="mt-3 pl-4"
+                className="mt-3 pl-4 mb-4"
                 style={{
                   borderLeft: "1px solid #DDD",
                 }}
@@ -486,8 +485,9 @@ const ProjectStep3Component = () => {
           }}
           onClick={() => {
             dispatch(updateProjectDetails(projectDetailState.projectDetail)).then(() => {
-            
+              dispatch(updateIsStepVisible(false))
               dispatch(updateCurrentStep(4));
+              dispatch(updateCurrentSubStepOfLastStep(1));
               
             })
           }}

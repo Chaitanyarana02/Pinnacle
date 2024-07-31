@@ -159,7 +159,7 @@ const DefineRoomsComponent = () => {
                   })}
                   <div>
                     <b
-                      className="text-primary mt-3 w-2"
+                      className="text-primary mt-3 w-2 cursor-pointer"
                       onClick={() => {
                     
                         setDialogState("");
@@ -171,7 +171,7 @@ const DefineRoomsComponent = () => {
                         setAddEditDialog(true);
                       }}
                     >
-                      <i className="pi pi-plus" /> Add another
+                      <i className="pi pi-plus " /> Add another
                     </b>
                   </div>
                 </div>
