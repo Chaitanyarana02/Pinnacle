@@ -1,12 +1,10 @@
 import { Button } from "primereact/button";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import { updateCurrentStep, updateCurrentSubStepOfLastStep, updateIsStepVisible } from "../../../store/feature/project-step.slice";
-import { Divider } from "primereact/divider";
 import {
   ProjectAreas,
   ProjectAreaFloors,
   ProjectFloorFunction,
-  ProjectAreaSystemDetails,
 } from "../../../interfaces/project.interface";
 import { useEffect, useRef, useState } from "react";
 import ProjectService from "../../../services/project.service";
@@ -15,7 +13,6 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import OptionRendererComponent from "./option-renderer.component";
 import { updateFunctionOptions } from "../../../store/feature/project-detail.slice";
-import { func } from "prop-types";
 import { updateProjectDetails } from "../../../store/feature/project-list.slice";
 import { Toast } from "primereact/toast";
 export interface CustomizationProductOptions {
@@ -63,8 +60,8 @@ enum TableDataTypeEnum {
 
 interface ProductAllPrice {
   [id: number]: {
-    optionsMetaByValue: { [key: string]: string | boolean };
     optionsMetaById: { [key: number]: string | boolean };
+    optionsType: { [key: number]: string}
     price: number;
   }[];
 }
@@ -138,7 +135,7 @@ const ProjectStep3Component = () => {
       });
       setCustomizationOptions(customizationOptions);
 
-      ProjectService.getAllProductCustomizationPrice().then((res) => {
+      ProjectService.getAllProductCustomizationPrice(productIds).then((res) => {
         const data: ProductAllPrice = res?.data?.data || [];
         setAllProductPrice(data);
       });
@@ -156,10 +153,11 @@ const ProjectStep3Component = () => {
               if(prod) {
                 console.log(Object.values(fun.systemDetails).join('') , prod);
                 
-                const p = prod.find(cat => Object.values(cat.optionsMetaByValue).join('_') === Object.values(fun.systemDetails).join('_'))?.price || 0;
+                const p = prod.find(cat => Object.values(cat.optionsMetaById).join('_') === Object.values(fun.systemDetails).join('_'))?.price || 0;
                 price += p * fun.count
               }
             });
+
           });
         });
       });
@@ -409,7 +407,7 @@ const ProjectStep3Component = () => {
                                         .data as CustomizationProductOptions
                                     ).productId
                                 )
-                                ?.systemDetails as { [key: string]: string | boolean; }
+                                ?.systemDetails as { [key: number]: string | boolean; }
 
                                 return  data2
                               })()
@@ -478,7 +476,7 @@ const ProjectStep3Component = () => {
         </div>
 
         <div
-          className="bg-primary align-content-center pl-2 pr-2"
+          className="bg-primary align-content-center pl-2 pr-2 cursor-pointer"
           style={{
             height: "40px",
             borderTop: "1px solid #DDD",

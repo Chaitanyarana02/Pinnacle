@@ -31,8 +31,8 @@ class ProjectService {
     static getProductsByCategoryOptions(ids: number[]) {
         return axios.get(`${UtilityService.getBaseUrl()}api/users/products/customization-options?productIds=${ids.join(',')}`)
     }
-    static getAllProductCustomizationPrice() {
-        return axios.get(`${UtilityService.getBaseUrl()}api/users/products/price`)
+    static getAllProductCustomizationPrice(ids: number[]) {
+        return axios.get(`${UtilityService.getBaseUrl()}api/users/projects/price?ids=${ids.join(',')}`)
     }
     static deleteProject(id: number) {
         return axios.delete(`${UtilityService.getBaseUrl()}api/users/projects/${id}`)

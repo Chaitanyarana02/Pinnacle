@@ -53,7 +53,7 @@ export interface ProjectFloorFunction {
 
 // need to update this for last step
 export interface ProjectAreaSystemDetails {
-    [key: string]: string | boolean
+    [key: number]: string | boolean
 }
 export interface DefaultProduct {
     name: string;

@@ -14,7 +14,6 @@ import {
   addFunctionsToRoom,
   removeRoomFunction,
   updateRoomFunction,
-  updateRoomSelection,
 } from "../../../store/feature/project-detail.slice";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import { DndProvider } from "react-dnd";
@@ -565,7 +564,7 @@ const ProjectStep2Component = () => {
           </div>
         </div>
         <div
-          className="bg-primary align-content-center pl-2 pr-2"
+          className="bg-primary align-content-center pl-2 pr-2 cursor-pointer"
           style={{
             height: "40px",
             borderTop: "1px solid #DDD",
