@@ -1,6 +1,11 @@
 import { Button } from "primereact/button";
+import { useAppDispatch } from "../../../store/store.utils";
+import { updateCurrentStep, updateCurrentSubStepOfLastStep, updateCurrentSubStepOne, updateIsStepVisible } from "../../../store/feature/project-step.slice";
+import { useNavigate } from "react-router-dom";
 
 const DeliveryConfirmComponent = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
     return (
         <div className="flex flex-column flex-wrap w-full align-content-center mt-6">
         <div className="text-3xl font-bold flex align-items-center justify-content-center mt-3">
@@ -17,7 +22,13 @@ const DeliveryConfirmComponent = () => {
             label="Track Order"
             rounded
             severity="secondary"
-            onClick={() => {}}
+            onClick={() => {
+              dispatch(updateCurrentStep(1));
+              dispatch(updateCurrentSubStepOne(1));
+              dispatch(updateCurrentSubStepOfLastStep(1));
+              dispatch(updateIsStepVisible(true));
+              navigate('/dashboard')
+            }}
           />
         </div>
       </div>

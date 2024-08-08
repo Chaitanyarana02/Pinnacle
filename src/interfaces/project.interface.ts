@@ -1,5 +1,6 @@
 import { CustomizationProductTypeEnum } from "../enums/customizationProduct.enum";
 import { projectColorScheme, projectResidentType, projectScope, projectStatus, projectType } from "../enums/project.enum";
+import { UndoRedoEventName } from "../enums/undoRedoEventName.enum";
 
 export interface ProjectBasicDetail {
     id?: number;
@@ -49,11 +50,18 @@ export interface ProjectFloorFunction {
     systemDetails: ProjectAreaSystemDetails
 
 }
+export interface UndoRedoStack {
+    eventName: UndoRedoEventName,
+    data: {
+      roomId: number,
+      functions: ProjectFloorFunction[]
+    }[]
+  }
 
 
 // need to update this for last step
 export interface ProjectAreaSystemDetails {
-    [key: number]: string | boolean
+    [key: string]: string | boolean
 }
 export interface DefaultProduct {
     name: string;

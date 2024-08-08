@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   createProjectApi,
   deleteProjectApi,
@@ -22,6 +22,8 @@ import { useNavigate } from "react-router-dom";
 import { setProjectDetail } from "../../store/feature/project-detail.slice";
 import { updateProjectStepProjectName } from "../../store/feature/project-step.slice";
 import { Avatar } from "primereact/avatar";
+import { Menu } from "primereact/menu";
+import { useCookies } from "react-cookie";
 
 const ProjectDashboard = () => {
   const user = useAppSelector((state) => state.userDataSlice);
@@ -69,6 +71,22 @@ const ProjectDashboard = () => {
     [projectStatus.pending]: "TECH DETAILS PENDING",
     [projectStatus.delivered]: "DELIVERY COMPLETED",
   };
+  const [, setCookie] = useCookies(["userData"]);
+  const menuLeft = useRef(null);
+  const items = [
+      {
+          label: 'Account',
+          items: [
+              {
+                  label: 'Log Out',
+                  command: () => {
+                    setCookie('userData' , '');
+                    navigate('/login');
+                  }
+              }
+          ]
+      }
+  ];
   useEffect(() => {
     dispatch(fetchProjectList());
   }, []);
@@ -111,7 +129,9 @@ const ProjectDashboard = () => {
             }
           }>PINNAQLE</div>
           <div>
-            <div className="flex">
+            <div className="flex cursor-pointer"   onClick={(event) => {
+                      menuLeft?.current?.toggle?.(event);
+                    }}>
               {user.userData.id ? (
                 <>
                   <Avatar
@@ -119,6 +139,7 @@ const ProjectDashboard = () => {
                     label={user.userData.name[0].toUpperCase()}
                     style={{ backgroundColor: "#9c27b0", color: "#ffffff" }}
                     shape="circle"
+                  
                   />
                   <div className="pl-2">
                     <span className="font-bold">{user.userData.name}</span>
@@ -127,13 +148,16 @@ const ProjectDashboard = () => {
                   </div>
                 </>
               ) : null}
+
             </div>
+            <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+
           </div>
         </div>
         <main className={styles.dashboardInner}>
           <div className={styles.frameParent}>
             <div className={styles.frameGroup}>
-              <div className={styles.yourProjectsWrapper}>
+              <div className="">
                 <h1 className={styles.yourProjects}>Your Projects</h1>
               </div>
               <Button
@@ -401,9 +425,9 @@ const ProjectDashboard = () => {
               <div className={styles.frameContainer}>
                 {productListState.projectList.map((projectDetail) => {
                   return (
-                    <div className={styles.frameDiv} key={projectDetail.id}>
-                      <div className={styles.frameParent1}>
-                        <div className={styles.projectParentFrame}>
+                    <div className={styles.frameDiv + ' w-25rem'} key={projectDetail.id}>
+                      <div className={styles.frameParent1 + ' w-25rem'}>
+                        <div >
                           <h3 className="text-2xl mt-0">
                             {projectDetail.name}
                           </h3>
@@ -477,7 +501,7 @@ const ProjectDashboard = () => {
                         </div>
                       </div>
                       <div
-                        className={styles.techDetailsPendingWrapper}
+                        className={styles.techDetailsPendingWrapper + ' w-25rem'}
                         style={{
                           backgroundColor:
                             projectStatusColors[

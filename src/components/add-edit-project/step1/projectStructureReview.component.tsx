@@ -59,19 +59,17 @@ const ProjectStructureReviewComponent = () => {
                                   >
                                     {area.floors.map((floor) => {
                                       return (
-                                        <div className="flex justify-content-between  w-full ">
+                                        <div className="flex justify-content-between  w-full mt-2">
                                           <div>
                                             <span className="text-xl font-semibold text-500 mb-5">
                                               {floor.name}
                                             </span>
                                           </div>
-                                          <div className="w-15rem">
-                                            {floor.floorRooms.map((room) => (
-                                              <>
-                                                <span className="text-xl font-semibold text-500">
-                                                  {room.name} |{" "}
-                                                </span>
-                                              </>
+                                          <div className="w-15rem flex flex-wrap">
+                                            {floor.floorRooms.map((room, roomIndex, rooms) => (
+                                                <div className= {rooms.length -1 === roomIndex ? "text-xl font-semibold text-500 ml-2 mt-1" : "text-xl font-semibold text-500 ml-2 mt-1 border-right-3 border-400 pr-2"}>
+                                                  {room.name}
+                                                </div>
                                             ))}
                                           </div>
                                         </div>

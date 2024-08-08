@@ -32,7 +32,7 @@ class ProjectService {
         return axios.get(`${UtilityService.getBaseUrl()}api/users/products/customization-options?productIds=${ids.join(',')}`)
     }
     static getAllProductCustomizationPrice(ids: number[]) {
-        return axios.get(`${UtilityService.getBaseUrl()}api/users/projects/price?ids=${ids.join(',')}`)
+        return axios.get(`${UtilityService.getBaseUrl()}api/users/products/price?ids=${ids.join(',')}`)
     }
     static deleteProject(id: number) {
         return axios.delete(`${UtilityService.getBaseUrl()}api/users/projects/${id}`)
@@ -72,6 +72,9 @@ class ProjectService {
     }
     static loginUser(data: LoginData) {
         return axios.post(`${UtilityService.getBaseUrl()}api/users/login`, data)
+    }
+    static autoRecommendProduct() {
+        return axios.get(`${UtilityService.getBaseUrl()}api/admin/room`)
     }
 } 
 export default ProjectService;

@@ -4,7 +4,7 @@ import ProfessionalsPage from "./components/static/ProfessionalsPage/Professiona
 import HomeOwners from "./components/static/homeOwners/homeOwners";
 import Hompage from "./components/static/homePage/Hompage";
 import Login from "./components/Login/loginComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddEditComponent from "./components/add-edit-project/add-edit.component";
 import axios from "axios";
 import ProjectDashboard from "./components/add-edit-project/projectDashboard.component";
@@ -12,17 +12,38 @@ import Payment from "./components/add-edit-project/step4/payment.component";
 import SignUp from "./components/Login/signUp.component";
 import { CookiesProvider, useCookies } from "react-cookie";
 import StaticPageComponent from "./components/static/static-page.component";
+import { useAppDispatch } from "./store/store.utils";
+import { setUserData } from "./store/feature/user-data.slice";
+import { UserList } from "./interfaces/users.interface";
 
 function App() {
   const navigate = useNavigate();
-  const [cookie] = useCookies(["token"]);
-  axios.defaults.headers.common["authtoken"] = cookie["token"];
+  const dispatch = useAppDispatch();
+  const [cookie] = useCookies(["userData"]);
+
+  try {
+    axios.defaults.headers.common["authtoken"] = cookie["userData"]?.accessToken;
+    
+  } catch (e) {
+    axios.defaults.headers.common["authtoken"] = "";
+  }
+  useEffect(() => {
+
+    if(!axios.defaults.headers.common["authtoken"]) {
+      dispatch(setUserData({} as UserList));
+      navigate("/login");
+    }else {
+      dispatch(setUserData(cookie["userData"] as UserList))
+    }
+  }, [])
+
   axios.interceptors.response.use(
     (config) => {
       return config;
     },
     (error) => {
       if (error.response.status === 401) {
+      dispatch(setUserData({} as UserList));
         navigate("/login");
       }
       return Promise.reject(error);

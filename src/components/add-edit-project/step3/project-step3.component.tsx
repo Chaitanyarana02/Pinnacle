@@ -61,6 +61,9 @@ enum TableDataTypeEnum {
 interface ProductAllPrice {
   [id: number]: {
     optionsMetaById: { [key: number]: string | boolean };
+    optionMetaByValue: { [key: string]: string | boolean };
+    optionTypeByValue: { [key: string]: string | boolean };
+    optionTypeById: { [key: string]: string | boolean };
     optionsType: { [key: number]: string}
     price: number;
   }[];
@@ -150,11 +153,34 @@ const ProjectStep3Component = () => {
             room.functions.forEach(fun => {
               const prod = allProductPrice[fun.id];
               
-              if(prod) {
-                console.log(Object.values(fun.systemDetails).join('') , prod);
+              if(prod && Object.values(fun.systemDetails || {}).length) {
+                const catType = prod[0].optionTypeByValue;
+                const findingProduct: {[key: string]: string | number | boolean} = {}
+                Object.keys(fun.systemDetails || {}).forEach(key => {
+                  if(catType[key] === CustomizationProductTypeEnum.SIZE) {
+                    findingProduct[key] = 1
+                  }else if(catType[key] === CustomizationProductTypeEnum.QUANTITY) {
+                    findingProduct[key] = 1
+                  }else {
+                    findingProduct[key] = fun.systemDetails[key]
+                  }
+                });
                 
-                const p = prod.find(cat => Object.values(cat.optionsMetaById).join('_') === Object.values(fun.systemDetails).join('_'))?.price || 0;
-                price += p * fun.count
+                const prodPrice =  prod.find(cat => Object.keys(cat?.optionMetaByValue || {}).map(key => cat?.optionMetaByValue?.[key] === findingProduct?.[key]));
+                
+                let subPrice: number = prodPrice?.price || 0;
+                Object.keys(prodPrice?.optionTypeByValue as unknown as object || {})?.forEach(key => {
+                  const type = prodPrice?.optionTypeByValue?.[key] || '';
+                  if(type === CustomizationProductTypeEnum.SIZE) {
+                    const sizes = fun.systemDetails[key]?.toString()?.split(',');
+                    const size = (parseInt(sizes[0]) + parseInt(sizes[1])) || 1;
+                    subPrice = size * subPrice
+                  }
+                  if(type === CustomizationProductTypeEnum.QUANTITY) {
+                    subPrice = parseInt(fun.systemDetails[key] as string) * subPrice
+                }
+                });
+                price += subPrice * fun.count
               }
             });
 

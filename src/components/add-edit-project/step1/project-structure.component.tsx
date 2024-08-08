@@ -45,8 +45,9 @@ const BuildingAreasComponent = () => {
       if(!projectDetailState.projectDetail.buildingAreas.length) {
         dispatch(getDefaultConfig())
 
+      }else {
+        dispatch(fetchProjectDetail(id));
       }
-      // dispatch(fetchProjectDetail(id));
     } else {
       dispatch(getDefaultConfig())
     

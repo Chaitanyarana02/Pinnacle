@@ -7,12 +7,16 @@ import {
   RoomFunctions,
   DefaultProduct,
   ProjectFloorFunction,
+  UndoRedoStack,
 } from "../../../interfaces/project.interface";
 import {
   addFunctionToAllRoom,
   addFunctionToRoom,
   addFunctionsToRoom,
+  autoRecombedProducts,
+  removeAllRoomFunction,
   removeRoomFunction,
+  undoRedoState,
   updateRoomFunction,
 } from "../../../store/feature/project-detail.slice";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
@@ -31,6 +35,8 @@ import { NotificationTypeEnum } from "../../../enums/notificationType.enum";
 import UtilityService from "../../../services/utilit.service";
 import { ActionCreators } from 'redux-undo';
 import { store } from "../../../store/store";
+import { UndoRedoEventName } from "../../../enums/undoRedoEventName.enum";
+
 const ProjectStep2Component = () => {
   const toast = useRef<Toast>(null);
   const projectDetailState = useAppSelector(
@@ -40,7 +46,8 @@ const ProjectStep2Component = () => {
   const [products, setProducts] = useState<RoomFunctions[]>([]);
   const [defaultProducts, setDefaultProducts] = useState<DefaultProduct[]>([]);
   const [price, setPrice] = useState<{min: number, max: number}>()
-
+  const [undoStack, setUndoStack] = useState<UndoRedoStack[]>([])
+  const [redoStack, setRedoStack] = useState<UndoRedoStack[]>([])
   const dispatch = useAppDispatch();
   useEffect(() => {
       ProjectService.getProductsCategoryWise().then((res) => {
@@ -85,7 +92,6 @@ const ProjectStep2Component = () => {
           floor.floorRooms.forEach(room => {
             room.functions.forEach(fun => {
               const prod = defaultProducts.find(p => p.id === fun.id);
-              console.log(prod , fun, defaultProducts);
               
               if(prod) {
                 price.min += fun.count * prod.minPrice;
@@ -98,7 +104,6 @@ const ProjectStep2Component = () => {
     });
     price.max += (price.max * priceCategory.value/100);
     price.min += (price.min * priceCategory.value/100);
-    console.log('price updated' , price);
     
     setPrice({...price});
   },[projectDetailState , defaultProducts , priceCategory])
@@ -233,7 +238,14 @@ const ProjectStep2Component = () => {
                       <div className="w-full" key={roomIndex}>
                         <div className="flex justify-content-between mt-4">
                           <div className="text-xl text-1000">{room.name}</div>
-                          <div className="text-primary">Reset</div>
+                          <div className="text-primary" onClick={() => {
+                            dispatch(removeAllRoomFunction({
+                              buildingAreaIndex,
+                              areaIndex,
+                              floorIndex,
+                              roomIndex,
+                            }))
+                          }}>Reset</div>
                         </div>
                         <DropZone
                           room={room}
@@ -255,6 +267,20 @@ const ProjectStep2Component = () => {
                                 },
                               })
                             );
+                            setUndoStack([...undoStack ,{
+                              eventName: UndoRedoEventName.ADDED,
+                              data: [{
+                                roomId: room.id as number,
+                                functions: [{
+                                  name: item.name,
+                                  count: 1,
+                                  id: item.id,
+                                  categoryId: item.categoryId,
+                                  systemDetails: {}
+                                }]
+                              }]
+                            }]);
+                            setRedoStack([]);
                           }}
                           setProducts= {
                             (newProducts :ProjectFloorFunction[] ) => {
@@ -267,7 +293,14 @@ const ProjectStep2Component = () => {
                                   values: newProducts
                                 })
                               );
-
+                              setUndoStack([...undoStack,{
+                                eventName: UndoRedoEventName.ADDED,
+                                data: [{
+                                  roomId: room.id as number,
+                                  functions:[...newProducts]
+                                }]
+                              }]);
+                              setRedoStack([]);
                             }
                           }
                           removeProduct={(functionIndex: number) => {
@@ -279,7 +312,16 @@ const ProjectStep2Component = () => {
                                 roomIndex,
                                 functionIndex,
                               })
+                              
                             );
+                            setUndoStack([...undoStack , {
+                              eventName: UndoRedoEventName.DELETED,
+                              data: [{
+                                roomId: room.id as number,
+                                functions:[room.functions[functionIndex]]
+                              }]
+                            }]);
+                            setRedoStack([]);
 
                           }}
                           updateProduct={(functionIndex: number , count: number) => {
@@ -327,6 +369,7 @@ const ProjectStep2Component = () => {
       UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one Product for each room')
     }
   }
+
   return (
     <DndProvider backend={HTML5Backend}>
          <Toast ref={toast} />
@@ -471,7 +514,11 @@ const ProjectStep2Component = () => {
                   rounded
                   severity="secondary"
                   className="mt-2"
-                  onClick={() => {}}
+                  onClick={() => {
+                    dispatch(
+                      autoRecombedProducts(defaultProducts)
+                    )
+                  }}
                 />
               </div>
             </div>
@@ -484,7 +531,14 @@ const ProjectStep2Component = () => {
                   severity="secondary"
                   className="mr-2"
                   onClick={() => {
-                    store.dispatch(ActionCreators.undo())
+                    const undoData = undoStack.pop();
+                    if(undoData) {
+                      setUndoStack([...undoStack]);
+                      dispatch(undoRedoState(undoData));
+                      undoData.eventName = undoData.eventName === UndoRedoEventName.ADDED  ? UndoRedoEventName.DELETED : UndoRedoEventName.ADDED;
+                      setRedoStack([...redoStack, undoData]);
+                    }
+                    
                   }}
                 />
                 <Button
@@ -493,7 +547,14 @@ const ProjectStep2Component = () => {
                   rounded
                   severity="secondary"
                   onClick={() => {
-                    store.dispatch(ActionCreators.redo())
+                    const redoData = redoStack.pop();
+                    if(redoData) {
+                      setRedoStack([...redoStack]);
+                      dispatch(undoRedoState(redoData));
+                      redoData.eventName = redoData.eventName === UndoRedoEventName.ADDED  ? UndoRedoEventName.DELETED : UndoRedoEventName.ADDED;
+                      setUndoStack([...undoStack, redoData]); //
+
+                    }
                   }}
                 />
               </div>

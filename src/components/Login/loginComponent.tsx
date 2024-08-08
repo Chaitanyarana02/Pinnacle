@@ -20,7 +20,7 @@ const Login: FunctionComponent = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const toast = useRef<Toast>(null);
-  const [, setCookie] = useCookies(['token']);
+  const [, setCookie] = useCookies(['userData']);
   const [checked, setChecked] = useState(false);
   const [formValues, setFormValues] = useState<LoginData>({
     email: "",
@@ -56,9 +56,8 @@ const Login: FunctionComponent = () => {
         .then((res: AxiosResponse<{data: {
           data : UserList
         }}>) => {
-          console.log(res);
           dispatch(setUserData(res?.data?.data?.data));
-          setCookie('token', res?.data?.data?.data?.accessToken);
+          setCookie('userData', res?.data?.data?.data);
         
           UtilityService.ShowNotification(
             toast,
@@ -71,7 +70,6 @@ const Login: FunctionComponent = () => {
           }, 3100);
         })
         .catch((e: AxiosError<{ error: { message: string } }>) => {
-          console.log(e);
           const error = e.response?.data.error?.message;
           UtilityService.ShowNotification(
             toast,
