@@ -202,7 +202,7 @@ const ProjectStep2Component = () => {
   ) => {
     return (
       <div
-        style={{ width: "50rem" }}
+        style={{ width: "58rem" }}
         key={buildingAreaIndex + "header" + areaIndex + "_" + floorIndex}
       >
         <div className="flex justify-content-between align-content-center">

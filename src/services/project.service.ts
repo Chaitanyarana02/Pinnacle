@@ -1,6 +1,6 @@
 import axios from "axios";
 import UtilityService from "./utilit.service";
-import { BuildingAreas, ProjectDetail } from "../interfaces/project.interface";
+import { BuildingAreas } from "../interfaces/project.interface";
 import { projectType, projectResidentType, projectScope, projectColorScheme, ProjectStatus } from "../enums/project.enum";
 import { UserSignUpData } from "../components/Login/signUp.component";
 import { LoginData } from "../components/Login/loginComponent";

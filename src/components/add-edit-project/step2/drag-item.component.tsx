@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useDrag } from "react-dnd";
 import { DefaultProduct } from "../../../interfaces/project.interface";
 import { Dialog } from "primereact/dialog";

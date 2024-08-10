@@ -9,10 +9,7 @@ const projectDetailMockData: ProjectDetail = {
     projectScope: projectScope.newBuild,
     projectColorScheme: projectColorScheme.white,
     projectStatus: ProjectStatus.pending,
-    buildingAreas: {
-        indoorArea: [],
-        outDoorArea: [],
-    }
+    buildingAreas: []
 };
 
 export default projectDetailMockData;

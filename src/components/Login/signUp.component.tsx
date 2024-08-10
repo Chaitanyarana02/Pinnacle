@@ -39,7 +39,7 @@ const SignUp: FunctionComponent = () => {
     companyAddress: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: {target: {name: string , value: string}}) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };

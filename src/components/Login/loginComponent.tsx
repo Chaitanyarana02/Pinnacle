@@ -46,7 +46,7 @@ const Login: FunctionComponent = () => {
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: {target: {name: string , value: string}}) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
