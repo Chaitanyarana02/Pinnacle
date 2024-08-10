@@ -1,5 +1,5 @@
 import { CustomizationProductTypeEnum } from "../enums/customizationProduct.enum";
-import { projectColorScheme, projectResidentType, projectScope, projectStatus, projectType } from "../enums/project.enum";
+import { projectColorScheme, projectResidentType, projectScope, ProjectStatus, projectType } from "../enums/project.enum";
 import { UndoRedoEventName } from "../enums/undoRedoEventName.enum";
 
 export interface ProjectBasicDetail {
@@ -10,7 +10,8 @@ export interface ProjectBasicDetail {
     projectResidentType: projectResidentType;
     projectScope: projectScope;
     projectColorScheme: projectColorScheme;
-    projectStatus?: projectStatus;
+    projectStatus?: ProjectStatus;
+    deliveryAddress?: string;
 
 }
 

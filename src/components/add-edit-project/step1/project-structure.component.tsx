@@ -2,8 +2,8 @@ import { Divider } from "primereact/divider";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useCallback, useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useParams } from "react-router-dom";
 import {
   fetchProjectDetail,
   updateProjectData,
@@ -33,7 +33,6 @@ const BuildingAreasComponent = () => {
     (state) => state.projectDetailState
   );
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -118,7 +117,7 @@ const BuildingAreasComponent = () => {
           <div className="m-auto max-w-max text-4xl font-semibold">
             Define building areas
           </div>
-          <p className="text-500 text-lg mt-3">
+          <p className="text-500 text-lg mt-3 pl-4 pr-4">
             Choose the areas included in your building by selecting from the
             options below. These are grouped by Indoor and Outdoor locations.
           </p>
@@ -129,7 +128,7 @@ const BuildingAreasComponent = () => {
               className="flex w-full justify-content-center p-5"
               key={buildingAreaIndex}
             >
-              <div style={{ width: "58rem" }}>
+              <div style={{ maxWidth: "55rem" , padding: '5px'}}>
                 <div className="w-full">
                   <span className="text-2xl font-semibold">
                     {buildingArea.name}
@@ -163,6 +162,7 @@ const BuildingAreasComponent = () => {
                           </span>
                         </div>
                         <InputText
+                        className="mr-3"
                           placeholder={area.name}
                           value={area.name}
                           onChange={(e) =>

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
+import { useAppSelector } from "../../../store/store.utils";
 import ContractComponent from "./contract-approvel.component";
 import PaymentConfirmedComponent from "./payment-confirmed";
 import DeliveryConfirmComponent from "./delevery-confirm.component";
@@ -7,7 +7,8 @@ import DeliveryConfirmComponent from "./delevery-confirm.component";
 const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
   const projectDetail = useAppSelector((state) => state.projectDetailState);
   const stepState = useAppSelector((state) => state.projectStepState);
-  const dispatch = useAppDispatch();
+  const price = useAppSelector(state => state.priceValueSlice);
+  const userData = useAppSelector(state => state.userDataSlice)
   const components: { [key: number]: ReactNode } = {
     1: <ContractComponent />,
     2: <PaymentConfirmedComponent/>,
@@ -83,7 +84,6 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
             </div>
           </div>
         </div>
-        *
         <div className="flex justify-content-center flex-wrap mt-5">
           <div className="bg-gray-100 w-25rem p-4 pl-5 border-round-3xl">
             <div className="border-bottom-1 border-black-alpha-20 pb-3 text-xl font-semibold text-500">
@@ -125,11 +125,11 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
                 <span className="font-semibold text-600 text-xl">
                   Final Price:
                 </span>
-                <span className="font-semibold text-xl"> £2,350</span>
+                <span className="font-semibold text-xl"> £{price.value}</span>
               </div>
               <div>
                 <span className="font-semibold text-600 text-xl">Rebate:</span>
-                <span className="font-semibold text-xl"> £350</span>
+                <span className="font-semibold text-xl"> £{userData.userData.rebateRate}</span>
               </div>
             </div>
 

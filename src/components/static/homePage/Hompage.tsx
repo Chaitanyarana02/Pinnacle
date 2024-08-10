@@ -150,7 +150,9 @@ const Hompage: FunctionComponent = () => {
             and designed for everyone.
           </span>
         </h3>
-        <Button className={styles.button} severity="info" rounded >
+        <Button className={styles.button} severity="info" rounded onClick={() => {
+                navigate('/dashboard');
+               }}>
           <span className={styles.buttonLabel}>Get Started</span>
         </Button>
       </section>
@@ -280,7 +282,9 @@ const Hompage: FunctionComponent = () => {
               home.
             </div>
           </div>
-          <Button className={styles.button} severity="info" rounded >
+          <Button className={styles.button} severity="info" rounded onClick={() => {
+                navigate('/dashboard');
+               }}>
             <span className={styles.buttonLabel}>Get Started</span>
         </Button>
         </div>
@@ -455,7 +459,9 @@ const Hompage: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <Button className={styles.button} severity="info" rounded >
+        <Button className={styles.button} severity="info" rounded onClick={() => {
+                navigate('/dashboard');
+               }}>
           <span className={styles.buttonLabel}>Get Started</span>
         </Button>
       </section>
@@ -542,7 +548,9 @@ const Hompage: FunctionComponent = () => {
             automation system.
           </p>
         </h1>
-        <Button className={styles.button} severity="info" rounded >
+        <Button className={styles.button} severity="info" rounded onClick={() => {
+                navigate('/dashboard');
+               }}>
           <span className={styles.buttonLabel}>Get Started</span>
         </Button>
       </section>

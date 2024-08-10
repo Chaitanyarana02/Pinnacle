@@ -19,7 +19,7 @@ export enum projectColorScheme {
     black = 'BLACK',
     Mixed = 'MIXED',
 }
-export enum projectStatus {
+export enum ProjectStatus {
     pending = 'pending',
     transition = 'transition',
     delivered = 'delivered',

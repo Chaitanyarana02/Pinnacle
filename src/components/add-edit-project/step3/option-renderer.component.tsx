@@ -24,7 +24,12 @@ const OptionRendererComponent = ({
         }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.SIZE) {
           valueChanged("1,1")
         }
-  }, [])
+  }, []);
+  const sizeValueChanged = (v: string, valueIndex: number) => {
+    const valueArr = (value[dataKey] as string)?.split(',');
+    valueArr[valueIndex] = v.toString();
+    valueChanged(valueArr.join(','));
+  }
   const renderers: {
     [key in CustomizationProductTypeEnum]: () => ReactElement;
   } = {
@@ -80,17 +85,17 @@ const OptionRendererComponent = ({
         className="w-4 mr-2"
         value={(value[dataKey] as string)?.split(',')[0]}
         onChange={(e) => {
-                        valueChanged(e.target.value)
+          sizeValueChanged(e.target.value , 0)
                       }}
                       placeholder="Width"/>
         <span className="font-bold">X</span>
         <InputText
         className="w-4 ml-2"
         type="number"
-        value={(value[dataKey] as string)?.split(',')[0]}
+        value={(value[dataKey] as string)?.split(',')[1]}
 
         onChange={(e) => {
-          valueChanged(e.target.value)
+          sizeValueChanged(e.target.value , 1)
         }}
         placeholder="Width"/>
     </div>,

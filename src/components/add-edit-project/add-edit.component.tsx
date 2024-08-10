@@ -5,7 +5,6 @@ import ProjectStep1Component from "./step1/project-step1.component";
 import ProjectStep2Component from "./step2/project-step2.component";
 import ProjectStep3Component from "./step3/project-step3.component";
 import { useEffect } from "react";
-import Payment from "./step4/payment.component";
 import PaymentStepComponent from "./step4/payment-step.component";
 
 const AddEditComponent = () => {

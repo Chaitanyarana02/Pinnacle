@@ -9,4 +9,5 @@ export interface UserList  {
     companyWebsite: string;
     companyAddress: string;
     accessToken?: string;
+    rebateRate?: number;
 }

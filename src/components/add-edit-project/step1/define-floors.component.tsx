@@ -2,7 +2,6 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../../store/store.utils";
 import { ProjectAreas } from "../../../interfaces/project.interface";
 import { Accordion, AccordionTab } from "primereact/accordion";
@@ -29,7 +28,6 @@ const DefineFloorsComponent = () => {
     (state) => state.projectDetailState
   );
   const dispatch = useAppDispatch();
-  const { id } = useParams();
 
   const addEditDialogFooter = (
     <>

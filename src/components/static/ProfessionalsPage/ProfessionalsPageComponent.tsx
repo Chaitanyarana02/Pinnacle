@@ -1,7 +1,9 @@
 import { FunctionComponent } from "react";
 import styles from "./ProfessionalsPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 const ProfessionalsPage: FunctionComponent = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.professionalsPage}>
       <section className={styles.content}>
@@ -21,7 +23,9 @@ const ProfessionalsPage: FunctionComponent = () => {
             You can easily tailor the system to the budget of your client
           </p>
         </div>
-        <button className={styles.button}>
+        <button className={styles.button} onClick={() => {
+                navigate('/dashboard');
+               }}>
           <div className={styles.label3}>Get Started</div>
         </button>
       </section>
@@ -126,7 +130,9 @@ const ProfessionalsPage: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <button className={styles.button}>
+        <button className={styles.button}  onClick={() => {
+                navigate('/dashboard');
+               }}>
           <div className={styles.label3}>Get Started</div>
         </button>
       </section>

@@ -1,4 +1,4 @@
-import { PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { createAppSlice } from "../store.utils";
 import ProjectService from "../../services/project.service";

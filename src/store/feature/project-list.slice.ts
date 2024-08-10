@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 import { createAppSlice } from "../store.utils";
 import ProjectService from "../../services/project.service";
 import { BuildingAreas, ProjectDetail } from "../../interfaces/project.interface";
-import { projectColorScheme, projectResidentType, projectScope, projectStatus, projectType } from "../../enums/project.enum";
+import { projectColorScheme, projectResidentType, projectScope, ProjectStatus, projectType } from "../../enums/project.enum";
 interface ProjectListState {
   projectList: ProjectDetail[];
   isLoading: boolean;
@@ -38,9 +38,10 @@ const projectListSlice = createAppSlice({
             colourScheme: projectColorScheme;
             requirementsMeta: Array<BuildingAreas>;
             creationStepsCompleted: string;
-            deliveryStatus: projectStatus;
+            deliveryStatus: ProjectStatus;
             createdAt: string;
             updatedAt: string;
+            deliveryAddress: unknown
           }[];
         }> = await ProjectService.getProjectList();
         const data: ProjectDetail[] = response.data.data.map(d => {
@@ -53,7 +54,8 @@ const projectListSlice = createAppSlice({
               projectScope: d.scope,
               projectColorScheme: d.colourScheme,
               projectStatus: d.deliveryStatus,
-              buildingAreas: d.requirementsMeta|| []
+              buildingAreas: d.requirementsMeta|| [],
+              deliveryAddress: JSON.stringify(d.deliveryAddress)
             };
         })
         return data;
@@ -79,10 +81,9 @@ const projectListSlice = createAppSlice({
           scope: project.projectScope,
           colourScheme: project.projectColorScheme,
           requirementsMeta: project.buildingAreas,
-          deliveryStatus: project.projectStatus || projectStatus.pending,
+          deliveryStatus: ProjectStatus.pending,
           creationStepsCompleted: 1,
         });
-        console.log(data);
         
         project.id = data.data.data.id;
           return project
@@ -108,8 +109,9 @@ const projectListSlice = createAppSlice({
           scope: project.projectScope,
           colourScheme: project.projectColorScheme,
           requirementsMeta: project.buildingAreas,
-          deliveryStatus: project.projectStatus || projectStatus.pending,
+          deliveryStatus: project.projectStatus || ProjectStatus.pending,
           creationStepsCompleted: 1,
+          deliveryAddress: JSON.parse(project?.deliveryAddress || '')
       });
         return project;
       },

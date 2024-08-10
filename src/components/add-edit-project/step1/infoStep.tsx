@@ -1,6 +1,4 @@
-import { useCallback } from "react";
 import styles from "./infoStep2.module.css";
-import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../store/store.utils";
 import { updateCurrentSubStepOne } from "../../../store/feature/project-step.slice";
 

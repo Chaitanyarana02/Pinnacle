@@ -33,10 +33,10 @@ import { updatePrice } from "../../../store/feature/price-category.slice";
 import { Toast } from "primereact/toast";
 import { NotificationTypeEnum } from "../../../enums/notificationType.enum";
 import UtilityService from "../../../services/utilit.service";
-import { ActionCreators } from 'redux-undo';
-import { store } from "../../../store/store";
 import { UndoRedoEventName } from "../../../enums/undoRedoEventName.enum";
-
+import jsPDF from "jspdf";
+import ProjectStructureReviewComponent from "../step1/projectStructureReview.component";
+import * as htmlToImage from 'html-to-image';
 const ProjectStep2Component = () => {
   const toast = useRef<Toast>(null);
   const projectDetailState = useAppSelector(
@@ -49,6 +49,33 @@ const ProjectStep2Component = () => {
   const [undoStack, setUndoStack] = useState<UndoRedoStack[]>([])
   const [redoStack, setRedoStack] = useState<UndoRedoStack[]>([])
   const dispatch = useAppDispatch();
+  function printDocument() {
+    try {
+      (document.getElementById('pdfDiv') as HTMLElement).style.display = 'block'
+
+    }catch (e) { 
+      console.log(e);
+      
+    }
+    htmlToImage.toPng(document.getElementById('pdfDiv') as HTMLElement, { quality: 0.95 })
+    .then(function (dataUrl) {
+      const link = document.createElement('a');
+      link.download = 'my-image-name.jpeg';
+      const pdf = new jsPDF();
+      const imgProps= pdf.getImageProperties(dataUrl);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(dataUrl, 'PNG', 0, 0,pdfWidth, pdfHeight);
+      pdf.save("download.pdf"); 
+      try {
+        (document.getElementById('pdfDiv') as HTMLElement).style.display = 'none'
+  
+      }catch (e) { 
+        console.log(e);
+        
+      }
+    });
+  }
   useEffect(() => {
       ProjectService.getProductsCategoryWise().then((res) => {
         const data = res.data.data
@@ -107,7 +134,6 @@ const ProjectStep2Component = () => {
     
     setPrice({...price});
   },[projectDetailState , defaultProducts , priceCategory])
-  // const products: RoomFunctions[] = [
   //   {
   //     categoryName: "Light",
   //     products: [
@@ -346,6 +372,7 @@ const ProjectStep2Component = () => {
             </Accordion>
           </div>
         </div>
+       
       </div>
     );
   };
@@ -403,7 +430,7 @@ const ProjectStep2Component = () => {
               severity="secondary"
               size="large"
               onClick={() => {
-                // Print sales brochure
+                printDocument();
                 console.log("Print sales brochure");
               }}
             />
@@ -635,6 +662,11 @@ const ProjectStep2Component = () => {
           Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
         </div>
       </div>
+      <div id="pdfDiv" style={{
+        display: 'none'
+      }}>
+        <ProjectStructureReviewComponent/>
+        </div>
     </DndProvider>
   );
 };

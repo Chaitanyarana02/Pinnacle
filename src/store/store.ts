@@ -9,7 +9,8 @@ import productCategoryReducer from './feature/project-category.slice'
 import productListReducer from './feature/product-list.slice'
 import defaultConfigSlice from './feature/default-config.slice'
 import userDataSlice from "./feature/user-data.slice";
-import priceCategorySlice from './feature/price-category.slice'
+import priceCategorySlice from './feature/price-category.slice';
+import priceValueSlice from './feature/priceValue.slice';
 export const store = configureStore({
     reducer: {
         projectListState: projectListReducer,
@@ -22,6 +23,7 @@ export const store = configureStore({
         defaultConfigState: defaultConfigSlice,
         userDataSlice: userDataSlice,
         priceCategorySlice: priceCategorySlice,
+        priceValueSlice: priceValueSlice
         // [apiSlice.reducerPath]: apiSlice.reducer
     },
     // middleware: (getDefaultMiddleWare) => {

@@ -1,4 +1,4 @@
-import { projectType, projectResidentType, projectScope, projectColorScheme, projectStatus } from "../enums/project.enum";
+import { projectType, projectResidentType, projectScope, projectColorScheme, ProjectStatus } from "../enums/project.enum";
 import { ProjectDetail } from "../interfaces/project.interface";
 
 const projectDetailMockData: ProjectDetail = {
@@ -8,7 +8,7 @@ const projectDetailMockData: ProjectDetail = {
     projectResidentType: projectResidentType.house,
     projectScope: projectScope.newBuild,
     projectColorScheme: projectColorScheme.white,
-    projectStatus: projectStatus.pending,
+    projectStatus: ProjectStatus.pending,
     buildingAreas: {
         indoorArea: [],
         outDoorArea: [],

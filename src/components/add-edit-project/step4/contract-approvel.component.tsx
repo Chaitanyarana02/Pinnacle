@@ -1,11 +1,13 @@
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { countyList } from "../../../mock/country-list";
-import { useAppDispatch } from "../../../store/store.utils";
+import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import { updateCurrentSubStepOfLastStep } from "../../../store/feature/project-step.slice";
+import { updateProjectDetails } from "../../../store/feature/project-list.slice";
+import { ProjectStatus } from "../../../enums/project.enum";
 interface addressInterFace {
   name: string;
   address: string;
@@ -16,6 +18,7 @@ interface addressInterFace {
 }
 const ContractComponent = () => {
   const [contractSigned, setContractSigned] = useState(false);
+  const projectState = useAppSelector((state) => state.projectDetailState);
   const dispatch = useAppDispatch();
   const [addressDialogVisible, setAddressDialogVisible] = useState(false);
   const [addressDialog, setAddressDialog] = useState<addressInterFace>({
@@ -26,6 +29,18 @@ const ContractComponent = () => {
     zip: "",
     country: "",
   });
+  useEffect(() => {
+    if (projectState.projectDetail.deliveryAddress) {
+      try {
+        const parsedAddress = JSON.parse(
+          projectState.projectDetail.deliveryAddress
+        );
+        setAddressDialog(parsedAddress);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, []);
   const addEditDialogFooter = (
     <>
       <Button
@@ -33,7 +48,14 @@ const ContractComponent = () => {
         style={{ float: "left" }}
         rounded
         onClick={() => {
-            dispatch(updateCurrentSubStepOfLastStep(2))
+          dispatch(
+            updateProjectDetails({
+              ...projectState.projectDetail,
+              projectStatus: ProjectStatus.transition,
+              deliveryAddress: JSON.stringify(addressDialog),
+            })
+          );
+          dispatch(updateCurrentSubStepOfLastStep(2));
         }}
       />
     </>

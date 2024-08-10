@@ -1,20 +1,19 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import ProfessionalsPage from "./components/static/ProfessionalsPage/ProfessionalsPageComponent";
 import HomeOwners from "./components/static/homeOwners/homeOwners";
 import Hompage from "./components/static/homePage/Hompage";
 import Login from "./components/Login/loginComponent";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AddEditComponent from "./components/add-edit-project/add-edit.component";
 import axios from "axios";
 import ProjectDashboard from "./components/add-edit-project/projectDashboard.component";
-import Payment from "./components/add-edit-project/step4/payment.component";
 import SignUp from "./components/Login/signUp.component";
 import { CookiesProvider, useCookies } from "react-cookie";
 import StaticPageComponent from "./components/static/static-page.component";
 import { useAppDispatch } from "./store/store.utils";
 import { setUserData } from "./store/feature/user-data.slice";
 import { UserList } from "./interfaces/users.interface";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
@@ -63,9 +62,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signUp" element={<SignUp />}></Route>
         <Route path="/dashboard" element={<ProjectDashboard />}></Route>
-        <Route path="/payment" element={<Payment />}></Route>
         <Route path="/add" element={<AddEditComponent />}></Route>
-        <Route path="/payment" element={<Payment />}></Route>
         <Route path="/edit/:id" element={<AddEditComponent />}></Route>
       </Routes>
     </>

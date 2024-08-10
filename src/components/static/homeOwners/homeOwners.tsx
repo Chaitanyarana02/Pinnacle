@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './homeOwners.module.css'
 
 const HomeOwners = () => {
+  const navigate = useNavigate()
   return (
     // <div className={styles.homeOwnerContainer}>
       <main className={styles.autoLayoutVerticalParent}>
@@ -80,7 +82,9 @@ const HomeOwners = () => {
             project.
           </div>
         </section>
-        <button className={styles.button}>
+        <button className={styles.button}  onClick={() => {
+                navigate('/dashboard');
+               }}>
           <div className={styles.label3}>Get Started</div>
         </button>
       </main>

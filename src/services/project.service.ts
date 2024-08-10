@@ -1,7 +1,7 @@
 import axios from "axios";
 import UtilityService from "./utilit.service";
 import { BuildingAreas, ProjectDetail } from "../interfaces/project.interface";
-import { projectType, projectResidentType, projectScope, projectColorScheme, projectStatus } from "../enums/project.enum";
+import { projectType, projectResidentType, projectScope, projectColorScheme, ProjectStatus } from "../enums/project.enum";
 import { UserSignUpData } from "../components/Login/signUp.component";
 import { LoginData } from "../components/Login/loginComponent";
 
@@ -45,7 +45,7 @@ class ProjectService {
         scope: projectScope;
         colourScheme: projectColorScheme;
         requirementsMeta:  Array<BuildingAreas>;
-        deliveryStatus: projectStatus;
+        deliveryStatus: ProjectStatus;
         creationStepsCompleted: number;
         
       }) {
@@ -59,9 +59,9 @@ class ProjectService {
         scope: projectScope;
         colourScheme: projectColorScheme;
         requirementsMeta:  Array<BuildingAreas>;
-        deliveryStatus: projectStatus;
+        deliveryStatus: ProjectStatus;
         creationStepsCompleted: number;
-        
+        deliveryAddress?: unknown;
       }) {
         console.log('update');
         
@@ -75,6 +75,13 @@ class ProjectService {
     }
     static autoRecommendProduct() {
         return axios.get(`${UtilityService.getBaseUrl()}api/admin/room`)
+    }
+    static sendForgotPassWord(email: string) {
+        const data = {
+            email,
+            otpFor: 'FORGOT PASSWORD'
+        }
+        return axios.post(`${UtilityService.getBaseUrl()}api/users/send-otp`, data)
     }
 } 
 export default ProjectService;

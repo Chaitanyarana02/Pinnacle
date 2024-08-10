@@ -15,7 +15,7 @@ import {
   projectColorScheme,
   projectResidentType,
   projectScope,
-  projectStatus,
+  ProjectStatus,
   projectType,
 } from "../../enums/project.enum";
 import { useNavigate } from "react-router-dom";
@@ -40,14 +40,14 @@ const ProjectDashboard = () => {
   } as ProjectBasicDetail);
 
   const projectStatusColors: {
-    [key in projectStatus]: { color: string; backGroundColor: string };
+    [key in ProjectStatus]: { color: string; backGroundColor: string };
   } = {
-    [projectStatus.transition]: {
+    [ProjectStatus.transition]: {
       color: "#9c9600",
       backGroundColor: "#fff5e2",
     },
-    [projectStatus.pending]: { color: "#919191", backGroundColor: "#eee" },
-    [projectStatus.delivered]: { color: "#039309", backGroundColor: "#e0f6e0" },
+    [ProjectStatus.pending]: { color: "#919191", backGroundColor: "#eee" },
+    [ProjectStatus.delivered]: { color: "#039309", backGroundColor: "#e0f6e0" },
   };
   const projectResidentLabels: {
     [key in projectResidentType]: string;
@@ -66,13 +66,13 @@ const ProjectDashboard = () => {
     [projectScope.systemInstallation]: "System Installation Only",
   };
 
-  const projectStatusLabels: { [key in projectStatus]: string } = {
-    [projectStatus.transition]: "IN TRANSIT",
-    [projectStatus.pending]: "TECH DETAILS PENDING",
-    [projectStatus.delivered]: "DELIVERY COMPLETED",
+  const projectStatusLabels: { [key in ProjectStatus]: string } = {
+    [ProjectStatus.transition]: "IN TRANSIT",
+    [ProjectStatus.pending]: "TECH DETAILS PENDING",
+    [ProjectStatus.delivered]: "DELIVERY COMPLETED",
   };
   const [, setCookie] = useCookies(["userData"]);
-  const menuLeft = useRef(null);
+  const menuLeft = useRef<Menu>(null);
   const items = [
       {
           label: 'Account',
@@ -120,14 +120,18 @@ const ProjectDashboard = () => {
     <>
       <div className={styles.dashboard}>
         <div className="flex justify-content-between bg-white w-full p-4">
-          <div style={
+          <div className="cursor-pointer" style={
             {
               fontSize: 'var(--font-size-18xl-3)',
               position: 'relative',
               lineHeight:'1.75rem',
               fontWeight: 600,
             }
-          }>PINNAQLE</div>
+          }
+          onClick={() => {
+            navigate('/');
+          }}
+          >PINNAQLE</div>
           <div>
             <div className="flex cursor-pointer"   onClick={(event) => {
                       menuLeft?.current?.toggle?.(event);
@@ -505,18 +509,18 @@ const ProjectDashboard = () => {
                         style={{
                           backgroundColor:
                             projectStatusColors[
-                              projectDetail.projectStatus as projectStatus
+                              projectDetail.projectStatus as ProjectStatus
                             ]?.backGroundColor,
                           color:
                             projectStatusColors[
-                              projectDetail.projectStatus as projectStatus
+                              projectDetail.projectStatus as ProjectStatus
                             ]?.color,
                         }}
                       >
                         <div className={styles.techDetailsPending}>
                           {
                             projectStatusLabels[
-                              projectDetail.projectStatus as projectStatus
+                              projectDetail.projectStatus as ProjectStatus
                             ]
                           }
                         </div>

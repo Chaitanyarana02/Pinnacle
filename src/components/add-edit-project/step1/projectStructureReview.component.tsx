@@ -5,7 +5,6 @@ import { Divider } from "primereact/divider";
 
 const ProjectStructureReviewComponent = () => {
   const dispatch = useAppDispatch();
-  const projectStepState = useAppSelector((state) => state.projectStepState);
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );

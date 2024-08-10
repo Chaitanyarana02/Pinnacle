@@ -1,9 +1,9 @@
-import { FunctionComponent, useCallback, useRef, useState } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import ProjectService from "../../services/project.service";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { InputText } from "primereact/inputtext";
 import { NotificationTypeEnum } from "../../enums/notificationType.enum";
 import UtilityService from "../../services/utilit.service";
@@ -67,7 +67,7 @@ const Login: FunctionComponent = () => {
       
           setTimeout(() => {
             navigate("/dashboard");
-          }, 3100);
+          }, 1100);
         })
         .catch((e: AxiosError<{ error: { message: string } }>) => {
           const error = e.response?.data.error?.message;
@@ -136,7 +136,21 @@ const Login: FunctionComponent = () => {
               </div>
               <div>
 
-                <span className="text-500 underline cursor-pointer">
+                <span className="text-500 underline cursor-pointer" onClick={() => {
+                  ProjectService.sendForgotPassWord(formValues.email).then(() => {
+                    UtilityService.ShowNotification(
+                      toast,
+                      NotificationTypeEnum.Success,
+                      "Reset Password Link has been sent to your registered email address."
+                    );
+                  }).catch(() => {
+                    UtilityService.ShowNotification(
+                      toast,
+                      NotificationTypeEnum.Error,
+                      "Failed to send forgot password email"
+                    );
+                  })
+                }}>
                    Forgot Password
                 </span>
               </div>

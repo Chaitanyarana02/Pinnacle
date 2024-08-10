@@ -1,6 +1,10 @@
 import { Button } from "primereact/button";
 import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
-import { updateCurrentStep, updateCurrentSubStepOfLastStep, updateIsStepVisible } from "../../../store/feature/project-step.slice";
+import {
+  updateCurrentStep,
+  updateCurrentSubStepOfLastStep,
+  updateIsStepVisible,
+} from "../../../store/feature/project-step.slice";
 import {
   ProjectAreas,
   ProjectAreaFloors,
@@ -15,6 +19,10 @@ import OptionRendererComponent from "./option-renderer.component";
 import { updateFunctionOptions } from "../../../store/feature/project-detail.slice";
 import { updateProjectDetails } from "../../../store/feature/project-list.slice";
 import { Toast } from "primereact/toast";
+import { updatePriceValue } from "../../../store/feature/priceValue.slice";
+import jsPDF from "jspdf";
+import ProjectStructureReviewComponent from "../step1/projectStructureReview.component";
+import * as htmlToImage from 'html-to-image';
 export interface CustomizationProductOptions {
   id: number;
   productCategoryId: number;
@@ -64,7 +72,7 @@ interface ProductAllPrice {
     optionMetaByValue: { [key: string]: string | boolean };
     optionTypeByValue: { [key: string]: string | boolean };
     optionTypeById: { [key: string]: string | boolean };
-    optionsType: { [key: number]: string}
+    optionsType: { [key: number]: string };
     price: number;
   }[];
 }
@@ -85,15 +93,44 @@ const ProjectStep3Component = () => {
     functions: [],
   });
   const [tableData, setTableData] = useState<TableData>({});
+  const userData = useAppSelector((state) => state.userDataSlice);
   const [allProductPrice, setAllProductPrice] = useState<ProductAllPrice>([]);
+  const priceCategory = useAppSelector((state) => state.priceCategorySlice);
+  const price = useAppSelector((state) => state.priceValueSlice);
   const [customizationOptions, setCustomizationOptions] =
     useState<customizationOptionsForTable>({});
-    const [price, setPrice] = useState<number>(0);
+
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
+  function printDocument() {
+    try {
+      (document.getElementById('pdfDiv') as HTMLElement).style.display = 'block'
 
-
+    }catch (e) { 
+      console.log(e);
+      
+    }
+    htmlToImage.toPng(document.getElementById('pdfDiv') as HTMLElement, { quality: 0.95 })
+    .then(function (dataUrl) {
+      const link = document.createElement('a');
+      link.download = 'my-image-name.jpeg';
+      const pdf = new jsPDF();
+      const imgProps= pdf.getImageProperties(dataUrl);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(dataUrl, 'PNG', 0, 0,pdfWidth, pdfHeight);
+      pdf.save("download.pdf"); 
+      try {
+        (document.getElementById('pdfDiv') as HTMLElement).style.display = 'none'
+  
+      }catch (e) { 
+        console.log(e);
+        
+      }
+    });
+  }
+  
   useEffect(() => {
     const productIds: number[] = [];
     projectDetailState.projectDetail?.buildingAreas?.forEach((areas) => {
@@ -145,53 +182,66 @@ const ProjectStep3Component = () => {
     });
   }, []);
   useEffect(() => {
-    let price: number = 0
-    projectDetailState.projectDetail.buildingAreas.forEach(bArea => {
-      bArea.areas.forEach(area => {
-        area.floors.forEach(floor => {
-          floor.floorRooms.forEach(room => {
-            room.functions.forEach(fun => {
+    let price: number = 0;
+    projectDetailState.projectDetail.buildingAreas.forEach((bArea) => {
+      bArea.areas.forEach((area) => {
+        area.floors.forEach((floor) => {
+          floor.floorRooms.forEach((room) => {
+            room.functions.forEach((fun) => {
               const prod = allProductPrice[fun.id];
-              
-              if(prod && Object.values(fun.systemDetails || {}).length) {
+
+              if (prod && Object.values(fun.systemDetails || {}).length) {
                 const catType = prod[0].optionTypeByValue;
-                const findingProduct: {[key: string]: string | number | boolean} = {}
-                Object.keys(fun.systemDetails || {}).forEach(key => {
-                  if(catType[key] === CustomizationProductTypeEnum.SIZE) {
-                    findingProduct[key] = 1
-                  }else if(catType[key] === CustomizationProductTypeEnum.QUANTITY) {
-                    findingProduct[key] = 1
-                  }else {
-                    findingProduct[key] = fun.systemDetails[key]
+                const findingProduct: {
+                  [key: string]: string | number | boolean;
+                } = {};
+                Object.keys(fun.systemDetails || {}).forEach((key) => {
+                  if (catType[key] === CustomizationProductTypeEnum.SIZE) {
+                    findingProduct[key] = 1;
+                  } else if (
+                    catType[key] === CustomizationProductTypeEnum.QUANTITY
+                  ) {
+                    findingProduct[key] = 1;
+                  } else {
+                    findingProduct[key] = fun.systemDetails[key];
                   }
                 });
-                
-                const prodPrice =  prod.find(cat => Object.keys(cat?.optionMetaByValue || {}).map(key => cat?.optionMetaByValue?.[key] === findingProduct?.[key]));
-                
+
+                const prodPrice = prod.find((cat) =>
+                  Object.keys(cat?.optionMetaByValue || {}).map(
+                    (key) =>
+                      cat?.optionMetaByValue?.[key] === findingProduct?.[key]
+                  )
+                );
+
                 let subPrice: number = prodPrice?.price || 0;
-                Object.keys(prodPrice?.optionTypeByValue as unknown as object || {})?.forEach(key => {
-                  const type = prodPrice?.optionTypeByValue?.[key] || '';
-                  if(type === CustomizationProductTypeEnum.SIZE) {
-                    const sizes = fun.systemDetails[key]?.toString()?.split(',');
-                    const size = (parseInt(sizes[0]) + parseInt(sizes[1])) || 1;
-                    subPrice = size * subPrice
+                Object.keys(
+                  (prodPrice?.optionTypeByValue as unknown as object) || {}
+                )?.forEach((key) => {
+                  const type = prodPrice?.optionTypeByValue?.[key] || "";
+                  if (type === CustomizationProductTypeEnum.SIZE) {
+                    const sizes = fun.systemDetails[key]
+                      ?.toString()
+                      ?.split(",");
+                    const size = parseInt(sizes[0]) + parseInt(sizes[1]) || 1;
+                    subPrice = size * subPrice;
                   }
-                  if(type === CustomizationProductTypeEnum.QUANTITY) {
-                    subPrice = parseInt(fun.systemDetails[key] as string) * subPrice
-                }
+                  if (type === CustomizationProductTypeEnum.QUANTITY) {
+                    subPrice =
+                      parseInt(fun.systemDetails[key] as string) * subPrice;
+                  }
                 });
-                price += subPrice * fun.count
+                price += subPrice * fun.count;
               }
             });
-
           });
         });
       });
     });
-    console.log('price updated' , price);
-    
-    setPrice(price);
-  },[projectDetailState])
+    console.log("price updated", price);
+
+    dispatch(updatePriceValue(price + price * (priceCategory.value / 100)));
+  }, [projectDetailState]);
   const makeTableData = (products: ProjectFloorFunction[]) => {
     const tableData: TableData = {};
     Object.keys(customizationOptions).forEach((catId) => {
@@ -261,7 +311,9 @@ const ProjectStep3Component = () => {
         key={buildingAreaIndex + "_" + areaIndex + "_" + floorIndex}
       >
         <div style={{ width: "58rem" }}>
-          <div className={!floorIndex ? "mt-2" : "pt-2 border-top-1 border-200"}>
+          <div
+            className={!floorIndex ? "mt-2" : "pt-2 border-top-1 border-200"}
+          >
             <div className="flex align-items-center flex-wrap">
               {headerTemplate(
                 buildingAreaName,
@@ -322,7 +374,7 @@ const ProjectStep3Component = () => {
   };
   return (
     <>
-       <Toast ref={toast} />
+      <Toast ref={toast} />
       <div className="p-4 mt-6">
         <div className="flex justify-content-between mb-6">
           <div>
@@ -352,17 +404,18 @@ const ProjectStep3Component = () => {
               rounded
               severity="secondary"
               size="large"
-              onClick={() => {}}
+              onClick={() => {
+                printDocument()
+              }}
             />
           </div>
         </div>
       </div>
       <div className="border-1 border-200 flex">
         <div
-        className="border-right-1 border-200"
+          className="border-right-1 border-200"
           style={{
             width: "25%",
-
           }}
         >
           {projectDetailState?.projectDetail?.buildingAreas?.map(
@@ -415,63 +468,63 @@ const ProjectStep3Component = () => {
                               }
                             </>
                           ) : (
-                            // this line creates options 
+                            // this line creates options
                             <OptionRendererComponent
-                              value={ (() => {
-                                
-                                const data2 = projectDetailState.projectDetail.buildingAreas[
-                                  selectedRoom.buildingAreaIndex
-                                ].areas[selectedRoom.areaIndex].floors[
-                                  selectedRoom.floorIndex
-                                ].floorRooms[
-                                  selectedRoom.roomIndex
-                                ].functions.find(
-                                  (fun) =>
-                                    fun.id ===
-                                    (
-                                      data[dataKay]
-                                        .data as CustomizationProductOptions
-                                    ).productId
-                                )
-                                ?.systemDetails as { [key: number]: string | boolean; }
+                              value={(() => {
+                                const data2 =
+                                  projectDetailState.projectDetail.buildingAreas[
+                                    selectedRoom.buildingAreaIndex
+                                  ].areas[selectedRoom.areaIndex].floors[
+                                    selectedRoom.floorIndex
+                                  ].floorRooms[
+                                    selectedRoom.roomIndex
+                                  ].functions.find(
+                                    (fun) =>
+                                      fun.id ===
+                                      (
+                                        data[dataKay]
+                                          .data as CustomizationProductOptions
+                                      ).productId
+                                  )?.systemDetails as {
+                                    [key: number]: string | boolean;
+                                  };
 
-                                return  data2
-                              })()
-                                
-                            }
-                            dataKey= {dataKay}
+                                return data2;
+                              })()}
+                              dataKey={dataKay}
                               customizationOption={
                                 data[dataKay]
                                   .data as CustomizationProductOptions
                               }
                               valueChanged={(value) => {
-                                console.log(data , dataKay , value);
+                                console.log(data, dataKay, value);
 
                                 dispatch(
                                   updateFunctionOptions({
-                                    buildingAreaIndex: selectedRoom.buildingAreaIndex,
+                                    buildingAreaIndex:
+                                      selectedRoom.buildingAreaIndex,
                                     areaIndex: selectedRoom.areaIndex,
                                     floorIndex: selectedRoom.floorIndex,
                                     roomIndex: selectedRoom.roomIndex,
-                                    functionIndex: projectDetailState.projectDetail.buildingAreas[
-                                      selectedRoom.buildingAreaIndex
-                                    ]?.areas[selectedRoom.areaIndex]?.floors[
-                                      selectedRoom.floorIndex
-                                    ]?.floorRooms[
-                                      selectedRoom.roomIndex
-                                    ]?.functions.findIndex(
-                                      (fun) =>
-                                        fun.id ===
-                                        (
-                                          data[dataKay]
-                                            .data as CustomizationProductOptions
-                                        ).productId
-                                    ),
+                                    functionIndex:
+                                      projectDetailState.projectDetail.buildingAreas[
+                                        selectedRoom.buildingAreaIndex
+                                      ]?.areas[selectedRoom.areaIndex]?.floors[
+                                        selectedRoom.floorIndex
+                                      ]?.floorRooms[
+                                        selectedRoom.roomIndex
+                                      ]?.functions.findIndex(
+                                        (fun) =>
+                                          fun.id ===
+                                          (
+                                            data[dataKay]
+                                              .data as CustomizationProductOptions
+                                          ).productId
+                                      ),
                                     key: dataKay,
                                     value: value,
-
                                   })
-                                )
+                                );
                               }}
                             />
                           )}
@@ -495,8 +548,10 @@ const ProjectStep3Component = () => {
         <div className="flex justify-content-between flex-wrap align-content-center">
           <div>
             <div className="pl-2">
-              <span>Final Price: £{price}</span>
-              <span className="ml-3">Rebate: £0</span>
+              <span>Final Price: £{price.value}</span>
+              <span className="ml-3">
+                Rebate: £{userData.userData.rebateRate}
+              </span>
             </div>
           </div>
         </div>
@@ -508,17 +563,23 @@ const ProjectStep3Component = () => {
             borderTop: "1px solid #DDD",
           }}
           onClick={() => {
-            dispatch(updateProjectDetails(projectDetailState.projectDetail)).then(() => {
-              dispatch(updateIsStepVisible(false))
+            dispatch(
+              updateProjectDetails(projectDetailState.projectDetail)
+            ).then(() => {
+              dispatch(updateIsStepVisible(false));
               dispatch(updateCurrentStep(4));
               dispatch(updateCurrentSubStepOfLastStep(1));
-              
-            })
+            });
           }}
         >
           Confirm & Proceed to Order <i className="pi pi-angle-right"></i>
         </div>
       </div>
+      <div id="pdfDiv" style={{
+        display: 'none'
+      }}>
+        <ProjectStructureReviewComponent/>
+        </div>
     </>
   );
 };

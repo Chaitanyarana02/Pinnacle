@@ -1,4 +1,4 @@
-import { projectColorScheme, projectResidentType, projectScope, projectStatus, projectType } from "../enums/project.enum";
+import { projectColorScheme, projectResidentType, projectScope, ProjectStatus, projectType } from "../enums/project.enum";
 import { ProjectBasicDetail } from "../interfaces/project.interface";
 
 const  projectListData: ProjectBasicDetail[] = [
@@ -9,7 +9,7 @@ const  projectListData: ProjectBasicDetail[] = [
         projectResidentType: projectResidentType.house,
         projectScope: projectScope.newBuild,
         projectColorScheme: projectColorScheme.white,
-        projectStatus: projectStatus.pending,
+        projectStatus: ProjectStatus.pending,
     },
     {
         name: 'project1',
@@ -18,7 +18,7 @@ const  projectListData: ProjectBasicDetail[] = [
         projectResidentType: projectResidentType.house,
         projectScope: projectScope.newBuild,
         projectColorScheme: projectColorScheme.white,
-        projectStatus: projectStatus.delivered,
+        projectStatus: ProjectStatus.delivered,
     },
     {
         name: 'project1',
@@ -27,7 +27,7 @@ const  projectListData: ProjectBasicDetail[] = [
         projectResidentType: projectResidentType.house,
         projectScope: projectScope.newBuild,
         projectColorScheme: projectColorScheme.white,
-        projectStatus: projectStatus.transition,
+        projectStatus: ProjectStatus.transition,
     },
     {
         name: 'project1',
@@ -36,7 +36,7 @@ const  projectListData: ProjectBasicDetail[] = [
         projectResidentType: projectResidentType.house,
         projectScope: projectScope.newBuild,
         projectColorScheme: projectColorScheme.white,
-        projectStatus: projectStatus.transition,
+        projectStatus: ProjectStatus.transition,
     }
 
 ];
