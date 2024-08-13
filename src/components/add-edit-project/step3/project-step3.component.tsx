@@ -20,9 +20,6 @@ import { updateFunctionOptions } from "../../../store/feature/project-detail.sli
 import { updateProjectDetails } from "../../../store/feature/project-list.slice";
 import { Toast } from "primereact/toast";
 import { updatePriceValue } from "../../../store/feature/priceValue.slice";
-import jsPDF from "jspdf";
-import ProjectStructureReviewComponent from "../step1/projectStructureReview.component";
-import * as htmlToImage from 'html-to-image';
 export interface CustomizationProductOptions {
   id: number;
   productCategoryId: number;
@@ -103,41 +100,40 @@ const ProjectStep3Component = () => {
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
-  function printDocument() {
-    try {
-      (document.getElementById('pdfDiv') as HTMLElement).style.display = 'block'
 
-    }catch (e) { 
-      console.log(e);
-      
-    }
-    htmlToImage.toPng(document.getElementById('pdfDiv') as HTMLElement, { quality: 0.95 })
-    .then(function (dataUrl) {
-      const link = document.createElement('a');
-      link.download = 'my-image-name.jpeg';
-      const pdf = new jsPDF();
-      const imgProps= pdf.getImageProperties(dataUrl);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(dataUrl, 'PNG', 0, 0,pdfWidth, pdfHeight);
-      pdf.save("download.pdf"); 
-      try {
-        (document.getElementById('pdfDiv') as HTMLElement).style.display = 'none'
-  
-      }catch (e) { 
-        console.log(e);
-        
-      }
-    });
-  }
   
   useEffect(() => {
+    let isSelectedRoomSet = false;
+    let selectedRoomVar: {
+      buildingAreaIndex: number;
+      areaIndex: number;
+      floorIndex: number;
+      roomIndex: number;
+      functions: ProjectFloorFunction[];
+    } = {
+      buildingAreaIndex: 0,
+      areaIndex: 0,
+      floorIndex: 0,
+      roomIndex: 0,
+      functions: [],
+    }
     const productIds: number[] = [];
-    projectDetailState.projectDetail?.buildingAreas?.forEach((areas) => {
-      areas?.areas.forEach((area) => {
-        area?.floors.forEach((floor) => {
-          floor?.floorRooms.forEach((room) => {
+    projectDetailState.projectDetail?.buildingAreas?.forEach((areas , buildingAreaIndex) => {
+      areas?.areas.forEach((area, areaIndex) => {
+        area?.floors.forEach((floor, floorIndex) => {
+          floor?.floorRooms.forEach((room, roomIndex) => {
+            if(room.isSelected && room.functions.length > 0 && !isSelectedRoomSet){
+              selectedRoomVar = ({
+                buildingAreaIndex,
+                areaIndex,
+                floorIndex,
+                roomIndex,
+                functions: room.functions
+              });
+              isSelectedRoomSet = true;
+            }
             room.functions.forEach((fun) => {
+              
               if (!productIds.includes(fun?.id)) {
                 productIds.push(fun?.id);
               }
@@ -179,6 +175,7 @@ const ProjectStep3Component = () => {
         const data: ProductAllPrice = res?.data?.data || [];
         setAllProductPrice(data);
       });
+      // setSelectedRoom({...})
     });
   }, []);
   useEffect(() => {
@@ -223,7 +220,7 @@ const ProjectStep3Component = () => {
                     const sizes = fun.systemDetails[key]
                       ?.toString()
                       ?.split(",");
-                    const size = parseInt(sizes[0]) + parseInt(sizes[1]) || 1;
+                    const size = parseInt(sizes?.[0]) + parseInt(sizes?.[1]) || 1;
                     subPrice = size * subPrice;
                   }
                   if (type === CustomizationProductTypeEnum.QUANTITY) {
@@ -238,11 +235,11 @@ const ProjectStep3Component = () => {
         });
       });
     });
-    console.log("price updated", price);
 
     dispatch(updatePriceValue(price + price * (priceCategory.value / 100)));
   }, [projectDetailState]);
   const makeTableData = (products: ProjectFloorFunction[]) => {
+    
     const tableData: TableData = {};
     Object.keys(customizationOptions).forEach((catId) => {
       tableData[catId] = [];
@@ -310,11 +307,11 @@ const ProjectStep3Component = () => {
         className="flex w-full justify-content-center pl-5 mt-0 pr-5"
         key={buildingAreaIndex + "_" + areaIndex + "_" + floorIndex}
       >
-        <div style={{ width: "58rem" }}>
+        <div style={{ width: "47rem" }}>
           <div
             className={!floorIndex ? "mt-2" : "pt-2 border-top-1 border-200"}
           >
-            <div className="flex align-items-center flex-wrap">
+            <div className="flex-column align-items-center flex-wrap">
               {headerTemplate(
                 buildingAreaName,
                 buildingAreaIndex,
@@ -405,7 +402,6 @@ const ProjectStep3Component = () => {
               severity="secondary"
               size="large"
               onClick={() => {
-                printDocument()
               }}
             />
           </div>
@@ -424,7 +420,7 @@ const ProjectStep3Component = () => {
                 {buildingArea.areas.map((area, areaIndex) => (
                   <>
                     {area.floors.map((floor, floorIndex) => {
-                      return floor.isSelected && floor.floorRooms.length
+                      return floor.isSelected && floor.floorRooms.length && floor.floorRooms.filter(v => v.isSelected).length
                         ? getSection(
                             floor,
                             buildingArea.name,
@@ -539,18 +535,19 @@ const ProjectStep3Component = () => {
         </div>
       </div>
       <div
-        className="w-full flex justify-content-between align-content-center flex-wrap"
+        className="w-full flex justify-content-between align-content-center flex-wrap sticky bottom-0"
         style={{
           height: "40px",
           borderTop: "1px solid #DDD",
+          background: '#fff'
         }}
       >
         <div className="flex justify-content-between flex-wrap align-content-center">
           <div>
             <div className="pl-2">
-              <span>Final Price: £{price.value}</span>
+              <span>Final Price: <span className="font-semibold">£{price.value}</span></span>
               <span className="ml-3">
-                Rebate: £{userData.userData.rebateRate}
+                Rebate:  <span className="font-semibold">£{userData.userData.rebateRate}</span>
               </span>
             </div>
           </div>
@@ -575,11 +572,6 @@ const ProjectStep3Component = () => {
           Confirm & Proceed to Order <i className="pi pi-angle-right"></i>
         </div>
       </div>
-      <div id="pdfDiv" style={{
-        display: 'none'
-      }}>
-        <ProjectStructureReviewComponent/>
-        </div>
     </>
   );
 };

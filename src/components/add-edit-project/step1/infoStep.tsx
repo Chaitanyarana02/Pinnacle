@@ -1,6 +1,6 @@
 import styles from "./infoStep2.module.css";
 import { useAppDispatch } from "../../../store/store.utils";
-import { updateCurrentSubStepOne } from "../../../store/feature/project-step.slice";
+import { updateCurrentSubStepOne, updateIsStepVisible } from "../../../store/feature/project-step.slice";
 
 const InfoStep = () => {
   const dispatch = useAppDispatch();
@@ -8,7 +8,7 @@ const InfoStep = () => {
   return (
     <div className="w-full flex justify-content-center">
       <div style={{
-        width: '58rem'
+        width: '47rem'
       }}>
         <div className="flex justify-content-around mt-4 text-3xl font-bold">
           <span>
@@ -96,7 +96,10 @@ const InfoStep = () => {
           </div>
         </section>
         <div className={styles.buttonWrapper}>
-          <button className={styles.button} onClick={() => dispatch(updateCurrentSubStepOne(2))}>
+          <button className={styles.button} onClick={() => {
+            dispatch(updateIsStepVisible(true));
+            dispatch(updateCurrentSubStepOne(2))
+            }}>
             <b className={styles.label}>Let’s Begin</b>
           </button>
         </div>

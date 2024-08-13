@@ -16,6 +16,7 @@ import {
   autoRecombedProducts,
   removeAllRoomFunction,
   removeRoomFunction,
+  resetAllFunctions,
   undoRedoState,
   updateRoomFunction,
 } from "../../../store/feature/project-detail.slice";
@@ -34,93 +35,69 @@ import { Toast } from "primereact/toast";
 import { NotificationTypeEnum } from "../../../enums/notificationType.enum";
 import UtilityService from "../../../services/utilit.service";
 import { UndoRedoEventName } from "../../../enums/undoRedoEventName.enum";
-import jsPDF from "jspdf";
-import ProjectStructureReviewComponent from "../step1/projectStructureReview.component";
-import * as htmlToImage from 'html-to-image';
 const ProjectStep2Component = () => {
   const toast = useRef<Toast>(null);
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
-  const priceCategory  = useAppSelector(state => state.priceCategorySlice)
+  const priceCategory = useAppSelector((state) => state.priceCategorySlice);
   const [products, setProducts] = useState<RoomFunctions[]>([]);
   const [defaultProducts, setDefaultProducts] = useState<DefaultProduct[]>([]);
-  const [price, setPrice] = useState<{min: number, max: number}>()
-  const [undoStack, setUndoStack] = useState<UndoRedoStack[]>([])
-  const [redoStack, setRedoStack] = useState<UndoRedoStack[]>([])
+  const [price, setPrice] = useState<{ min: number; max: number }>();
+  const [undoStack, setUndoStack] = useState<UndoRedoStack[]>([]);
+  const [redoStack, setRedoStack] = useState<UndoRedoStack[]>([]);
   const dispatch = useAppDispatch();
-  function printDocument() {
-    try {
-      (document.getElementById('pdfDiv') as HTMLElement).style.display = 'block'
-
-    }catch (e) { 
-      console.log(e);
-      
-    }
-    htmlToImage.toPng(document.getElementById('pdfDiv') as HTMLElement, { quality: 0.95 })
-    .then(function (dataUrl) {
-      const link = document.createElement('a');
-      link.download = 'my-image-name.jpeg';
-      const pdf = new jsPDF();
-      const imgProps= pdf.getImageProperties(dataUrl);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(dataUrl, 'PNG', 0, 0,pdfWidth, pdfHeight);
-      pdf.save("download.pdf"); 
-      try {
-        (document.getElementById('pdfDiv') as HTMLElement).style.display = 'none'
-  
-      }catch (e) { 
-        console.log(e);
-        
-      }
-    });
-  }
   useEffect(() => {
-      ProjectService.getProductsCategoryWise().then((res) => {
-        const data = res.data.data
-        const prod: RoomFunctions[] = []
-        Object.keys(data).forEach( cat => {
-          if(data[cat].length) {
-            prod.push({
-              categoryName: cat,
-              products: data[cat].map((p: {id: number, name: string, minPrice: number , maxPrice: number, categoryId:number }) => ({
+    ProjectService.getProductsCategoryWise().then((res) => {
+      const data = res.data.data;
+      const prod: RoomFunctions[] = [];
+      Object.keys(data).forEach((cat) => {
+        if (data[cat].length) {
+          prod.push({
+            categoryName: cat,
+            products: data[cat].map(
+              (p: {
+                id: number;
+                name: string;
+                minPrice: number;
+                maxPrice: number;
+                categoryId: number;
+              }) => ({
                 name: p.name,
                 minPrice: p.minPrice,
                 maxPrice: p.maxPrice,
                 id: p.id,
-                categoryId: p.categoryId
-              }))
-            })
-          }
-  
-        });
+                categoryId: p.categoryId,
+              })
+            ),
+          });
+        }
+      });
 
-        setProducts(prod);
-        
-        const defProds: DefaultProduct[] = []
-        prod.forEach(cat => {
-            defProds.push(... cat.products)
-        });
-        console.log(defProds);
+      setProducts(prod);
 
-        setDefaultProducts(defProds)
-        
-      })
+      const defProds: DefaultProduct[] = [];
+      prod.forEach((cat) => {
+        defProds.push(...cat.products);
+      });
+      console.log(defProds);
+
+      setDefaultProducts(defProds);
+    });
   }, []);
   useEffect(() => {
-    const price: {min: number , max: number} = {
+    const price: { min: number; max: number } = {
       min: 0,
       max: 0,
-    }
-    projectDetailState.projectDetail.buildingAreas.forEach(bArea => {
-      bArea.areas.forEach(area => {
-        area.floors.forEach(floor => {
-          floor.floorRooms.forEach(room => {
-            room.functions.forEach(fun => {
-              const prod = defaultProducts.find(p => p.id === fun.id);
-              
-              if(prod) {
+    };
+    projectDetailState.projectDetail.buildingAreas.forEach((bArea) => {
+      bArea.areas.forEach((area) => {
+        area.floors.forEach((floor) => {
+          floor.floorRooms.forEach((room) => {
+            room.functions.forEach((fun) => {
+              const prod = defaultProducts.find((p) => p.id === fun.id);
+
+              if (prod) {
                 price.min += fun.count * prod.minPrice;
                 price.max += fun.count * prod.maxPrice;
               }
@@ -129,11 +106,11 @@ const ProjectStep2Component = () => {
         });
       });
     });
-    price.max += (price.max * priceCategory.value/100);
-    price.min += (price.min * priceCategory.value/100);
-    
-    setPrice({...price});
-  },[projectDetailState , defaultProducts , priceCategory])
+    price.max += (price.max * priceCategory.value) / 100;
+    price.min += (price.min * priceCategory.value) / 100;
+
+    setPrice({ ...price });
+  }, [projectDetailState, defaultProducts, priceCategory]);
   //   {
   //     categoryName: "Light",
   //     products: [
@@ -202,7 +179,7 @@ const ProjectStep2Component = () => {
   ) => {
     return (
       <div
-        style={{ width: "58rem" }}
+        style={{ width: "57rem" }}
         key={buildingAreaIndex + "header" + areaIndex + "_" + floorIndex}
       >
         <div className="flex justify-content-between align-content-center">
@@ -242,7 +219,9 @@ const ProjectStep2Component = () => {
         className="flex w-full justify-content-between pl-5 mt-0 pr-5"
         key={buildingAreaIndex + "_" + areaIndex + "_" + floorIndex}
       >
-        <div style={{ width: "58rem" }}>
+        <div style={{ 
+          maxWidth: "57rem"
+          }}>
           <Divider className="m-0 mt-4" />
           <div className="mt-2">
             <Accordion activeIndex={0}>
@@ -259,19 +238,25 @@ const ProjectStep2Component = () => {
               >
                 <div className="flex align-items-center flex-wrap">
                   {floor.floorRooms.map((room, roomIndex) => {
-
-                    return room.isSelected ?  (
+                    return room.isSelected && floor.floorRooms.length ? (
                       <div className="w-full" key={roomIndex}>
                         <div className="flex justify-content-between mt-4">
                           <div className="text-xl text-1000">{room.name}</div>
-                          <div className="text-primary" onClick={() => {
-                            dispatch(removeAllRoomFunction({
-                              buildingAreaIndex,
-                              areaIndex,
-                              floorIndex,
-                              roomIndex,
-                            }))
-                          }}>Reset</div>
+                          <div
+                            className="text-primary"
+                            onClick={() => {
+                              dispatch(
+                                removeAllRoomFunction({
+                                  buildingAreaIndex,
+                                  areaIndex,
+                                  floorIndex,
+                                  roomIndex,
+                                })
+                              );
+                            }}
+                          >
+                            Reset
+                          </div>
                         </div>
                         <DropZone
                           room={room}
@@ -289,46 +274,58 @@ const ProjectStep2Component = () => {
                                   count: 1,
                                   id: item.id,
                                   categoryId: item.categoryId,
-                                  systemDetails: {}
+                                  systemDetails: {},
                                 },
                               })
                             );
-                            setUndoStack([...undoStack ,{
-                              eventName: UndoRedoEventName.ADDED,
-                              data: [{
-                                roomId: room.id as number,
-                                functions: [{
-                                  name: item.name,
-                                  count: 1,
-                                  id: item.id,
-                                  categoryId: item.categoryId,
-                                  systemDetails: {}
-                                }]
-                              }]
-                            }]);
+                            setUndoStack([
+                              ...undoStack,
+                              {
+                                eventName: UndoRedoEventName.ADDED,
+                                data: [
+                                  {
+                                    roomId: room.id as number,
+                                    functions: [
+                                      {
+                                        name: item.name,
+                                        count: 1,
+                                        id: item.id,
+                                        categoryId: item.categoryId,
+                                        systemDetails: {},
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            ]);
                             setRedoStack([]);
                           }}
-                          setProducts= {
-                            (newProducts :ProjectFloorFunction[] ) => {
-                              dispatch(
-                                addFunctionsToRoom({
-                                  buildingAreaIndex,
-                                  areaIndex,
-                                  floorIndex,
-                                  roomIndex,
-                                  values: newProducts
-                                })
-                              );
-                              setUndoStack([...undoStack,{
+                          setProducts={(
+                            newProducts: ProjectFloorFunction[]
+                          ) => {
+                            dispatch(
+                              addFunctionsToRoom({
+                                buildingAreaIndex,
+                                areaIndex,
+                                floorIndex,
+                                roomIndex,
+                                values: newProducts,
+                              })
+                            );
+                            setUndoStack([
+                              ...undoStack,
+                              {
                                 eventName: UndoRedoEventName.ADDED,
-                                data: [{
-                                  roomId: room.id as number,
-                                  functions:[...newProducts]
-                                }]
-                              }]);
-                              setRedoStack([]);
-                            }
-                          }
+                                data: [
+                                  {
+                                    roomId: room.id as number,
+                                    functions: [...newProducts],
+                                  },
+                                ],
+                              },
+                            ]);
+                            setRedoStack([]);
+                          }}
                           removeProduct={(functionIndex: number) => {
                             dispatch(
                               removeRoomFunction({
@@ -338,19 +335,25 @@ const ProjectStep2Component = () => {
                                 roomIndex,
                                 functionIndex,
                               })
-                              
                             );
-                            setUndoStack([...undoStack , {
-                              eventName: UndoRedoEventName.DELETED,
-                              data: [{
-                                roomId: room.id as number,
-                                functions:[room.functions[functionIndex]]
-                              }]
-                            }]);
+                            setUndoStack([
+                              ...undoStack,
+                              {
+                                eventName: UndoRedoEventName.DELETED,
+                                data: [
+                                  {
+                                    roomId: room.id as number,
+                                    functions: [room.functions[functionIndex]],
+                                  },
+                                ],
+                              },
+                            ]);
                             setRedoStack([]);
-
                           }}
-                          updateProduct={(functionIndex: number , count: number) => {
+                          updateProduct={(
+                            functionIndex: number,
+                            count: number
+                          ) => {
                             dispatch(
                               updateRoomFunction({
                                 buildingAreaIndex,
@@ -361,48 +364,50 @@ const ProjectStep2Component = () => {
                                 count,
                               })
                             );
-
                           }}
                         ></DropZone>
                       </div>
-                    ): null;
+                    ) : null;
                   })}
                 </div>
               </AccordionTab>
             </Accordion>
           </div>
         </div>
-       
       </div>
     );
   };
-  const checkValidation = () =>{
+  const checkValidation = () => {
     let flag = true;
-    projectDetailState.projectDetail.buildingAreas.forEach( buildingArea => {
-        buildingArea.areas.forEach(area => {
-          area.floors.forEach(floor => {
-            floor.floorRooms.forEach(room => {
-              if(!room.functions.length && room.isSelected) {
-                flag = false
-              }
-            })
-          })
-        })
-    })
-    if(flag) {
-      dispatch(updateCurrentStep(3))
-
-    }else{
-      UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one Product for each room')
+    projectDetailState.projectDetail.buildingAreas.forEach((buildingArea) => {
+      buildingArea.areas.forEach((area) => {
+        area.floors.forEach((floor) => {
+          floor.floorRooms.forEach((room) => {
+            if (!room.functions.length && room.isSelected) {
+              flag = false;
+            }
+          });
+        });
+      });
+    });
+    if (flag) {
+      dispatch(updateCurrentStep(3));
+    } else {
+      UtilityService.ShowNotification(
+        toast,
+        NotificationTypeEnum.Error,
+        "Please select at list one Product for each room"
+      );
     }
-  }
+  };
 
   return (
     <DndProvider backend={HTML5Backend}>
-         <Toast ref={toast} />
-      <div className="p-4 mt-6">
-        <div className="flex justify-content-between mb-6">
-          <div>
+      <Toast ref={toast} />
+      <div className="">
+          <div className=" mt-6">
+        <div className="flex justify-content-between mb-6 flex-wrap ">
+          <div className="">
             <Button
               label="Edit Structure"
               icon="pi pi-angle-left"
@@ -413,7 +418,7 @@ const ProjectStep2Component = () => {
             />
           </div>
 
-          <div>
+          <div className="">
             <div className="m-auto max-w-max text-4xl font-semibold">
               Define Functions for each room
             </div>
@@ -422,7 +427,7 @@ const ProjectStep2Component = () => {
               Structure.
             </p>
           </div>
-          <div>
+          <div className="">
             <Button
               label="Print Sales Brochure"
               icon="pi pi-print"
@@ -430,7 +435,6 @@ const ProjectStep2Component = () => {
               severity="secondary"
               size="large"
               onClick={() => {
-                printDocument();
                 console.log("Print sales brochure");
               }}
             />
@@ -442,32 +446,33 @@ const ProjectStep2Component = () => {
               (buildingArea, buildingAreaIndex) => (
                 <section key={buildingAreaIndex}>
                   {buildingArea.areas.map((area, areaIndex) => (
-                    <> {
-                        area.isSelected ?  <>
-                      {area.floors.map((floor, floorIndex) => {
-
-                        return  floor.isSelected && floor.floorRooms.length ? getSection(
-                          floor,
-                          buildingArea.name,
-                          buildingAreaIndex,
-                          area,
-                          areaIndex,
-                          floorIndex
-                        ): null;
-                      })}
-                      </>
-                      : null
-                    }
-                      
+                    <>
+                      {" "}
+                      {area.isSelected && area.floors.length ? (
+                        <>
+                          {area.floors.map((floor, floorIndex) => {
+                            return floor.isSelected && floor.floorRooms.length && floor.floorRooms.filter(v =>   v.isSelected).length
+                              ? getSection(
+                                  floor,
+                                  buildingArea.name,
+                                  buildingAreaIndex,
+                                  area,
+                                  areaIndex,
+                                  floorIndex
+                                )
+                              : null;
+                          })}
+                        </>
+                      ) : null}
                     </>
                   ))}
                 </section>
               )
             )}
           </div>
-          <div>
+          <div className="sticky top-0 align-self-start mr-6 mb-4">
             <div
-              className="border-1"
+              className="border-1 "
               style={{
                 borderRadius: "30px",
                 borderColor: "#DDD",
@@ -510,8 +515,7 @@ const ProjectStep2Component = () => {
                             (productItem, productItemIndex) => {
                               return (
                                 <DragItem
-                                dbClickedItem={
-                                  () => {
+                                  dbClickedItem={() => {
                                     dispatch(
                                       addFunctionToAllRoom({
                                         value: {
@@ -519,12 +523,11 @@ const ProjectStep2Component = () => {
                                           name: productItem.name,
                                           count: 1,
                                           id: productItem.id,
-                                          systemDetails: {}
+                                          systemDetails: {},
                                         },
                                       })
                                     );
-                                  }
-                                }
+                                  }}
                                   product={productItem}
                                   key={productItemIndex}
                                 />
@@ -542,9 +545,7 @@ const ProjectStep2Component = () => {
                   severity="secondary"
                   className="mt-2"
                   onClick={() => {
-                    dispatch(
-                      autoRecombedProducts(defaultProducts)
-                    )
+                    dispatch(autoRecombedProducts(defaultProducts));
                   }}
                 />
               </div>
@@ -559,33 +560,42 @@ const ProjectStep2Component = () => {
                   className="mr-2"
                   onClick={() => {
                     const undoData = undoStack.pop();
-                    if(undoData) {
+                    if (undoData) {
                       setUndoStack([...undoStack]);
                       dispatch(undoRedoState(undoData));
-                      undoData.eventName = undoData.eventName === UndoRedoEventName.ADDED  ? UndoRedoEventName.DELETED : UndoRedoEventName.ADDED;
+                      undoData.eventName =
+                        undoData.eventName === UndoRedoEventName.ADDED
+                          ? UndoRedoEventName.DELETED
+                          : UndoRedoEventName.ADDED;
                       setRedoStack([...redoStack, undoData]);
                     }
-                    
                   }}
                 />
                 <Button
                   label="Redo"
                   icon="pi pi-angle-right"
                   rounded
+                  iconPos={'right'}
                   severity="secondary"
                   onClick={() => {
                     const redoData = redoStack.pop();
-                    if(redoData) {
+                    if (redoData) {
                       setRedoStack([...redoStack]);
                       dispatch(undoRedoState(redoData));
-                      redoData.eventName = redoData.eventName === UndoRedoEventName.ADDED  ? UndoRedoEventName.DELETED : UndoRedoEventName.ADDED;
+                      redoData.eventName =
+                        redoData.eventName === UndoRedoEventName.ADDED
+                          ? UndoRedoEventName.DELETED
+                          : UndoRedoEventName.ADDED;
                       setUndoStack([...undoStack, redoData]); //
-
                     }
                   }}
                 />
               </div>
-              <span className="text-primary align-content-center">
+              <span className="text-primary align-content-center cursor-pointer" onClick={
+                () => {
+                    dispatch(resetAllFunctions())
+                }
+              }>
                 Reset All
               </span>
             </div>
@@ -593,13 +603,14 @@ const ProjectStep2Component = () => {
         </div>
       </div>
       <div
-        className="w-full flex justify-content-between align-content-center flex-wrap"
+        className="w-full flex justify-content-between align-content-center flex-wrap sticky bottom-0"
         style={{
           height: "40px",
           borderTop: "1px solid #DDD",
+          background: '#fff'
         }}
       >
-        <div className="flex justify-content-between flex-wrap align-content-center">
+        <div className="flex justify-content-between flex-wrap align-content-center md:flex-none">
           <div>
             <div className="pl-2">Set Quality Level:</div>
           </div>
@@ -621,7 +632,7 @@ const ProjectStep2Component = () => {
                 inputId="productQUality2"
                 name="productQUality"
                 value={PriceCategoryEnum.STANDARD}
-                onChange={(e) =>  dispatch(updatePrice(e.value || 0))}
+                onChange={(e) => dispatch(updatePrice(e.value || 0))}
                 checked={priceCategory.value === PriceCategoryEnum.STANDARD}
               />
               <label htmlFor="productQUality2" className="ml-1">
@@ -633,7 +644,7 @@ const ProjectStep2Component = () => {
                 inputId="productQUality3"
                 name="productQUality"
                 value={PriceCategoryEnum.PREMIUM}
-                onChange={(e) =>  dispatch(updatePrice(e.value || 0))}
+                onChange={(e) => dispatch(updatePrice(e.value || 0))}
                 checked={priceCategory.value === PriceCategoryEnum.PREMIUM}
               />
               <label htmlFor="productQUality3" className="ml-1">
@@ -644,10 +655,9 @@ const ProjectStep2Component = () => {
         </div>
         <div className="align-content-center">
           <div>
-          Estimated Price Range:&nbsp;
-          <span className="font-semibold"> 
-           £{price?.min || 0} - £{price?.max || 0}
-
+            Estimated Price Range:&nbsp;
+            <span className="font-semibold">
+              £{price?.min || 0} - £{price?.max || 0}
             </span>
           </div>
         </div>
@@ -662,11 +672,10 @@ const ProjectStep2Component = () => {
           Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
         </div>
       </div>
-      <div id="pdfDiv" style={{
-        display: 'none'
-      }}>
-        <ProjectStructureReviewComponent/>
-        </div>
+      </div>
+    
+      
+
     </DndProvider>
   );
 };

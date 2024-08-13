@@ -36,7 +36,7 @@ const ProjectStructureReviewComponent = () => {
                       <>
                         {buildingArea.areas.map(
                           (area) => {
-                            return (
+                            return area.isSelected ? (
                               <>
                                 <Divider className="m-0 p-4 " key={'divider' + buildingAreaIndex}/>
                                 <div className="flex justify-content-between " key={buildingAreaIndex}>
@@ -57,7 +57,7 @@ const ProjectStructureReviewComponent = () => {
                                     style={{ marginLeft: "15rem" }}
                                   >
                                     {area.floors.map((floor) => {
-                                      return (
+                                      return floor.isSelected ? (
                                         <div className="flex justify-content-between  w-full mt-2">
                                           <div>
                                             <span className="text-xl font-semibold text-500 mb-5">
@@ -65,20 +65,21 @@ const ProjectStructureReviewComponent = () => {
                                             </span>
                                           </div>
                                           <div className="w-15rem flex flex-wrap">
-                                            {floor.floorRooms.map((room, roomIndex, rooms) => (
+                                            {floor.floorRooms.map((room, roomIndex, rooms) => 
+                                            room.isSelected ? (
                                                 <div className= {rooms.length -1 === roomIndex ? "text-xl font-semibold text-500 ml-2 mt-1" : "text-xl font-semibold text-500 ml-2 mt-1 border-right-3 border-400 pr-2"}>
                                                   {room.name}
                                                 </div>
-                                            ))}
+                                            ): null)}
                                           </div>
                                         </div>
-                                      );
+                                      ): null;
                                     })}
                                   </div>
                                   <div></div>
                                 </div>
                               </>
-                            );
+                            ): null;
                           }
                         )}
                       </>
@@ -97,7 +98,10 @@ const ProjectStructureReviewComponent = () => {
               rounded
               severity="secondary"
               size="large"
-              onClick={() => dispatch(updateCurrentSubStepOne(2))}
+              onClick={() => {
+                dispatch(updateCurrentStep(1));
+                dispatch(updateCurrentSubStepOne(4))
+              }}
             />
           </div>
          

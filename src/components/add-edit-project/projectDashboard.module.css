@@ -1,27 +1,4 @@
 
-.yourProjects {
-  margin: 0;
-  position: relative;
-  font-size: inherit;
-  line-height: 2.75rem;
-  font-weight: 600;
-}
-.yourProjectsWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: var(--padding-5xs) 0 0;
-}
-.frameGroup {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  align-self: stretch;
-  justify-content: space-between;
-  gap: var(--gap-xl);
-  margin-top: 20px;
-}
 
 
 .residentialParent {
@@ -80,13 +57,7 @@
   color: #919191;
 }
 .frameDiv {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-width: 19.688rem;
-  max-width: 100%;
+ 
 }
 .projectAbc {
   margin: 0;
@@ -210,13 +181,6 @@
     line-height: 1.813rem;
   }
   .addressParent {
-    flex-wrap: wrap;
-  }
-  .button2 {
-    font-size: var(--body-base-text-size);
-    line-height: 1.188rem;
-  }
-  .buttonParent {
     flex-wrap: wrap;
   }
   .frameParent1 {

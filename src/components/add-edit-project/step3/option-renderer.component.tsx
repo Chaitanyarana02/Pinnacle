@@ -64,7 +64,7 @@ const OptionRendererComponent = ({
               fontSize: "0.7rem",
             }}
             onClick={() => {
-              valueChanged((parseInt(value[dataKey] as string, 10) - 1).toString())
+              valueChanged((parseInt(value[dataKey] as string, 10) || 0 - 1).toString())
             }}
           ></i>
           <span className="m-2">{value[dataKey] || 0}</span>
@@ -74,7 +74,7 @@ const OptionRendererComponent = ({
               fontSize: "0.7rem",
             }}
             onClick={() => {
-              valueChanged((parseInt(value[dataKey] as string, 10) + 1).toString())
+              valueChanged((parseInt(value[dataKey] as string, 10) || 0 + 1).toString())
             }}
           ></i>
         </span>

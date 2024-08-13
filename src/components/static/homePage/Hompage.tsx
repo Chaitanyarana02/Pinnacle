@@ -8,12 +8,12 @@ const Hompage: FunctionComponent = () => {
   return (
     <div className={styles.pageMainCss}>
       <section className={styles.section1 + ' ' + styles.displayFlexFlexDirectionColumnAlignCenter}>
-        <div className={styles.section1Container}> {/* autoLayoutVertical1 */}
+        <div className={styles.section1Container}>
           <div className={styles.capitalizeDivWidth38Weight500 + ' ' + styles.widhtFull}>Smart, Secure, Simple</div>
-          <h1 className={styles.h1Title64}> {/* experienceTheFuture */}
+          <h1 className={styles.h1Title64}> 
             Experience the Future of Smart Living with Apple HomeKit
           </h1>
-          <h1 className={styles.h1Title34}> {/* unrivaledIntegrationSecurit */}
+          <h1 className={styles.h1Title34}>
             Unrivaled Integration, Security, and Simplicity
           </h1>
         </div>
@@ -44,7 +44,7 @@ const Hompage: FunctionComponent = () => {
                <Button className={styles.photoBttn} severity="info" rounded  onClick={() => {
                 navigate('/home-owners');
                }}>
-                  <span className={styles.blueTitle20}>I’m a Homeowner</span>
+                  <span className={styles.blueTitle20 }>I’m a Homeowner</span>
                </Button>
             </div>
             <div className={styles.section2Photo}>

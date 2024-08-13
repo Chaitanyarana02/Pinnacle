@@ -33,7 +33,7 @@ const AddEditHeaderComponent = ({
           <span className="font-semibold text-3xl">{projectName}</span>
         </div>
         {isVisible ? (
-          <div className="flex  justify-content-between w-6 flex-wrap">
+          <div className="flex  justify-content-between w-6 flex-wrap md:flex-none">
             <div className="flex align-items-center">
               {getStep(1)}
               <span className="ml-3 font-medium text-xl text-700">

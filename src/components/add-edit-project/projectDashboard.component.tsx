@@ -5,7 +5,7 @@ import {
   fetchProjectList,
 } from "../../store/feature/project-list.slice";
 import { useAppDispatch, useAppSelector } from "../../store/store.utils";
-import { ProjectBasicDetail } from "../../interfaces/project.interface";
+import { ProjectBasicDetail, ProjectDetail } from "../../interfaces/project.interface";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
@@ -20,7 +20,7 @@ import {
 } from "../../enums/project.enum";
 import { useNavigate } from "react-router-dom";
 import { setProjectDetail } from "../../store/feature/project-detail.slice";
-import { updateProjectStepProjectName } from "../../store/feature/project-step.slice";
+import { updateCurrentStep, updateCurrentSubStepOfLastStep, updateCurrentSubStepOne, updateIsStepVisible, updateProjectStepProjectName } from "../../store/feature/project-step.slice";
 import { Avatar } from "primereact/avatar";
 import { Menu } from "primereact/menu";
 import { useCookies } from "react-cookie";
@@ -32,6 +32,8 @@ const ProjectDashboard = () => {
   const productListState = useAppSelector((state) => state.projectListState);
   const [isCreateProjectVisible, setCreateProjectVisible] =
     useState<boolean>(false);
+  const [deleteDialog, setDeleteDialog] = useState<boolean>(false);
+  const [selectedProject, setSelectedProject] = useState<ProjectBasicDetail>();
   const [newProjectData, setNewProjectData] = useState<ProjectBasicDetail>({
     projectType: projectType.residential,
     projectResidentType: projectResidentType.house,
@@ -74,18 +76,18 @@ const ProjectDashboard = () => {
   const [, setCookie] = useCookies(["userData"]);
   const menuLeft = useRef<Menu>(null);
   const items = [
-      {
-          label: 'Account',
-          items: [
-              {
-                  label: 'Log Out',
-                  command: () => {
-                    setCookie('userData' , '');
-                    navigate('/login');
-                  }
-              }
-          ]
-      }
+    {
+      label: "Account",
+      items: [
+        {
+          label: "Log Out",
+          command: () => {
+            setCookie("userData", "");
+            navigate("/login");
+          },
+        },
+      ],
+    },
   ];
   useEffect(() => {
     dispatch(fetchProjectList());
@@ -110,7 +112,16 @@ const ProjectDashboard = () => {
               ...newProjectData,
               buildingAreas: [],
             })
-          );
+          )
+          .then((v) => {
+            const data = v.payload as unknown;
+            dispatch(updateProjectStepProjectName(newProjectData.name));
+            dispatch(setProjectDetail(data as ProjectDetail));
+            dispatch(updateIsStepVisible(false));
+            dispatch(updateCurrentStep(1));
+            dispatch(updateCurrentSubStepOne(1));
+            navigate(`/edit/${(data as ProjectDetail)?.id}`);
+          });
           setCreateProjectVisible(false);
         }}
       ></Button>
@@ -118,24 +129,23 @@ const ProjectDashboard = () => {
   );
   return (
     <>
-      <div className={styles.dashboard}>
+      <div>
         <div className="flex justify-content-between bg-white w-full p-4">
-          <div className="cursor-pointer" style={
-            {
-              fontSize: 'var(--font-size-18xl-3)',
-              position: 'relative',
-              lineHeight:'1.75rem',
-              fontWeight: 600,
-            }
-          }
-          onClick={() => {
-            navigate('/');
-          }}
-          >PINNAQLE</div>
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <img src="/logo.svg" alt="" />
+          </div>
           <div>
-            <div className="flex cursor-pointer"   onClick={(event) => {
-                      menuLeft?.current?.toggle?.(event);
-                    }}>
+            <div
+              className="flex cursor-pointer"
+              onClick={(event) => {
+                menuLeft?.current?.toggle?.(event);
+              }}
+            >
               {user.userData.id ? (
                 <>
                   <Avatar
@@ -143,7 +153,6 @@ const ProjectDashboard = () => {
                     label={user.userData.name[0].toUpperCase()}
                     style={{ backgroundColor: "#9c27b0", color: "#ffffff" }}
                     shape="circle"
-                  
                   />
                   <div className="pl-2">
                     <span className="font-bold">{user.userData.name}</span>
@@ -152,23 +161,24 @@ const ProjectDashboard = () => {
                   </div>
                 </>
               ) : null}
-
             </div>
             <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
-
           </div>
         </div>
-        <main className={styles.dashboardInner}>
-          <div className={styles.frameParent}>
-            <div className={styles.frameGroup}>
+        <main className="">
+          <div>
+            <div className="flex m-4 align-content-center justify-content-between">
               <div className="">
-                <h1 className={styles.yourProjects}>Your Projects</h1>
+                <h1>Your Projects</h1>
               </div>
-              <Button
-                label="New Project"
-                className="p-button-rounded"
-                onClick={() => setCreateProjectVisible(true)}
-              />
+              <div className="align-content-center">
+                <Button
+                  label="New Project"
+                  className="p-button-rounded"
+                  onClick={() => setCreateProjectVisible(true)}
+                />
+              </div>
+
               <Dialog
                 visible={isCreateProjectVisible}
                 modal
@@ -425,13 +435,15 @@ const ProjectDashboard = () => {
                 </div>
               </Dialog>
             </div>
-            <div className={styles.frameWrapper}>
-              <div className={styles.frameContainer}>
+            <div className="flex justify-content-around w-full flex-wrap pr-7 pl-7">
+              <div className="flex flex-wrap justify-content-between">
                 {productListState.projectList.map((projectDetail) => {
                   return (
-                    <div className={styles.frameDiv + ' w-25rem'} key={projectDetail.id}>
-                      <div className={styles.frameParent1 + ' w-25rem'}>
-                        <div >
+                    <div className="m-3 w-25rem" key={projectDetail.id}>
+                      <div
+                        className={styles.frameParent1 + " w-25rem relative"}
+                      >
+                        <div>
                           <h3 className="text-2xl mt-0">
                             {projectDetail.name}
                           </h3>
@@ -468,7 +480,17 @@ const ProjectDashboard = () => {
                                 updateProjectStepProjectName(projectDetail.name)
                               );
                               dispatch(setProjectDetail(projectDetail));
+                              if(projectDetail?.projectStatus){
+                                dispatch(updateIsStepVisible(false));
+                                dispatch(updateCurrentStep(4));
+                                dispatch(updateCurrentSubStepOfLastStep(1));
+                              }else {
+                                dispatch(updateIsStepVisible(false));
+                                dispatch(updateCurrentStep(1));
+                                dispatch(updateCurrentSubStepOne(1));
+                              }
                               navigate(`/edit/${projectDetail.id}`);
+                       
                             }}
                             label={
                               !projectDetail.projectStatus
@@ -495,9 +517,11 @@ const ProjectDashboard = () => {
                             <i
                               className="pi pi-trash text-xl text-500 ml-3 cursor-pointer"
                               onClick={() => {
-                                dispatch(
-                                  deleteProjectApi(projectDetail.id as number)
-                                );
+                                setSelectedProject(projectDetail);
+                                setDeleteDialog(true);
+                                // dispatch(
+                                //   deleteProjectApi(projectDetail.id as number)
+                                // );
                               }}
                             ></i>
                           </div>
@@ -505,7 +529,9 @@ const ProjectDashboard = () => {
                         </div>
                       </div>
                       <div
-                        className={styles.techDetailsPendingWrapper + ' w-25rem'}
+                        className={
+                          styles.techDetailsPendingWrapper + " w-25rem"
+                        }
                         style={{
                           backgroundColor:
                             projectStatusColors[
@@ -518,11 +544,9 @@ const ProjectDashboard = () => {
                         }}
                       >
                         <div className={styles.techDetailsPending}>
-                          {
-                            projectStatusLabels[
-                              projectDetail.projectStatus as ProjectStatus
-                            ]
-                          }
+                          {projectStatusLabels[
+                            projectDetail.projectStatus as ProjectStatus
+                          ] || projectStatusLabels[ProjectStatus.pending]}
                         </div>
                       </div>
                     </div>
@@ -536,6 +560,38 @@ const ProjectDashboard = () => {
           </div>
         </main>
       </div>
+      <Dialog
+        visible={deleteDialog}
+        style={{ width: "400px" }}
+        header={`Are you sure you want to delete ${selectedProject?.name}`}
+        modal
+        className="p-fluid"
+        footer={() => {
+          return (
+            <div className="p-d-flex justify-content-end">
+              <Button
+                label="Yes, Delete Project"
+                onClick={() => {
+                  dispatch(deleteProjectApi(selectedProject?.id as number));
+                  setDeleteDialog(false);
+                }}
+                rounded
+                severity="danger"
+                style={{ float: "left" }}
+              />
+            </div>
+          );
+        }}
+        onHide={() => setDeleteDialog(false)}
+      >
+        <div className="flex justify-content-between">
+          <div className="w-full">
+            <p className="text-500">
+              This will permanently delete the project from your dashboard.
+            </p>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 };

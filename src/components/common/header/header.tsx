@@ -31,24 +31,24 @@ const Header = () => {
     <div>
       <header className={styles.mainHeader}>
         <div className={styles.pinnaqleWrapper} onClick={() => redirect("")}>
-          <div className={styles.pinnaqleLogo}>Pinnaqle</div>
+          <img src="/logo.svg" alt="" />
         </div>
         <div className={styles.autoLayoutHorizontal}>
           <div
-            className={styles.homeOwnersBtn}
+            className={styles.homeOwnersBtn + ' cursor-pointer'}
             onClick={() => redirect("home-owners")}
           >
             <div className={styles.label}>Homeowners</div>
           </div>
           <div
-            className={styles.professionalsBtn}
+            className={styles.professionalsBtn + ' cursor-pointer'}
             onClick={() => redirect("professionals")}
           >
             <div className={styles.label1}>Professionals</div>
           </div>
           {user.userData.id ? (
             <>
-              <div className="flex cursor-pointer" onClick={(event) => {
+              <div className="flex cursor-pointer ml-3" onClick={(event) => {
                     menuLeft?.current?.toggle?.(event);
                   }}>
                 <Avatar

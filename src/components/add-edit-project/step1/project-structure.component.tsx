@@ -5,7 +5,6 @@ import { InputText } from "primereact/inputtext";
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import {
-  fetchProjectDetail,
   updateProjectData,
   updateBuildingAreaData,
   addAreaToProject,
@@ -44,8 +43,6 @@ const BuildingAreasComponent = () => {
       if(!projectDetailState.projectDetail.buildingAreas.length) {
         dispatch(getDefaultConfig())
 
-      }else {
-        dispatch(fetchProjectDetail(id));
       }
     } else {
       dispatch(getDefaultConfig())
@@ -176,7 +173,8 @@ const BuildingAreasComponent = () => {
                           }
                           autoFocus
                         />
-                        <InputText
+                        {
+                          area.isSelected ?  <InputText
                           className="w-18rem"
                           placeholder="Additional Comment (Optional)"
                           value={area.description}
@@ -192,7 +190,9 @@ const BuildingAreasComponent = () => {
                               })
                             )
                           }
-                        />
+                        /> : <div className="w-18rem"></div>
+                        }
+                       
                       </div>
                     );
                   })}
@@ -220,7 +220,10 @@ const BuildingAreasComponent = () => {
               rounded
               severity="secondary"
               size="large"
-              onClick={() => dispatch(updateCurrentSubStepOne(1))}
+              onClick={() => {
+                dispatch(updateIsStepVisible(false));
+                dispatch(updateCurrentSubStepOne(1))
+              }}
             />
           </div>
           <div className="flex">

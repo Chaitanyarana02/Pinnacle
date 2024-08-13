@@ -294,6 +294,19 @@ const projectDetailSlice = createAppSlice({
         ].floors[floorIndex].floorRooms[roomIndex].functions = [];
       }
     }),
+    resetAllFunctions: create.reducer((state) => {
+      state.projectDetail.buildingAreas.forEach((buildingArea) => {
+        buildingArea.areas.forEach((area) => {
+          area.floors.forEach((floor) => {
+            floor.floorRooms.forEach((room) => {
+              if (room.isSelected) {
+                room.functions = [];
+              }
+            });
+          });
+        });
+      });
+    }),
     autoRecombedProducts: create.asyncThunk(
       async (defaultProducts: DefaultProduct[]) => {
         const res: AxiosResponse<{
@@ -426,6 +439,7 @@ export const {
   updateFunctionOptions,
   undoRedoState,
   autoRecombedProducts,
-  removeAllRoomFunction
+  removeAllRoomFunction,
+  resetAllFunctions
 } = projectDetailSlice.actions;
 export default projectDetailSlice.reducer;

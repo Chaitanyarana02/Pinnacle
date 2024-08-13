@@ -97,7 +97,7 @@ const DefineFloorsComponent = () => {
         className="flex w-full justify-content-center pl-5 mt-0 pr-5"
         key={buildingAreaIndex + "_" + areaIndex}
       >
-        <div style={{ width: "58rem" }}>
+        <div style={{ width: "47rem" }}>
           <Divider className="m-0 mt-4" />
           <div className="mt-2">
             <Accordion activeIndex={0}>

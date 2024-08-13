@@ -48,6 +48,13 @@
     --highlight-text-color: #1d4ed8;
     color-scheme: light;
   }
+
+  .logInBtnCustom .p-button{
+      background-color: #E9F1FE;
+      color: #2D74FE;
+      border-color: #E9F1FE;
+  
+  }
 /*   
   @font-face {
     font-family: "Inter var";
@@ -4912,8 +4919,8 @@
       background: #ffffff;
       color: #374151;
       padding: 1.5rem;
-      border-top-right-radius: 6px;
-      border-top-left-radius: 6px;
+      border-top-right-radius: 30px;
+      border-top-left-radius: 30px;
     }
     .p-dialog .p-dialog-header .p-dialog-title {
       font-weight: 700;
@@ -4948,8 +4955,8 @@
       padding: 0 1.5rem 2rem 1.5rem;
     }
     .p-dialog .p-dialog-content:last-of-type {
-      border-bottom-right-radius: 6px;
-      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 15px;
+      border-bottom-left-radius: 15px;
     }
     .p-dialog .p-dialog-footer {
       border-top: 0 none;
@@ -4957,8 +4964,8 @@
       color: #4b5563;
       padding: 0 1.5rem 1.5rem 1.5rem;
       text-align: right;
-      border-bottom-right-radius: 6px;
-      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 30px;
     }
     .p-dialog .p-dialog-footer button {
       margin: 0 0.5rem 0 0;
