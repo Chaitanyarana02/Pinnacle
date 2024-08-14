@@ -5,7 +5,10 @@ import {
   fetchProjectList,
 } from "../../store/feature/project-list.slice";
 import { useAppDispatch, useAppSelector } from "../../store/store.utils";
-import { ProjectBasicDetail, ProjectDetail } from "../../interfaces/project.interface";
+import {
+  ProjectBasicDetail,
+  ProjectDetail,
+} from "../../interfaces/project.interface";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
@@ -20,7 +23,13 @@ import {
 } from "../../enums/project.enum";
 import { useNavigate } from "react-router-dom";
 import { setProjectDetail } from "../../store/feature/project-detail.slice";
-import { updateCurrentStep, updateCurrentSubStepOfLastStep, updateCurrentSubStepOne, updateIsStepVisible, updateProjectStepProjectName } from "../../store/feature/project-step.slice";
+import {
+  updateCurrentStep,
+  updateCurrentSubStepOfLastStep,
+  updateCurrentSubStepOne,
+  updateIsStepVisible,
+  updateProjectStepProjectName,
+} from "../../store/feature/project-step.slice";
 import { Avatar } from "primereact/avatar";
 import { Menu } from "primereact/menu";
 import { useCookies } from "react-cookie";
@@ -48,6 +57,10 @@ const ProjectDashboard = () => {
       color: "#9c9600",
       backGroundColor: "#fff5e2",
     },
+    [ProjectStatus.submitted]: {
+      color: "#9c9600",
+      backGroundColor: "#fff5e2",
+    },
     [ProjectStatus.pending]: { color: "#919191", backGroundColor: "#eee" },
     [ProjectStatus.delivered]: { color: "#039309", backGroundColor: "#e0f6e0" },
   };
@@ -70,9 +83,11 @@ const ProjectDashboard = () => {
 
   const projectStatusLabels: { [key in ProjectStatus]: string } = {
     [ProjectStatus.transition]: "IN TRANSIT",
+    [ProjectStatus.submitted]: "IN TRANSIT",
     [ProjectStatus.pending]: "TECH DETAILS PENDING",
     [ProjectStatus.delivered]: "DELIVERY COMPLETED",
   };
+
   const [, setCookie] = useCookies(["userData"]);
   const menuLeft = useRef<Menu>(null);
   const items = [
@@ -92,7 +107,88 @@ const ProjectDashboard = () => {
   useEffect(() => {
     dispatch(fetchProjectList());
   }, []);
+const navigateToProjectDetails = (projectDetail: ProjectDetail) => {
+  dispatch(
+    updateProjectStepProjectName(projectDetail.name)
+  );
+  let projectDetailLocalStorage: ProjectDetail = {} as ProjectDetail;
 
+  if (
+    localStorage.getItem(
+      projectDetail.id?.toString() || ""
+    )
+  ) {
+    try {
+      projectDetailLocalStorage = JSON.parse(
+        localStorage.getItem(
+          projectDetail.id?.toString() || ""
+        ) || ''
+      );
+      dispatch(setProjectDetail(projectDetailLocalStorage));
+    } catch (e) {
+      console.log(e);
+      projectDetailLocalStorage = projectDetail
+      dispatch(setProjectDetail(projectDetail));
+    }
+  } else {
+    projectDetailLocalStorage = projectDetail
+    dispatch(setProjectDetail(projectDetail));
+  }
+  if (projectDetail?.projectStatus) {
+
+    if(projectDetail.projectStatus === ProjectStatus.pending) {
+      dispatch(updateIsStepVisible(true));
+      dispatch(updateCurrentStep(2));
+    }else if(projectDetail.projectStatus === ProjectStatus.submitted) {
+      dispatch(updateIsStepVisible(false));
+      dispatch(updateCurrentStep(4));
+      dispatch(updateCurrentSubStepOfLastStep(1));
+    }else if (
+      projectDetail.projectStatus ===
+      ProjectStatus.transition
+    ) {
+      dispatch(updateIsStepVisible(false));
+      dispatch(updateCurrentStep(4));
+      dispatch(updateCurrentSubStepOfLastStep(2));
+    } else if (
+      projectDetail.projectStatus ===
+      ProjectStatus.delivered
+    ) {
+      dispatch(updateIsStepVisible(false));
+      dispatch(updateCurrentStep(4));
+      dispatch(updateCurrentSubStepOfLastStep(3));
+    }
+  } else {
+    dispatch(updateCurrentStep(1));
+    let stepNo = 1;
+    let isStepVisible = false;
+    projectDetailLocalStorage.buildingAreas.forEach(buildingArea => {
+      if(!buildingArea.areas.filter(v => v.isSelected).length) {
+        stepNo = 2;
+        isStepVisible = true;
+      }else {
+        buildingArea?.areas?.forEach(area => {
+          if(!area?.floors.filter(v => v.isSelected).length) {
+              stepNo = 3;
+              isStepVisible = true;
+          }else {
+            area?.floors?.forEach(floor => {
+              if(!floor?.floorRooms.filter(v => v.isSelected).length) {
+                  stepNo = 4;
+                  isStepVisible = true;
+              }
+            })
+          }
+        })
+      }
+    });
+    dispatch(updateCurrentSubStepOne(stepNo));
+    dispatch(updateIsStepVisible(isStepVisible));
+
+    
+  }
+  navigate(`/edit/${projectDetail.id}`);
+}
   const headerElement = (
     <div>
       <span className="text-3xl font-bold block">Create New Project</span>
@@ -112,8 +208,7 @@ const ProjectDashboard = () => {
               ...newProjectData,
               buildingAreas: [],
             })
-          )
-          .then((v) => {
+          ).then((v) => {
             const data = v.payload as unknown;
             dispatch(updateProjectStepProjectName(newProjectData.name));
             dispatch(setProjectDetail(data as ProjectDetail));
@@ -476,24 +571,12 @@ const ProjectDashboard = () => {
                         <div className="flex fle justify-content-between w-full">
                           <Button
                             onClick={() => {
-                              dispatch(
-                                updateProjectStepProjectName(projectDetail.name)
-                              );
-                              dispatch(setProjectDetail(projectDetail));
-                              if(projectDetail?.projectStatus){
-                                dispatch(updateIsStepVisible(false));
-                                dispatch(updateCurrentStep(4));
-                                dispatch(updateCurrentSubStepOfLastStep(1));
-                              }else {
-                                dispatch(updateIsStepVisible(false));
-                                dispatch(updateCurrentStep(1));
-                                dispatch(updateCurrentSubStepOne(1));
-                              }
-                              navigate(`/edit/${projectDetail.id}`);
-                       
+                              navigateToProjectDetails(projectDetail)
                             }}
                             label={
-                              !projectDetail.projectStatus
+                              !projectDetail.projectStatus ||
+                              projectDetail.projectStatus ===
+                                ProjectStatus.pending
                                 ? "Resume"
                                 : "View Details"
                             }

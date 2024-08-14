@@ -111,8 +111,9 @@ const projectListSlice = createAppSlice({
           requirementsMeta: project.buildingAreas,
           deliveryStatus: project.projectStatus || ProjectStatus.pending,
           creationStepsCompleted: 1,
-          deliveryAddress: JSON.parse(project?.deliveryAddress || '')
+          deliveryAddress: JSON.parse(project?.deliveryAddress || '') || {}
       });
+      localStorage.setItem(project.id?.toString() || '', JSON.stringify(project));
         return project;
       },
       {

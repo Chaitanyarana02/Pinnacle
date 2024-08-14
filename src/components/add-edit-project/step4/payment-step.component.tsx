@@ -1,18 +1,68 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useAppSelector } from "../../../store/store.utils";
 import ContractComponent from "./contract-approvel.component";
 import PaymentConfirmedComponent from "./payment-confirmed";
 import DeliveryConfirmComponent from "./delevery-confirm.component";
-
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import ProjectStep3Pdf from "../step3/project-step3PDF.component";
+import ProjectService from "../../../services/project.service";
+import {
+  CustomizationOptionByCategory,
+  ProductAllPrice,
+  customizationOptionsForTable,
+} from "../step3/project-step3.component";
 const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
   const projectDetail = useAppSelector((state) => state.projectDetailState);
   const stepState = useAppSelector((state) => state.projectStepState);
-  const price = useAppSelector(state => state.priceValueSlice);
-  const userData = useAppSelector(state => state.userDataSlice)
+  const price = useAppSelector((state) => state.priceValueSlice);
+  const userData = useAppSelector((state) => state.userDataSlice);
   const components: { [key: number]: ReactNode } = {
     1: <ContractComponent />,
-    2: <PaymentConfirmedComponent/>,
-    3: <DeliveryConfirmComponent/>
+    2: <PaymentConfirmedComponent />,
+    3: <DeliveryConfirmComponent />,
+  };
+  const printPdf = () => {
+
+
+    try{
+      (document.getElementById("pdf-div") as HTMLElement).style.display = "block";
+
+    }catch (e) {
+        console.log(e);
+        
+    }
+    const element = document.getElementById("pdf-div") as HTMLElement;
+
+    html2canvas(element).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      const imgWidth = 210;
+      const pageHeight = 295; // A4 in nm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+
+      let position = 0;
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save("document.pdf");
+      try{
+        (document.getElementById("pdf-div") as HTMLElement).style.display = "none";
+  
+      }catch (e) {
+        console.log(e);
+        
+      } 
+    });
   };
   const getSuccessIcon = (
     name: string,
@@ -20,7 +70,11 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
     lastStepSubStep?: number
   ) => {
     let icon = <></>;
-    if ((stepState.currentStep > step && !lastStepSubStep) || (lastStepSubStep && (stepState.currentSubStepOfLastStep || 0) > lastStepSubStep)) {
+    if (
+      (stepState.currentStep > step && !lastStepSubStep) ||
+      (lastStepSubStep &&
+        (stepState.currentSubStepOfLastStep || 0) > lastStepSubStep)
+    ) {
       icon = (
         <>
           <span className="bg-green-600 border-circle p-2 flex align-items-center justify-content-center">
@@ -66,9 +120,61 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
       </div>
     );
   };
-  //   return <>{components[currentStep]}</>;
+  const [allProductPrice, setAllProductPrice] = useState<ProductAllPrice>([]);
+  const [customizationOptions, setCustomizationOptions] =
+    useState<customizationOptionsForTable>({});
+  useEffect(() => {
+    const productIds: number[] = [];
+    projectDetail.projectDetail?.buildingAreas?.forEach((areas) => {
+      areas?.areas.forEach((area) => {
+        area?.floors.forEach((floor) => {
+          floor?.floorRooms.forEach((room) => {
+            room.functions.forEach((fun) => {
+              if (!productIds.includes(fun?.id)) {
+                productIds.push(fun?.id);
+              }
+            });
+          });
+        });
+      });
+    });
+    ProjectService.getProductsByCategoryOptions(productIds).then((res) => {
+      const data: CustomizationOptionByCategory[] = res.data.data;
+      const customizationOptions: customizationOptionsForTable = {};
+      data.forEach((option) => {
+        if (customizationOptions[option.categoryId]) {
+          customizationOptions[option.categoryId].products.push({
+            id: option.id,
+            name: option.name,
+            categoryId: option.categoryId,
+          });
+        } else {
+          customizationOptions[option.categoryId] = {
+            products: [
+              {
+                id: option.id,
+                name: option.name,
+                categoryId: option.categoryId,
+              },
+            ],
+            categoryId: option.categoryId,
+            category: option.category,
+            customizationOptions: option.customizationOptions,
+          };
+        }
+      });
+      setCustomizationOptions(customizationOptions);
+
+      ProjectService.getAllProductCustomizationPrice(productIds).then((res) => {
+        const data: ProductAllPrice = res?.data?.data || [];
+        setAllProductPrice(data);
+      });
+      // setSelectedRoom({...})
+    });
+  }, []);
   return (
     <>
+
       <div className="mt-3">
         <div className="flex justify-content-around">
           <div className="w-29rem flex flex-column">
@@ -129,27 +235,46 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
               </div>
               <div>
                 <span className="font-semibold text-600 text-xl">Rebate:</span>
-                <span className="font-semibold text-xl"> £{userData.userData.rebateRate}</span>
+                <span className="font-semibold text-xl">
+                  {" "}
+                  £{userData.userData.rebateRate}
+                </span>
               </div>
             </div>
 
             <div className="mt-6 text-primary font-semibold">
-              <div className="mb-3">
-                <i className="pi pi-cloud-download mr-2"></i>
-                Download Tech Specification Sheet
-              </div>
-              <div>
-              <i className="pi pi-cloud-download mr-2"></i>
-
-                Download Sales Brochure
+              <div
+                className="mb-3 cursor-pointer flex"
+                onClick={() => {
+                  printPdf();
+                }}
+              >
+                <img src="/download-doc.svg" alt="" />
+                <div className="align-content-center">
+                  &nbsp; Download Tech Specification Sheet
                 </div>
+              </div>
+              <div className="cursor-pointer flex">
+                <img src="/download-doc.svg" alt="" />
+                <div className="align-content-center">
+                  &nbsp; Download Sales Brochure
+                </div>
+              </div>
             </div>
           </div>
-          <div className="w-25rem">
-            {components[currentStep]}
-
-          </div>
+          <div className="w-25rem">{components[currentStep]}</div>
         </div>
+      </div>
+
+      <div style={{
+        width: '100%',
+        display: 'none'
+      }}
+      id='pdf-div'>
+        <ProjectStep3Pdf
+          allProductPrice={allProductPrice}
+          customizationOptions={customizationOptions}
+        />
       </div>
     </>
   );

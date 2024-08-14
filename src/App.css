@@ -211,7 +211,9 @@
   
 
   
-
+  .undo-btn .p-button {
+    border: 2px solid #DDDDDD;
+  }
 
   .content {
     margin-left: 250px;

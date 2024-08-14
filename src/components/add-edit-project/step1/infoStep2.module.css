@@ -1,504 +1,203 @@
-.testProject {
-    text-decoration: none;
-    position: relative;
-    line-height: 2.75rem;
-    font-weight: 600;
-    color: inherit;
-    white-space: nowrap;
-  }
-  .xIcon {
-    width: 2.5rem;
-    height: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-    cursor: pointer;
-  }
-  .header1,
-  .xWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-11xs) 0 0;
-  }
-  .header1 {
-    align-self: stretch;
-    background-color: var(--default-white);
-    border-bottom: 1px solid var(--color-gainsboro-500);
-    overflow: hidden;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: var(--padding-9xl) var(--padding-21xl) var(--padding-7xl)
-      var(--padding-41xl);
-    top: 0;
-    z-index: 99;
-    position: sticky;
-    gap: var(--gap-xl);
-    text-align: center;
-    font-size: var(--font-size-13xl);
-    color: var(--color-gray-400);
-    
-  }
-  .designingASystem {
-    margin: 0;
-    width: 34.125rem;
-    position: relative;
-    font-size: inherit;
-    line-height: 2.75rem;
-    font-weight: 600;
-    
-    display: inline-block;
-    max-width: 100%;
-  }
-  .designingASystemConsistsOfWrapper {
-    align-self: stretch;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0 var(--padding-xl);
-    box-sizing: border-box;
-    max-width: 100%;
-  }
-  .b,
-  .frameChild {
-    position: absolute;
-  }
-  .frameChild {
-    top: 0;
-    left: 0;
-    border-radius: 50%;
-    background-color: var(--default-white);
-    border: 0 solid var(--color-gainsboro-500);
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-  .b {
-    top: 0.606rem;
-    left: 2.625rem;
-    line-height: 5.375rem;
-    font-weight: 600;
-    z-index: 2;
-  }
-  .ellipseParent {
-    height: 6.563rem;
-    width: 6.563rem;
-    position: relative;
-  }
-  .frameItem {
-    height: 0.125rem;
-    width: 45.375rem;
-    position: absolute;
-    margin: 0 !important;
-    top: 1.125rem;
-    right: -37.375rem;
-    background-color: #f5f5f5;
-  }
-  .chevronsRightIcon {
-    height: 2.5rem;
-    width: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-    z-index: 1;
-  }
-  .frameWrapper,
-  .rectangleParent {
-    display: flex;
-    align-items: flex-start;
-  }
-  .rectangleParent {
-    flex-direction: row;
-    justify-content: flex-start;
-    position: relative;
-  }
-  .frameWrapper {
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 0 var(--padding-13xl);
-  }
-  .frameContainer {
-    align-self: stretch;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--gap-xl);
-  }
-  .createStructure {
-    width: 12.5rem;
-    position: relative;
-    line-height: 2.25rem;
-    font-weight: 600;
-    display: inline-block;
-  }
-  .designYourClients {
-    margin: 0;
-    align-self: stretch;
-    position: relative;
-    font-size: var(--font-size-base);
-    line-height: 1.5rem;
-    
-    color: var(--color-dimgray-100);
-  }
-  .createStructureParent,
-  .frameGroup {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .createStructureParent {
-    align-self: stretch;
-    gap: var(--gap-lg);
-    text-align: left;
-    font-size: var(--font-size-5xl);
-    color: var(--color-gray-400);
-  }
-  .frameGroup {
-    width: 15.313rem;
-    padding: 0 var(--padding-mini) 0 0;
-    box-sizing: border-box;
-    gap: var(--gap-11xl);
-  }
-  .b1,
-  .frameInner {
-    position: absolute;
-  }
-  .frameInner {
-    top: 0;
-    left: 0;
-    border-radius: 50%;
-    background-color: var(--default-white);
-    border: 0 solid var(--color-gainsboro-500);
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-  .b1 {
-    top: 0.606rem;
-    left: 2.438rem;
-    line-height: 5.375rem;
-    font-weight: 600;
-    display: inline-block;
-    min-width: 1.75rem;
-    z-index: 2;
-  }
-  .ellipseGroup {
-    height: 6.563rem;
-    width: 6.563rem;
-    position: relative;
-  }
-  .chevronsRightIcon1 {
-    width: 2.5rem;
-    height: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-    z-index: 1;
-  }
-  .chevronsRightWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-13xl) 0 0;
-  }
-  .frameParent1 {
-    width: 14.375rem;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--gap-xl);
-  }
-  .defineFunctions {
-    margin: 0;
-    align-self: stretch;
-    position: relative;
-    font-size: inherit;
-    line-height: 2.25rem;
-    font-weight: 600;
-    
-  }
-  .craftThePerfect {
-    margin: 0;
-    width: 14.438rem;
-    position: relative;
-    font-size: var(--font-size-base);
-    line-height: 1.5rem;
-    
-    color: var(--color-dimgray-100);
-    display: inline-block;
-  }
-  .defineFunctionsParent,
-  .frameDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .defineFunctionsParent {
-    align-self: stretch;
-    gap: var(--gap-lg);
-    text-align: left;
-    font-size: var(--font-size-5xl);
-    color: var(--color-gray-400);
-  }
-  .frameDiv {
-    width: 15rem;
-    gap: var(--gap-11xl);
-  }
-  .b2,
-  .ellipseDiv {
-    position: absolute;
-  }
-  .ellipseDiv {
-    top: 0;
-    left: 0;
-    border-radius: 50%;
-    background-color: var(--default-white);
-    border: 0 solid var(--color-gainsboro-500);
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-  .b2 {
-    top: 0.606rem;
-    left: 2.375rem;
-    line-height: 5.375rem;
-    font-weight: 600;
-    display: inline-block;
-    min-width: 1.813rem;
-    z-index: 2;
-  }
-  .ellipseContainer,
-  .frameChild1 {
-    height: 6.563rem;
-    width: 6.563rem;
-    position: relative;
-  }
-  .frameChild1 {
-    width: 0.688rem;
-    height: 0.688rem;
-    border-radius: 50%;
-    background-color: #d7d7d7;
-    z-index: 1;
-  }
-  .ellipseWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-7xs) 0 0;
-  }
-  .allDone {
-    position: relative;
-    line-height: 1.5rem;
-    display: inline-block;
-    min-width: 4.125rem;
-  }
-  .frameParent4 {
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: var(--gap-3xs);
-  }
-  .frameParent3,
-  .frameParent4,
-  .frameWrapper1 {
-    display: flex;
-    align-items: flex-start;
-  }
-  .frameWrapper1 {
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: var(--padding-21xl) 0 0;
-    text-align: left;
-    font-size: var(--font-size-base);
-    color: var(--color-dimgray-100);
-    
-  }
-  .frameParent3 {
-    align-self: stretch;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: var(--gap-xl);
-  }
-  .provideTechDetails {
-    margin: 0;
-    align-self: stretch;
-    position: relative;
-    font-size: inherit;
-    line-height: 2.25rem;
-    font-weight: 600;
-    
-  }
-  .polishTheFinal {
-    margin: 0;
-    width: 14.313rem;
-    position: relative;
-    font-size: var(--font-size-base);
-    line-height: 1.5rem;
-    
-    color: var(--color-dimgray-100);
-    display: inline-block;
-  }
-  .provideTechDetailsParent {
-    width: 15rem;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: var(--gap-lg);
-    text-align: left;
-    font-size: var(--font-size-5xl);
-    color: var(--color-gray-400);
-  }
-  .frameParent,
-  .frameParent2,
-  .provideTechDetailsParent {
-    display: flex;
-    align-items: flex-start;
-  }
-  .frameParent2 {
-    width: 19.75rem;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: var(--gap-11xl);
-  }
-  .frameParent {
-    flex-direction: row;
-    justify-content: center;
-    gap: 3.437rem;
-    max-width: 100%;
-  }
-  .infostepInner,
-  .label {
-    
-  }
-  .infostepInner {
-    width: 85.219rem;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0 var(--padding-xl);
-    box-sizing: border-box;
-    max-width: 100%;
-    text-align: center;
-    font-size: var(--font-size-27xl-7);
-    color: var(--color-royalblue);
-    margin-right: 20%;
-  }
-  .label {
-    position: relative;
-    font-size: var(--font-size-xl);
-    line-height: 1.5rem;
-    font-weight: 600;
-    color: var(--default-white);
-    text-align: left;
-    display: inline-block;
-    min-width: 6.625rem;
-  }
-  .button,
-  .buttonWrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  .button {
-    cursor: pointer;
-    border: 0;
-    padding: var(--padding-lg) var(--padding-13xl);
-    background-color: var(--color-royalblue);
-    border-radius: var(--br-31xl);
-    justify-content: flex-start;
-    white-space: nowrap;
-  }
-  .button:hover {
-    background-color: var(--color-dodgerblue);
-  }
-  .buttonWrapper {
-    align-self: stretch;
-    justify-content: center;
-    padding: 0 var(--padding-xl);
-  }
-  .infostep {
-    width: 100%;
-    position: relative;
-    background-color: var(--default-white);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 0 0 4.687rem;
-    box-sizing: border-box;
-    gap: 5rem;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    font-size: var(--font-size-13xl);
-    color: var(--color-gray-400);
-    
-  }
-  @media screen and (max-width: 900px) {
-    .header1 {
-      padding-left: var(--padding-11xl);
-      box-sizing: border-box;
-    }
-    .designingASystem {
-      font-size: var(--font-size-7xl);
-      line-height: 2.188rem;
-    }
-    .b,
-    .b1,
-    .b2 {
-      font-size: var(--font-size-18xl);
-      line-height: 4.25rem;
-    }
-    .frameParent {
-      flex-wrap: wrap;
-    }
-    .infostep {
-      gap: var(--gap-21xl);
-    }
-  }
-  @media screen and (max-width: 450px) {
-    .designingASystem {
-      font-size: var(--font-size-lgi);
-      line-height: 1.625rem;
-    }
-    .b {
-      font-size: var(--font-size-9xl);
-      line-height: 3.188rem;
-    }
-    .createStructure {
-      font-size: var(--font-size-lgi);
-      line-height: 1.813rem;
-    }
-    .b1 {
-      font-size: var(--font-size-9xl);
-      line-height: 3.188rem;
-    }
-    .defineFunctions {
-      font-size: var(--font-size-lgi);
-      line-height: 1.813rem;
-    }
-    .b2 {
-      font-size: var(--font-size-9xl);
-      line-height: 3.188rem;
-    }
-    .provideTechDetails {
-      font-size: var(--font-size-lgi);
-      line-height: 1.813rem;
-    }
-    .frameParent {
-      gap: 1.688rem;
-    }
-    .infostep {
-      gap: var(--gap-xl);
-    }
-  }
+
+.frameChild {
+  position: absolute;
+  top: 51px;
+  left: 102px;
+  background-color: #f5f5f5;
+  width: 726px;
+  height: 2px;
+}
+.groupChild {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background-color: var(--default-white);
+  border: 1px solid var(--color-gainsboro-500);
+  box-sizing: border-box;
+  width: 105px;
+  height: 105px;
+}
+.div {
+  position: absolute;
+  top: 9.7px;
+  left: calc(50% - 10.5px);
+  line-height: 85.56px;
+  font-weight: 600;
+}
+.ellipseParent {
+  width: 105px;
+  position: relative;
+  height: 105px;
+}
+.createStructure {
+  width: 200px;
+  position: relative;
+  font-size: var(--font-size-5xl);
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-gray-400);
+  text-align: left;
+  display: inline-block;
+}
+.groupParent {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-11xl);
+}
+.designYourClients {
+  width: 230px;
+  position: relative;
+  font-size: var(--body-base-text-size);
+  line-height: 24px;
+  color: var(--color-dimgray-100);
+  text-align: left;
+  display: inline-block;
+}
+.frameParent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg);
+}
+.div1 {
+  position: absolute;
+  top: 9.7px;
+  left: calc(50% - 13.5px);
+  line-height: 85.56px;
+  font-weight: 600;
+}
+.craftThePerfect,
+.defineFunctions {
+  position: relative;
+  text-align: left;
+  display: inline-block;
+}
+.defineFunctions {
+  width: 240px;
+  font-size: var(--font-size-5xl);
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-gray-400);
+}
+.craftThePerfect {
+  width: 231px;
+  font-size: var(--body-base-text-size);
+  line-height: 24px;
+  color: var(--color-dimgray-100);
+}
+.frameGroup {
+  position: absolute;
+  top: 0;
+  left: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg);
+}
+.div2 {
+  position: absolute;
+  top: 9.7px;
+  left: calc(50% - 14.5px);
+  line-height: 85.56px;
+  font-weight: 600;
+}
+.polishTheFinal {
+  width: 229px;
+  position: relative;
+  font-size: var(--body-base-text-size);
+  line-height: 24px;
+  color: var(--color-dimgray-100);
+  text-align: left;
+  display: inline-block;
+}
+.frameContainer {
+  position: absolute;
+  top: 0;
+  left: 595px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg);
+}
+.chevronsRightIcon,
+.chevronsRightIcon1 {
+  position: absolute;
+  top: 33px;
+  left: 190px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+.chevronsRightIcon1 {
+  top: 32px;
+  left: 490px;
+}
+.frameItem {
+  position: absolute;
+  top: 46px;
+  left: 824px;
+  border-radius: 50%;
+  background-color: #d7d7d7;
+  width: 11px;
+  height: 11px;
+}
+.allDone {
+  position: absolute;
+  top: 40px;
+  left: 845px;
+  font-size: var(--body-base-text-size);
+  line-height: 24px;
+  color: var(--color-dimgray-100);
+  text-align: left;
+  width: max-content;
+}
+.rectangleParent {
+  width: 835px;
+  position: relative;
+  height: 381px;
+  font-size: var(--font-size-27xl-7);
+  color: var(--color-royalblue);
+  margin-top: 50px;
+}
+.label {
+  position: relative;
+  line-height: 24px;
+  font-weight: 600;
+}
+.addDetails1,
+.button {
+  display: flex;
+  align-items: center;
+}
+.button {
+  border-radius: var(--br-31xl);
+  background-color: var(--color-royalblue);
+  flex-direction: row;
+  justify-content: center;
+  padding: var(--padding-lg) var(--padding-13xl);
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--default-white);
+}
+.addDetails1 {
+  width: 1440px;
+  background-color: var(--default-white);
+  max-width: 100%;
+  height: 900px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-61xl);
+  text-align: center;
+  font-size: var(--font-size-13xl);
+  color: var(--color-gray-400);
+}

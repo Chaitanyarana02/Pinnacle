@@ -185,9 +185,11 @@ const ProjectStep2Component = () => {
         <div className="flex justify-content-between align-content-center">
           <div>
             <div className="text-500 text-sm">
-              <span className="text-xl mr-2">{area.name}</span>
+              <span className="text-xl mr-2">
+                {area.description || area.name}
+              </span>
               <img src="Rectangle.png" className="mr-2" alt="" />
-              <span>{area.internalName}</span>
+              <span>{area.name}</span>
               <span className="mr-1 ml-1">&#8226;</span>
               <span>{buildingAreaName}</span>
             </div>
@@ -219,9 +221,11 @@ const ProjectStep2Component = () => {
         className="flex w-full justify-content-between pl-5 mt-0 pr-5"
         key={buildingAreaIndex + "_" + areaIndex + "_" + floorIndex}
       >
-        <div style={{ 
-          maxWidth: "57rem"
-          }}>
+        <div
+          style={{
+            maxWidth: "57rem",
+          }}
+        >
           <Divider className="m-0 mt-4" />
           <div className="mt-2">
             <Accordion activeIndex={0}>
@@ -391,6 +395,10 @@ const ProjectStep2Component = () => {
       });
     });
     if (flag) {
+      localStorage.setItem(
+        projectDetailState.projectDetail.id?.toString() || "",
+        JSON.stringify(projectDetailState.projectDetail)
+      );
       dispatch(updateCurrentStep(3));
     } else {
       UtilityService.ShowNotification(
@@ -405,277 +413,280 @@ const ProjectStep2Component = () => {
     <DndProvider backend={HTML5Backend}>
       <Toast ref={toast} />
       <div className="">
-          <div className=" mt-6">
-        <div className="flex justify-content-between mb-6 flex-wrap ">
-          <div className="">
-            <Button
-              label="Edit Structure"
-              icon="pi pi-angle-left"
-              rounded
-              severity="secondary"
-              size="large"
-              onClick={() => dispatch(updateCurrentStep(1))}
-            />
-          </div>
-
-          <div className="">
-            <div className="m-auto max-w-max text-4xl font-semibold">
-              Define Functions for each room
+        <div className=" mt-6">
+          <div className="flex justify-content-between mb-6">
+            <div className="">
+              <Button
+                label="Edit Structure"
+                icon="pi pi-angle-left"
+                rounded
+                severity="secondary"
+                size="large"
+                onClick={() => dispatch(updateCurrentStep(1))}
+              />
             </div>
-            <p className="m-auto max-w-max text-500 text-lg mt-3">
-              Start by assigning multiple functions needed for your project
-              Structure.
-            </p>
+
+            <div className="pr-4 pl-4">
+              <div className="m-auto max-w-max text-4xl font-semibold md:text-2xl ">
+                Define Functions for each room
+              </div>
+              <p className="m-auto max-w-max text-500 text-lg mt-3 md:text-sm">
+                Start by assigning multiple functions needed for your project
+                Structure.
+              </p>
+            </div>
+            <div className="">
+              <Button
+                label="Print Sales Brochure"
+                icon="pi pi-print"
+                rounded
+                severity="secondary"
+                size="large"
+                onClick={() => {
+                  console.log("Print sales brochure");
+                }}
+              />
+            </div>
           </div>
-          <div className="">
-            <Button
-              label="Print Sales Brochure"
-              icon="pi pi-print"
-              rounded
-              severity="secondary"
-              size="large"
-              onClick={() => {
-                console.log("Print sales brochure");
-              }}
-            />
+          <div className="flex justify-content-between">
+            <div>
+              {projectDetailState?.projectDetail?.buildingAreas?.map(
+                (buildingArea, buildingAreaIndex) => (
+                  <section key={buildingAreaIndex}>
+                    {buildingArea.areas.map((area, areaIndex) => (
+                      <>
+                        {" "}
+                        {area.isSelected && area.floors.length ? (
+                          <>
+                            {area.floors.map((floor, floorIndex) => {
+                              return floor.isSelected &&
+                                floor.floorRooms.length &&
+                                floor.floorRooms.filter((v) => v.isSelected)
+                                  .length
+                                ? getSection(
+                                    floor,
+                                    buildingArea.name,
+                                    buildingAreaIndex,
+                                    area,
+                                    areaIndex,
+                                    floorIndex
+                                  )
+                                : null;
+                            })}
+                          </>
+                        ) : null}
+                      </>
+                    ))}
+                  </section>
+                )
+              )}
+            </div>
+            <div className="sticky top-0 align-self-start mr-6 mb-4">
+              <div
+                className="border-1 "
+                style={{
+                  borderRadius: "30px",
+                  borderColor: "#DDD",
+                  boxShadow: "1px 1px 1px #DDD",
+                  width: "30rem",
+                }}
+              >
+                <div className="m-4">
+                  <span className="font-bold">
+                    Drag & Drop Functions in rooms
+                  </span>
+                  <br />
+                  <br />
+                  <span className="text-500">
+                    HINT: Double click a function to add to all rooms
+                  </span>
+
+                  <div
+                    style={{
+                      border: "1px solid #DDD",
+                      backgroundColor: "#FAFAFA",
+                      borderRadius: "10px",
+                    }}
+                    className="mt-4 mb-3"
+                  >
+                    <div
+                      className="m-2 flex flex-wrap"
+                      style={{
+                        height: "320px",
+                        overflow: "auto",
+                      }}
+                    >
+                      {products.map((product, productIndex) => {
+                        return (
+                          <div className="w-max m-3" key={productIndex}>
+                            <span className="font-bold text-400">
+                              {product.categoryName}
+                            </span>
+                            {product.products.map(
+                              (productItem, productItemIndex) => {
+                                return (
+                                  <DragItem
+                                    dbClickedItem={() => {
+                                      dispatch(
+                                        addFunctionToAllRoom({
+                                          value: {
+                                            categoryId: productItem.categoryId,
+                                            name: productItem.name,
+                                            count: 1,
+                                            id: productItem.id,
+                                            systemDetails: {},
+                                          },
+                                        })
+                                      );
+                                    }}
+                                    product={productItem}
+                                    key={productItemIndex}
+                                  />
+                                );
+                              }
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <Button
+                    label="Auto Recommend Functions"
+                    rounded
+                    severity="secondary"
+                    className="mt-2"
+                    onClick={() => {
+                      dispatch(autoRecombedProducts(defaultProducts));
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="flex justify-content-between mt-3">
+                <div className="undo-btn">
+                  <Button
+                    label="Undo"
+                    icon={<img src="/reverse-left.svg" className="mr-2"/>}
+                    rounded
+                    outlined
+                    severity="secondary"
+                    className="mr-2"
+                    onClick={() => {
+                      const undoData = undoStack.pop();
+                      if (undoData) {
+                        setUndoStack([...undoStack]);
+                        dispatch(undoRedoState(undoData));
+                        undoData.eventName =
+                          undoData.eventName === UndoRedoEventName.ADDED
+                            ? UndoRedoEventName.DELETED
+                            : UndoRedoEventName.ADDED;
+                        setRedoStack([...redoStack, undoData]);
+                      }
+                    }}
+                  />
+                  <Button
+                    label="Redo"
+                    icon={<img src="/reverse-right.svg" className="mr-2"/>}
+                    rounded
+                    outlined
+                    iconPos={"right"}
+                    severity="secondary"
+                    onClick={() => {
+                      const redoData = redoStack.pop();
+                      if (redoData) {
+                        setRedoStack([...redoStack]);
+                        dispatch(undoRedoState(redoData));
+                        redoData.eventName =
+                          redoData.eventName === UndoRedoEventName.ADDED
+                            ? UndoRedoEventName.DELETED
+                            : UndoRedoEventName.ADDED;
+                        setUndoStack([...undoStack, redoData]); //
+                      }
+                    }}
+                  />
+                </div>
+                <span
+                  className="text-primary align-content-center cursor-pointer"
+                  onClick={() => {
+                    dispatch(resetAllFunctions());
+                  }}
+                >
+                  Reset All
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex justify-content-between">
-          <div>
-            {projectDetailState?.projectDetail?.buildingAreas?.map(
-              (buildingArea, buildingAreaIndex) => (
-                <section key={buildingAreaIndex}>
-                  {buildingArea.areas.map((area, areaIndex) => (
-                    <>
-                      {" "}
-                      {area.isSelected && area.floors.length ? (
-                        <>
-                          {area.floors.map((floor, floorIndex) => {
-                            return floor.isSelected && floor.floorRooms.length && floor.floorRooms.filter(v =>   v.isSelected).length
-                              ? getSection(
-                                  floor,
-                                  buildingArea.name,
-                                  buildingAreaIndex,
-                                  area,
-                                  areaIndex,
-                                  floorIndex
-                                )
-                              : null;
-                          })}
-                        </>
-                      ) : null}
-                    </>
-                  ))}
-                </section>
-              )
-            )}
-          </div>
-          <div className="sticky top-0 align-self-start mr-6 mb-4">
-            <div
-              className="border-1 "
-              style={{
-                borderRadius: "30px",
-                borderColor: "#DDD",
-                boxShadow: "1px 1px 1px #DDD",
-                width: "30rem",
-              }}
-            >
-              <div className="m-4">
-                <span className="font-bold">
-                  Drag & Drop Functions in rooms
-                </span>
-                <br />
-                <br />
-                <span className="text-500">
-                  HINT: Double click a function to add to all rooms
-                </span>
 
-                <div
-                  style={{
-                    border: "1px solid #DDD",
-                    backgroundColor: "#FAFAFA",
-                    borderRadius: "10px",
-                  }}
-                  className="mt-4 mb-3"
-                >
-                  <div
-                    className="m-2 flex flex-wrap"
-                    style={{
-                      height: "320px",
-                      overflow: "auto",
-                    }}
-                  >
-                    {products.map((product, productIndex) => {
-                      return (
-                        <div className="w-max m-3" key={productIndex}>
-                          <span className="font-bold text-400">
-                            {product.categoryName}
-                          </span>
-                          {product.products.map(
-                            (productItem, productItemIndex) => {
-                              return (
-                                <DragItem
-                                  dbClickedItem={() => {
-                                    dispatch(
-                                      addFunctionToAllRoom({
-                                        value: {
-                                          categoryId: productItem.categoryId,
-                                          name: productItem.name,
-                                          count: 1,
-                                          id: productItem.id,
-                                          systemDetails: {},
-                                        },
-                                      })
-                                    );
-                                  }}
-                                  product={productItem}
-                                  key={productItemIndex}
-                                />
-                              );
-                            }
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <Button
-                  label="Auto Recommend Functions"
-                  rounded
-                  severity="secondary"
-                  className="mt-2"
-                  onClick={() => {
-                    dispatch(autoRecombedProducts(defaultProducts));
-                  }}
+      </div>
+      <div
+          className="w-full flex justify-content-between  align-content-center sticky bottom-0 md:flex-none"
+          style={{
+            borderTop: "1px solid #DDD",
+            background: "#fff",
+          }}
+        >
+          <div className="flex justify-content-between flex-wrap align-content-center ">
+            <div className="align-content-center">
+              <div className="pl-2">Set Quality Level:</div>
+            </div>
+            <div className="flex justify-content-between w-19rem align-content-center ml-3 pr-3 flex-wrap border-right-2 border-300">
+              <div>
+                <RadioButton
+                  inputId="productQUality1"
+                  name="productQUality"
+                  value={PriceCategoryEnum.BUDGET}
+                  onChange={(e) => dispatch(updatePrice(e.value || 0))}
+                  checked={priceCategory.value === PriceCategoryEnum.BUDGET}
                 />
+                <label htmlFor="productQUality1" className="ml-1">
+                  Budget
+                </label>
+              </div>
+              <div>
+                <RadioButton
+                  inputId="productQUality2"
+                  name="productQUality"
+                  value={PriceCategoryEnum.STANDARD}
+                  onChange={(e) => dispatch(updatePrice(e.value || 0))}
+                  checked={priceCategory.value === PriceCategoryEnum.STANDARD}
+                />
+                <label htmlFor="productQUality2" className="ml-1">
+                  Standard
+                </label>
+              </div>
+              <div>
+                <RadioButton
+                  inputId="productQUality3"
+                  name="productQUality"
+                  value={PriceCategoryEnum.PREMIUM}
+                  onChange={(e) => dispatch(updatePrice(e.value || 0))}
+                  checked={priceCategory.value === PriceCategoryEnum.PREMIUM}
+                />
+                <label htmlFor="productQUality3" className="ml-1">
+                  Premium
+                </label>
               </div>
             </div>
-            <div className="flex justify-content-between mt-3">
-              <div>
-                <Button
-                  label="Undo"
-                  icon="pi pi-angle-left"
-                  rounded
-                  severity="secondary"
-                  className="mr-2"
-                  onClick={() => {
-                    const undoData = undoStack.pop();
-                    if (undoData) {
-                      setUndoStack([...undoStack]);
-                      dispatch(undoRedoState(undoData));
-                      undoData.eventName =
-                        undoData.eventName === UndoRedoEventName.ADDED
-                          ? UndoRedoEventName.DELETED
-                          : UndoRedoEventName.ADDED;
-                      setRedoStack([...redoStack, undoData]);
-                    }
-                  }}
-                />
-                <Button
-                  label="Redo"
-                  icon="pi pi-angle-right"
-                  rounded
-                  iconPos={'right'}
-                  severity="secondary"
-                  onClick={() => {
-                    const redoData = redoStack.pop();
-                    if (redoData) {
-                      setRedoStack([...redoStack]);
-                      dispatch(undoRedoState(redoData));
-                      redoData.eventName =
-                        redoData.eventName === UndoRedoEventName.ADDED
-                          ? UndoRedoEventName.DELETED
-                          : UndoRedoEventName.ADDED;
-                      setUndoStack([...undoStack, redoData]); //
-                    }
-                  }}
-                />
-              </div>
-              <span className="text-primary align-content-center cursor-pointer" onClick={
-                () => {
-                    dispatch(resetAllFunctions())
-                }
-              }>
-                Reset All
+          </div>
+          <div className="align-content-center">
+            <div>
+              Estimated Price Range:&nbsp;
+              <span className="font-semibold">
+                £{price?.min || 0} - £{price?.max || 0}
               </span>
             </div>
           </div>
-        </div>
-      </div>
-      <div
-        className="w-full flex justify-content-between align-content-center flex-wrap sticky bottom-0"
-        style={{
-          height: "40px",
-          borderTop: "1px solid #DDD",
-          background: '#fff'
-        }}
-      >
-        <div className="flex justify-content-between flex-wrap align-content-center md:flex-none">
-          <div>
-            <div className="pl-2">Set Quality Level:</div>
-          </div>
-          <div className="flex justify-content-between w-19rem align-content-center ml-3 pr-3 flex-wrap border-right-2 border-300">
-            <div>
-              <RadioButton
-                inputId="productQUality1"
-                name="productQUality"
-                value={PriceCategoryEnum.BUDGET}
-                onChange={(e) => dispatch(updatePrice(e.value || 0))}
-                checked={priceCategory.value === PriceCategoryEnum.BUDGET}
-              />
-              <label htmlFor="productQUality1" className="ml-1">
-                Budget
-              </label>
-            </div>
-            <div>
-              <RadioButton
-                inputId="productQUality2"
-                name="productQUality"
-                value={PriceCategoryEnum.STANDARD}
-                onChange={(e) => dispatch(updatePrice(e.value || 0))}
-                checked={priceCategory.value === PriceCategoryEnum.STANDARD}
-              />
-              <label htmlFor="productQUality2" className="ml-1">
-                Standard
-              </label>
-            </div>
-            <div>
-              <RadioButton
-                inputId="productQUality3"
-                name="productQUality"
-                value={PriceCategoryEnum.PREMIUM}
-                onChange={(e) => dispatch(updatePrice(e.value || 0))}
-                checked={priceCategory.value === PriceCategoryEnum.PREMIUM}
-              />
-              <label htmlFor="productQUality3" className="ml-1">
-                Premium
-              </label>
-            </div>
+          <div
+            className="bg-primary align-content-center pl-2 pr-2 cursor-pointer"
+            style={{
+              height: "40px",
+              borderTop: "1px solid #DDD",
+            }}
+            onClick={() => checkValidation()}
+          >
+            Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
           </div>
         </div>
-        <div className="align-content-center">
-          <div>
-            Estimated Price Range:&nbsp;
-            <span className="font-semibold">
-              £{price?.min || 0} - £{price?.max || 0}
-            </span>
-          </div>
-        </div>
-        <div
-          className="bg-primary align-content-center pl-2 pr-2 cursor-pointer"
-          style={{
-            height: "40px",
-            borderTop: "1px solid #DDD",
-          }}
-          onClick={() => checkValidation()}
-        >
-          Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
-        </div>
-      </div>
-      </div>
-    
-      
-
     </DndProvider>
   );
 };

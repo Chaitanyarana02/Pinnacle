@@ -43,11 +43,11 @@ const ProjectStructureReviewComponent = () => {
                                   <div>
                                     <div>
                                       <span className="text-xl font-semibold text-500">
-                                        {area.name}
+                                        {area.description || area.name}
                                       </span>
                                     </div>
                                     <div className="text-500 text-sm">
-                                      <span>{area.internalName}</span>
+                                      <span>{area.name}</span>
                                       <span className="mr-1 ml-1">&#8226;</span>
                                       <span>{buildingArea.name}</span>
                                     </div>
@@ -112,7 +112,10 @@ const ProjectStructureReviewComponent = () => {
               rounded
               iconPos="right"
               size="large"
-              onClick={() => dispatch(updateCurrentStep(2))}
+              onClick={() => {
+                localStorage.setItem(projectDetailState.projectDetail.id?.toString() || '', JSON.stringify(projectDetailState.projectDetail)); 
+                dispatch(updateCurrentStep(2))
+              }}
             />
           </div>
         </div>

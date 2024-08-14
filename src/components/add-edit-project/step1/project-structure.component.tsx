@@ -75,6 +75,7 @@ const BuildingAreasComponent = () => {
         selected += buildingArea.areas.filter(area => area.isSelected).length;
       })
       if(selected) {
+        localStorage.setItem(projectDetailState.projectDetail.id?.toString() || '', JSON.stringify(projectDetailState.projectDetail));
         dispatch(updateCurrentSubStepOne(3))
 
       }else{

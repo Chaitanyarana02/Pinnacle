@@ -11,24 +11,28 @@ const OptionRendererComponent = ({
   dataKey,
   valueChanged
 }: {
-  value: {[key: string]:  string | boolean};
+  value: {[key: string]:  string | boolean | number};
   customizationOption: CustomizationProductOptions;
   dataKey: string;
-  valueChanged: (value: string | boolean) => void
+  valueChanged: (value: string | boolean | number) => void
 }) => {
   useEffect(() => {
         if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.RADIO) {
           valueChanged(customizationOption.options[0])
         }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.QUANTITY) {
-          valueChanged("0")
+          valueChanged("1")
         }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.SIZE) {
           valueChanged("1,1")
         }
   }, []);
   const sizeValueChanged = (v: string, valueIndex: number) => {
     const valueArr = (value[dataKey] as string)?.split(',');
-    valueArr[valueIndex] = v.toString();
-    valueChanged(valueArr.join(','));
+    if(valueArr[valueIndex]) {
+      valueArr[valueIndex] = v.toString();
+      valueChanged(valueArr.join(','));
+
+    }
+    
   }
   const renderers: {
     [key in CustomizationProductTypeEnum]: () => ReactElement;
@@ -49,35 +53,43 @@ const OptionRendererComponent = ({
     </> 
     },
     [CustomizationProductTypeEnum.QUANTITY]: () => <div className="w-13rem">
-    <span
-          className="font-bold w-max align-content-center m-2"
+    <div
+          className="font-bold w-max align-content-center m-2 p-3"
           style={{
-            border: "1px solid #DDD",
+            border: "2px solid #DDD",
             padding: "5px 15px",
+            borderRadius: "10px",
             backgroundColor: "white",
           }}
         >
 
           <i
-            className="pi pi-minus"
+            className="pi pi-minus  border-1 border-circle p-1 cursor-pointer"
             style={{
               fontSize: "0.7rem",
+              backgroundColor: "#F7F7F7",
+              borderColor: '#F7F7F7'
             }}
             onClick={() => {
-              valueChanged((parseInt(value[dataKey] as string, 10) || 0 - 1).toString())
+              if((value[dataKey] as number) > 1) {
+                valueChanged(((parseInt(value[dataKey] as string, 10) || 0) - 1).toString())
+
+              }
             }}
           ></i>
           <span className="m-2">{value[dataKey] || 0}</span>
           <i
-            className="pi pi-plus"
+            className="pi pi-plus  border-1 border-circle p-1 cursor-pointer"
             style={{
+               backgroundColor: "#F7F7F7",
+              borderColor: '#F7F7F7',
               fontSize: "0.7rem",
             }}
             onClick={() => {
-              valueChanged((parseInt(value[dataKey] as string, 10) || 0 + 1).toString())
+              valueChanged(((parseInt(value[dataKey] as string, 10) || 0 ) + 1).toString())
             }}
           ></i>
-        </span>
+        </div>
     </div>,
     [CustomizationProductTypeEnum.SIZE]: () => <div className="w-13rem">
         <InputText 

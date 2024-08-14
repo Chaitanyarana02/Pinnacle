@@ -71,9 +71,9 @@ const DefineRoomsComponent = () => {
         <div className="flex justify-content-between align-content-center">
           <div>
             <div className="text-500 text-sm">
-              <span className="text-xl mr-2">{area.name}</span>
+              <span className="text-xl mr-2">{area.description || area.name}</span>
               <img src="Rectangle.png" className="mr-2" alt="" />
-              <span>{area.internalName}</span>
+              <span>{area.name}</span>
               <span className="mr-1 ml-1">&#8226;</span>
               <span>{buildingAreaName}</span>
             </div>
@@ -190,6 +190,7 @@ const DefineRoomsComponent = () => {
         })
     })
     if(selected) {
+      localStorage.setItem(projectDetailState.projectDetail.id?.toString() || '', JSON.stringify(projectDetailState.projectDetail)); 
       dispatch(updateCurrentSubStepOne(5))
 
     }else{
@@ -240,7 +241,9 @@ const DefineRoomsComponent = () => {
               rounded
               severity="secondary"
               size="large"
-              onClick={() => dispatch(updateCurrentSubStepOne(3))}
+              onClick={() => {
+                dispatch(updateCurrentSubStepOne(3))
+              }}
             />
           </div>
           <div className="flex">

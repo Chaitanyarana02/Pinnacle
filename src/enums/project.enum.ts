@@ -21,6 +21,7 @@ export enum projectColorScheme {
 }
 export enum ProjectStatus {
     pending = 'pending',
+    submitted= 'submitted',
     transition = 'transition',
     delivered = 'delivered',
 

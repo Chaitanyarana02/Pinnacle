@@ -4,11 +4,31 @@ import { updateCurrentStep, updateCurrentSubStepOfLastStep, updateCurrentSubStep
 import { useNavigate } from "react-router-dom";
 import { ProjectStatus } from "../../../enums/project.enum";
 import { updateProjectDetails } from "../../../store/feature/project-list.slice";
+import { useEffect, useState } from "react";
+import { addressInterFace } from "./contract-approvel.component";
 
 const DeliveryConfirmComponent = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const projectState = useAppSelector(state => state.projectDetailState)
+  const projectState = useAppSelector(state => state.projectDetailState);
+  const [address, setAddress] = useState<addressInterFace>({
+    name: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: "",
+  });
+
+  useEffect(() => {
+    try {
+        const addr = JSON.parse(projectState.projectDetail.deliveryAddress || '') || {};
+        setAddress(addr)
+    }catch (err) {
+      console.log(err);
+      
+    }
+  }, [])
     return (
         <div className="flex flex-column flex-wrap w-full align-content-center mt-6">
         <div className="text-3xl font-bold flex align-items-center justify-content-center mt-3">
@@ -18,7 +38,10 @@ const DeliveryConfirmComponent = () => {
         <div className="text-500 flex align-items-center justify-content-center mt-5">Estimated Delivery:</div>
         <div className="text-lg font-bold flex align-items-center justify-content-center mt-2">14th June 2024</div>
         <div className="text-500 flex align-items-center justify-content-center mt-5">Delivery Address: </div>
-        <div className="text-lg font-bold flex align-items-center justify-content-center mt-2">39547 Kemmer Overpass Suite 971</div>
+        <div className="text-lg font-bold flex align-items-center justify-content-center mt-2">{
+          
+            address.name ? `${address.zip} ${address.name} ${address.address}  ${address.city} ${address.state}  ${address.country}`  : projectState.projectDetail.address
+          }</div>
         <div className="flex align-items-center justify-content-center mt-4">
           {" "}
           <Button

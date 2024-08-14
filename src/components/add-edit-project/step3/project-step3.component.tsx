@@ -29,14 +29,14 @@ export interface CustomizationProductOptions {
   type: CustomizationProductTypeEnum;
   productId?: number;
 }
-interface CustomizationOptionByCategory {
+export interface CustomizationOptionByCategory {
   id: number;
   name: string;
   categoryId: number;
   category: string;
   customizationOptions: CustomizationProductOptions[];
 }
-interface customizationOptionsForTable {
+export interface customizationOptionsForTable {
   [id: string]: {
     products: {
       id: number;
@@ -48,22 +48,22 @@ interface customizationOptionsForTable {
     customizationOptions: CustomizationProductOptions[];
   };
 }
-interface TableData {
+export interface TableData {
   [id: string]: TableInternalData[];
 }
-interface TableInternalData {
+export interface TableInternalData {
   [name: string]: {
     type: TableDataTypeEnum;
     data: CustomizationProductOptions | { name: string; id: number };
   };
 }
 
-enum TableDataTypeEnum {
+export enum TableDataTypeEnum {
   PRODUCT = "Product",
   CUSTOMIZATION_OPTION = "CustomizationOption",
 }
 
-interface ProductAllPrice {
+export interface ProductAllPrice {
   [id: number]: {
     optionsMetaById: { [key: number]: string | boolean };
     optionMetaByValue: { [key: string]: string | boolean };
@@ -101,7 +101,6 @@ const ProjectStep3Component = () => {
     (state) => state.projectDetailState
   );
 
-  
   useEffect(() => {
     let isSelectedRoomSet = false;
     let selectedRoomVar: {
@@ -116,32 +115,37 @@ const ProjectStep3Component = () => {
       floorIndex: 0,
       roomIndex: 0,
       functions: [],
-    }
+    };
     const productIds: number[] = [];
-    projectDetailState.projectDetail?.buildingAreas?.forEach((areas , buildingAreaIndex) => {
-      areas?.areas.forEach((area, areaIndex) => {
-        area?.floors.forEach((floor, floorIndex) => {
-          floor?.floorRooms.forEach((room, roomIndex) => {
-            if(room.isSelected && room.functions.length > 0 && !isSelectedRoomSet){
-              selectedRoomVar = ({
-                buildingAreaIndex,
-                areaIndex,
-                floorIndex,
-                roomIndex,
-                functions: room.functions
-              });
-              isSelectedRoomSet = true;
-            }
-            room.functions.forEach((fun) => {
-              
-              if (!productIds.includes(fun?.id)) {
-                productIds.push(fun?.id);
+    projectDetailState.projectDetail?.buildingAreas?.forEach(
+      (areas, buildingAreaIndex) => {
+        areas?.areas.forEach((area, areaIndex) => {
+          area?.floors.forEach((floor, floorIndex) => {
+            floor?.floorRooms.forEach((room, roomIndex) => {
+              if (
+                room.isSelected &&
+                room.functions.length > 0 &&
+                !isSelectedRoomSet
+              ) {
+                selectedRoomVar = {
+                  buildingAreaIndex,
+                  areaIndex,
+                  floorIndex,
+                  roomIndex,
+                  functions: room.functions,
+                };
+                isSelectedRoomSet = true;
               }
+              room.functions.forEach((fun) => {
+                if (!productIds.includes(fun?.id)) {
+                  productIds.push(fun?.id);
+                }
+              });
             });
           });
         });
-      });
-    });
+      }
+    );
     console.log(productIds);
     ProjectService.getProductsByCategoryOptions(productIds).then((res) => {
       console.log(res);
@@ -174,8 +178,10 @@ const ProjectStep3Component = () => {
       ProjectService.getAllProductCustomizationPrice(productIds).then((res) => {
         const data: ProductAllPrice = res?.data?.data || [];
         setAllProductPrice(data);
+
       });
-      // setSelectedRoom({...})
+      setSelectedRoom(selectedRoomVar);
+      makeTableData(selectedRoomVar.functions , customizationOptions);
     });
   }, []);
   useEffect(() => {
@@ -220,12 +226,14 @@ const ProjectStep3Component = () => {
                     const sizes = fun.systemDetails[key]
                       ?.toString()
                       ?.split(",");
-                    const size = parseInt(sizes?.[0]) + parseInt(sizes?.[1]) || 1;
+                    const size =
+                      parseInt(sizes?.[0]) + parseInt(sizes?.[1]) || 1;
                     subPrice = size * subPrice;
                   }
                   if (type === CustomizationProductTypeEnum.QUANTITY) {
                     subPrice =
-                      parseInt(fun.systemDetails[key] as string) * subPrice;
+                      (parseInt(fun.systemDetails[key] as string) || 0) *
+                      subPrice;
                   }
                 });
                 price += subPrice * fun.count;
@@ -238,8 +246,7 @@ const ProjectStep3Component = () => {
 
     dispatch(updatePriceValue(price + price * (priceCategory.value / 100)));
   }, [projectDetailState]);
-  const makeTableData = (products: ProjectFloorFunction[]) => {
-    
+  const makeTableData = (products: ProjectFloorFunction[] , customizationOptions: customizationOptionsForTable) => {
     const tableData: TableData = {};
     Object.keys(customizationOptions).forEach((catId) => {
       tableData[catId] = [];
@@ -280,9 +287,11 @@ const ProjectStep3Component = () => {
         <div className="flex justify-content-between align-content-center">
           <div>
             <div className="text-500 text-sm">
-              <span className="text-xl mr-2">{area.name}</span>
+              <span className="text-xl mr-2">
+                {area.description || area.name}
+              </span>
               <img src="Rectangle.png" className="mr-2" alt="" />
-              <span>{area.internalName}</span>
+              <span>{area.name}</span>
               <span className="mr-1 ml-1">&#8226;</span>
               <span>{buildingAreaName}</span>
             </div>
@@ -355,7 +364,7 @@ const ProjectStep3Component = () => {
                           roomIndex,
                           functions: room.functions,
                         });
-                        makeTableData(room.functions);
+                        makeTableData(room.functions, customizationOptions);
                       }}
                     >
                       {room.name}
@@ -401,8 +410,7 @@ const ProjectStep3Component = () => {
               rounded
               severity="secondary"
               size="large"
-              onClick={() => {
-              }}
+              onClick={() => {}}
             />
           </div>
         </div>
@@ -420,7 +428,9 @@ const ProjectStep3Component = () => {
                 {buildingArea.areas.map((area, areaIndex) => (
                   <>
                     {area.floors.map((floor, floorIndex) => {
-                      return floor.isSelected && floor.floorRooms.length && floor.floorRooms.filter(v => v.isSelected).length
+                      return floor.isSelected &&
+                        floor.floorRooms.length &&
+                        floor.floorRooms.filter((v) => v.isSelected).length
                         ? getSection(
                             floor,
                             buildingArea.name,
@@ -484,7 +494,7 @@ const ProjectStep3Component = () => {
                                   )?.systemDetails as {
                                     [key: number]: string | boolean;
                                   };
-
+                                  
                                 return data2;
                               })()}
                               dataKey={dataKay}
@@ -493,7 +503,6 @@ const ProjectStep3Component = () => {
                                   .data as CustomizationProductOptions
                               }
                               valueChanged={(value) => {
-                                console.log(data, dataKay, value);
 
                                 dispatch(
                                   updateFunctionOptions({
@@ -518,7 +527,7 @@ const ProjectStep3Component = () => {
                                           ).productId
                                       ),
                                     key: dataKay,
-                                    value: value,
+                                    value: value as string | boolean,
                                   })
                                 );
                               }}
@@ -539,15 +548,21 @@ const ProjectStep3Component = () => {
         style={{
           height: "40px",
           borderTop: "1px solid #DDD",
-          background: '#fff'
+          background: "#fff",
         }}
       >
         <div className="flex justify-content-between flex-wrap align-content-center">
           <div>
             <div className="pl-2">
-              <span>Final Price: <span className="font-semibold">£{price.value}</span></span>
+              <span>
+                Final Price:{" "}
+                <span className="font-semibold">£{price.value}</span>
+              </span>
               <span className="ml-3">
-                Rebate:  <span className="font-semibold">£{userData.userData.rebateRate}</span>
+                Rebate:{" "}
+                <span className="font-semibold">
+                  £{userData.userData.rebateRate}
+                </span>
               </span>
             </div>
           </div>
@@ -563,6 +578,10 @@ const ProjectStep3Component = () => {
             dispatch(
               updateProjectDetails(projectDetailState.projectDetail)
             ).then(() => {
+              localStorage.setItem(
+                projectDetailState.projectDetail.id?.toString() || "",
+                JSON.stringify(projectDetailState.projectDetail)
+              );
               dispatch(updateIsStepVisible(false));
               dispatch(updateCurrentStep(4));
               dispatch(updateCurrentSubStepOfLastStep(1));

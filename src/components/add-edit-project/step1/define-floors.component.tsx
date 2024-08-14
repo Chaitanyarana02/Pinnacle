@@ -106,7 +106,7 @@ const DefineFloorsComponent = () => {
                 headerTemplate={headerTemplate(
                   area.internalName || '',
                   buildingAreaName,
-                  area.name,
+                  area.description || area.name,
                   buildingAreaIndex,
                   areaIndex
                 )}
@@ -177,6 +177,7 @@ const DefineFloorsComponent = () => {
         })
     })
     if(selected) {
+      localStorage.setItem(projectDetailState.projectDetail.id?.toString() || '', JSON.stringify(projectDetailState.projectDetail));
       dispatch(updateCurrentSubStepOne(4))
 
     }else{
@@ -221,7 +222,9 @@ const DefineFloorsComponent = () => {
               rounded
               severity="secondary"
               size="large"
-              onClick={() => dispatch(updateCurrentSubStepOne(2))}
+              onClick={() => {
+                dispatch(updateCurrentSubStepOne(2))
+              }}
             />
           </div>
           <div className="flex">

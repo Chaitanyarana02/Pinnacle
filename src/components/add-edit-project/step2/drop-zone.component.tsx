@@ -51,7 +51,7 @@ const DropZone = ({
                   count: 1,
                   name: p.name,
                   categoryId: p.categoryId,
-                  systemDetails: {}
+                  systemDetails: {},
                 });
               }
             });
@@ -64,77 +64,85 @@ const DropZone = ({
     </>
   );
   return (
-    <div
-      className="mt-4 flex flex-wrap align-content-center"
-      style={{
-        border: "2px dashed #DDD",
-        borderRadius: "30px",
-        height: "150px",
-        overflow: "auto",
-        backgroundColor: "#FAFAFA",
-      }}
-      ref={drop}
-    >
-      {functions.length ? (
-        functions.map((functionItem, index) => (
-          <span
-            key={index}
-            className="font-bold w-max align-content-center m-2"
-            style={{
-              border: "1px solid #DDD",
-              padding: "5px 15px",
-              backgroundColor: "white",
-              borderRadius: "30px",
-            }}
-          >
-            {functionItem.name}
-            <i
-              className="pi pi-trash m-3"
+    <>
+      <div
+        className="mt-4 flex flex-wrap align-content-center p-3"
+        style={{
+          border: "2px dashed #DDD",
+          borderRadius: "30px",
+          backgroundColor: "#FAFAFA",
+          minHeight: "10rem",
+        }}
+        ref={drop}
+      >
+        {/* <div className="flex flex-wrap align-content-center  h-9rem "> */}
+        {functions.length ? (
+          functions.map((functionItem, index) => (
+            <div
+              key={index}
+              className="font-bold w-max align-content-center mr-2 mt-2"
               style={{
-                fontSize: "0.7rem",
-              }}
-              onClick={() => {
-                removeProduct(index);
-              }}
-            ></i>
-
-            <i
-              className="pi pi-minus"
-              style={{
-                fontSize: "0.7rem",
-              }}
-              onClick={() => {
-                updateProduct(index, functionItem.count - 1)
-              }}
-            ></i>
-            <span className="m-2">{functionItem.count}</span>
-            <i
-              className="pi pi-plus"
-              style={{
-                fontSize: "0.7rem",
-              }}
-              onClick={() => {
-                updateProduct(index, functionItem.count+ 1)
-              }}
-            ></i>
-          </span>
-        ))
-      ) : (
-        <div className="flex justify-content-around w-full">
-          <div>
-            Drag and Drop functions here or
-            <span
-              className="text-primary font-bold"
-              onClick={() => {
-                setShowDialog(true);
+                border: "1px solid #DDD",
+                backgroundColor: "white",
+                borderRadius: "30px",
               }}
             >
-              {" "}
-              Select functions
-            </span>
+              <span className="m-3">
+                {functionItem.name}
+                {functionItem.count <= 1 ? (
+                  <i
+                    className="pi pi-trash m-3 mr-2 cursor-pointer"
+                    style={{
+                      fontSize: "0.8rem",
+                    }}
+                    onClick={() => {
+                      removeProduct(index);
+                    }}
+                  ></i>
+                ) : (
+                  <i
+                    className="pi pi-minus m-3 mr-2 border-1 border-circle p-1 cursor-pointer"
+                    style={{
+                      fontSize: "0.7rem",
+                    }}
+                    onClick={() => {
+                      updateProduct(index, functionItem.count - 1);
+                    }}
+                  ></i>
+                )}
+
+                <span className="m-2">{functionItem.count}</span>
+                <i
+                  className="pi pi-plus m-3 ml-2 border-1 border-circle p-1 cursor-pointer"
+                  style={{
+                    fontSize: "0.7rem",
+
+                  }}
+                  onClick={() => {
+                    updateProduct(index, functionItem.count + 1);
+                  }}
+                ></i>
+              </span>
+            </div>
+          ))
+        ) : (
+          <div className="flex justify-content-around w-full">
+            <div>
+              Drag and Drop functions here or
+              <span
+                className="text-primary font-bold"
+                onClick={() => {
+                  setShowDialog(true);
+                }}
+              >
+                {" "}
+                Select functions
+              </span>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+      {/* </div> */}
       <Dialog
         visible={showDialog}
         style={{ width: "550px" }}
@@ -204,7 +212,7 @@ const DropZone = ({
           })}
         </div>
       </Dialog>
-    </div>
+    </>
   );
 };
 

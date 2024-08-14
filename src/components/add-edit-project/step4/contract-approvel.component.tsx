@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import { updateCurrentSubStepOfLastStep } from "../../../store/feature/project-step.slice";
 import { updateProjectDetails } from "../../../store/feature/project-list.slice";
 import { ProjectStatus } from "../../../enums/project.enum";
-interface addressInterFace {
+export interface addressInterFace {
   name: string;
   address: string;
   city: string;
@@ -140,7 +140,7 @@ const ContractComponent = () => {
           <div className="w-full">
             <InputText
               id="Full Name"
-              value={addressDialog.name}
+              value={addressDialog?.name}
               onChange={(e) => {
                 setAddressDialog({
                   ...addressDialog,
@@ -156,7 +156,7 @@ const ContractComponent = () => {
         <div className="w-full mt-4">
           <InputText
             id="Full Address"
-            value={addressDialog.address}
+            value={addressDialog?.address}
             onChange={(e) => {
               setAddressDialog({
                 ...addressDialog,
@@ -171,7 +171,7 @@ const ContractComponent = () => {
           <div>
             <InputText
               id="City"
-              value={addressDialog.city}
+              value={addressDialog?.city}
               onChange={(e) => {
                 setAddressDialog({
                   ...addressDialog,
@@ -185,7 +185,7 @@ const ContractComponent = () => {
           <div>
             <InputText
               id="State/Province/Region"
-              value={addressDialog.state}
+              value={addressDialog?.state}
               onChange={(e) => {
                 setAddressDialog({
                   ...addressDialog,
@@ -201,7 +201,7 @@ const ContractComponent = () => {
           <div>
             <InputText
               id="Zip"
-              value={addressDialog.zip}
+              value={addressDialog?.zip}
               onChange={(e) => {
                 setAddressDialog({
                   ...addressDialog,
@@ -214,7 +214,7 @@ const ContractComponent = () => {
           </div>
           <div className="w-15rem">
             <Dropdown
-              value={addressDialog.country}
+              value={addressDialog?.country}
               onChange={(e) =>
                 setAddressDialog({ ...addressDialog, country: e.value })
               }
