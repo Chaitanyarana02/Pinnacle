@@ -170,10 +170,13 @@ const DefineFloorsComponent = () => {
   };
 
   const checkValidation = () =>{
-    let selected = 0;
+    let selected = true;
     projectDetailState.projectDetail.buildingAreas.forEach( buildingArea => {
         buildingArea.areas.forEach(area => {
-          selected += area.floors.filter(v => v.isSelected).length;
+          if(area.isSelected && selected) {
+            selected = (area.floors.filter(v => v.isSelected).length)  > 0;
+
+          }
         })
     })
     if(selected) {
@@ -181,7 +184,7 @@ const DefineFloorsComponent = () => {
       dispatch(updateCurrentSubStepOne(4))
 
     }else{
-      UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one floor')
+      UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one floor in each area')
     }
   }
   return (

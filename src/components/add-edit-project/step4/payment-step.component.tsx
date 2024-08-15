@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useAppSelector } from "../../../store/store.utils";
+import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import ContractComponent from "./contract-approvel.component";
 import PaymentConfirmedComponent from "./payment-confirmed";
 import DeliveryConfirmComponent from "./delevery-confirm.component";
@@ -12,6 +12,9 @@ import {
   ProductAllPrice,
   customizationOptionsForTable,
 } from "../step3/project-step3.component";
+import { CustomizationProductTypeEnum } from "../../../enums/customizationProduct.enum";
+import { ProjectDetail } from "../../../interfaces/project.interface";
+import { updatePriceValue } from "../../../store/feature/priceValue.slice";
 const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
   const projectDetail = useAppSelector((state) => state.projectDetailState);
   const stepState = useAppSelector((state) => state.projectStepState);
@@ -22,6 +25,7 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
     2: <PaymentConfirmedComponent />,
     3: <DeliveryConfirmComponent />,
   };
+  const dispatch = useAppDispatch();
   const printPdf = () => {
 
 
@@ -172,6 +176,76 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
       // setSelectedRoom({...})
     });
   }, []);
+  const priceCategory = useAppSelector((state) => state.priceCategorySlice);
+  const updatePrice =  (projectDetail: ProjectDetail) => {
+    let price: number = 0;
+    projectDetail.buildingAreas.forEach((bArea) => {
+      bArea.areas.forEach((area) => {
+        area.floors.forEach((floor) => {
+          floor.floorRooms.forEach((room) => {
+            room.functions.forEach((fun) => {
+              const prod = allProductPrice[fun.id];
+
+              if (prod && Object.values(fun.systemDetails || {}).length) {
+                const catType = prod[0].optionTypeByValue;
+                const findingProduct: {
+                  [key: string]: string | number | boolean;
+                } = {};
+                Object.keys(fun.systemDetails || {}).forEach((key) => {
+                  if (catType[key] === CustomizationProductTypeEnum.SIZE) {
+                    findingProduct[key] = 1;
+                  } else if (
+                    catType[key] === CustomizationProductTypeEnum.QUANTITY
+                  ) {
+                    findingProduct[key] = 1;
+                  } else {
+                    findingProduct[key] = fun.systemDetails[key];
+                  }
+                });
+
+                const prodPrice = prod.find((cat) =>
+                  Object.keys(cat?.optionMetaByValue || {}).map(
+                    (key) =>
+                      cat?.optionMetaByValue?.[key] === findingProduct?.[key]
+                  ).filter(v => v)?.length === Object.keys(cat?.optionMetaByValue || {})?.length
+                );
+
+                let subPrice: number = prodPrice?.price || 0;
+                // console.log(prodPrice , fun.id , fun.name , fun , findingProduct);
+                
+                Object.keys(
+                  (prodPrice?.optionTypeByValue as unknown as object) || {}
+                )?.forEach((key) => {
+                  const type = prodPrice?.optionTypeByValue?.[key] || "";
+                  if (type === CustomizationProductTypeEnum.SIZE) {
+                    const sizes = fun.systemDetails[key]
+                      ?.toString()
+                      ?.split(",");
+                    const size =
+                      parseInt(sizes?.[0]) * parseInt(sizes?.[1]) || 1;
+                    subPrice = size * subPrice;
+                  }
+                  if (type === CustomizationProductTypeEnum.QUANTITY) {
+                    subPrice =
+                      (parseInt(fun.systemDetails[key] as string) || 0) *
+                      subPrice;
+                  }
+                });
+                price += subPrice * fun.count;
+              }
+            });
+          });
+        });
+      });
+    });
+
+    dispatch(updatePriceValue(price + price * (priceCategory.value / 100)));
+  }
+
+  useEffect(() => {
+    updatePrice(projectDetail.projectDetail)
+  }, [projectDetail, allProductPrice]);
+
   return (
     <>
 

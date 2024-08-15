@@ -17,16 +17,20 @@ const OptionRendererComponent = ({
   valueChanged: (value: string | boolean | number) => void
 }) => {
   useEffect(() => {
-        if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.RADIO) {
-          valueChanged(customizationOption.options[0])
-        }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.QUANTITY) {
-          valueChanged("1")
-        }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.SIZE) {
-          valueChanged("1,1")
-        }
+        // if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.RADIO) {
+        //   valueChanged(customizationOption.options[0])
+        // }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.QUANTITY) {
+        //   valueChanged("1")
+        // }else if(!Object.prototype.hasOwnProperty.call(value, dataKey) && customizationOption.type === CustomizationProductTypeEnum.SIZE) {
+        //   valueChanged("1,1")
+        // }
   }, []);
   const sizeValueChanged = (v: string, valueIndex: number) => {
-    const valueArr = (value[dataKey] as string)?.split(',');
+    let valueArr = (value[dataKey].toString() as string)?.split(',');
+    if(valueArr.length !== 2) {
+      valueArr = ["1", "1"];
+      valueChanged(valueArr.join(','));
+    }
     if(valueArr[valueIndex]) {
       valueArr[valueIndex] = v.toString();
       valueChanged(valueArr.join(','));
@@ -95,7 +99,8 @@ const OptionRendererComponent = ({
         <InputText 
         type="number"
         className="w-4 mr-2"
-        value={(value[dataKey] as string)?.split(',')[0]}
+        min={1}
+        value={(value[dataKey].toString() as string)?.split(',')[0] || '1'}
         onChange={(e) => {
           sizeValueChanged(e.target.value , 0)
                       }}
@@ -104,7 +109,8 @@ const OptionRendererComponent = ({
         <InputText
         className="w-4 ml-2"
         type="number"
-        value={(value[dataKey] as string)?.split(',')[1]}
+        min={1}
+        value={(value[dataKey].toString() as string)?.split(',')[1] || '1'}
 
         onChange={(e) => {
           sizeValueChanged(e.target.value , 1)

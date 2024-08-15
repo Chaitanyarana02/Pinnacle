@@ -181,12 +181,18 @@ const DefineRoomsComponent = () => {
     );
   };
   const checkValidation = () =>{
-    let selected = 0;
+    let selected = true;
     projectDetailState.projectDetail.buildingAreas.forEach( buildingArea => {
         buildingArea.areas.forEach(area => {
+          if(area.isSelected) {
           area.floors.forEach(floor => {
-            selected += floor.floorRooms.filter(v => v.isSelected).length;
+            if(floor.isSelected) {
+              if(selected) {
+                selected = floor.floorRooms.filter(v => v.isSelected).length > 0;
+              }
+            }
           })
+          }
         })
     })
     if(selected) {
@@ -194,7 +200,7 @@ const DefineRoomsComponent = () => {
       dispatch(updateCurrentSubStepOne(5))
 
     }else{
-      UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one Room')
+      UtilityService.ShowNotification(toast, NotificationTypeEnum.Error , 'Please select at list one Room in each floor')
     }
   }
   return (

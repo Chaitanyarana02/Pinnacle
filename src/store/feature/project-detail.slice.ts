@@ -13,6 +13,7 @@ import {
   UndoRedoStack,
 } from "../../interfaces/project.interface";
 import { UndoRedoEventName } from "../../enums/undoRedoEventName.enum";
+import { ProductAllPrice } from "../../components/add-edit-project/step3/project-step3.component";
 interface ProjectDetailState {
   projectDetail: ProjectDetail;
   isLoading: boolean;
@@ -339,7 +340,7 @@ const projectDetailSlice = createAppSlice({
                             room.functions.push({
                               id: f.id,
                               name: f.name,
-                              count: 0,
+                              count: 1,
                               categoryId: action.payload.defaultProducts?.find(fun => fun.id === f.id )?.categoryId,
                               systemDetails: {}
                             });
@@ -385,6 +386,30 @@ const projectDetailSlice = createAppSlice({
           functionIndex
         ].systemDetails[key] = value;
       }
+    }),
+    updateDefaultFunctionOptions: create.reducer<ProductAllPrice>((state, action) => {
+      
+
+      state.projectDetail.buildingAreas.forEach((buildingArea) => {
+        buildingArea.areas.forEach((area) => {
+          if (area.isSelected) {
+            area.floors.forEach((floor) => {
+              if(floor.isSelected) {
+                floor.floorRooms.forEach((room) => {
+                  if(room.isSelected) {
+                    room.functions.forEach(fun => {
+                      if(fun.id && action.payload[fun.id] && !Object.keys(fun.systemDetails).length) {
+                        const data = action.payload[fun.id][0].optionMetaByValue;
+                        fun.systemDetails = data
+                      }
+                    })
+                  }
+                });
+              }
+            });
+          }
+        });
+      })
     }),
     undoRedoState: create.reducer<UndoRedoStack>((state, action) => {
       state.projectDetail.buildingAreas.forEach((buildingArea) => {
@@ -440,6 +465,7 @@ export const {
   undoRedoState,
   autoRecombedProducts,
   removeAllRoomFunction,
-  resetAllFunctions
+  resetAllFunctions,
+  updateDefaultFunctionOptions
 } = projectDetailSlice.actions;
 export default projectDetailSlice.reducer;

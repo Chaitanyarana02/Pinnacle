@@ -4,6 +4,7 @@ import {
   ProjectAreas,
   ProjectAreaFloors,
   ProjectFloorFunction,
+  ProjectDetail,
 } from "../../../interfaces/project.interface";
 import { useEffect } from "react";
 import { CustomizationProductTypeEnum } from "../../../enums/customizationProduct.enum";
@@ -37,10 +38,9 @@ const ProjectStep3Pdf = ({
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
-
-  useEffect(() => {
+  const updatePrice =  (projectDetail: ProjectDetail) => {
     let price: number = 0;
-    projectDetailState.projectDetail.buildingAreas.forEach((bArea) => {
+    projectDetail.buildingAreas.forEach((bArea) => {
       bArea.areas.forEach((area) => {
         area.floors.forEach((floor) => {
           floor.floorRooms.forEach((room) => {
@@ -68,10 +68,11 @@ const ProjectStep3Pdf = ({
                   Object.keys(cat?.optionMetaByValue || {}).map(
                     (key) =>
                       cat?.optionMetaByValue?.[key] === findingProduct?.[key]
-                  )
+                  ).filter(v => v)?.length === Object.keys(cat?.optionMetaByValue || {})?.length
                 );
 
                 let subPrice: number = prodPrice?.price || 0;
+                
                 Object.keys(
                   (prodPrice?.optionTypeByValue as unknown as object) || {}
                 )?.forEach((key) => {
@@ -81,7 +82,7 @@ const ProjectStep3Pdf = ({
                       ?.toString()
                       ?.split(",");
                     const size =
-                      parseInt(sizes?.[0]) + parseInt(sizes?.[1]) || 1;
+                      parseInt(sizes?.[0]) * parseInt(sizes?.[1]) || 1;
                     subPrice = size * subPrice;
                   }
                   if (type === CustomizationProductTypeEnum.QUANTITY) {
@@ -99,7 +100,10 @@ const ProjectStep3Pdf = ({
     });
 
     dispatch(updatePriceValue(price + price * (priceCategory.value / 100)));
-  }, [projectDetailState]);
+  }
+  useEffect(() => {
+    updatePrice(projectDetailState.projectDetail)
+  }, [projectDetailState, allProductPrice]);
   const makeTableData = (products: ProjectFloorFunction[]): TableData => {
     const tableData: TableData = {};
     Object.keys(customizationOptions).forEach((catId) => {
@@ -125,7 +129,6 @@ const ProjectStep3Pdf = ({
         }
       });
     });
-    console.log(tableData);
 
     return tableData;
   };

@@ -40,7 +40,7 @@ const DeliveryConfirmComponent = () => {
         <div className="text-500 flex align-items-center justify-content-center mt-5">Delivery Address: </div>
         <div className="text-lg font-bold flex align-items-center justify-content-center mt-2">{
           
-            address.name ? `${address.zip} ${address.name} ${address.address}  ${address.city} ${address.state}  ${address.country}`  : projectState.projectDetail.address
+            address.name ? `${address.zip || ''} ${address.name || ''} ${address.address || ''}  ${address.city || ''} ${address.state || ''}  ${address.country || ''}`  : projectState.projectDetail.address
           }</div>
         <div className="flex align-items-center justify-content-center mt-4">
           {" "}

@@ -221,7 +221,7 @@ const ContractComponent = () => {
               options={countyList}
               optionLabel="name"
               optionValue="code"
-              placeholder="Select a City"
+              placeholder="Select a Country"
             />
           </div>
         </div>

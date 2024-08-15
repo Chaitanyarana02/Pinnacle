@@ -9,6 +9,7 @@ import {
   ProjectAreas,
   ProjectAreaFloors,
   ProjectFloorFunction,
+  ProjectDetail,
 } from "../../../interfaces/project.interface";
 import { useEffect, useRef, useState } from "react";
 import ProjectService from "../../../services/project.service";
@@ -16,7 +17,7 @@ import { CustomizationProductTypeEnum } from "../../../enums/customizationProduc
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import OptionRendererComponent from "./option-renderer.component";
-import { updateFunctionOptions } from "../../../store/feature/project-detail.slice";
+import { updateDefaultFunctionOptions, updateFunctionOptions } from "../../../store/feature/project-detail.slice";
 import { updateProjectDetails } from "../../../store/feature/project-list.slice";
 import { Toast } from "primereact/toast";
 import { updatePriceValue } from "../../../store/feature/priceValue.slice";
@@ -100,6 +101,74 @@ const ProjectStep3Component = () => {
   const projectDetailState = useAppSelector(
     (state) => state.projectDetailState
   );
+  const updatePrice =  (projectDetail: ProjectDetail) => {
+    let price: number = 0;
+    projectDetail.buildingAreas.forEach((bArea) => {
+      bArea.areas.forEach((area) => {
+        area.floors.forEach((floor) => {
+          floor.floorRooms.forEach((room) => {
+            room.functions.forEach((fun) => {
+              const prod = allProductPrice[fun.id];
+
+              if (prod && Object.values(fun.systemDetails || {}).length) {
+                const catType = prod[0].optionTypeByValue;
+                const findingProduct: {
+                  [key: string]: string | number | boolean;
+                } = {};
+                Object.keys(fun.systemDetails || {}).forEach((key) => {
+                  if (catType[key] === CustomizationProductTypeEnum.SIZE) {
+                    findingProduct[key] = 1;
+                  } else if (
+                    catType[key] === CustomizationProductTypeEnum.QUANTITY
+                  ) {
+                    findingProduct[key] = 1;
+                  } else {
+                    findingProduct[key] = fun.systemDetails[key];
+                  }
+                });
+
+                const prodPrice = prod.find((cat) =>
+                  Object.keys(cat?.optionMetaByValue || {}).map(
+                    (key) =>
+                      cat?.optionMetaByValue?.[key] === findingProduct?.[key]
+                  ).filter(v => v)?.length === Object.keys(cat?.optionMetaByValue || {})?.length
+                );
+
+                let subPrice: number = prodPrice?.price || 0;
+                // console.log(prodPrice , fun.id , fun.name , fun , findingProduct);
+                
+                Object.keys(
+                  (prodPrice?.optionTypeByValue as unknown as object) || {}
+                )?.forEach((key) => {
+                  const type = prodPrice?.optionTypeByValue?.[key] || "";
+                  if (type === CustomizationProductTypeEnum.SIZE) {
+                    const sizes = fun.systemDetails[key]
+                      ?.toString()
+                      ?.split(",");
+                    const size =
+                      parseInt(sizes?.[0]) * parseInt(sizes?.[1]) || 1;
+                    subPrice = size * subPrice;
+                  }
+                  if (type === CustomizationProductTypeEnum.QUANTITY) {
+                    subPrice =
+                      (parseInt(fun.systemDetails[key] as string) || 0) *
+                      subPrice;
+                  }
+                });
+                price += subPrice * fun.count;
+              }
+            });
+          });
+        });
+      });
+    });
+
+    dispatch(updatePriceValue(price + price * (priceCategory.value / 100)));
+  }
+
+  useEffect(() => {
+    updatePrice(projectDetailState.projectDetail)
+  }, [projectDetailState, allProductPrice]);
 
   useEffect(() => {
     let isSelectedRoomSet = false;
@@ -146,9 +215,7 @@ const ProjectStep3Component = () => {
         });
       }
     );
-    console.log(productIds);
     ProjectService.getProductsByCategoryOptions(productIds).then((res) => {
-      console.log(res);
       const data: CustomizationOptionByCategory[] = res.data.data;
       const customizationOptions: customizationOptionsForTable = {};
       data.forEach((option) => {
@@ -178,74 +245,16 @@ const ProjectStep3Component = () => {
       ProjectService.getAllProductCustomizationPrice(productIds).then((res) => {
         const data: ProductAllPrice = res?.data?.data || [];
         setAllProductPrice(data);
+        dispatch(updateDefaultFunctionOptions(data))
+        // updatePrice(projectDetailState.projectDetail)
 
       });
       setSelectedRoom(selectedRoomVar);
       makeTableData(selectedRoomVar.functions , customizationOptions);
     });
   }, []);
-  useEffect(() => {
-    let price: number = 0;
-    projectDetailState.projectDetail.buildingAreas.forEach((bArea) => {
-      bArea.areas.forEach((area) => {
-        area.floors.forEach((floor) => {
-          floor.floorRooms.forEach((room) => {
-            room.functions.forEach((fun) => {
-              const prod = allProductPrice[fun.id];
 
-              if (prod && Object.values(fun.systemDetails || {}).length) {
-                const catType = prod[0].optionTypeByValue;
-                const findingProduct: {
-                  [key: string]: string | number | boolean;
-                } = {};
-                Object.keys(fun.systemDetails || {}).forEach((key) => {
-                  if (catType[key] === CustomizationProductTypeEnum.SIZE) {
-                    findingProduct[key] = 1;
-                  } else if (
-                    catType[key] === CustomizationProductTypeEnum.QUANTITY
-                  ) {
-                    findingProduct[key] = 1;
-                  } else {
-                    findingProduct[key] = fun.systemDetails[key];
-                  }
-                });
 
-                const prodPrice = prod.find((cat) =>
-                  Object.keys(cat?.optionMetaByValue || {}).map(
-                    (key) =>
-                      cat?.optionMetaByValue?.[key] === findingProduct?.[key]
-                  )
-                );
-
-                let subPrice: number = prodPrice?.price || 0;
-                Object.keys(
-                  (prodPrice?.optionTypeByValue as unknown as object) || {}
-                )?.forEach((key) => {
-                  const type = prodPrice?.optionTypeByValue?.[key] || "";
-                  if (type === CustomizationProductTypeEnum.SIZE) {
-                    const sizes = fun.systemDetails[key]
-                      ?.toString()
-                      ?.split(",");
-                    const size =
-                      parseInt(sizes?.[0]) + parseInt(sizes?.[1]) || 1;
-                    subPrice = size * subPrice;
-                  }
-                  if (type === CustomizationProductTypeEnum.QUANTITY) {
-                    subPrice =
-                      (parseInt(fun.systemDetails[key] as string) || 0) *
-                      subPrice;
-                  }
-                });
-                price += subPrice * fun.count;
-              }
-            });
-          });
-        });
-      });
-    });
-
-    dispatch(updatePriceValue(price + price * (priceCategory.value / 100)));
-  }, [projectDetailState]);
   const makeTableData = (products: ProjectFloorFunction[] , customizationOptions: customizationOptionsForTable) => {
     const tableData: TableData = {};
     Object.keys(customizationOptions).forEach((catId) => {
@@ -351,9 +360,11 @@ const ProjectStep3Component = () => {
                               borderRadius: "1rem",
                               backgroundColor: "#E9F1FE",
                               fontWeight: "600",
+                              cursor:'pointer'
                             }
                           : {
                               padding: "1.2rem",
+                              cursor:'pointer'
                             }
                       }
                       onClick={() => {

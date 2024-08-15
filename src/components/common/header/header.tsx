@@ -1,18 +1,25 @@
 import { Avatar } from "primereact/avatar";
-import { useAppSelector } from "../../../store/store.utils";
+import { useAppDispatch, useAppSelector } from "../../../store/store.utils";
 import styles from "./header.module.css";
 import { useNavigate } from "react-router-dom";
 import { Menu } from "primereact/menu";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useCookies } from "react-cookie";
+import { UserList } from "../../../interfaces/users.interface";
+import { setUserData } from "../../../store/feature/user-data.slice";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.userDataSlice);
   const redirect = (url: string) => navigate(url);
   const menuLeft = useRef<Menu>(null);
-  const [, setCookie] = useCookies(["userData"]);
-
+  const [cookie, setCookie] = useCookies(["userData"]);
+  useEffect(() => {
+    if(cookie["userData"]?.accessToken) {
+      dispatch(setUserData(cookie["userData"] as UserList))
+    }
+  }, [])
   const items = [
     {
       label: "Account",

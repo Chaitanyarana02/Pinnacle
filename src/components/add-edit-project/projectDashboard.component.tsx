@@ -107,88 +107,81 @@ const ProjectDashboard = () => {
   useEffect(() => {
     dispatch(fetchProjectList());
   }, []);
-const navigateToProjectDetails = (projectDetail: ProjectDetail) => {
-  dispatch(
-    updateProjectStepProjectName(projectDetail.name)
-  );
-  let projectDetailLocalStorage: ProjectDetail = {} as ProjectDetail;
+  const navigateToProjectDetails = (projectDetail: ProjectDetail) => {
+    dispatch(updateProjectStepProjectName(projectDetail.name));
+    let projectDetailLocalStorage: ProjectDetail = {} as ProjectDetail;
 
-  if (
-    localStorage.getItem(
-      projectDetail.id?.toString() || ""
-    )
-  ) {
-    try {
-      projectDetailLocalStorage = JSON.parse(
-        localStorage.getItem(
-          projectDetail.id?.toString() || ""
-        ) || ''
-      );
-      dispatch(setProjectDetail(projectDetailLocalStorage));
-    } catch (e) {
-      console.log(e);
-      projectDetailLocalStorage = projectDetail
+    if (localStorage.getItem(projectDetail.id?.toString() || "")) {
+      try {
+        projectDetailLocalStorage = JSON.parse(
+          localStorage.getItem(projectDetail.id?.toString() || "") || ""
+        );
+        dispatch(setProjectDetail(projectDetailLocalStorage));
+      } catch (e) {
+        console.log(e);
+        projectDetailLocalStorage = projectDetail;
+        dispatch(setProjectDetail(projectDetail));
+      }
+    } else {
+      projectDetailLocalStorage = projectDetail;
       dispatch(setProjectDetail(projectDetail));
     }
-  } else {
-    projectDetailLocalStorage = projectDetail
-    dispatch(setProjectDetail(projectDetail));
-  }
-  if (projectDetail?.projectStatus) {
-
-    if(projectDetail.projectStatus === ProjectStatus.pending) {
-      dispatch(updateIsStepVisible(true));
-      dispatch(updateCurrentStep(2));
-    }else if(projectDetail.projectStatus === ProjectStatus.submitted) {
-      dispatch(updateIsStepVisible(false));
-      dispatch(updateCurrentStep(4));
-      dispatch(updateCurrentSubStepOfLastStep(1));
-    }else if (
-      projectDetail.projectStatus ===
-      ProjectStatus.transition
-    ) {
-      dispatch(updateIsStepVisible(false));
-      dispatch(updateCurrentStep(4));
-      dispatch(updateCurrentSubStepOfLastStep(2));
-    } else if (
-      projectDetail.projectStatus ===
-      ProjectStatus.delivered
-    ) {
-      dispatch(updateIsStepVisible(false));
-      dispatch(updateCurrentStep(4));
-      dispatch(updateCurrentSubStepOfLastStep(3));
-    }
-  } else {
-    dispatch(updateCurrentStep(1));
-    let stepNo = 1;
-    let isStepVisible = false;
-    projectDetailLocalStorage.buildingAreas.forEach(buildingArea => {
-      if(!buildingArea.areas.filter(v => v.isSelected).length) {
-        stepNo = 2;
-        isStepVisible = true;
-      }else {
-        buildingArea?.areas?.forEach(area => {
-          if(!area?.floors.filter(v => v.isSelected).length) {
-              stepNo = 3;
-              isStepVisible = true;
-          }else {
-            area?.floors?.forEach(floor => {
-              if(!floor?.floorRooms.filter(v => v.isSelected).length) {
-                  stepNo = 4;
-                  isStepVisible = true;
-              }
-            })
-          }
-        })
+    if (projectDetail?.projectStatus) {
+      if (projectDetail.projectStatus === ProjectStatus.pending) {
+        dispatch(updateIsStepVisible(true));
+        dispatch(updateCurrentStep(2));
+      } else if (projectDetail.projectStatus === ProjectStatus.submitted) {
+        dispatch(updateIsStepVisible(false));
+        dispatch(updateCurrentStep(4));
+        dispatch(updateCurrentSubStepOfLastStep(1));
+      } else if (projectDetail.projectStatus === ProjectStatus.transition) {
+        dispatch(updateIsStepVisible(false));
+        dispatch(updateCurrentStep(4));
+        dispatch(updateCurrentSubStepOfLastStep(2));
+      } else if (projectDetail.projectStatus === ProjectStatus.delivered) {
+        dispatch(updateIsStepVisible(false));
+        dispatch(updateCurrentStep(4));
+        dispatch(updateCurrentSubStepOfLastStep(3));
       }
-    });
-    dispatch(updateCurrentSubStepOne(stepNo));
-    dispatch(updateIsStepVisible(isStepVisible));
-
-    
-  }
-  navigate(`/edit/${projectDetail.id}`);
-}
+    } else {
+      dispatch(updateCurrentStep(1));
+      let stepNo = 1;
+      let isStepVisible = false;
+      let isBuildingArea = false;
+      let isFloorArea = false;
+      let isRoomArea = false;
+      projectDetailLocalStorage.buildingAreas.forEach((buildingArea) => {
+        if (!buildingArea.areas.filter((v) => v.isSelected).length) {
+          isStepVisible = true;
+          isBuildingArea = true;
+        } else {
+          buildingArea?.areas?.forEach((area) => {
+            if (!area?.floors.filter((v) => v.isSelected).length) {
+              isStepVisible = true;
+              isFloorArea = true;
+            } else {
+              area?.floors?.forEach((floor) => {
+                if (!floor?.floorRooms.filter((v) => v.isSelected).length) {
+                  isStepVisible = true;
+                  isRoomArea = true;
+                }
+              });
+            }
+          });
+        }
+      });
+      if (isRoomArea) {
+        stepNo = 4;
+      } else if (isFloorArea) {
+        stepNo = 3;
+      } else if (isBuildingArea) {
+        stepNo = 2;
+      }
+      dispatch(updateCurrentSubStepOne(stepNo));
+      dispatch(updateIsStepVisible(isStepVisible));
+    }
+    navigate(`/edit/${projectDetail.id}`);
+  };
   const headerElement = (
     <div>
       <span className="text-3xl font-bold block">Create New Project</span>
@@ -531,7 +524,7 @@ const navigateToProjectDetails = (projectDetail: ProjectDetail) => {
               </Dialog>
             </div>
             <div className="flex justify-content-around w-full flex-wrap pr-7 pl-7">
-              <div className="flex flex-wrap justify-content-between">
+              <div className="flex flex-wrap justify-content-center">
                 {productListState.projectList.map((projectDetail) => {
                   return (
                     <div className="m-3 w-25rem" key={projectDetail.id}>
@@ -571,7 +564,7 @@ const navigateToProjectDetails = (projectDetail: ProjectDetail) => {
                         <div className="flex fle justify-content-between w-full">
                           <Button
                             onClick={() => {
-                              navigateToProjectDetails(projectDetail)
+                              navigateToProjectDetails(projectDetail);
                             }}
                             label={
                               !projectDetail.projectStatus ||
@@ -583,10 +576,12 @@ const navigateToProjectDetails = (projectDetail: ProjectDetail) => {
                             outlined
                             rounded
                           />
-                          {/* {!projectDetail.projectStatus  ? ( */}
-                          <div className="pt-2 mr-3">
-                            <i
-                              className="pi pi-file-edit text-xl text-500 ml-3 cursor-pointer"
+                          {
+                           !( projectDetail.projectStatus === ProjectStatus.delivered || projectDetail.projectStatus === ProjectStatus.transition) ? <>
+                                     <div className="pt-2 mr-3 flex align-content-center">
+                            <img
+                              src="/edit.svg"
+                              className="cursor-pointer"
                               onClick={() => {
                                 dispatch(
                                   updateProjectStepProjectName(
@@ -596,19 +591,22 @@ const navigateToProjectDetails = (projectDetail: ProjectDetail) => {
                                 dispatch(setProjectDetail(projectDetail));
                                 navigate(`/edit/${projectDetail.id}`);
                               }}
-                            ></i>
-                            <i
-                              className="pi pi-trash text-xl text-500 ml-3 cursor-pointer"
-                              onClick={() => {
-                                setSelectedProject(projectDetail);
-                                setDeleteDialog(true);
-                                // dispatch(
-                                //   deleteProjectApi(projectDetail.id as number)
-                                // );
-                              }}
-                            ></i>
+                            />
+                              <img
+                                className="ml-3 cursor-pointer"
+                               src="/trash.svg"
+                                onClick={() => {
+                                  setSelectedProject(projectDetail);
+                                  setDeleteDialog(true);
+                                 
+                                }}
+                              />
                           </div>
-                          {/* ) : null} */}
+                            
+                            
+                            </> : null
+                          }
+                 
                         </div>
                       </div>
                       <div

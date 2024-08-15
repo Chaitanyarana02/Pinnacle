@@ -65,9 +65,9 @@ const ProjectStructureReviewComponent = () => {
                                             </span>
                                           </div>
                                           <div className="w-15rem flex flex-wrap">
-                                            {floor.floorRooms.map((room, roomIndex, rooms) => 
+                                            {floor.floorRooms.filter(v=> v.isSelected).map((room, roomIndex, rooms) => 
                                             room.isSelected ? (
-                                                <div className= {rooms.length -1 === roomIndex ? "text-xl font-semibold text-500 ml-2 mt-1" : "text-xl font-semibold text-500 ml-2 mt-1 border-right-3 border-400 pr-2"}>
+                                                <div className= {rooms?.length -1 === roomIndex ? "text-xl font-semibold text-500 ml-2 mt-1" : "text-xl font-semibold text-500 ml-2 mt-1 border-right-3 border-400 pr-2"}>
                                                   {room.name}
                                                 </div>
                                             ): null)}

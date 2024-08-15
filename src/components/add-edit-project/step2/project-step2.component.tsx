@@ -385,13 +385,18 @@ const ProjectStep2Component = () => {
     let flag = true;
     projectDetailState.projectDetail.buildingAreas.forEach((buildingArea) => {
       buildingArea.areas.forEach((area) => {
-        area.floors.forEach((floor) => {
-          floor.floorRooms.forEach((room) => {
-            if (!room.functions.length && room.isSelected) {
-              flag = false;
+        if (area.isSelected) {
+          area.floors.forEach((floor) => {
+            if(floor.isSelected) { 
+               floor.floorRooms.forEach((room) => {
+              if (!room.functions.length && room.isSelected) {
+                flag = false;
+              }
+            });
             }
+           
           });
-        });
+        }
       });
     });
     if (flag) {
@@ -565,7 +570,7 @@ const ProjectStep2Component = () => {
                 <div className="undo-btn">
                   <Button
                     label="Undo"
-                    icon={<img src="/reverse-left.svg" className="mr-2"/>}
+                    icon={<img src="/reverse-left.svg" className="mr-2" />}
                     rounded
                     outlined
                     severity="secondary"
@@ -585,7 +590,7 @@ const ProjectStep2Component = () => {
                   />
                   <Button
                     label="Redo"
-                    icon={<img src="/reverse-right.svg" className="mr-2"/>}
+                    icon={<img src="/reverse-right.svg" className="mr-2" />}
                     rounded
                     outlined
                     iconPos={"right"}
@@ -616,77 +621,76 @@ const ProjectStep2Component = () => {
             </div>
           </div>
         </div>
-
       </div>
       <div
-          className="w-full flex justify-content-between  align-content-center sticky bottom-0 md:flex-none"
-          style={{
-            borderTop: "1px solid #DDD",
-            background: "#fff",
-          }}
-        >
-          <div className="flex justify-content-between flex-wrap align-content-center ">
-            <div className="align-content-center">
-              <div className="pl-2">Set Quality Level:</div>
-            </div>
-            <div className="flex justify-content-between w-19rem align-content-center ml-3 pr-3 flex-wrap border-right-2 border-300">
-              <div>
-                <RadioButton
-                  inputId="productQUality1"
-                  name="productQUality"
-                  value={PriceCategoryEnum.BUDGET}
-                  onChange={(e) => dispatch(updatePrice(e.value || 0))}
-                  checked={priceCategory.value === PriceCategoryEnum.BUDGET}
-                />
-                <label htmlFor="productQUality1" className="ml-1">
-                  Budget
-                </label>
-              </div>
-              <div>
-                <RadioButton
-                  inputId="productQUality2"
-                  name="productQUality"
-                  value={PriceCategoryEnum.STANDARD}
-                  onChange={(e) => dispatch(updatePrice(e.value || 0))}
-                  checked={priceCategory.value === PriceCategoryEnum.STANDARD}
-                />
-                <label htmlFor="productQUality2" className="ml-1">
-                  Standard
-                </label>
-              </div>
-              <div>
-                <RadioButton
-                  inputId="productQUality3"
-                  name="productQUality"
-                  value={PriceCategoryEnum.PREMIUM}
-                  onChange={(e) => dispatch(updatePrice(e.value || 0))}
-                  checked={priceCategory.value === PriceCategoryEnum.PREMIUM}
-                />
-                <label htmlFor="productQUality3" className="ml-1">
-                  Premium
-                </label>
-              </div>
-            </div>
-          </div>
+        className="w-full flex justify-content-between  align-content-center sticky bottom-0 md:flex-none"
+        style={{
+          borderTop: "1px solid #DDD",
+          background: "#fff",
+        }}
+      >
+        <div className="flex justify-content-between flex-wrap align-content-center ">
           <div className="align-content-center">
-            <div>
-              Estimated Price Range:&nbsp;
-              <span className="font-semibold">
-                £{price?.min || 0} - £{price?.max || 0}
-              </span>
-            </div>
+            <div className="pl-2">Set Quality Level:</div>
           </div>
-          <div
-            className="bg-primary align-content-center pl-2 pr-2 cursor-pointer"
-            style={{
-              height: "40px",
-              borderTop: "1px solid #DDD",
-            }}
-            onClick={() => checkValidation()}
-          >
-            Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
+          <div className="flex justify-content-between w-19rem align-content-center ml-3 pr-3 flex-wrap border-right-2 border-300">
+            <div>
+              <RadioButton
+                inputId="productQUality1"
+                name="productQUality"
+                value={PriceCategoryEnum.BUDGET}
+                onChange={(e) => dispatch(updatePrice(e.value || 0))}
+                checked={priceCategory.value === PriceCategoryEnum.BUDGET}
+              />
+              <label htmlFor="productQUality1" className="ml-1">
+                Budget
+              </label>
+            </div>
+            <div>
+              <RadioButton
+                inputId="productQUality2"
+                name="productQUality"
+                value={PriceCategoryEnum.STANDARD}
+                onChange={(e) => dispatch(updatePrice(e.value || 0))}
+                checked={priceCategory.value === PriceCategoryEnum.STANDARD}
+              />
+              <label htmlFor="productQUality2" className="ml-1">
+                Standard
+              </label>
+            </div>
+            <div>
+              <RadioButton
+                inputId="productQUality3"
+                name="productQUality"
+                value={PriceCategoryEnum.PREMIUM}
+                onChange={(e) => dispatch(updatePrice(e.value || 0))}
+                checked={priceCategory.value === PriceCategoryEnum.PREMIUM}
+              />
+              <label htmlFor="productQUality3" className="ml-1">
+                Premium
+              </label>
+            </div>
           </div>
         </div>
+        <div className="align-content-center">
+          <div>
+            Estimated Price Range:&nbsp;
+            <span className="font-semibold">
+              £{price?.min || 0} - £{price?.max || 0}
+            </span>
+          </div>
+        </div>
+        <div
+          className="bg-primary align-content-center pl-2 pr-2 cursor-pointer"
+          style={{
+            height: "40px",
+            borderTop: "1px solid #DDD",
+          }}
+          onClick={() => checkValidation()}
+        >
+          Confirm & Add Tech Details <i className="pi pi-angle-right"></i>
+        </div>
+      </div>
     </DndProvider>
   );
 };
