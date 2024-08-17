@@ -26,6 +26,7 @@ const OptionRendererComponent = ({
         // }
   }, []);
   const sizeValueChanged = (v: string, valueIndex: number) => {
+    console.log(JSON.stringify(value[dataKey]));
     let valueArr = (value[dataKey].toString() as string)?.split(',');
     if(valueArr.length !== 2) {
       valueArr = ["1", "1"];
@@ -99,8 +100,8 @@ const OptionRendererComponent = ({
         <InputText 
         type="number"
         className="w-4 mr-2"
-        min={1}
-        value={(value[dataKey].toString() as string)?.split(',')[0] || '1'}
+        min={'1'}
+        // value={(value[dataKey].toString() as string)?.split(',')[0] || '1'}
         onChange={(e) => {
           sizeValueChanged(e.target.value , 0)
                       }}
@@ -110,7 +111,7 @@ const OptionRendererComponent = ({
         className="w-4 ml-2"
         type="number"
         min={1}
-        value={(value[dataKey].toString() as string)?.split(',')[1] || '1'}
+      
 
         onChange={(e) => {
           sizeValueChanged(e.target.value , 1)

@@ -135,16 +135,14 @@ const ProjectStep3Component = () => {
                 );
 
                 let subPrice: number = prodPrice?.price || 0;
-                // console.log(prodPrice , fun.id , fun.name , fun , findingProduct);
+                console.log(prodPrice , fun.id , fun.name , fun , findingProduct);
                 
                 Object.keys(
                   (prodPrice?.optionTypeByValue as unknown as object) || {}
                 )?.forEach((key) => {
                   const type = prodPrice?.optionTypeByValue?.[key] || "";
                   if (type === CustomizationProductTypeEnum.SIZE) {
-                    const sizes = fun.systemDetails[key]
-                      ?.toString()
-                      ?.split(",");
+                    const sizes = fun.systemDetails[key]?.toString()?.split(",");
                     const size =
                       parseInt(sizes?.[0]) * parseInt(sizes?.[1]) || 1;
                     subPrice = size * subPrice;
