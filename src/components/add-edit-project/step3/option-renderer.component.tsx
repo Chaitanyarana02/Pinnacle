@@ -27,18 +27,21 @@ const OptionRendererComponent = ({
   }, []);
   const sizeValueChanged = (v: string, valueIndex: number) => {
     console.log(JSON.stringify(value[dataKey]));
-    let valueArr = (value[dataKey].toString() as string)?.split(',');
-    if(valueArr.length !== 2) {
+  
+    // Ensure that value[dataKey] is a string
+    let valueStr = value[dataKey]?.toString() || "1,1";
+    let valueArr = valueStr.split(',');
+  
+    if (valueArr.length !== 2) {
       valueArr = ["1", "1"];
       valueChanged(valueArr.join(','));
-    }
-    if(valueArr[valueIndex]) {
-      valueArr[valueIndex] = v.toString();
+    } else {
+      valueArr[valueIndex] = v;
       valueChanged(valueArr.join(','));
-
     }
-    
-  }
+  
+    console.log(valueArr);
+  };
   const renderers: {
     [key in CustomizationProductTypeEnum]: () => ReactElement;
   } = {
@@ -97,26 +100,23 @@ const OptionRendererComponent = ({
         </div>
     </div>,
     [CustomizationProductTypeEnum.SIZE]: () => <div className="w-13rem">
-        <InputText 
-        type="number"
-        className="w-4 mr-2"
-        min={'1'}
-        // value={(value[dataKey].toString() as string)?.split(',')[0] || '1'}
-        onChange={(e) => {
-          sizeValueChanged(e.target.value , 0)
-                      }}
-                      placeholder="Width"/>
-        <span className="font-bold">X</span>
-        <InputText
-        className="w-4 ml-2"
-        type="number"
-        min={1}
-      
-
-        onChange={(e) => {
-          sizeValueChanged(e.target.value , 1)
-        }}
-        placeholder="Width"/>
+       <InputText
+      type="number"
+      className="w-4 mr-2"
+      min="1"
+      value={value[dataKey]?.toString().split(',')[0] || '1'}
+      onChange={(e) => sizeValueChanged(e.target.value, 0)}
+      placeholder="Width"
+    />
+    <span className="font-bold">X</span>
+    <InputText
+      type="number"
+      className="w-4 ml-2"
+      min="1"
+      value={value[dataKey]?.toString().split(',')[1] || '1'}
+      onChange={(e) => sizeValueChanged(e.target.value, 1)}
+      placeholder="Height"
+    />
     </div>,
   };
   
