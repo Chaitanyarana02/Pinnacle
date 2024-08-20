@@ -63,6 +63,7 @@ const ProjectDashboard = () => {
     },
     [ProjectStatus.pending]: { color: "#919191", backGroundColor: "#eee" },
     [ProjectStatus.delivered]: { color: "#039309", backGroundColor: "#e0f6e0" },
+    [ProjectStatus.buildingAreas]: { color: "", backGroundColor: "" },
   };
   const projectResidentLabels: {
     [key in projectResidentType]: string;
@@ -86,6 +87,7 @@ const ProjectDashboard = () => {
     [ProjectStatus.submitted]: "IN TRANSIT",
     [ProjectStatus.pending]: "TECH DETAILS PENDING",
     [ProjectStatus.delivered]: "DELIVERY COMPLETED",
+    [ProjectStatus.buildingAreas]: "DELIVERY COMPLETED",
   };
 
   const [, setCookie] = useCookies(["userData"]);
@@ -281,7 +283,7 @@ const ProjectDashboard = () => {
                 <div className="w-full">
                   <div className="">
                     <InputText
-                      className="w-full"
+                      className="w-full mt-1"
                       onChange={(e) => {
                         newProjectData.name = e.target.value;
                         setNewProjectData({ ...newProjectData });
@@ -317,7 +319,7 @@ const ProjectDashboard = () => {
                               projectType.residential
                             }
                           />
-                          <label htmlFor="projectType1" className="ml-2">
+                          <label htmlFor="projectType1" className="ml-2 cursor-pointer">
                             Residential
                           </label>
                         </div>
@@ -337,7 +339,7 @@ const ProjectDashboard = () => {
                               projectType.commercial
                             }
                           />
-                          <label htmlFor="projectType2" className="ml-2">
+                          <label htmlFor="projectType2" className="ml-2 cursor-pointer">
                             Commercial
                           </label>
                         </div>
@@ -364,7 +366,7 @@ const ProjectDashboard = () => {
                           />
                           <label
                             htmlFor="projectResidentType1"
-                            className="ml-2"
+                            className="ml-2 cursor-pointer"
                           >
                             Flat
                           </label>
@@ -385,7 +387,7 @@ const ProjectDashboard = () => {
                           />
                           <label
                             htmlFor="projectResidentType2"
-                            className="ml-2"
+                            className="ml-2 cursor-pointer"
                           >
                             House
                           </label>
@@ -411,7 +413,7 @@ const ProjectDashboard = () => {
                             projectScope.fullRefurbishment
                           }
                         />
-                        <label htmlFor="projectScope1" className="ml-2">
+                        <label htmlFor="projectScope1" className="ml-2 cursor-pointer">
                           Full Refurbishment
                         </label>
                       </div>
@@ -431,13 +433,13 @@ const ProjectDashboard = () => {
                             projectScope.newBuild
                           }
                         />
-                        <label htmlFor="projectScope2" className="ml-2">
+                        <label htmlFor="projectScope2" className="ml-2 cursor-pointer">
                           New Build
                         </label>
                       </div>
                       <div className="flex align-items-center">
                         <RadioButton
-                          inputId="projectScope2"
+                          inputId="projectScope3"
                           name="projectScope"
                           value={projectScope.systemInstallation}
                           onChange={(e) => {
@@ -451,7 +453,7 @@ const ProjectDashboard = () => {
                             projectScope.systemInstallation
                           }
                         />
-                        <label htmlFor="projectScope2" className="ml-2">
+                        <label htmlFor="projectScope3" className="ml-2 cursor-pointer">
                           System Installation Only
                         </label>
                       </div>
@@ -476,7 +478,7 @@ const ProjectDashboard = () => {
                             projectColorScheme.white
                           }
                         />
-                        <label htmlFor="productColor1" className="ml-2">
+                        <label htmlFor="productColor1" className="ml-2 cursor-pointer">
                           White
                         </label>
                       </div>
@@ -494,13 +496,13 @@ const ProjectDashboard = () => {
                             projectColorScheme.Mixed
                           }
                         />
-                        <label htmlFor="productColor2" className="ml-2">
+                        <label htmlFor="productColor2" className="ml-2 cursor-pointer">
                           Mixed
                         </label>
                       </div>
                       <div className="flex align-items-center">
                         <RadioButton
-                          inputId="productColor2"
+                          inputId="productColor3"
                           name="productColor"
                           value={projectColorScheme.black}
                           onChange={(e) => {
@@ -514,7 +516,7 @@ const ProjectDashboard = () => {
                             projectColorScheme.black
                           }
                         />
-                        <label htmlFor="productColor2" className="ml-2">
+                        <label htmlFor="productColor3" className="ml-2 cursor-pointer">
                           Black
                         </label>
                       </div>
@@ -644,9 +646,9 @@ const ProjectDashboard = () => {
       <Dialog
         visible={deleteDialog}
         style={{ width: "400px" }}
-        header={`Are you sure you want to delete ${selectedProject?.name}`}
+        header=  {<span style={{ fontSize: "1.3rem" }}>{`Are you sure you want to delete ${selectedProject?.name} project ?`}</span>}
         modal
-        className="p-fluid"
+        className="p-fluid "
         footer={() => {
           return (
             <div className="p-d-flex justify-content-end">
@@ -658,7 +660,7 @@ const ProjectDashboard = () => {
                 }}
                 rounded
                 severity="danger"
-                style={{ float: "left" }}
+                style={{ float: "left"  }}
               />
             </div>
           );

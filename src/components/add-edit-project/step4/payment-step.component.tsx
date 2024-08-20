@@ -12,6 +12,14 @@ import {
   ProductAllPrice,
   customizationOptionsForTable,
 } from "../step3/project-step3.component";
+ interface addressInterFace {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+}
 import { CustomizationProductTypeEnum } from "../../../enums/customizationProduct.enum";
 import { ProjectDetail } from "../../../interfaces/project.interface";
 import { updatePriceValue } from "../../../store/feature/priceValue.slice";
@@ -20,11 +28,20 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
   const stepState = useAppSelector((state) => state.projectStepState);
   const price = useAppSelector((state) => state.priceValueSlice);
   const userData = useAppSelector((state) => state.userDataSlice);
+
+
+  const [ , setDeliveryAddress] = useState<addressInterFace>();
+
+  const getClaintAddress =  (data: addressInterFace) => {
+    setDeliveryAddress(data);
+  }
+
   const components: { [key: number]: ReactNode } = {
-    1: <ContractComponent />,
+    1: <ContractComponent  onData={getClaintAddress} />,
     2: <PaymentConfirmedComponent />,
     3: <DeliveryConfirmComponent />,
   };
+
   const dispatch = useAppDispatch();
   const printPdf = () => {
 
@@ -193,7 +210,7 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
                 } = {};
                 Object.keys(fun.systemDetails || {}).forEach((key) => {
                   if (catType[key] === CustomizationProductTypeEnum.SIZE) {
-                    findingProduct[key] = 1;
+                    findingProduct[key] = '1,1';
                   } else if (
                     catType[key] === CustomizationProductTypeEnum.QUANTITY
                   ) {
@@ -311,7 +328,7 @@ const PaymentStepComponent = ({ currentStep }: { currentStep: number }) => {
                 <span className="font-semibold text-600 text-xl">Rebate:</span>
                 <span className="font-semibold text-xl">
                   {" "}
-                  £{userData.userData.rebateRate}
+                  £{(price.value * (userData?.userData?.rebateRate || 0) / 100).toFixed(2)}
                 </span>
               </div>
             </div>

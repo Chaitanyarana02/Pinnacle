@@ -114,6 +114,7 @@ const projectListSlice = createAppSlice({
           deliveryAddress: JSON.parse(project?.deliveryAddress || '') || {}
       });
       localStorage.setItem(project.id?.toString() || '', JSON.stringify(project));
+
         return project;
       },
       {

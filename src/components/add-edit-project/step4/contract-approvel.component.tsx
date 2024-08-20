@@ -16,7 +16,14 @@ export interface addressInterFace {
   zip: string;
   country: string;
 }
-const ContractComponent = () => {
+
+interface ContractComponentProps {
+  onData: (data: addressInterFace) => void;
+}
+
+
+
+const ContractComponent:React.FC<ContractComponentProps> = ({onData}) => {
   const [contractSigned, setContractSigned] = useState(false);
   const projectState = useAppSelector((state) => state.projectDetailState);
   const dispatch = useAppDispatch();
@@ -41,6 +48,8 @@ const ContractComponent = () => {
       }
     }
   }, []);
+
+  
   const addEditDialogFooter = (
     <>
       <Button
@@ -48,6 +57,7 @@ const ContractComponent = () => {
         style={{ float: "left" }}
         rounded
         onClick={() => {
+          onData(addressDialog);
           dispatch(
             updateProjectDetails({
               ...projectState.projectDetail,

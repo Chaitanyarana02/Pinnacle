@@ -24,5 +24,6 @@ export enum ProjectStatus {
     submitted= 'submitted',
     transition = 'transition',
     delivered = 'delivered',
+    buildingAreas = "buildingAreas",
 
 }

@@ -20,15 +20,47 @@ const DeliveryConfirmComponent = () => {
     country: "",
   });
 
-  useEffect(() => {
+  const diliveryAddresGet = async () => {
     try {
-        const addr = JSON.parse(projectState.projectDetail.deliveryAddress || '') || {};
-        setAddress(addr)
-    }catch (err) {
-      console.log(err);
-      
+      const projectId = projectState?.projectDetail?.id;
+      if (!projectId) return;
+      setTimeout(async () => {
+        const diliver_Address = localStorage.getItem(projectId.toString());
+        if (diliver_Address) {
+          let diliveryAddress;
+          try {
+            diliveryAddress = JSON.parse(diliver_Address);
+          } catch (parseError) {
+            console.error('Error parsing delivery address JSON:', parseError);
+            return;
+          }
+  
+          if (diliveryAddress && diliveryAddress.deliveryAddress) {
+            try {
+              const finall_diliveryAddress = JSON.parse(diliveryAddress.deliveryAddress);
+              // console.log('Final delivery address:', finall_diliveryAddress);
+              setAddress(finall_diliveryAddress);
+            } catch (parseError) {
+              // console.error('Error parsing final delivery address JSON:', parseError);
+            }
+          } else {
+            // console.error('Delivery address data is missing or invalid.');
+          }
+        } else {
+          let storeDeliverAddress = JSON.parse(projectState?.projectDetail?.deliveryAddress ?? '{}');
+          console.log("cd",projectState?.projectDetail);
+          setAddress(storeDeliverAddress);
+          
+        }
+      }, 500); 
+    } catch (err) {
+      console.error('Error fetching or parsing delivery address:', err);
     }
-  }, [])
+  };
+  
+  useEffect(() => {
+    diliveryAddresGet();
+  }, []);
     return (
         <div className="flex flex-column flex-wrap w-full align-content-center mt-6">
         <div className="text-3xl font-bold flex align-items-center justify-content-center mt-3">

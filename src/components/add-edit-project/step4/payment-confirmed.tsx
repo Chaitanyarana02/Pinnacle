@@ -17,22 +17,46 @@ const PaymentConfirmedComponent = () => {
       country: "",
     });
   
-    useEffect(() => {
+    const diliveryAddresGet = async () => {
       try {
-          const addr = JSON.parse(projectState.projectDetail.deliveryAddress || '') || {
-            name: "",
-            address: "",
-            city: "",
-            state: "",
-            zip: "",
-            country: "",
-          };
-          setAddress(addr)
-      }catch (err) {
-        console.log(err);
-        
+        const projectId = projectState?.projectDetail?.id;
+        if (!projectId) return;
+        setTimeout(async () => {
+          const diliver_Address = localStorage.getItem(projectId.toString());
+          if (diliver_Address) {
+            let diliveryAddress;
+            try {
+              diliveryAddress = JSON.parse(diliver_Address);
+            } catch (parseError) {
+              console.error('Error parsing delivery address JSON:', parseError);
+              return;
+            }
+    
+            if (diliveryAddress && diliveryAddress.deliveryAddress) {
+              try {
+                const finall_diliveryAddress = JSON.parse(diliveryAddress.deliveryAddress);
+                console.log('Final delivery address:', finall_diliveryAddress);
+                setAddress(finall_diliveryAddress);
+              } catch (parseError) {
+                console.error('Error parsing final delivery address JSON:', parseError);
+              }
+            } else {
+              console.error('Delivery address data is missing or invalid.');
+            }
+          } else {
+            console.error('No delivery address found in localStorage.');
+          }
+        }, 800); 
+      } catch (err) {
+        console.error('Error fetching or parsing delivery address:', err);
       }
-    }, [])
+    };
+    
+    useEffect(() => {
+      diliveryAddresGet();
+    }, []);
+    
+
   return (
     <div className="flex flex-column flex-wrap w-full align-content-center mt-6">
 

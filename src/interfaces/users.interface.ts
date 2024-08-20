@@ -1,4 +1,5 @@
 export interface UserList  {
+    mobile: string;
     name: string;
     id: string;
     isPassWordGenerated: boolean;

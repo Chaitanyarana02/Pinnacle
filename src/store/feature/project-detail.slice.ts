@@ -400,7 +400,11 @@ const projectDetailSlice = createAppSlice({
                     room.functions.forEach(fun => {
                       if(fun.id && action.payload[fun.id] && !Object.keys(fun.systemDetails).length) {
                         const data = action.payload[fun.id][0].optionMetaByValue;
+                        if (data.Size == '1') {
+                          data.Size = '1,1';
+                        }
                         fun.systemDetails = data
+                        
                       }
                     })
                   }

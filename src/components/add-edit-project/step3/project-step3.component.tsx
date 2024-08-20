@@ -251,8 +251,6 @@ const ProjectStep3Component = () => {
       makeTableData(selectedRoomVar.functions , customizationOptions);
     });
   }, []);
-
-
   const makeTableData = (products: ProjectFloorFunction[] , customizationOptions: customizationOptionsForTable) => {
     const tableData: TableData = {};
     Object.keys(customizationOptions).forEach((catId) => {
@@ -570,7 +568,7 @@ const ProjectStep3Component = () => {
               <span className="ml-3">
                 Rebate:{" "}
                 <span className="font-semibold">
-                  £{userData.userData.rebateRate}
+                  £{(price.value * (userData?.userData?.rebateRate || 0) / 100).toFixed(2)}
                 </span>
               </span>
             </div>
